@@ -7,7 +7,7 @@
         <div v-if="showWines[1]" class="wine-list">
             <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein' && wine.match == 1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
+                <div v-if="wine.winetype === 'Weisswein' && wine.match && wine.match.indexOf('Nusslisalat') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
                     <h3 style="text-align: center;">{{ wine.name }}</h3>
                     <div class="wine-attribute">Traube: {{ wine.grape }}</div>
                     <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
@@ -21,7 +21,7 @@
         <div v-if="showWines[2]" class="wine-list">
             <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein' && wine.match === 2" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
+                <div v-if="wine.winetype === 'Weisswein' && wine.match && wine.match.indexOf('Fleisch-Kase-Platte') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
                     <h3 style="text-align: center;">{{ wine.name }}</h3>
                     <div class="wine-attribute">Traube: {{ wine.grape }}</div>
                     <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
@@ -35,7 +35,7 @@
         <div v-if="showWines[3]" class="wine-list">
             <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein' && wine.match === 2" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
+                <div v-if="wine.winetype === 'Weisswein' && wine.match && wine.match.indexOf('Rosti mit Spiegelei') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
                     <h3 style="text-align: center;">{{ wine.name }}</h3>
                     <div class="wine-attribute">Traube: {{ wine.grape }}</div>
                     <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
@@ -49,7 +49,7 @@
         <div v-if="showWines[4]" class="wine-list">
             <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
             <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein'  && wine.match === 2" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
+                <div v-if="wine.winetype === 'Weisswein'  && wine.match && wine.match.indexOf('Zuri-Gschnetzeltes') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
                     <h3 style="text-align: center;">{{ wine.name }}</h3>
                     <div class="wine-attribute">Traube: {{ wine.grape }}</div>
                     <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
@@ -63,7 +63,7 @@
         <div v-if="showWines[5]" class="wine-list">
             <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
             <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein'  && wine.match === 3" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
+                <div v-if="wine.winetype === 'Weisswein'  && wine.match && wine.match.indexOf('Bundner-Nusstorte') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
                     <h3 style="text-align: center;">{{ wine.name }}</h3>
                     <div class="wine-attribute">Traube: {{ wine.grape }}</div>
                     <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
@@ -101,7 +101,8 @@
     },
     async created() {
         try {
-            const response = await axios.get('https://localhost:44322/api/Wine');
+            const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
+            //const response = await axios.get('https://localhost:44322/api/Wine');
             this.wines = response.data;
             this.loading = false;
         } catch (error) {
