@@ -3,6 +3,7 @@
     <nuxt-link to="/Winemenu" class="button button-1">Weinkarte</nuxt-link>
     <nuxt-link to="/Food" class="button button-2">Weinvorschläge</nuxt-link>
     <nuxt-link to="/Undecided" class="button button-3">Unentschlossen</nuxt-link>
+    <!--Die benutzerdefinierte Weinsuche teil ist noch nicht auf Netlify deployed-->
     <div id="customBox" class="custom-box">
       <div class="checkbox-group">
         <label>
