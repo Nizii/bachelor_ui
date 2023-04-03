@@ -35,8 +35,8 @@ export default {
   },
   async created() {
     try {
-      const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
-      //const response = await axios.get('https://localhost:44322/api/Wine');
+      //const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
+      const response = await axios.get('https://localhost:44322/api/Wine');
 
       this.wines = response.data;
       this.loading = false;
