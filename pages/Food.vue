@@ -4,9 +4,12 @@
         <h1 style="text-align: center; margin: 20px;">Passend zu Essen</h1>
         <div class="button-group">
         <button class="button button-1" @click="toggleWines(1)">Nüsslisalat</button>
+        <!--Überprüft ob Wein angezeigt werden soll-->
         <div v-if="showWines[1]" class="wine-list">
             <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
+            <!--Loop durh alle Weine-->
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
+                <!--Zeigt Weine an die zu Nüsslisalat passen. Attribut match ist ein String Array das Tags wie "Nusslisalat" enthält-->
                 <div v-if="wine.winetype === 'Weisswein' && wine.match && wine.match.indexOf('Nusslisalat') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
                     <h3 style="text-align: center;">{{ wine.name }}</h3>
                     <div class="wine-attribute">Traube: {{ wine.grape }}</div>
