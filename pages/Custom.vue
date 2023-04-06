@@ -2,11 +2,13 @@
   <div>
     <div style="text-align: center; margin: 20px;">
       <Header />
+      <!--
       <p>Süß: {{ preferences?.suss }}</p>
       <p>Sauer: {{ preferences?.sauer }}</p>
       <p>Kräftig: {{ preferences?.kraftig }}</p>
       <p>Fruchtig: {{ preferences?.fruchtig }}</p>
       <p>Neutral: {{ preferences?.neutral }}</p>
+      -->
     </div>
     <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
     <div v-else>
