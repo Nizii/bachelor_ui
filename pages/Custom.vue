@@ -12,7 +12,7 @@
     <div v-else>
       <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
       <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
-          <div v-if="wine.winetype === 'Weisswein'" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
+          <div v-if="wine.winetype === 'Weisswein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
             <h3 style="text-align: center;">{{ wine.name }}</h3>
             <div class="wine-attribute">Traube: {{ wine.grape }}</div>
             <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
@@ -25,7 +25,7 @@
       </div>
       <h1 style="text-align: center; margin: 20px;">Rotweine</h1>
       <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
-          <div v-if="wine.winetype === 'Rotwein'" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
+          <div v-if="wine.winetype === 'Rotwein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
             <h3 style="text-align: center;">{{ wine.name }}</h3>
             <div class="wine-attribute">Traube: {{ wine.grape }}</div>
             <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
