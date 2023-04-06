@@ -77,7 +77,7 @@ export default {
   methods: {
     calc() {
 
-      /*
+      
       var match = 0;
       for(var j = 0; j < this.wines.length; j++) {
         for(var x = 0; x < this.wines[j].profile.length; x++) {
@@ -92,8 +92,8 @@ export default {
         }
         match = 0;
       }
-      */
-
+      
+      /*
       let match;
       for (let j = 0; j < this.wines.length; j++) {
         match = 0;
@@ -113,8 +113,7 @@ export default {
         }
       }
       this.wines.sort((a, b) => b.rating - a.rating);
-    },
-
+    */},
   }
 }
 </script>
