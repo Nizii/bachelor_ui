@@ -3,27 +3,32 @@
     <nuxt-link to="/Winemenu" class="button button-1">Weinkarte</nuxt-link>
     <nuxt-link to="/Food" class="button button-2">Weinvorschläge</nuxt-link>
     <nuxt-link to="/Undecided" class="button button-3">Unentschlossen</nuxt-link>
-    <!--Die benutzerdefinierte Weinsuche teil ist noch nicht auf Netlify deployed-->
+    <!--Die benutzerdefinierte Weinsuche ist noch nicht auf Netlify deployed-->
     <div id="customBox" class="custom-box">
       <div class="checkbox-group">
+        <h2>Das mag ich</h2>
         <label>
-          <input type="checkbox" v-model="customerPreferences.suss" true-value="yes" false-value="no"/>
+          <input type="checkbox" v-model="preferences.suss" true-value="true" false-value="false"/>
           Süss
         </label>
         <label>
-          <input type="checkbox" v-model="customerPreferences.sauer" true-value="yes" false-value="no"/>
+          <input type="checkbox" v-model="preferences.sauer" true-value="true" false-value="false"/>
           Sauer
         </label>
         <label>
-          <input type="checkbox" v-model="customerPreferences.stark" true-value="yes" false-value="no"/>
-          Stark
+          <input type="checkbox" v-model="preferences.kraftig" true-value="true" false-value="false"/>
+          Kräftig
         </label>
         <label>
-          <input type="checkbox" v-model="customerPreferences.fruchtig" true-value="yes" false-value="no"/>
+          <input type="checkbox" v-model="preferences.fruchtig" true-value="true" false-value="false"/>
           Fruchtig
         </label>
+        <label>
+          <input type="checkbox" v-model="preferences.neutral" true-value="true" false-value="false"/>
+          Neutral
+        </label>
       </div>
-      <nuxt-link to="/" class="button button-4">Mein Profil</nuxt-link>
+      <button class="button button-4" @click="sendPreferences">Mein Profil</button>
     </div>
   </div>
 </template>
@@ -32,7 +37,20 @@
 export default {
   data() {
     return {
-      customerPreferences: {}
+      preferences: {
+        suss: false,
+        sauer: false,
+        kraftig: false,
+        fruchtig: false,
+        neutral: false
+      }
+    }
+  },
+
+  methods: {
+    sendPreferences() {
+      localStorage.setItem('preferences', JSON.stringify(this.preferences));
+      this.$router.push('/Custom');
     }
   }
 }
