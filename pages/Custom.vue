@@ -12,7 +12,7 @@
     </div>
     <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
     <div v-else>
-      <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
+      <WineHeader title="Weissweine" />
       <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
           <div v-if="wine.winetype === 'Weisswein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
             <h3 style="text-align: center;">{{ wine.name }}</h3>
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-      <h1 style="text-align: center; margin: 20px;">Rotweine</h1>
+      <WineHeader title="Rotweine" />
       <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
           <div v-if="wine.winetype === 'Rotwein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
             <h3 style="text-align: center;">{{ wine.name }}</h3>
@@ -44,11 +44,15 @@
 
 <script>
 import Header from '~/components/Header.vue';
+import WineHeader from '~/components/WineHeader.vue';
+import WineInfoCondition from "@/components/WineInfoCondition.vue";
 import axios from 'axios';
 
 export default {
   components: {
-    Header
+    Header,
+    WineHeader,
+    WineInfoCondition
   },
   data() {
     return {
@@ -61,8 +65,8 @@ export default {
   async created() {
     try {
       //const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
-      const response = await axios.get('https://wine.azurewebsites.net/api/wine');
-      //const response = await axios.get('https://localhost:44322/api/Wine');
+      //const response = await axios.get('https://wine.azurewebsites.net/api/wine');
+      const response = await axios.get('https://localhost:44322/api/Wine');
       this.wines = response.data;
       this.loading = false;
       if (this.wines.length > 0) {

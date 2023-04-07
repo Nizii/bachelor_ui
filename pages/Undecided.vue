@@ -3,136 +3,64 @@
       <Header />
       <h1 style="text-align: center; margin: 20px;">Für Unentschlossene</h1>
       <div class="button-group">
-        <button class="button button-1" @click="toggleWines(1)">1. Date</button>
-        <!--Überprüft ob Wein angezeigt werden soll-->
+
+        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Bündner Nusstorte</ShowButton>
         <div v-if="showWines[1]" class="wine-list">
-            <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
-            <!--Loop durh alle Weine-->
+            <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <!--Zeigt Weine an die zu Nüsslisalat passen. Attribut match ist ein String Array das Tags wie "1.Date" enthält-->
-                <div v-if="wine.winetype === 'Weisswein'  && wine.match && wine.match.indexOf('1.Date') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="1.Date" />
             </div>
-            <h1 style="text-align: center; margin: 20px;">Rotweine</h1>
+            <WineHeader title="Rotweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <div v-if="wine.winetype === 'Rotwein'  && wine.match && wine.match.indexOf('1.Date') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="1.Date" />
             </div>
         </div>
 
-        <button class="button button-2" @click="toggleWines(2)">Hochzeitstag</button>
+        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Hochzeitstag</ShowButton>
         <div v-if="showWines[2]" class="wine-list">
-            <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
+            <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein'  && wine.match && wine.match.indexOf('Hochzeitstag') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="Hochzeitstag" />
             </div>
-            <h1 style="text-align: center; margin: 20px;">Rotwein</h1>
+            <WineHeader title="Rotweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <div v-if="wine.winetype === 'Rotwein'  && wine.match && wine.match.indexOf('Hochzeitstag') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="Hochzeitstag" />
             </div>
         </div>
         
-        <button class="button button-3" @click="toggleWines(3)">Geburtstag</button>
+        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Geburtstag</ShowButton>
         <div v-if="showWines[3]" class="wine-list">
-            <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
+            <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein'  && wine.match && wine.match.indexOf('Geburtstag') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="Geburtstag" />
             </div>
-            <h1 style="text-align: center; margin: 20px;">Rotweine</h1>
+            <WineHeader title="Rotweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <div v-if="wine.winetype === 'Rotwein'  && wine.match && wine.match.indexOf('Geburtstag') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="Geburtstag" />
             </div>
         </div>
 
-        <button class="button button-4" @click="toggleWines(4)">Geschäftsessen</button>
+        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Geschäftsessen</ShowButton>
         <div v-if="showWines[4]" class="wine-list">
-            <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
+            <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein'  && wine.match && wine.match.indexOf('Geschaftsessen') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="Geschaftsessen" />
             </div>
-            <h1 style="text-align: center; margin: 20px;">Rotweine</h1>
+            <WineHeader title="Rotweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <div v-if="wine.winetype === 'Rotwein'  && wine.match && wine.match.indexOf('Geschaftsessen') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="Geschaftsessen" />
             </div>
         </div>
         
-        <button class="button button-5" @click="toggleWines(5)">Treffen mit Kollegen</button>
+        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Treffen mit Kollegen</ShowButton>
         <div v-if="showWines[5]" class="wine-list">
-            <h1 style="text-align: center; margin: 20px;">Weissweine</h1>
+            <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <div v-if="wine.winetype === 'Weisswein'  && wine.match && wine.match.indexOf('Treffen mit Kollegen') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="Treffen mit Kollegen" />
             </div>
-            <h1 style="text-align: center; margin: 20px;">Rotweine</h1>
+            <WineHeader title="Rotweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <div v-if="wine.winetype === 'Rotwein'  && wine.match && wine.match.indexOf('Treffen mit Kollegen') !== -1" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-                    <h3 style="text-align: center;">{{ wine.name }}</h3>
-                    <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-                    <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-                    <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-                    <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-                    <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-                </div>
+                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="Treffen mit Kollegen" />
             </div>
         </div>
     </div>
@@ -141,11 +69,17 @@
   
 <script>
     import Header from '~/components/Header.vue';
+    import WineHeader from '~/components/WineHeader.vue';
+    import WineInfoCondition from "~/components/WineInfoCondition.vue";
+    import ShowButton from "~/components/ShowButton.vue";
     import axios from 'axios';
   
     export default {
         components: {
-        Header
+        Header,
+        WineHeader,
+        WineInfoCondition,
+        ShowButton
     },
     data() {
         return {
@@ -162,9 +96,9 @@
     },
     async created() {
         try {
-            const response = await axios.get('https://wine.azurewebsites.net/api/wine');
+            //const response = await axios.get('https://wine.azurewebsites.net/api/wine');
             //const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
-            //const response = await axios.get('https://localhost:44322/api/Wine');
+            const response = await axios.get('https://localhost:44322/api/Wine');
             this.wines = response.data;
             this.loading = false;
         } catch (error) {
