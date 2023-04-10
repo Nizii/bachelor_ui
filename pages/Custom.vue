@@ -12,8 +12,9 @@
     </div>
     <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
     <div v-else>
-      <WineHeader title="Weissweine" />
-      <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
+      <div v-if="preferences.weisswein">
+        <WineHeader title="Weissweine" />
+        <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
           <div v-if="wine.winetype === 'Weisswein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
             <h3 style="text-align: center;">{{ wine.name }}</h3>
             <div class="wine-attribute">Traube: {{ wine.grape }}</div>
@@ -25,8 +26,9 @@
           </div>
         </div>
       </div>
-      <WineHeader title="Rotweine" />
-      <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
+      <div v-if="preferences.rotwein">
+        <WineHeader title="Rotweine" />
+        <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
           <div v-if="wine.winetype === 'Rotwein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
             <h3 style="text-align: center;">{{ wine.name }}</h3>
             <div class="wine-attribute">Traube: {{ wine.grape }}</div>
@@ -65,8 +67,8 @@ export default {
   async created() {
     try {
       //const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
-      //const response = await axios.get('https://wine.azurewebsites.net/api/wine');
-      const response = await axios.get('https://localhost:44322/api/Wine');
+      const response = await axios.get('https://wine.azurewebsites.net/api/wine');
+      //const response = await axios.get('https://localhost:44322/api/Wine');
       this.wines = response.data;
       this.loading = false;
       if (this.wines.length > 0) {
@@ -82,8 +84,6 @@ export default {
 
   methods: {
     calc() {
-
-      
       var match = 0;
       for(var j = 0; j < this.wines.length; j++) {
         for(var x = 0; x < this.wines[j].profile.length; x++) {

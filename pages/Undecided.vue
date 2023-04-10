@@ -4,7 +4,7 @@
       <h1 style="text-align: center; margin: 20px;">Für Unentschlossene</h1>
       <div class="button-group">
 
-        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Bündner Nusstorte</ShowButton>
+        <ShowButton buttonNumber="1" @toggle-wines="toggleWines">Bündner Nusstorte</ShowButton>
         <div v-if="showWines[1]" class="wine-list">
             <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Hochzeitstag</ShowButton>
+        <ShowButton buttonNumber="2" @toggle-wines="toggleWines">Hochzeitstag</ShowButton>
         <div v-if="showWines[2]" class="wine-list">
             <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
@@ -28,7 +28,7 @@
             </div>
         </div>
         
-        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Geburtstag</ShowButton>
+        <ShowButton buttonNumber="3" @toggle-wines="toggleWines">Geburtstag</ShowButton>
         <div v-if="showWines[3]" class="wine-list">
             <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Geschäftsessen</ShowButton>
+        <ShowButton buttonNumber="4" @toggle-wines="toggleWines">Geschäftsessen</ShowButton>
         <div v-if="showWines[4]" class="wine-list">
             <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
@@ -96,9 +96,9 @@
     },
     async created() {
         try {
-            //const response = await axios.get('https://wine.azurewebsites.net/api/wine');
+            const response = await axios.get('https://wine.azurewebsites.net/api/wine');
             //const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
-            const response = await axios.get('https://localhost:44322/api/Wine');
+            //const response = await axios.get('https://localhost:44322/api/Wine');
             this.wines = response.data;
             this.loading = false;
         } catch (error) {
