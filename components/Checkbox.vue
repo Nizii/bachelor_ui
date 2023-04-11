@@ -56,7 +56,7 @@ input[type=checkbox] {
 .checkbox-container {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   padding-left:40px ;
 }
 .checkbox-label {
