@@ -3,7 +3,9 @@
     <div style="text-align: center; margin: 20px;">
       <Header />
       <!--
-      <p>Süß: {{ preferences?.suss }}</p>
+      <p>Weisswein: {{ preferences?.Weisswein }}</p>
+      <p>Rotwein: {{ preferences?.Rotwein }}</p>
+      <p>Süss: {{ preferences?.suss }}</p>
       <p>Sauer: {{ preferences?.sauer }}</p>
       <p>Kräftig: {{ preferences?.kraftig }}</p>
       <p>Fruchtig: {{ preferences?.fruchtig }}</p>
@@ -16,13 +18,7 @@
         <WineHeader title="Weissweine" />
         <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
           <div v-if="wine.winetype === 'Weisswein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-            <h3 style="text-align: center;">{{ wine.name }}</h3>
-            <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-            <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-            <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-            <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-            <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-            <div class="match-result">Matched mit dir zu {{ wine.rating }} %</div>
+            <WineInfoCustom :wine="wine" />
           </div>
         </div>
       </div>
@@ -30,13 +26,7 @@
         <WineHeader title="Rotweine" />
         <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
           <div v-if="wine.winetype === 'Rotwein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-            <h3 style="text-align: center;">{{ wine.name }}</h3>
-            <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-            <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-            <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-            <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-            <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
-            <div class="match-result">Matched mit dir zu {{ wine.rating }} %</div>
+            <WineInfoCustom :wine="wine" />
           </div>
         </div>
       </div>
@@ -48,13 +38,15 @@
 import Header from '~/components/Header.vue';
 import WineHeader from '~/components/WineHeader.vue';
 import WineInfoCondition from "@/components/WineInfoCondition.vue";
+import WineInfoCustom from "@/components/WineInfoCustom.vue";
 import axios from 'axios';
 
 export default {
   components: {
     Header,
     WineHeader,
-    WineInfoCondition
+    WineInfoCondition,
+    WineInfoCustom
   },
   data() {
     return {
