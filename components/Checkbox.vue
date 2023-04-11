@@ -36,8 +36,8 @@ export default {
 
 <style scoped>
 input[type=checkbox] {
-  transform: scale(5);
-  margin: 20px 0;
+  transform: scale(4);
+  margin: 24px 0;
 }
 
 .checkbox-group {
