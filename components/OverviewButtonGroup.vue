@@ -1,9 +1,9 @@
 <template>
   <div class="button-group">
     <nuxt-link to="/Winemenu" class="button button-1">Weinkarte</nuxt-link>
-    <nuxt-link to="/Food" class="button button-2">Weinvorschläge</nuxt-link>
-    <nuxt-link to="/Undecided" class="button button-3">Unentschlossen</nuxt-link>
-    <nuxt-link to="/CustomMenu" class="button button-4">Benutzerdefiniert</nuxt-link>
+    <nuxt-link to="/Food" class="button button-2">Wein für Gerichte</nuxt-link>
+    <nuxt-link to="/Events" class="button button-3">Wein für Anlässe</nuxt-link>
+    <nuxt-link to="/CustomMenu" class="button button-4">Suche mit deinem Geschmacksprofil</nuxt-link>
   </div>
 </template>
 

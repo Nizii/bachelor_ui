@@ -4,7 +4,7 @@
       <h1 style="text-align: center; margin: 20px;">Für Unentschlossene</h1>
       <div class="button-group">
 
-        <ShowButton buttonNumber="1" @toggle-wines="toggleWines">Bündner Nusstorte</ShowButton>
+        <ShowButton buttonNumber="1" @toggle-wines="toggleWines">1.Date</ShowButton>
         <div v-if="showWines[1]" class="wine-list">
             <WineHeader title="Weissweine" />
             <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
