@@ -3,7 +3,7 @@
     <nuxt-link to="/Winemenu" class="button button-1">Weinkarte</nuxt-link>
     <nuxt-link to="/Food" class="button button-2">Wein für Gerichte</nuxt-link>
     <nuxt-link to="/Events" class="button button-3">Wein für Anlässe</nuxt-link>
-    <nuxt-link to="/CustomMenu" class="button button-4">Suche mit deinem Geschmacksprofil</nuxt-link>
+    <nuxt-link to="/CustomMenu" class="button button-4">Dein Geschmacksprofil</nuxt-link>
   </div>
 </template>
 
