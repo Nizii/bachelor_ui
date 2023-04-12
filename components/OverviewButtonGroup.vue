@@ -4,6 +4,7 @@
     <nuxt-link to="/Food" class="button button-2">Wein für Gerichte</nuxt-link>
     <nuxt-link to="/Events" class="button button-3">Wein für Anlässe</nuxt-link>
     <nuxt-link to="/CustomMenu" class="button button-4">Dein Geschmacksprofil</nuxt-link>
+    
   </div>
 </template>
 

@@ -64,6 +64,7 @@
             </div>
         </div>
     </div>
+    <Tabbar />
 </div>
 </template>
   

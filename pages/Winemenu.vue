@@ -12,6 +12,7 @@
         <WineInfo :wine="wine" v-if="wine.winetype === 'Rotwein'" />      
       </div>
     </div>
+    <Tabbar />
   </div>
 </template>
 

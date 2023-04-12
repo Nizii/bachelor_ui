@@ -6,27 +6,47 @@
         <h1>Welchen Wein trinkst du gerne?</h1>
         <Checkbox v-model="preferences.weisswein" label="Weißwein" />
         <Checkbox v-model="preferences.rotwein" label="Rotwein" />
+
         <h1>Das mag ich</h1>
-        <h3>Min. eine Auswahl tätigen!!!</h3>
-        <Checkbox v-model="preferences.suss" label="Süss" />
-        <Checkbox v-model="preferences.sauer" label="Sauer" />
-        <Checkbox v-model="preferences.kraftig" label="Kräftig" />
-        <Checkbox v-model="preferences.fruchtig" label="Fruchtig" />
-        <Checkbox v-model="preferences.neutral" label="Neutral" />
+        <div class="toggle-group">
+          <label for="toggle-switch">Experten Modus:</label>
+          <input type="checkbox" id="toggle-switch" v-model="useSliders" />
+        </div>
+
+        <div v-if="useSliders">
+          <h3>Min. eine Auswahl tätigen!!!</h3>
+          <Slider v-model="preferences.suss" label="Süss" />
+          <Slider v-model="preferences.sauer" label="Sauer" />
+          <Slider v-model="preferences.kraftig" label="Kräftig" />
+          <Slider v-model="preferences.fruchtig" label="Fruchtig" />
+          <Slider v-model="preferences.neutral" label="Neutral" />
+        </div>
+
+        <div v-else>
+          <h3>Min. eine Auswahl tätigen!!!</h3>
+          <Checkbox v-model="preferences.suss" label="Süss" />
+          <Checkbox v-model="preferences.sauer" label="Sauer" />
+          <Checkbox v-model="preferences.kraftig" label="Kräftig" />
+          <Checkbox v-model="preferences.fruchtig" label="Fruchtig" />
+          <Checkbox v-model="preferences.neutral" label="Neutral" />
+        </div>
       </div>
       <button class="button button-4" @click="sendPreferences">Suche Starten</button>
     </div>
+    <Tabbar />
   </div>
 </template>
 
 <script>
 import Header from '~/components/Header.vue';
 import Checkbox from '~/components/Checkbox.vue';
+import Slider from '~/components/Slider.vue';
 
 export default {
   components: {
     Header,
-    Checkbox, // hinzufügen Sie die Checkbox-Komponente hier als deklariertes Komponente
+    Checkbox,
+    Slider,
   },
   data() {
     return {
@@ -38,7 +58,8 @@ export default {
         kraftig: false,
         fruchtig: false,
         neutral: false
-      }
+      },
+      useSliders: false,
     }
   },
 
@@ -108,4 +129,3 @@ export default {
   }
   
 </style>
-
