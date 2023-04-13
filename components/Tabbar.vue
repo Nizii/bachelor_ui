@@ -4,15 +4,15 @@
         <i class="fas fa-home"></i>
         <span class="bottom-bar-label">Start</span>
       </router-link>
-      <router-link to="/profile" class="bottom-bar-link" :class="{ 'active': activeTab === 'Favoriten' }">
+      <router-link to="/login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Favoriten' }">
         <i class="fas fa-user"></i>
         <span class="bottom-bar-label">Favoriten</span>
       </router-link>
-      <router-link to="/profile" class="bottom-bar-link" :class="{ 'active': activeTab === 'Profile' }">
+      <router-link to="/login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Profile' }">
         <i class="fas fa-user"></i>
         <span class="bottom-bar-label">Profil</span>
       </router-link>
-      <router-link to="/" class="bottom-bar-link" @click="logout" :class="{ 'active': activeTab === 'Abmelden' }">
+      <router-link to="/" class="bottom-bar-link" @click.prevent="logout" :class="{ 'active': activeTab === 'Abmelden' }">
         <i class="fas fa-user"></i>
         <span class="bottom-bar-label">Abmelden</span>
       </router-link>
@@ -44,6 +44,7 @@
   background-color: #592321;
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
   height: 50px;
   box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.2);

@@ -7,6 +7,7 @@
   </template>
   
   <script>
+  import axios from 'axios';
   import Header from '~/components/Header.vue';
   
   export default {
@@ -16,16 +17,37 @@
   
     data() {
       return {
+        userData: null,
       }
     },
-}
-</script>
   
-<style scoped>
-h1 {
+    mounted() {
+      this.getUserData();
+    },
+  
+    methods: {
+      getUserData() {
+        const token = localStorage.getItem('jwt-token');
+        const headers = { Authorization: `Bearer ${token}` };
+  
+        axios.get('https://localhost:44322/api/userdata', { headers })
+          .then(response => {
+            this.userData = response.data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      },
+    },
+  }
+  </script>
+  
+  <style scoped>
+  h1 {
     font-size: 48px;
     text-align: center;
     margin-top: 50px;
     margin-bottom: 30px;
   }
-</style>
+  </style>
+  

@@ -51,7 +51,7 @@
     data() {
       return {
         showRegister: false,
-        name: '',
+        username: '',
         password: '',
       }
     },

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main">
     <Header />
     <div class="container">
       <ButtonGroup />
@@ -21,9 +21,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.container {
-    margin: 20px;
-}
-</style>

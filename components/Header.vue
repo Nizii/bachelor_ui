@@ -4,6 +4,7 @@
       <button class="back-button" @click="goBack">
         Zurück
       </button>
+      <h1>Interaktive Weinkarte</h1>
       <router-link to="/Login" class="login-button">
         Profil
       </router-link>
