@@ -1,22 +1,22 @@
 <template>
-    <div class="fixed-bottom-bar">
-      <router-link to="/" class="bottom-bar-link" :class="{ 'active': activeTab === 'Start' }">
-        <i class="fas fa-home"></i>
-        <span class="bottom-bar-label">Start</span>
-      </router-link>
-      <router-link to="/login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Favoriten' }">
-        <i class="fas fa-user"></i>
-        <span class="bottom-bar-label">Favoriten</span>
-      </router-link>
-      <router-link to="/login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Profile' }">
-        <i class="fas fa-user"></i>
-        <span class="bottom-bar-label">Profil</span>
-      </router-link>
-      <router-link to="/" class="bottom-bar-link" @click.prevent="logout" :class="{ 'active': activeTab === 'Abmelden' }">
-        <i class="fas fa-user"></i>
-        <span class="bottom-bar-label">Abmelden</span>
-      </router-link>
-    </div>
+  <div class="fixed-bottom-bar">
+    <router-link to="/Login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Favoriten' }">
+      <i class="fas fa-user"></i>
+      <span class="bottom-bar-label">Mein Weinkeller</span>
+    </router-link>
+    <router-link to="/Login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Profile' }">
+      <i class="fas fa-user"></i>
+      <span class="bottom-bar-label">Statistik</span>
+    </router-link>
+    <a v-if="isLoggedIn()" href="#" class="bottom-bar-link" @click.prevent="logout" :class="{ 'active': activeTab === 'Abmelden' }">
+      <i class="fas fa-user"></i>
+      <span class="bottom-bar-label">Abmelden</span>
+    </a>
+    <router-link v-else to="/Login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Anmelden' }">
+      <i class="fas fa-user"></i>
+      <span class="bottom-bar-label">Anmelden</span>
+    </router-link>
+  </div>
   </template>
   
   <script>
@@ -28,11 +28,15 @@
     },
 
     methods: {
-    logout() {
+      logout() {
         localStorage.removeItem('jwt');
+        console.log(localStorage.getItem('jwt'))
         this.$router.push('/');
+      },
+      isLoggedIn() {
+        return localStorage.getItem('jwt') !== null;
+      }
     }
-}
   };
   </script>
   
@@ -72,4 +76,10 @@
   .bottom-bar-label {
     font-size: 12px;
   }
+
+  .button:hover,
+  .button:focus {
+    color: #d0d0d0; /* Dezente Farbe für Hover und Focus */
+  }
+
   </style>

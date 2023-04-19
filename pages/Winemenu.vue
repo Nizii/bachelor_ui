@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header />
+    <MainTabbar />
     <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
     <div v-else>
       <WineHeader title="Weissweine" />
@@ -21,6 +22,7 @@
 import Header from '~/components/Header.vue';
 import WineInfo from '~/components/WineInfo.vue';
 import WineHeader from '~/components/WineHeader.vue';
+import MainTabbar from '~/components/MainTabbar.vue';
 import axios from 'axios';
 
 export default {
@@ -28,7 +30,8 @@ export default {
   components: {
     Header,
     WineInfo,
-    WineHeader
+    WineHeader,
+    MainTabbar
   },
   data() {
     return {

@@ -1,6 +1,7 @@
 <template>
     <div>
         <Header />
+        <MainTabbar />
         <h1 style="text-align: center; margin: 20px;">Passend zu Essen</h1>
         <div class="button-group">
             <ShowButton buttonNumber="1" @toggle-wines="toggleWines">Nüsslisalat</ShowButton>
@@ -68,6 +69,7 @@
     import WineHeader from '~/components/WineHeader.vue';
     import WineInfoCondition from "~/components/WineInfoCondition.vue";
     import ShowButton from "~/components/ShowButton.vue";
+    import MainTabbar from '~/components/MainTabbar.vue';
     import axios from 'axios';
   
     export default {
@@ -75,7 +77,8 @@
             Header,
             WineHeader,
             WineInfoCondition,
-            ShowButton
+            ShowButton,
+            MainTabbar
         },
 
     data() {

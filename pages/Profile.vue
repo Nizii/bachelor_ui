@@ -1,6 +1,7 @@
 <template>
     <div>
       <Header />
+      <MainTabbar />
       <h1>Profilseite</h1>
       <Tabbar />
     </div>
@@ -27,12 +28,13 @@
   
     methods: {
       getUserData() {
-        const token = localStorage.getItem('jwt-token');
+        const token = localStorage.getItem('jwt');
         const headers = { Authorization: `Bearer ${token}` };
   
-        axios.get('https://localhost:44322/api/userdata', { headers })
+        axios.get('https://localhost:44322/api/user/userdata', {headers} )
           .then(response => {
             this.userData = response.data;
+            console.log(this.userData);
           })
           .catch(error => {
             console.error(error);

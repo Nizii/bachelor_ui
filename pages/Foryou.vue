@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header />
+    <MainTabbar />
     <div class="custom-box">
       <div class="checkbox-group">
         <h1>Welchen Wein trinkst du gerne?</h1>

@@ -1,6 +1,7 @@
 <template>
     <div>
       <Header />
+      <MainTabbar />
       <div class="login-container">
         <div class="form-container">
           <div v-if="!showRegister" class="form">
@@ -100,14 +101,15 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    background-color: #F4F4F4;
+    background-color: #FFFF;
+    margin-top: 30px;
   }
   
   .form-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #FFFFFF;
+    background-color: #F4F4F4;
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
