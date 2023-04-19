@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin: 0; padding: 0; box-sizing: border-box;">
     <Header />
     <MainTabbar />
     <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
@@ -53,3 +53,7 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+</style>

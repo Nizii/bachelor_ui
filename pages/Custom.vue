@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div style="text-align: center; margin: 20px;">
+  <div style="margin: 0; padding: 0; box-sizing: border-box;">
+    <div style="text-align: center;">
       <Header />
       <MainTabbar />
       <!--
@@ -18,16 +18,18 @@
       <div v-if="preferences.weisswein">
         <WineHeader title="Weissweine" />
         <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
-          <div v-if="wine.winetype === 'Weisswein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-            <WineInfoCustom :wine="wine" />
+          <div v-if="wine.winetype === 'Weisswein' && !(wine.rating === 0)" class="wine-info">
+            <div class="match-result">Matched mit dir zu {{ wine.rating }} %</div>
+            <WineInfo :wine="wine" />
           </div>
         </div>
       </div>
       <div v-if="preferences.rotwein">
         <WineHeader title="Rotweine" />
         <div v-for="wine in wines" :key="wine.id" style="margin: 20px;">
-          <div v-if="wine.winetype === 'Rotwein' && !(wine.rating === 0)" class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-            <WineInfoCustom :wine="wine" />
+          <div v-if="wine.winetype === 'Rotwein' && !(wine.rating === 0)" class="wine-info">
+            <div class="match-result">Matched mit dir zu {{ wine.rating }} %</div>
+            <WineInfo :wine="wine" />
           </div>
         </div>
       </div>
@@ -124,4 +126,11 @@ export default {
     padding: 20px;
     background-color: yellow;
   }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
 </style>

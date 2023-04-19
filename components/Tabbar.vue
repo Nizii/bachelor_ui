@@ -82,4 +82,5 @@
     color: #d0d0d0; /* Dezente Farbe für Hover und Focus */
   }
 
+
   </style>

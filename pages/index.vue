@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div style="margin: 0; padding: 0; box-sizing: border-box;">
     <Header />
     <div class="container">
       <MainTabbar />
@@ -22,3 +22,18 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+</style>

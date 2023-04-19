@@ -18,4 +18,5 @@ export default {
   text-align: center;
   margin: 20px;
 }
+
 </style>

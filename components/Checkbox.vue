@@ -1,7 +1,8 @@
 <template>
-  <div class="checkbox-container">
-    <input type="checkbox" :id="id" v-model="checked" true-value="true" false-value="false" />
-    <label :for="id" class="checkbox-label">{{ label }}</label>
+  <div class="checkbox-container" @click="toggle">
+    <div class="checkbox" :class="{ 'checkbox-checked': checked }">
+      {{ label }}
+    </div>
   </div>
 </template>
 
@@ -31,35 +32,39 @@ export default {
       },
     },
   },
+  methods: {
+    toggle() {
+      this.checked = !this.checked;
+    },
+  },
 };
 </script>
 
 <style scoped>
-input[type=checkbox] {
-  transform: scale(4);
-  margin: 24px 0;
-}
-
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.checkbox-group label {
-  display: flex;
-  align-items: center;
-  font-size: 24px;
-}
-
-
 .checkbox-container {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  padding-left:40px ;
+  width: 50%;
 }
-.checkbox-label {
-  margin-left: 40px;
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  border: 2px solid #aaa;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s, color 0.3s;
 }
+
+.checkbox.checkbox-checked {
+  background-color: #007bff;
+  color: #fff;
+}
+
 </style>

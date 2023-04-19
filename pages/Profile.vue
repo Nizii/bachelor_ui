@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div style="margin: 0; padding: 0; box-sizing: border-box;">
       <Header />
       <MainTabbar />
       <h1>Profilseite</h1>
@@ -31,7 +31,8 @@
         const token = localStorage.getItem('jwt');
         const headers = { Authorization: `Bearer ${token}` };
   
-        axios.get('https://localhost:44322/api/user/userdata', {headers} )
+        //axios.get('https://localhost:44322/api/user/userdata', {headers} )
+        axios.get('https://wine.azurewebsites.net/api/user/userdata', {headers} )
           .then(response => {
             this.userData = response.data;
             console.log(this.userData);
@@ -51,5 +52,6 @@
     margin-top: 50px;
     margin-bottom: 30px;
   }
+
   </style>
   

@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="navigation">
-      <h1>Interaktive Weinkarte</h1>
+      <h2>Interaktive Weinkarte</h2>
     </div>
   </header>
 </template>
@@ -14,4 +14,5 @@ header {
   text-align: center;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 </style>

@@ -1,7 +1,10 @@
 <template>
-    <div>
+    <div style="margin: 0; padding: 0; box-sizing: border-box;">
         <Header />
         <MainTabbar />
+        <FoodTabbar />
+        <Tabbar />
+        <!--
         <h1 style="text-align: center; margin: 20px;">Passend zu Essen</h1>
         <div class="button-group">
             <ShowButton buttonNumber="1" @toggle-wines="toggleWines">Nüsslisalat</ShowButton>
@@ -60,7 +63,7 @@
             </div>
         </div>
     </div>
-    <Tabbar />
+    -->
 </div>
 </template>
   
@@ -119,33 +122,9 @@
 </script>
 
 <style scoped>
-    .button-group {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100%;
-    }
-  
-    .button {
-        margin: 10px;
-        width: 250px;
-        height: 80px;
-        border-radius: 5px;
-        border: none;
-        font-size: 15px;
-        font-family: 'Arial', sans-serif;
-        cursor: pointer;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-    }
-  
-    .button-1, .button-2, .button-3, .button-4, .button-5 {
-        background-color: #d9d9d9;
-        color: black;
-    }
-  
-    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 </style>

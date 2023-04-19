@@ -7,16 +7,28 @@
     <div class="wine-card-row2">
       <img class="wine-image" src="/wine.png" alt="Weinbild" width="30px" height="100px" >
       <div class="wine-description">
-        <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-        <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-        <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
+        <div class="wine-attribute">
+          Traube: {{ wine.grape }}
+        </div>
+        <div class="wine-attribute">
+          Jahrgang: {{ wine.year }}
+        </div>
+        <div class="wine-attribute">
+          Alkohol: {{ wine.alcohol }}%
+        </div>
       </div>
     </div>
     <div class="wine-card-row3">
-      <div class="star-rating">****</div>
+      <div class="star-rating">
+        ****
+      </div>
       <div class="wine-price-container">
-        <div class="wine-price">{{ wine.openprice }} .- / 1d l</div>
-        <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
+        <div class="wine-price">
+          {{ wine.openprice }} .- / 1d l
+        </div>
+        <div class="wine-price">
+          {{ wine.bottleprice}} .- / 0.75 l
+        </div>
       </div>
     </div>
   </div>  

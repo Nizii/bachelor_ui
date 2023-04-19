@@ -1,5 +1,5 @@
 <template>
-    <div>
+  <div style="margin: 0; padding: 0; box-sizing: border-box;">
       <Header />
       <MainTabbar />
       <div class="login-container">
@@ -67,7 +67,8 @@
     methods: {
       async login() {
         try {
-          const response = await axios.post('https://localhost:44322/api/User/login', {
+          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+          //const response = await axios.post('https://localhost:44322/api/User/login', {
             username: this.username,
             password: this.password
           });
@@ -81,7 +82,8 @@
   
       async register() {
         try {
-          const response = await axios.post('https://localhost:44322/api/User/reg', {
+          const response = await axios.post('https://wine.azurewebsites.net/api/User/reg', {
+          //const response = await axios.post('https://localhost:44322/api/User/reg', {
             username: this.username,
             password: this.password
           });
@@ -172,6 +174,12 @@
     font-weight: bold;
     text-decoration: underline;
     cursor: pointer;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
   
 </style>
