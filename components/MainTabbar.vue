@@ -13,7 +13,7 @@
   flex-direction: row; /* Fügt diese Zeile hinzu */
   justify-content: space-around;
   align-items: center;
-  background-color: #104645;
+  background-color: #775d5b;
   height: 50px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 }

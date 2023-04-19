@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Header />
-    <MainTabbar />
     <div style="text-align: center; margin: 20px;">
+      <Header />
+      <MainTabbar />
       <!--
       <p>Weisswein: {{ preferences?.Weisswein }}</p>
       <p>Rotwein: {{ preferences?.Rotwein }}</p>

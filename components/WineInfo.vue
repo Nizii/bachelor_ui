@@ -1,12 +1,25 @@
 <template>
-    <div class="wine-info" style="display: flex; flex-direction: column; align-items: center;">
-      <h3 style="text-align: center;">{{ wine.name }}</h3>
-      <div class="wine-attribute">Traube: {{ wine.grape }}</div>
-      <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
-      <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
-      <div class="wine-price" style="margin-top: 10px;">{{ wine.openprice }} .- / 1d l</div>
-      <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
+  <div class="wine-card">
+    <div class="wine-card-row1">
+      <button class="favorite-button">Icon</button>
+      <h3 class="wine-title">{{ wine.name }}</h3>
     </div>
+    <div class="wine-card-row2">
+      <img class="wine-image" src="/wine.png" alt="Weinbild" width="30px" height="100px" >
+      <div class="wine-description">
+        <div class="wine-attribute">Traube: {{ wine.grape }}</div>
+        <div class="wine-attribute">Jahrgang: {{ wine.year }}</div>
+        <div class="wine-attribute">Alkohol: {{ wine.alcohol }}%</div>
+      </div>
+    </div>
+    <div class="wine-card-row3">
+      <div class="star-rating">****</div>
+      <div class="wine-price-container">
+        <div class="wine-price">{{ wine.openprice }} .- / 1d l</div>
+        <div class="wine-price">{{ wine.bottleprice}} .- / 0.75 l</div>
+      </div>
+    </div>
+  </div>  
   </template>
   
   <script>
@@ -21,3 +34,67 @@
   }
   </script>
   
+  <style scoped>
+  .wine-card {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .wine-card-row1,
+  .wine-card-row2,
+  .wine-card-row3 {
+    display: flex;
+  }
+  
+  .wine-card-row1 {
+    background-color: bisque;
+  }
+  .wine-card-row2 {
+    background-color:whitesmoke;
+    padding: 10px;
+  }
+  .wine-card-row3 {
+    background-color:bisque;
+    padding: 10px;
+  }
+
+  .wine-description{
+    margin-left: 20px;
+  }
+
+  .favorite-button {
+    width: 50px;
+    height: 50px;
+    background-color: #d9d9d9;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1rem;
+  }
+  
+  .wine-title {
+    flex-grow: 1;
+  }
+  
+  .wine-image {
+    width: auto;
+    height: 150px;
+  }
+  
+  .star-rating {
+    flex-grow: 1;
+  }
+  
+  .wine-price-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+</style>
