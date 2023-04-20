@@ -6,32 +6,32 @@
       <div class="popup-text">
         <span class="popup-tag">Süss:</span>
         <br>
-        Schmeckt der Wein angenehm süß und zeigt deutliche Aromen von Zucker, Honig oder kandierten Früchten, die den Gaumen betören?
+        <p class="infotxt">Schmeckt der Wein angenehm süß und zeigt deutliche Aromen von Zucker, Honig oder kandierten Früchten, die den Gaumen betören?</p>
       </div>
       <div class="popup-text">
         <span class="popup-tag">Sauer:</span>
         <br>
-        Wein eine ausgeprägte Säure, die sich durch erfrischende und lebhafte Zitrus- oder grüne Fruchtnoten bemerkbar macht und den Gaumen anregt?
+        <p class="infotxt">Wein eine ausgeprägte Säure, die sich durch erfrischende und lebhafte Zitrus- oder grüne Fruchtnoten bemerkbar macht und den Gaumen anregt?</p>
       </div>
       <div class="popup-text">
         <span class="popup-tag">Intensiv:</span>
         <br>
-        Hat der Wein ein intensives Geruchsbouquet oder muss ich das Glas mehrmals schwenken, bis ich etwas wahrnehme?
+        <p class="infotxt">Hat der Wein ein intensives Geruchsbouquet oder muss ich das Glas mehrmals schwenken, bis ich etwas wahrnehme?</p>
       </div>
       <div class="popup-text">
         <span class="popup-tag">Mild:</span>
         <br>
-        Ist der Wein sanft und zurückhaltend im Geruch, sodass er einen leichten und unaufdringlichen Eindruck hinterlässt?
+        <p class="infotxt">Ist der Wein sanft und zurückhaltend im Geruch, sodass er einen leichten und unaufdringlichen Eindruck hinterlässt?</p>
       </div>
       <div class="popup-text">
         <span class="popup-tag">Fruchtig:</span>
         <br>
-        Besitzt der Wein ausgeprägte fruchtige Aromen, wie z.B. Beeren, Zitrusfrüchte oder tropische Früchte, die sofort ins Auge fallen?
+        <p class="infotxt">Besitzt der Wein ausgeprägte fruchtige Aromen, wie z.B. Beeren, Zitrusfrüchte oder tropische Früchte, die sofort ins Auge fallen?</p>
       </div>
       <div class="popup-text">
         <span class="popup-tag">Erdig:</span>
         <br>
-        Nimmt man beim Riechen und Schmecken des Weins erdige Nuancen wahr, wie etwa mineralische, pilzartige oder waldbodenähnliche Noten?
+        <p class="infotxt">Nimmt man beim Riechen und Schmecken des Weins erdige Nuancen wahr, wie etwa mineralische, pilzartige oder waldbodenähnliche Noten?</p>
       </div>
     </div>
   </div>
@@ -89,5 +89,9 @@ export default {
 
 .popup-tag {
   font-weight: bold;
+}
+
+.infotxt{
+  font-size: 10px;
 }
 </style>
