@@ -13,7 +13,6 @@
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
             <img src="/1.jpg" alt="Bild 1" style="width: 30%; margin-bottom: 20px;">
             <img src="/2.jpg" alt="Bild 2" style="width: 30%; margin-bottom: 20px;">
-            <img src="/3.jpg" alt="Bild 3" style="width: 30%; margin-bottom: 20px;">
         </div>
         <br>
     </div>
