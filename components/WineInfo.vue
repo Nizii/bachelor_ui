@@ -127,7 +127,7 @@
   }
   
   .star-rating {
-    flex-grow: 1;
+    transform: scale(0.5);
   }
   
   .wine-price-container {
