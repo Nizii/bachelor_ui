@@ -38,7 +38,7 @@ export default {
   width: 25%;
   box-sizing: border-box;
   transition: color 0.3s;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .button:hover,
