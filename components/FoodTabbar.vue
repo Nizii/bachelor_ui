@@ -52,6 +52,7 @@ export default {
   border-radius: 10px;
   margin-left: 20px;
   border-style: none;
+  font-size: 12px;
   
 }
 

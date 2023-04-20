@@ -119,6 +119,7 @@
   .wine-title {
     flex-grow: 1;
     padding: 10px;
+    font-size: 15px;
   }
   
   .wine-image {
@@ -135,6 +136,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    
+  }
+
+  .wine-price{
+    font-size: 12px;
+  }
+
+  .wine-attribute{
+    font-size: 12px;;
   }
   
 </style>
