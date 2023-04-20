@@ -2,7 +2,7 @@
 <template>
   <div v-if="show" class="popup">
     <div class="popup-content">
-      <button class="close-popup" @click="$emit('close')">×</button>
+      <button class="close-popup" @click="$emit('close')">X</button>
       <div class="popup-text">
         <span class="popup-tag">Süss:</span>
         <br>
@@ -53,13 +53,17 @@ export default {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #f2f2f2;
+  background-color: hsl(0, 45%, 29%);
+  color:#fff;
   border: 1px solid #aaa;
   border-radius: 5px;
   padding: 5px;
   font-size: 10px;
   cursor: pointer;
   user-select: none;
+  height: 30px;
+  width: 30px;
+  font-size: 15px;
 }
 
 .popup {
