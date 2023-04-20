@@ -59,8 +59,8 @@
     methods: {
       async saveRating() {
         try {
-          //const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}');
-          const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
+          const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
+          //const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
           this.rating++;
         console.log(response.data);
         } catch (error) {
