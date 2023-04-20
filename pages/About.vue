@@ -3,18 +3,19 @@
     <Header />
     <MainTabbar />
     <div style="text-align: center; margin: 20px;">
-        <h1>Über Uns</h1>
-        <p class="txt">Wir sind ein kreatives Duo, bestehend aus einem Informatik-Studenten und einem Design-Studenten. Aktuell arbeiten wir an unserer Bachelorarbeit, bei der wir ein Restaurant auf seiner Reise in die Digitalisierung begleiten. Unser Ziel ist es, eine interaktive Weinkarte für Kunden zu entwickeln, die sich unsicher sind, welcher Wein zu ihrem Essen passt.</p>
+        <h2>Über Uns</h2>
+        <p class="txt">Wir sind ein kreatives Duo, bestehend aus einem Informatik-Studenten und einem Design-Studenten.</p>
         <br>
-        <h2>Unsere Leidenschaft für Wein</h2>
+        <h3>Unsere Leidenschaft für Wein</h3>
         <p class="txt">Unsere Begeisterung für Wein hat uns auf zahlreiche Reisen und Entdeckungen geführt. Zusammen haben wir Weindegustationen besucht in der Toskana sowie auf dem malerischen Wii-Schiff in Luzern und haben in der Schule eigene Weinproben organisiert. Dabei konnten wir unser Wissen erweitern und unsere Leidenschaft für Wein vertiefen.</p>
         <br>
-        <h2>Bilder</h2>
+        <h3>Bilder</h3>
         <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
             <img src="/1.jpg" alt="Bild 1" style="width: 30%; margin-bottom: 20px;">
             <img src="/2.jpg" alt="Bild 2" style="width: 30%; margin-bottom: 20px;">
             <img src="/3.jpg" alt="Bild 3" style="width: 30%; margin-bottom: 20px;">
         </div>
+        <br>
     </div>
     <Tabbar />
   </div>
