@@ -128,6 +128,7 @@
   }
   
   .star-rating {
+    width: 50%;
     transform: scale(0.5);
   }
   
@@ -136,8 +137,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    
+    width: 50%;
   }
+  
 
   .wine-price{
     font-size: 12px;
