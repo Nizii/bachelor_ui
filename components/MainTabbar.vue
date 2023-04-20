@@ -1,16 +1,25 @@
 <template>
   <div class="button-group">
-    <nuxt-link to="/Winemenu" class="button button-1">Weinkarte</nuxt-link>
-    <nuxt-link to="/Food" class="button button-2">Essen</nuxt-link>
-    <nuxt-link to="/Foryou" class="button button-3">Für dich</nuxt-link>
-    <nuxt-link to="/About" class="button button-4">Über uns</nuxt-link> 
+    <nuxt-link to="/Winemenu" :class="{ active: isActive('/Winemenu') }" class="button button-1">Weinkarte</nuxt-link>
+    <nuxt-link to="/Food" :class="{ active: isActive('/Food') }" class="button button-2">Essen</nuxt-link>
+    <nuxt-link to="/Foryou" :class="{ active: isActive('/Foryou') }" class="button button-3">Für dich</nuxt-link>
+    <nuxt-link to="/About" :class="{ active: isActive('/About') }" class="button button-4">Über uns</nuxt-link> 
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    isActive(route) {
+      return this.$route.path === route;
+    }
+  }
+};
+</script>
 
 <style scoped>
 .button-group {
   display: flex;
-  flex-direction: row; /* Fügt diese Zeile hinzu */
   justify-content: space-around;
   align-items: center;
   background-color: #775d5b;
@@ -20,13 +29,14 @@
 
 .button {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #b7b7b7;
   text-decoration: none;
   padding: 0 1rem;
   height: 100%;
+  width: 25%;
+  box-sizing: border-box;
   transition: color 0.3s;
 }
 
@@ -35,12 +45,8 @@
   color: #d0d0d0; /* Dezente Farbe für Hover und Focus */
 }
 
-
-.button-1 span,
-.button-2 span,
-.button-3 span,
-.button-4 span {
-  font-size: 12px;
+.active {
+  background-color: #592321;
+  color: white;
 }
-
 </style>

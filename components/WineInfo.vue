@@ -1,7 +1,7 @@
 <template>
   <div class="wine-card">
     <div class="wine-card-row1">
-      <button class="favorite-button">Icon</button>
+      <button class="favorite-button">+</button>
       <h3 class="wine-title">{{ wine.name }}</h3>
     </div>
     <div class="wine-card-row2">
@@ -16,11 +16,15 @@
         <div class="wine-attribute">
           Alkohol: {{ wine.alcohol }}%
         </div>
+        <br>
+        <div class="wine-attribute">
+          {{ wine.charakter }}
+        </div>
       </div>
     </div>
     <div class="wine-card-row3">
       <div class="star-rating">
-        ****
+        <star-rating v-model="rating" @rating-selected="saveRating" />
       </div>
       <div class="wine-price-container">
         <div class="wine-price">
@@ -35,14 +39,35 @@
   </template>
   
   <script>
+  import axios from 'axios';
   export default {
+    data() {
+      return {
+        rating: 0,
+      }
+    },
+
     name: 'WineInfo',
+
     props: {
       wine: {
         type: Object,
         required: true
       }
-    }
+    },
+
+    methods: {
+      async saveRating() {
+        try {
+          //const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}');
+          const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
+          this.rating++;
+        console.log(response.data);
+        } catch (error) {
+        console.error(error);
+      }
+    },
+  },
   }
   </script>
   
@@ -53,6 +78,7 @@
     width: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+    margin-bottom: 20px;
   }
   
   .wine-card-row1,
@@ -87,10 +113,12 @@
     justify-content: center;
     align-items: center;
     margin-right: 1rem;
+    font-size: 40px;
   }
   
   .wine-title {
     flex-grow: 1;
+    padding: 10px;
   }
   
   .wine-image {

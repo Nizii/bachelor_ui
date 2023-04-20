@@ -3,12 +3,22 @@
     <Header />
     <MainTabbar />
     <div style="text-align: center; margin: 20px;">
-        About
+        <h1>Über Uns</h1>
+        <p>Wir sind ein kreatives Duo, bestehend aus einem Informatik-Studenten und einem Design-Studenten. Aktuell arbeiten wir an unserer Bachelorarbeit, bei der wir ein Restaurant auf seiner Reise in die Digitalisierung begleiten. Unser Ziel ist es, eine interaktive Weinkarte für Kunden zu entwickeln, die sich unsicher sind, welcher Wein zu ihrem Essen passt.</p>
+        <br>
+        <h2>Unsere Leidenschaft für Wein</h2>
+        <p>Unsere Begeisterung für Wein hat uns auf zahlreiche Reisen und Entdeckungen geführt. Zusammen haben wir Weindegustationen besucht in der Toskana sowie auf dem malerischen Wii-Schiff in Luzern und haben in der Schule eigene Weinproben organisiert. Dabei konnten wir unser Wissen erweitern und unsere Leidenschaft für Wein vertiefen.</p>
+        <br>
+        <h2>Bilder</h2>
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <img src="/1.jpg" alt="Bild 1" style="width: 30%; margin-bottom: 20px;">
+            <img src="/2.jpg" alt="Bild 2" style="width: 30%; margin-bottom: 20px;">
+            <img src="/3.jpg" alt="Bild 3" style="width: 30%; margin-bottom: 20px;">
+        </div>
     </div>
     <Tabbar />
   </div>
 </template>
-
 <style scoped>
 * {
   margin: 0;

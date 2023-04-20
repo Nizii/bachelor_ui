@@ -18,8 +18,8 @@
           <Checkbox v-model="preferences.sauer" label="Sauer" />
         </div>
         <div id="taste-3" class="taste">
-          <Checkbox v-model="preferences.schwer" label="Schwer" />
-          <Checkbox v-model="preferences.leicht" label="Leicht" />
+          <Checkbox v-model="preferences.intensiv" label="Intensiv" />
+          <Checkbox v-model="preferences.mild" label="Mild" />
         </div>
         <div id="taste-4" class="taste">
           <Checkbox v-model="preferences.fruchtig" label="Fruchtig" />
@@ -52,8 +52,8 @@ export default {
         rotwein: false,
         suss: false,
         sauer: false,
-        schwer: false,
-        leicht: false,
+        intensiv: false,
+        mild: false,
         fruchtig: false,
         erdig: false,
       },
@@ -93,6 +93,7 @@ export default {
 
 .checkbox-group h3 {
   margin-bottom: 0.5rem;
+  margin-top: 8px;
 }
 
 .checkbox-group .taste {

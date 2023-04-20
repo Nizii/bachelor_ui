@@ -6,32 +6,32 @@
       <div class="popup-text">
         <span class="popup-tag">Süss:</span>
         <br>
-        Ist der Wein eher klebrig süsslich oder trinkt er sich mit fruchtig saurem Nachhall?
+        Schmeckt der Wein angenehm süß und zeigt deutliche Aromen von Zucker, Honig oder kandierten Früchten, die den Gaumen betören?
       </div>
       <div class="popup-text">
         <span class="popup-tag">Sauer:</span>
         <br>
-        Erinnert der Wein eher an saures Zitronenwasser oder an ungesüsste Getränke?
+        Wein eine ausgeprägte Säure, die sich durch erfrischende und lebhafte Zitrus- oder grüne Fruchtnoten bemerkbar macht und den Gaumen anregt?
       </div>
       <div class="popup-text">
-        <span class="popup-tag">Schwer:</span>
+        <span class="popup-tag">Intensiv:</span>
         <br>
-        Ist der Wein eher klebrig süsslich oder trinkt er sich mit fruchtig saurem Nachhall?
+        Hat der Wein ein intensives Geruchsbouquet oder muss ich das Glas mehrmals schwenken, bis ich etwas wahrnehme?
       </div>
       <div class="popup-text">
-        <span class="popup-tag">Leicht:</span>
+        <span class="popup-tag">Mild:</span>
         <br>
-        Erinnert der Wein eher an saures Zitronenwasser oder an ungesüsste Getränke?
+        Ist der Wein sanft und zurückhaltend im Geruch, sodass er einen leichten und unaufdringlichen Eindruck hinterlässt?
       </div>
       <div class="popup-text">
         <span class="popup-tag">Fruchtig:</span>
         <br>
-        Ist der Wein eher klebrig süsslich oder trinkt er sich mit fruchtig saurem Nachhall?
+        Besitzt der Wein ausgeprägte fruchtige Aromen, wie z.B. Beeren, Zitrusfrüchte oder tropische Früchte, die sofort ins Auge fallen?
       </div>
       <div class="popup-text">
         <span class="popup-tag">Erdig:</span>
         <br>
-        Ist der Wein eher klebrig süsslich oder trinkt er sich mit fruchtig saurem Nachhall?
+        Nimmt man beim Riechen und Schmecken des Weins erdige Nuancen wahr, wie etwa mineralische, pilzartige oder waldbodenähnliche Noten?
       </div>
     </div>
   </div>
@@ -57,7 +57,7 @@ export default {
   border: 1px solid #aaa;
   border-radius: 5px;
   padding: 5px;
-  font-size: 14px;
+  font-size: 10px;
   cursor: pointer;
   user-select: none;
 }

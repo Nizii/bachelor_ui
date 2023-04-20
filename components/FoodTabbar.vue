@@ -1,16 +1,29 @@
 <template>
   <div class="button-group">
-    <nuxt-link to="/" class="button button-1">Antipasti</nuxt-link>
-    <nuxt-link to="/" class="button button-2">Salat</nuxt-link>
-    <nuxt-link to="/" class="button button-3">Pizza</nuxt-link>
-    <nuxt-link to="/" class="button button-4">Pasta</nuxt-link> 
-    <nuxt-link to="/" class="button button-4">Fisch</nuxt-link> 
-    <nuxt-link to="/" class="button button-4">Tiramisu</nuxt-link> 
-    <nuxt-link to="/" class="button button-4">Panacota</nuxt-link> 
+    <button @click="showWinesForDish('Antipasti')" :class="{ active: selectedDish === 'Antipasti' }" class="button button-1">Antipasti</button>
+    <button @click="showWinesForDish('Salat')" :class="{ active: selectedDish === 'Salat' }" class="button button-2">Salat</button>
+    <button @click="showWinesForDish('Pizza')" :class="{ active: selectedDish === 'Pizza' }" class="button button-3">Pizza</button>
+    <button @click="showWinesForDish('Pasta')" :class="{ active: selectedDish === 'Pasta' }" class="button button-4">Pasta</button>
+    <button @click="showWinesForDish('Fisch')" :class="{ active: selectedDish === 'Fisch' }" class="button button-4">Fisch</button>
+    <button @click="showWinesForDish('Tiramisu')" :class="{ active: selectedDish === 'Tiramisu' }" class="button button-4">Tiramisu</button>
+    <button @click="showWinesForDish('Panacota')" :class="{ active: selectedDish === 'Panacota' }" class="button button-4">Panacota</button>
   </div>
-
-  
 </template>
+<script>
+export default {
+  data() {
+    return {
+      selectedDish: '',
+    };
+  },
+  methods: {
+    showWinesForDish(dish) {
+      this.selectedDish = dish;
+      this.$emit('show-wines', dish);
+    },
+  },
+};
+</script>
 
 <style scoped>
 .button-group {
@@ -18,11 +31,11 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: #104645;
+  background-color: #FFFFFF;
   height: 50px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
   overflow-x: auto; /* Hinzufügen von seitlichem Scroll */
   white-space: nowrap; /* Verhindert den Umbruch der Elemente */
+  margin: 4px;
 }
 
 .button {
@@ -30,11 +43,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #b7b7b7;
+  color: black;
+  background-color: bisque;
   text-decoration: none;
   padding: 0 1rem;
   height: 100%;
   transition: color 0.3s;
+  border-radius: 10px;
+  margin-left: 20px;
+  border-style: none;
+  
 }
 
 .button:hover,
@@ -48,6 +66,11 @@
 .button-3 span,
 .button-4 span {
   font-size: 12px;
+}
+
+.active {
+  background-color: #592321;
+  color: white;
 }
 
 </style>

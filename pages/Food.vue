@@ -1,130 +1,99 @@
 <template>
     <div style="margin: 0; padding: 0; box-sizing: border-box;">
-        <Header />
-        <MainTabbar />
-        <FoodTabbar />
-        <Tabbar />
-        <!--
-        <h1 style="text-align: center; margin: 20px;">Passend zu Essen</h1>
-        <div class="button-group">
-            <ShowButton buttonNumber="1" @toggle-wines="toggleWines">Nüsslisalat</ShowButton>
-            <div v-if="showWines[1]" class="wine-list">
-            <WineHeader title="Weissweine" />
-            <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="1.Date" />
-            </div>
-            <WineHeader title="Rotweine" /> 
-            <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="1.Date" />
-            </div>
-        </div>
-        <ShowButton buttonNumber="2" @toggle-wines="toggleWines">Fleisch-Käse-Platte</ShowButton>
-        <div v-if="showWines[2]" class="wine-list">
-            <WineHeader title="Weissweine" />
-            <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="Fleisch-Kase-Platte" />
-            </div>
-            <WineHeader title="Rotweine" />  
-            <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="Fleisch-Kase-Platte" />
-            </div>
-        </div>
-        <ShowButton buttonNumber="3" @toggle-wines="toggleWines">Rösti mit Spiegelei</ShowButton>
-        <div v-if="showWines[3]" class="wine-list">
-            <WineHeader title="Weissweine" />
-            <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="Rosti mit Spiegelei" />
-            </div>
-            <WineHeader title="Rotweine" />  
-            <div v-for="wine in wines" :key="wine.id" style="display: block;margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="Rosti mit Spiegelei" />
-            </div>
-        </div>
-        <ShowButton buttonNumber="4" @toggle-wines="toggleWines">Züri-Gschnetzeltes</ShowButton>
-        <div v-if="showWines[4]" class="wine-list">
-            <WineHeader title="Weissweine" />
-            <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="Zuri-Gschnetzeltes" />
-            </div>
-            <WineHeader title="Rotweine" />   
-            <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="Zuri-Gschnetzeltes" />
-            </div>
-        </div>
-        <ShowButton buttonNumber="5" @toggle-wines="toggleWines">Bündner Nusstorte</ShowButton>
-        <div v-if="showWines[5]" class="wine-list">
-            <WineHeader title="Weissweine" />
-            <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Weisswein" matchType="Bundner-Nusstorte" />
-            </div>
-            <WineHeader title="Rotweine" /> 
-            <div v-for="wine in wines" :key="wine.id" style="display: block; margin: 20px;">
-                <WineInfoCondition :wine="wine" wineType="Rotwein" matchType="Bundner-Nusstorte" />
-            </div>
-        </div>
+      <Header />
+      <MainTabbar />
+      <FoodTabbar @show-wines="showWinesForDish" />
+      <Tabbar />
+  
+      <WineHeader v-if="selectedDish && wines.some(wine => wine.winetype === 'Weisswein' && wine.match && wine.match.indexOf(selectedDish) !== -1)" title="Weissweine" />
+      <div v-for="wine in whiteWines" :key="wine.id" style="margin: 20px;">
+        <WineInfo v-if="wine.match && wine.match.indexOf(selectedDish) !== -1" :wine="wine" wineType="Weisswein" :matchType="selectedDish" />
+      </div>
+  
+      <WineHeader v-if="selectedDish && wines.some(wine => wine.winetype === 'Rotwein' && wine.match && wine.match.indexOf(selectedDish) !== -1)" title="Rotweine" />
+      <div v-for="wine in redWines" :key="wine.id" style="margin: 20px;">
+        <WineInfo v-if="wine.match && wine.match.indexOf(selectedDish) !== -1" :wine="wine" wineType="Rotwein" :matchType="selectedDish" />
+      </div>
     </div>
-    -->
-</div>
-</template>
+  </template>
   
-<script>
-    import Header from '~/components/Header.vue';
-    import WineHeader from '~/components/WineHeader.vue';
-    import WineInfoCondition from "~/components/WineInfoCondition.vue";
-    import ShowButton from "~/components/ShowButton.vue";
-    import MainTabbar from '~/components/MainTabbar.vue';
-    import axios from 'axios';
+  <script>
+  import Header from '~/components/Header.vue';
+  import WineHeader from '~/components/WineHeader.vue';
+  import ShowButton from "~/components/ShowButton.vue";
+  import MainTabbar from '~/components/MainTabbar.vue';
+  import WineInfo from '~/components/WineInfo.vue';
+  import axios from 'axios';
   
-    export default {
-        components: {
-            Header,
-            WineHeader,
-            WineInfoCondition,
-            ShowButton,
-            MainTabbar
-        },
-
+  export default {
+    components: {
+      Header,
+      WineHeader,
+      WineInfo,
+      ShowButton,
+      MainTabbar
+    },
+  
     data() {
-        return {
-            loading: true,
-            wines: [],
-            showWines: {
-                1: false,
-                2: false,
-                3: false,
-                4: false,
-                5: false
-            }
+      return {
+        loading: true,
+        wines: [],
+        selectedDish: '',
+        showWines: {
+          1: false,
+          2: false,
+          3: false,
+          4: false,
+          5: false
         }
+      }
     },
+  
+    computed: {
+      whiteWines() {
+        return this.wines.filter(wine => wine.winetype === 'Weisswein');
+      },
+      redWines() {
+        return this.wines.filter(wine => wine.winetype === 'Rotwein');
+      },
+      hasWhiteWines() {
+        return this.whiteWines.length > 0;
+      }
+    },
+  
     async created() {
-        try {
-            const response = await axios.get('https://wine.azurewebsites.net/api/wine');
-            //const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
-            //const response = await axios.get('https://localhost:44322/api/Wine');
-            this.wines = response.data;
-            this.loading = false;
-        } catch (error) {
-            console.error(error);
-        }
+      try {
+        const response = await axios.get('https://wine.azurewebsites.net/api/wine');
+        //const response = await axios.get('https://interactivemenu.azurewebsites.net/api/wine');
+        //const response = await axios.get('https://localhost:44322/api/Wine');
+        this.wines = response.data;
+        this.loading = false;
+      } catch (error) {
+        console.error(error);
+      }
     },
-
+  
     methods: {
-        toggleWines(index) {
-            if (this.showWines[index]) {
-                this.showWines[index] = false;
-            } else {
-                this.showWines[index] = true;
-            }
-        }       
+      toggleWines(index) {
+        if (this.showWines[index]) {
+          this.showWines[index] = false;
+        } else {
+          this.showWines[index] = true;
+        }
+      },
+  
+      showWinesForDish(dish) {
+        this.selectedDish = dish;
+      }   
     }
-}
-</script>
-
-<style scoped>
-* {
+  }
+  </script>
+  
+  <style scoped>
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
-</style>
+  </style>
+  
