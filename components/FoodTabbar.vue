@@ -6,7 +6,7 @@
     <button @click="showWinesForDish('Pasta')" :class="{ active: selectedDish === 'Pasta' }" class="button button-4">Pasta</button>
     <button @click="showWinesForDish('Fisch')" :class="{ active: selectedDish === 'Fisch' }" class="button button-4">Fisch</button>
     <button @click="showWinesForDish('Tiramisu')" :class="{ active: selectedDish === 'Tiramisu' }" class="button button-4">Tiramisu</button>
-    <button @click="showWinesForDish('Panacota')" :class="{ active: selectedDish === 'Panacota' }" class="button button-4">Panacota</button>
+    <button @click="showWinesForDish('Panacota')" :class="{ active: selectedDish === 'Panna Cotta' }" class="button button-4">Panacota</button>
   </div>
 </template>
 <script>
