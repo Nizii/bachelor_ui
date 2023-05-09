@@ -31,10 +31,10 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: #FFFFFF;
+  background-color: #D9D9D9;
   height: 50px;
-  overflow-x: auto; /* Hinzufügen von seitlichem Scroll */
-  white-space: nowrap; /* Verhindert den Umbruch der Elemente */
+  overflow-x: auto; /* Scrollt seitlich yessss*/
+  white-space: nowrap; 
   margin: 4px;
 }
 
@@ -44,7 +44,7 @@ export default {
   justify-content: center;
   align-items: center;
   color: black;
-  background-color: bisque;
+  background-color: #D9D9D9;
   text-decoration: none;
   padding: 0 1rem;
   height: 100%;
@@ -58,8 +58,14 @@ export default {
 
 .button:hover,
 .button:focus {
-  color: #d0d0d0; /* Dezente Farbe für Hover und Focus */
+  color: black;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 2px;
+  text-decoration-offset: 5px;
 }
+
 
 
 .button-1 span,
@@ -70,8 +76,8 @@ export default {
 }
 
 .active {
-  background-color: #592321;
-  color: white;
+  background-color: #D9D9D9;
+  color: black;
 }
 
 </style>

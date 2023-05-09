@@ -3,9 +3,9 @@
       <Header />
       <div class="inputrow">
         <input type="text" class="search-input" placeholder="Suche" @input="onSearchInput" />
-        <button class="toggle-btn" @click="toggleFrame">Show</button>
+        <button class="toggle-btn" @click="toggleFrame">Essen</button>
       </div>
-      <OverlayFrame v-if="showFrame" @close="toggleFrame" />
+      <OverlayFrame v-if="showFrame" @close="toggleFrame" :wines="wines" />
       <div class="button-group">
       <button @click="filterWines('all')" class="button">Für dich</button>
       <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
@@ -153,5 +153,9 @@ export default {
 .button:focus {
   color: black;
   font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 2px;
+  text-decoration-offset: 5px;
 }
 </style>

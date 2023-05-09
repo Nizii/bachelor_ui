@@ -5,7 +5,8 @@
       <FoodTabbar @show-wines="showWinesForDish" />
       <Tabbar />
   
-      <WineHeader v-if="selectedDish && wines.some(wine => wine.winetype === 'Weisswein' && wine.match && wine.match.indexOf(selectedDish) !== -1)" title="Weissweine" />
+      <WineInfo v-if="wine.match && wine.match.indexOf(selectedDish) !== -1" :wine="wine" wineType="Rotwein" :matchType="selectedDish" />
+        <WineInfo v-if="wine.match && wine.match.indexOf(selectedDish) !== -1" :wine="wine" wineType="Rotwein" :matchType="selectedDish" />
       <div v-for="wine in whiteWines" :key="wine.id" style="margin: 20px;">
         <WineInfo v-if="wine.match && wine.match.indexOf(selectedDish) !== -1" :wine="wine" wineType="Weisswein" :matchType="selectedDish" />
       </div>

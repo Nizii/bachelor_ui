@@ -77,13 +77,13 @@
   .wine-card {
     display: flex;
     flex-direction: column;
-    width: auto;
+    width: 100%;
     margin-bottom: 20px;
   }
   
   .wine-card-row1 {
     display: flex;
-    background-color: #FFFFFF;
+    background-color: #EDEDED;
     padding: 10px;
   }
   
@@ -116,6 +116,7 @@
   .wine-attribute {
     font-size: 12px;
   }
+  
   
   .wine-pricing-rating {
     flex: 0 0 25%;
