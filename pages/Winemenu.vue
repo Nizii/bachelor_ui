@@ -40,7 +40,6 @@
 
 <script>
 import Header from '~/components/Header.vue';
-import MainTabbar from '~/components/MainTabbar.vue';
 import WineInfo from '~/components/WineInfo.vue'; // Import WineInfo component
 import axios from 'axios';
 import OverlayFrame from '~/components/OverlayFrame.vue';
@@ -50,7 +49,6 @@ export default {
   name: 'WineList',
   components: {
     Header,
-    MainTabbar,
     WineInfo,
     OverlayFrame,
   },

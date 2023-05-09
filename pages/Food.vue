@@ -21,7 +21,6 @@
   import Header from '~/components/Header.vue';
   import WineHeader from '~/components/WineHeader.vue';
   import ShowButton from "~/components/ShowButton.vue";
-  import MainTabbar from '~/components/MainTabbar.vue';
   import WineInfo from '~/components/WineInfo.vue';
   import axios from 'axios';
   
@@ -31,7 +30,6 @@
       WineHeader,
       WineInfo,
       ShowButton,
-      MainTabbar
     },
   
     data() {
