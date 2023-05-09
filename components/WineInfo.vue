@@ -1,42 +1,39 @@
 <template>
   <div class="wine-card">
     <div class="wine-card-row1">
-      <button class="favorite-button">+</button>
-      <h3 class="wine-title">{{ wine.name }}</h3>
-    </div>
-    <div class="wine-card-row2">
-      <img class="wine-image" src="/wine.png" alt="Weinbild" width="30px" height="100px" >
-      <div class="wine-description">
+      <img class="wine-image" src="/wine.png" alt="Weinbild" width="30px" height="100px"/>
+      <div class="wine-details">
+        <div class="wine-flag">CH</div>
+        <h3 class="wine-title">{{ wine.name }}</h3>
+        <div class="wine-attribute">{{ wine.grape }}</div>
         <div class="wine-attribute">
-          Traube: {{ wine.grape }}
+          <span v-for="(profileItem, index) in wine.profile" :key="index">
+            {{ profileItem }}
+            <span v-if="index < wine.profile.length - 1">, </span>
+          </span>
         </div>
-        <div class="wine-attribute">
-          Jahrgang: {{ wine.year }}
-        </div>
-        <div class="wine-attribute">
-          Alkohol: {{ wine.alcohol }}%
-        </div>
-        <br>
-        <div class="wine-attribute">
-          {{ wine.charakter }}
+        <div class="wine-attribute">Passt zu 
+          <span v-for="(matchItem, index) in wine.match" :key="index">
+            {{ matchItem }}
+            <span v-if="index < wine.match.length - 1">, </span>
+          </span>
         </div>
       </div>
-    </div>
-    <div class="wine-card-row3">
-      <div class="star-rating">
-        <star-rating v-model="rating" @rating-selected="saveRating" />
-      </div>
-      <div class="wine-price-container">
+      <div class="wine-pricing-rating">
         <div class="wine-price">
           {{ wine.openprice }} .- / 1d l
-        </div>
-        <div class="wine-price">
+          <br />
           {{ wine.bottleprice}} .- / 0.75 l
         </div>
+        <!--
+        <div class="star-rating">
+          <star-rating v-model="rating" @rating-selected="saveRating" />
+        </div>
+        -->
       </div>
     </div>
-  </div>  
-  </template>
+  </div>
+</template>
   
   <script>
   import axios from 'axios';
@@ -70,83 +67,71 @@
   },
   }
   </script>
-  
+
+
   <style scoped>
+  * {
+    font-family: sans-serif;
+  }
+  
   .wine-card {
     display: flex;
     flex-direction: column;
     width: auto;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
     margin-bottom: 20px;
   }
   
-  .wine-card-row1,
-  .wine-card-row2,
-  .wine-card-row3 {
-    display: flex;
-  }
-  
   .wine-card-row1 {
-    background-color: bisque;
-  }
-  .wine-card-row2 {
-    background-color:whitesmoke;
-    padding: 10px;
-  }
-  .wine-card-row3 {
-    background-color:bisque;
-    padding: 10px;
-  }
-
-  .wine-description{
-    margin-left: 20px;
-  }
-
-  .favorite-button {
-    width: 50px;
-    height: 50px;
-    background-color: #d9d9d9;
-    border: none;
-    cursor: pointer;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 1rem;
-    font-size: 40px;
-  }
-  
-  .wine-title {
-    flex-grow: 1;
+    background-color: #FFFFFF;
     padding: 10px;
-    font-size: 15px;
   }
   
   .wine-image {
-    width: auto;
-    height: 150px;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .wine-details {
+    flex: 1;
+    padding: 0 10px;
+  }
+  
+  .wine-flag {
+    width: 100%;
+    height: auto;
+    display: block;
+    background-image: url("/flag.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 30px;
+    margin-bottom: 0;
+  }
+  
+  .wine-title {
+    font-size: 15px;
+    margin-top: 0;
+  }
+  
+  .wine-attribute {
+    font-size: 12px;
+  }
+  
+  .wine-pricing-rating {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-left: 10px;
+  }
+  
+  .wine-price {
+    font-size: 12px;
   }
   
   .star-rating {
-    width: 50%;
+    width: 100%;
     transform: scale(0.5);
   }
-  
-  .wine-price-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
-    width: 50%;
-  }
-  
-
-  .wine-price{
-    font-size: 12px;
-  }
-
-  .wine-attribute{
-    font-size: 12px;;
-  }
-  
-</style>
+  </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="button-group">
-    <nuxt-link to="/Winemenu" :class="{ active: isActive('/Winemenu') }" class="button button-1">Weinkarte</nuxt-link>
-    <nuxt-link to="/Food" :class="{ active: isActive('/Food') }" class="button button-2">Essen</nuxt-link>
-    <nuxt-link to="/Foryou" :class="{ active: isActive('/Foryou') }" class="button button-3">Für dich</nuxt-link>
-    <nuxt-link to="/About" :class="{ active: isActive('/About') }" class="button button-4">Über uns</nuxt-link> 
+    <nuxt-link to="/YourTaste" :class="{ active: isActive('/YourTaste') }" class="button button-1">Für dich</nuxt-link>
+    <nuxt-link to="/Food" :class="{ active: isActive('/Food') }" class="button button-2">Weisswein</nuxt-link>
+    <nuxt-link to="/Foryou" :class="{ active: isActive('/Foryou') }" class="button button-3">Rosé</nuxt-link>
+    <nuxt-link to="/About" :class="{ active: isActive('/About') }" class="button button-4">Rotwein</nuxt-link> 
   </div>
 </template>
 
@@ -22,16 +22,15 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #775d5b;
+  background-color:whitesmoke;
   height: 50px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #b7b7b7;
+  color: black;
   text-decoration: none;
   padding: 0 1rem;
   height: 100%;
@@ -39,15 +38,18 @@ export default {
   box-sizing: border-box;
   transition: color 0.3s;
   font-size: 12px;
+  font-family: sans-serif;
 }
 
 .button:hover,
 .button:focus {
-  color: #d0d0d0; /* Dezente Farbe für Hover und Focus */
+  color:black; 
+  font-weight: bold;
 }
 
 .active {
-  background-color: #592321;
-  color: white;
+  background-color: white;
+  color:black;
+  
 }
 </style>

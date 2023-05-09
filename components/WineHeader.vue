@@ -15,8 +15,9 @@ export default {
 
 <style scoped>
 .wine-header {
-  text-align: center;
+  text-align: left;
   margin: 20px;
+  font-family: sans-serif;
 }
 
 </style>

@@ -76,6 +76,10 @@ export default {
 </script>
 
 <style scoped>
+
+*{
+  font-family: sans-serif;
+}
 .custom-box {
   display: flex;
   flex-direction: column;

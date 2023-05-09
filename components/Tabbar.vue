@@ -41,17 +41,20 @@
   </script>
   
   <style scoped>
+
+  *{
+    font-family: sans-serif;
+  }
  .fixed-bottom-bar {
   display: flex;
   justify-content: flex-start; /* Ändert die Ausrichtung auf linksbündig */
   align-items: center;
-  background-color: #592321;
+  background-color: #F5F5F5;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 50px;
-  box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.2);
 }
 
 .bottom-bar-link {
@@ -60,7 +63,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #b7b7b7;
+  color: black;
   text-decoration: none;
   height: 100%;
 }
@@ -76,11 +79,16 @@
   .bottom-bar-label {
     font-size: 12px;
   }
-
-  .button:hover,
-  .button:focus {
-    color: #d0d0d0; /* Dezente Farbe für Hover und Focus */
+  .bottom-bar-link:hover,
+  .bottom-bar-link:focus {
+    color:black; 
+    font-weight: bold;
   }
-
+  
+  .active {
+    background-color: white;
+    color:black;
+    
+  }
 
   </style>
