@@ -17,7 +17,7 @@
             <p>Noch keinen Account? <a href="#" @click="showRegister = true">Registrieren</a></p>
           </div>
           <div v-if="showRegister" class="form">
-            <WineHeader title="Melde dich an!"/>
+            <WineHeader class="overrideMargin" title="Erstelle ein Profil!"/>
             <form @submit.prevent="register">
               <div class="input-container">
                 <input type="text" id="username" v-model="username" required>
@@ -62,8 +62,8 @@
     methods: {
       async login() {
         try {
-          //const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
-          const response = await axios.post('https://localhost:44322/api/User/login', {
+          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+          //const response = await axios.post('https://localhost:44322/api/User/login', {
             username: this.username,
             password: this.password
           });

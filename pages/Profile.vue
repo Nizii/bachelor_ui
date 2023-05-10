@@ -50,8 +50,8 @@ export default {
     async getUserData() {
       const token = localStorage.getItem('jwt');
       try {
-          //const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/userdata/${this.wine._id}`, {}, {
-            const response = await this.$axios.get(`https://localhost:44322/api/user/userdata/`, {
+          const response = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+            //const response = await this.$axios.get(`https://localhost:44322/api/user/userdata/`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
