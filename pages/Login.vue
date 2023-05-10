@@ -4,14 +4,12 @@
       <div class="login-container">
         <div class="form-container">
           <div v-if="!showRegister" class="form">
-            <h2>Anmelden</h2>
+          <WineHeader class="overrideMargin" title="Melde dich an!"/>
             <form @submit.prevent="login">
               <div class="input-container">
-                <label for="username">Benutzername:</label>
                 <input type="text" id="username" v-model="username" required>
               </div>
               <div class="input-container">
-                <label for="password">Passwort:</label>
                 <input type="password" id="password" v-model="password" required>
               </div>
               <button type="submit">Anmelden</button>
@@ -19,14 +17,12 @@
             <p>Noch keinen Account? <a href="#" @click="showRegister = true">Registrieren</a></p>
           </div>
           <div v-if="showRegister" class="form">
-            <h2>Registrieren</h2>
+            <WineHeader title="Melde dich an!"/>
             <form @submit.prevent="register">
               <div class="input-container">
-                <label for="username">Benutzername:</label>
                 <input type="text" id="username" v-model="username" required>
               </div>
               <div class="input-container">
-                <label for="password">Passwort:</label>
                 <input type="password" id="password" v-model="password" required>
               </div>
               <button type="submit">Registrieren</button>
@@ -96,6 +92,17 @@
   </script>
   
   <style scoped>
+  .overrideMargin{
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  
+  *{
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
   .login-container {
     display: flex;
     flex-direction: column;
@@ -110,10 +117,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #F4F4F4;
+    background-color: white;
     padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   }
   
   .form {
@@ -141,21 +146,19 @@
     display: block;
     width: 100%;
     padding: 10px;
-    border-radius: 5px;
     border: none;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   }
 
   button[type="submit"] {
     background-color: #720710;
     color: #FFFFFF;
     border: none;
-    border-radius: 5px;
     padding: 10px;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
+    width: 100%;
   }
 
   button[type="submit"]:hover {
@@ -175,10 +178,9 @@
     cursor: pointer;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  input{
+    background-color: #D9D9D9;
   }
+
   
 </style>
