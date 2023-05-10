@@ -85,6 +85,8 @@
     display: flex;
     background-color: #EDEDED;
     padding: 10px;
+    border-radius: 15px;
+
   }
   
   .wine-image {
@@ -101,7 +103,7 @@
     width: 100%;
     height: auto;
     display: block;
-    background-image: url("/flag.png");
+    /*background-image: url("/flag.png");*/
     background-size: contain;
     background-repeat: no-repeat;
     height: 30px;
@@ -111,6 +113,7 @@
   .wine-title {
     font-size: 15px;
     margin-top: 0;
+    color: #881111;
   }
   
   .wine-attribute {

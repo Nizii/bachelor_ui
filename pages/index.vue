@@ -7,11 +7,11 @@
     </div>
     <OverlayFrame v-if="showFrame" @close="toggleFrame" :wines="wines" />
     <div class="button-group">
-    <button @click="filterWines('all')" class="button">Für dich</button>
-    <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
-    <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
-    <button @click="filterWines('Rosé')" class="button">Rosé</button>
-  </div>
+      <button @click="filterWines('all')" class="button">Für dich</button>
+      <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
+      <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
+      <button @click="filterWines('Rosé')" class="button">Rosé</button>
+    </div>
   <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
   <div v-else>
     <WineHeader v-if="hasWineType('Weisswein')" title="Weissweine" />

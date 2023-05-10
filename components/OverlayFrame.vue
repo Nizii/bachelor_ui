@@ -1,7 +1,9 @@
 <template>
-    <div class="overlay-frame" @touchstart="onTouchStart" @touchend="onTouchEnd">
-      <div class="frame-header">
+  <div class="overlay-frame" :class="{ open: frameOpen }">
+    <div class="frame-header">
+        <div></div>
         <h2>Essen</h2>
+        <button class="close-button" @click="closeOverlay">X</button>
       </div>
       <FoodTabbar @show-wines="showWinesForDish" />
       <div v-if="selectedDish !== ''">
@@ -35,29 +37,23 @@
       },
     },
     methods: {
-      onTouchStart(event) {
-        this.startY = event.touches[0].clientY;
-      },
-      onTouchEnd(event) {
-        this.endY = event.changedTouches[0].clientY;
-        this.handleSwipe();
-      },
-      handleSwipe() {
-        const threshold = 100;
-  
-        if (this.startY - this.endY > threshold) {
-          this.$emit("close");
-        }
-      },
       showWinesForDish(dish) {
         this.selectedDish = dish;
       },
+      closeOverlay() {
+        this.$emit('close')
+      },
+      closeOverlay() {
+        this.frameOpen = false;
+        setTimeout(() => {
+          this.$emit('close');
+        }, 1000); /*Warten 1 ServiceWorker. bis Event ausgelöst wird*/
+      }
     },
     data() {
       return {
-        startY: 0,
-        endY: 0,
         selectedDish: '',
+        frameOpen: false,
       };
     },
     computed: {
@@ -65,11 +61,15 @@
         return this.wines.filter(wine => wine.match && wine.match.indexOf(this.selectedDish) !== -1);
       },
     },
+    mounted() {
+      setTimeout(() => {
+        this.frameOpen = true;
+      }, 100); 
+    },
   };
   </script>
   
   <style scoped>
-
   #overwritingParent{
     margin-left: 0; 
   }
@@ -88,18 +88,26 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 85%;
+    height: 95%;
     background-color: lightgray;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     z-index: 1000;
+    /* Hier wird die Overlay Animation gemacht*/
+    transition:transform 0.5s;
+    transform: translateY(100%);
   }
-  
+
+  .open {
+    transform: translateY(0);
+  }
+
   .frame-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 50px;
+    padding: 0 20px;
   }
 
   .wine-container {
@@ -111,5 +119,10 @@
   h2 {
     margin: 0;
   }
-  </style>
-  
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+</style>

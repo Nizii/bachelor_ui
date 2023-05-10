@@ -26,6 +26,7 @@ export default {
 </script>
 
 <style scoped>
+
 .button-group {
   display: flex;
   flex-direction: row;
@@ -36,6 +37,7 @@ export default {
   overflow-x: auto; /* Scrollt seitlich yessss*/
   white-space: nowrap; 
   margin: 4px;
+  padding-left: 40px;
 }
 
 .button {
