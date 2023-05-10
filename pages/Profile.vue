@@ -22,7 +22,7 @@
       </div>
     </div>
     <WineHeader title="Deine Weine" />
-    <img class="wine-image" src="/stats.jpg" alt="Weinbild" width="80px" height="60px" />
+    <img class="wine-image" src="/stat.jpg" alt="Weinbild" width="80px" height="60px" />
     <Tabbar />
   </div>
 </template>
