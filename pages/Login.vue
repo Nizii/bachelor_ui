@@ -1,7 +1,6 @@
 <template>
   <div style="margin: 0; padding: 0; box-sizing: border-box;">
       <Header />
-      <MainTabbar />
       <div class="login-container">
         <div class="form-container">
           <div v-if="!showRegister" class="form">
@@ -67,8 +66,8 @@
     methods: {
       async login() {
         try {
-          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
-          //const response = await axios.post('https://localhost:44322/api/User/login', {
+          //const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+          const response = await axios.post('https://localhost:44322/api/User/login', {
             username: this.username,
             password: this.password
           });

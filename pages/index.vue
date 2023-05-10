@@ -14,19 +14,19 @@
     </div>
   <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
   <div v-else>
-    <WineHeader v-if="hasWineType('Weisswein')" title="Weissweine" />
+    <!--<WineHeader v-if="hasWineType('Weisswein')" title="Weissweine" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Weisswein'">
         <WineInfo :wine="wine" />
       </div>
     </div>
-    <WineHeader v-if="hasWineType('Rotwein')" title="Rotweine" />
+    <!--<WineHeader v-if="hasWineType('Rotwein')" title="Rotweine" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Rotwein'">
         <WineInfo :wine="wine" />
       </div>
     </div>
-    <WineHeader v-if="hasWineType('Rosé')" title="Rosé" />
+    <!--<WineHeader v-if="hasWineType('Rosé')" title="Rosé" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Rosé'">
         <WineInfo :wine="wine" />
@@ -93,6 +93,7 @@ methods: {
 async created() {
   try {
     const response = await axios.get('https://wine.azurewebsites.net/api/wine');
+    //const response = await axios.get('https://wine.azurewebsites.net/api/wine');
     this.wines = response.data;
     this.loading = false;
   } catch (error) {

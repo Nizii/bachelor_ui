@@ -1,12 +1,12 @@
 <template>
   <div class="fixed-bottom-bar">
+    <router-link to="/" class="bottom-bar-link" :class="{ 'active': activeTab === 'Profile' }">
+      <i class="fas fa-user"></i>
+      <span class="bottom-bar-label">Home</span>
+    </router-link>
     <router-link to="/Login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Favoriten' }">
       <i class="fas fa-user"></i>
       <span class="bottom-bar-label">Mein Weinkeller</span>
-    </router-link>
-    <router-link to="/Login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Profile' }">
-      <i class="fas fa-user"></i>
-      <span class="bottom-bar-label">Statistik</span>
     </router-link>
     <a v-if="isLoggedIn()" href="#" class="bottom-bar-link" @click.prevent="logout" :class="{ 'active': activeTab === 'Abmelden' }">
       <i class="fas fa-user"></i>

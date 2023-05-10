@@ -25,6 +25,8 @@
           <br />
           {{ wine.bottleprice}} .- / 0.75 l
         </div>
+        <button @click="addToFavorites" class="add-favorite-button">Favoriten</button>
+
         <!--
         <div class="star-rating">
           <star-rating v-model="rating" @rating-selected="saveRating" />
@@ -59,17 +61,37 @@
           const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
           //const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
           this.rating++;
-        console.log(response.data);
+          console.log(response.data);
         } catch (error) {
-        console.error(error);
-      }
+          console.error(error);
+        }
+      },
+
+      async addToFavorites() {
+        const token = localStorage.getItem('jwt');
+        if (!token) {
+          console.log("User muss sich einloggen");
+          return;
+        }
+        try {
+          //const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${this.wine._id}`, {}, {
+          const response = await this.$axios.post(`https://localhost:44322/api/user/add-favorite/${this.wine._id}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log(response.data);
+          } catch (error) {
+          console.error(error);
+        }
+      },
     },
-  },
   }
   </script>
 
 
   <style scoped>
+
   * {
     font-family: sans-serif;
   }
@@ -80,13 +102,25 @@
     width: 100%;
     margin-bottom: 20px;
   }
+
+
+  .add-favorite-button {
+    background-color: #881111;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
   
   .wine-card-row1 {
     display: flex;
     background-color: #EDEDED;
     padding: 10px;
     border-radius: 15px;
-
   }
   
   .wine-image {
