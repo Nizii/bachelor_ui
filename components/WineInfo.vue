@@ -107,6 +107,11 @@
       },
 
       async toggleFavorite() {
+        if (!this.isLoggedIn) {
+          Alert("User muss sich einloggen");
+        return;
+    }
+
         if (this.isFavorite) {
           await this.deleteFavorites();
         } else {
@@ -129,7 +134,7 @@
       async deleteFavorites() {
         const token = localStorage.getItem('jwt');
         if (!token) {
-          console.log("User muss sich einloggen");
+          Alert("User muss sich einloggen");
           return;
         }
         try {
@@ -149,7 +154,7 @@
       async addToFavorites() {
         const token = localStorage.getItem('jwt');
         if (!token) {
-          console.log("User muss sich einloggen");
+          Alert("User muss sich einloggen");
           return;
         }
         try {
