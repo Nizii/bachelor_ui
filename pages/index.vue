@@ -74,9 +74,14 @@ computed: {
   }
 },
 methods: {
+  onFavoriteUpdated() {
+    this.loadWines(); 
+  },
+
   onSearchInput(event) {
     this.searchText = event.target.value;
   },
+
   filterWines(filter) {
     if (filter === 'all') {
       this.searchText = '';
@@ -84,13 +89,16 @@ methods: {
       this.searchText = filter;
     }
   },
+
   hasWineType(winetype) {
     return this.filteredWines.some(wine => wine.winetype === winetype);
   },
+
   toggleFrame() {
     this.showFrame = !this.showFrame;
   },
 },
+
 async created() {
   try {
     const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');

@@ -25,9 +25,10 @@
           <br />
           {{ wine.bottleprice}} .- / 0.75 l
         </div>
-        <button :class="favoriteButtonClass" @click="addToFavorites">
+        <button :class="favoriteButtonClass" @click="toggleFavorite">
           {{ favoriteButtonText }}
         </button>
+        
         <!--
         <div class="star-rating">
           <star-rating v-model="rating" @rating-selected="saveRating" />
@@ -61,9 +62,17 @@
     },
 
     computed: {
+      isFavorite() {
+        if (!this.isLoggedIn) {
+          return false;
+        }
+        return this.userData.favoriten.some((favorite) => favorite._id === this.wine._id);
+      },
+
       isLoggedIn() {
         return this.userData !== null;
       },
+
       favoriteButtonClass() {
         if (!this.isLoggedIn) {
           return "add-favorite-button";
@@ -73,6 +82,7 @@
         );
         return isFavorite ? "marked-favorite-button" : "add-favorite-button";
       },
+
       favoriteButtonText() {
         if (!this.isLoggedIn) {
           return "Favoriten";
@@ -96,6 +106,46 @@
         }
       },
 
+      async toggleFavorite() {
+        if (this.isFavorite) {
+          await this.deleteFavorites();
+        } else {
+          await this.addToFavorites();
+        }
+        this.updateFavoriteList(); 
+      },
+
+      updateFavoriteList() {
+      if (this.isFavorite) {
+        this.userData.favoriten = this.userData.favoriten.filter(
+          (favorite) => favorite._id !== this.wine._id
+        );
+      } else {
+        this.userData.favoriten.push({ _id: this.wine._id });
+      }
+      this.userData.favoriten = [...this.userData.favoriten];
+      },
+
+      async deleteFavorites() {
+        const token = localStorage.getItem('jwt');
+        if (!token) {
+          console.log("User muss sich einloggen");
+          return;
+        }
+        try {
+          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
+          //const response = await this.$axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        //this.favoriteButtonClass();
+        //this.favoriteButtonText();
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
       async addToFavorites() {
         const token = localStorage.getItem('jwt');
         if (!token) {
@@ -103,15 +153,14 @@
           return;
         }
         try {
-          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${this.wine._id}`, {}, {
+          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${this.wine._id}`, {
           //const response = await this.$axios.post(`https://localhost:44322/api/user/add-favorite/${this.wine._id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
-          console.log(response.data);
-          favoriteButtonClass();
-          favoriteButtonText(); 
+          //this.favoriteButtonClass();
+          //this.favoriteButtonText();
           } catch (error) {
           console.error(error);
         }
