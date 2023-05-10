@@ -110,7 +110,7 @@
         if (!this.isLoggedIn) {
           Alert("User muss sich einloggen");
         return;
-    }
+        }
 
         if (this.isFavorite) {
           await this.deleteFavorites();
@@ -144,8 +144,6 @@
             Authorization: `Bearer ${token}`,
           },
         });
-        //this.favoriteButtonClass();
-        //this.favoriteButtonText();
         } catch (error) {
           console.error(error);
         }
@@ -164,8 +162,6 @@
               Authorization: `Bearer ${token}`,
             },
           });
-          //this.favoriteButtonClass();
-          //this.favoriteButtonText();
           } catch (error) {
           console.error(error);
         }
