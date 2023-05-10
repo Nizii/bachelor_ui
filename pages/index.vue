@@ -17,19 +17,19 @@
     <!--<WineHeader v-if="hasWineType('Weisswein')" title="Weissweine" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Weisswein'">
-        <WineInfo :wine="wine" />
+        <WineInfo :wine="wine" :userData="userData" />      
       </div>
     </div>
     <!--<WineHeader v-if="hasWineType('Rotwein')" title="Rotweine" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Rotwein'">
-        <WineInfo :wine="wine" />
+        <WineInfo :wine="wine" :userData="userData" />      
       </div>
     </div>
     <!--<WineHeader v-if="hasWineType('Rosé')" title="Rosé" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Rosé'">
-        <WineInfo :wine="wine" />
+        <WineInfo :wine="wine" :userData="userData" />
       </div>
     </div>
   </div>
@@ -58,6 +58,7 @@ data() {
     wines: [],
     searchText: '',
     showFrame: false,
+    userData: null,
   }
 },
 computed: {
@@ -92,10 +93,20 @@ methods: {
 },
 async created() {
   try {
-    const response = await axios.get('https://wine.azurewebsites.net/api/wine');
+    const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
     //const response = await axios.get('https://wine.azurewebsites.net/api/wine');
-    this.wines = response.data;
+    this.wines = WineDataResponse.data;
     this.loading = false;
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+      //const response = await this.$axios.get(`https://localhost:44322/api/user/userdata/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          },
+        });
+        this.userData = userDataResponse.data;
+      }
   } catch (error) {
     console.error(error);
   }

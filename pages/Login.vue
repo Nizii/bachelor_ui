@@ -82,7 +82,8 @@
             username: this.username,
             password: this.password
           });
-          console.log(response.data);
+          localStorage.setItem('jwt', response.data.token);
+          this.$router.push('/profile');
         } catch (error) {
           console.error(error);
         }

@@ -21,8 +21,8 @@
         </div>
       </div>
     </div>
-    <WineHeader title="Deine Weine" />
-    <img class="wine-image" src="/stat.jpg" alt="Weinbild" width="80px" height="60px" />
+    <WineHeader title="Statistiken" />
+    <img class="wine-image" src="/stat.jpg" alt="Weinbild" width="200px" height="160px" margin="20px"/>
     <Tabbar />
   </div>
 </template>

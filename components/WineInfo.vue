@@ -25,8 +25,9 @@
           <br />
           {{ wine.bottleprice}} .- / 0.75 l
         </div>
-        <button @click="addToFavorites" class="add-favorite-button">Favoriten</button>
-
+        <button :class="favoriteButtonClass" @click="addToFavorites">
+          {{ favoriteButtonText }}
+        </button>
         <!--
         <div class="star-rating">
           <star-rating v-model="rating" @rating-selected="saveRating" />
@@ -52,7 +53,35 @@
       wine: {
         type: Object,
         required: true
-      }
+      },
+      userData: {
+        type: Object,
+        default: null,
+      },
+    },
+
+    computed: {
+      isLoggedIn() {
+        return this.userData !== null;
+      },
+      favoriteButtonClass() {
+        if (!this.isLoggedIn) {
+          return "add-favorite-button";
+        }
+        const isFavorite = this.userData.favoriten.some(
+          (favorite) => favorite._id === this.wine._id
+        );
+        return isFavorite ? "marked-favorite-button" : "add-favorite-button";
+      },
+      favoriteButtonText() {
+        if (!this.isLoggedIn) {
+          return "Favoriten";
+        }
+        const isFavorite = this.userData.favoriten.some(
+          (favorite) => favorite._id === this.wine._id
+        );
+        return isFavorite ? "Markiert" : "Favoriten";
+      },
     },
 
     methods: {
@@ -81,6 +110,8 @@
             },
           });
           console.log(response.data);
+          favoriteButtonClass();
+          favoriteButtonText(); 
           } catch (error) {
           console.error(error);
         }
@@ -103,6 +134,18 @@
     margin-bottom: 20px;
   }
 
+  .marked-favorite-button {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  
 
   .add-favorite-button {
     background-color: #881111;
