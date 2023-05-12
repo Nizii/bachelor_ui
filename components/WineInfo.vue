@@ -1,5 +1,5 @@
 <template>
-  <div class="wine-card">
+  <div class="wine-card" @click="openDetailView">
     <div class="wine-card-row1">
       <img class="wine-image" src="/wine.png" alt="Weinbild" width="30px" height="100px"/>
       <div class="wine-details">
@@ -25,7 +25,7 @@
           <br />
           {{ wine.bottleprice}} .- / 0.75 l
         </div>
-        <button :class="favoriteButtonClass" @click="toggleFavorite">
+        <button :class="favoriteButtonClass" @click.stop="toggleFavorite">
           {{ favoriteButtonText }}
         </button>
         
@@ -40,11 +40,17 @@
 </template>
   
   <script>
+  import DetailViewWine from '~/components/DetailViewWine.vue';
   import axios from 'axios';
   export default {
+    components:{
+      DetailViewWine,
+    },
+
     data() {
       return {
         rating: 0,
+        selectedWine: null,
       }
     },
 
@@ -105,10 +111,14 @@
           console.error(error);
         }
       },
-
+    
+      openDetailView() {
+        this.$emit('open-detail-view', this.wine);
+      },
+      
       async toggleFavorite() {
         if (!this.isLoggedIn) {
-          Alert("User muss sich einloggen");
+          //Alert("User muss sich einloggen");
         return;
         }
 
@@ -134,12 +144,12 @@
       async deleteFavorites() {
         const token = localStorage.getItem('jwt');
         if (!token) {
-          Alert("User muss sich einloggen");
+          Console.log("User muss sich einloggen");
           return;
         }
         try {
-          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
-          //const response = await this.$axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
+          //const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
+          const response = await axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -152,12 +162,12 @@
       async addToFavorites() {
         const token = localStorage.getItem('jwt');
         if (!token) {
-          Alert("User muss sich einloggen");
+          //Alert("User muss sich einloggen");
           return;
         }
         try {
-          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${this.wine._id}`, {
-          //const response = await this.$axios.post(`https://localhost:44322/api/user/add-favorite/${this.wine._id}`, {
+          //const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${this.wine._id}`, {
+          const response = await this.$axios.post(`https://localhost:44322/api/user/add-favorite/${this.wine._id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

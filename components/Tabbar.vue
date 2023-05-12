@@ -1,46 +1,65 @@
 <template>
   <div class="fixed-bottom-bar">
-    <router-link to="/" class="bottom-bar-link" :class="{ 'active': activeTab === 'Profile' }">
+    <button @click="navigateTo('/')" class="bottom-bar-link">
       <i class="fas fa-user"></i>
-      <span class="bottom-bar-label">Home</span>
-    </router-link>
-    <router-link to="/Login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Favoriten' }">
+      <span class="bottom-bar-label">Menü</span>
+    </button>
+    <button @click="openBookmarkOverlay" class="bottom-bar-link">
       <i class="fas fa-user"></i>
-      <span class="bottom-bar-label">Mein Weinkeller</span>
-    </router-link>
-    <a v-if="isLoggedIn()" href="#" class="bottom-bar-link" @click.prevent="logout" :class="{ 'active': activeTab === 'Abmelden' }">
+      <span class="bottom-bar-label">Merkliste</span>
+    </button>
+    <button @click="navigateTo('/Login')" class="bottom-bar-link">
+      <i class="fas fa-user"></i>
+      <span class="bottom-bar-label">Profil</span>
+    </button>
+    <button v-if="isLoggedIn()" @click.prevent="logout" class="bottom-bar-link">
       <i class="fas fa-user"></i>
       <span class="bottom-bar-label">Abmelden</span>
-    </a>
-    <router-link v-else to="/Login" class="bottom-bar-link" :class="{ 'active': activeTab === 'Anmelden' }">
+    </button>
+    <button v-else @click="navigateTo('/Login')" class="bottom-bar-link">
       <i class="fas fa-user"></i>
       <span class="bottom-bar-label">Anmelden</span>
-    </router-link>
+    </button>
   </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        activeTab: 'home',
-      }
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      activeTab: 'home',
+    }
+  },
+  methods: {
+    navigateTo(route) {
+      this.$router.push(route);
     },
 
-    methods: {
-      logout() {
-        localStorage.removeItem('jwt');
-        console.log(localStorage.getItem('jwt'))
-        this.$router.push('/');
-      },
-      isLoggedIn() {
-        return localStorage.getItem('jwt') !== null;
-      }
+    openBookmarkOverlay() {
+        this.frameOpen = true;
+        setTimeout(() => {
+          this.$emit('openBookmarkOverlay');
+        }, 300);
+    },
+
+    logout() {
+      localStorage.removeItem('jwt');
+      console.log(localStorage.getItem('jwt'))
+      this.$router.push('/');
+    },
+    isLoggedIn() {
+      return localStorage.getItem('jwt') !== null;
     }
-  };
-  </script>
+  }
+};
+</script>
+
   
   <style scoped>
+
+  button{
+    border:none;
+  } 
 
   *{
     font-family: sans-serif;
@@ -83,12 +102,6 @@
   .bottom-bar-link:focus {
     color:black; 
     font-weight: bold;
-  }
-  
-  .active {
-    background-color: white;
-    color:black;
-    
   }
 
   </style>

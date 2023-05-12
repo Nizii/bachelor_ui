@@ -7,10 +7,10 @@
           <WineHeader class="overrideMargin" title="Melde dich an!"/>
             <form @submit.prevent="login">
               <div class="input-container">
-                <input type="text" id="username" v-model="username" required>
+                <input type="text" id="username" placeholder="Email" v-model="username" required>
               </div>
               <div class="input-container">
-                <input type="password" id="password" v-model="password" required>
+                <input type="password" id="password" placeholder="Passwort" v-model="password" required>
               </div>
               <button type="submit">Anmelden</button>
             </form>
@@ -20,10 +20,13 @@
             <WineHeader class="overrideMargin" title="Erstelle ein Profil!"/>
             <form @submit.prevent="register">
               <div class="input-container">
-                <input type="text" id="username" v-model="username" required>
+                <input type="text" id="username" placeholder="Email" v-model="username" required>
               </div>
               <div class="input-container">
-                <input type="password" id="password" v-model="password" required>
+                <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="4" required>
+              </div>
+              <div class="input-container">
+                <input type="password" id="password" placeholder="Passwort" v-model="confirmPassword" minlength="4" required>
               </div>
               <button type="submit">Registrieren</button>
             </form>
@@ -31,7 +34,7 @@
           </div>
         </div>
       </div>
-      <Tabbar />
+      <Tabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
     </div>
   </template>
   
@@ -49,6 +52,7 @@
         showRegister: false,
         username: '',
         password: '',
+        confirmPassword: '',
       }
     },
   
@@ -62,8 +66,8 @@
     methods: {
       async login() {
         try {
-          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
-          //const response = await axios.post('https://localhost:44322/api/User/login', {
+          //const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+          const response = await axios.post('https://localhost:44322/api/User/login', {
             username: this.username,
             password: this.password
           });
@@ -76,9 +80,13 @@
       },
   
       async register() {
+        if (this.password !== this.confirmPassword) {
+          alert('Passwörter stimmen nicht überein!');
+          return;
+        }
         try {
-          const response = await axios.post('https://wine.azurewebsites.net/api/User/reg', {
-          //const response = await axios.post('https://localhost:44322/api/User/reg', {
+          //const response = await axios.post('https://wine.azurewebsites.net/api/User/reg', {
+          const response = await axios.post('https://localhost:44322/api/User/reg', {
             username: this.username,
             password: this.password
           });

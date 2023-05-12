@@ -3,9 +3,8 @@
     <Header />
     <div class="inputrow">
       <input type="text" class="search-input" placeholder="Suche" @input="onSearchInput" />
-      <button class="toggle-btn" @click="toggleFrame">Essen</button>
+      <button class="toggle-btn" @click="toggleShowFoodOverlay">Essen</button>
     </div>
-    <OverlayFrame v-if="showFrame" @close="toggleFrame" :wines="wines" />
     <div class="button-group">
       <button @click="filterWines('all')" class="button">Für dich</button>
       <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
@@ -17,32 +16,37 @@
     <!--<WineHeader v-if="hasWineType('Weisswein')" title="Weissweine" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Weisswein'">
-        <WineInfo :wine="wine" :userData="userData" />      
+        <WineInfo :wine="wine" :userData="userData" @open-detail-view="openDetailViewWine" />      
       </div>
     </div>
     <!--<WineHeader v-if="hasWineType('Rotwein')" title="Rotweine" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Rotwein'">
-        <WineInfo :wine="wine" :userData="userData" />      
+        <WineInfo :wine="wine" :userData="userData" @open-detail-view="openDetailViewWine" />      
       </div>
     </div>
     <!--<WineHeader v-if="hasWineType('Rosé')" title="Rosé" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Rosé'">
-        <WineInfo :wine="wine" :userData="userData" />
+        <WineInfo :wine="wine" :userData="userData" @open-detail-view="openDetailViewWine" />      
       </div>
     </div>
   </div>
-  <Tabbar />
+  <OverlayFrame v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
+  <bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" />
+  <DetailViewWine v-if="showWineDetail" :wine="selectedWine" @close="showWineDetail = false" />
+  <Tabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
 </div>
 </template>
 
 
 <script>
 import Header from '~/components/Header.vue';
-import WineInfo from '~/components/WineInfo.vue'; // Import WineInfo component
+import WineInfo from '~/components/WineInfo.vue';
 import axios from 'axios';
 import OverlayFrame from '~/components/OverlayFrame.vue';
+import Bookmarks from '~/components/Bookmarks.vue';
+import DetailViewWine from '~/components/DetailViewWine.vue';
 
 
 export default {
@@ -51,14 +55,19 @@ components: {
   Header,
   WineInfo,
   OverlayFrame,
+  Bookmarks,
+  DetailViewWine,
 },
 data() {
   return {
     loading: true,
     wines: [],
     searchText: '',
-    showFrame: false,
+    showFoodOverlay: false,
+    showBookmarksOverlay: false,
     userData: null,
+    selectedWine: null,
+    showWineDetail: false,
   }
 },
 computed: {
@@ -90,25 +99,36 @@ methods: {
     }
   },
 
+  openDetailViewWine(wine) {
+    console.log("Click");
+    console.log("Wine" +wine);
+    this.selectedWine = wine;
+    this.showWineDetail = true;
+  },
+
   hasWineType(winetype) {
     return this.filteredWines.some(wine => wine.winetype === winetype);
   },
 
-  toggleFrame() {
-    this.showFrame = !this.showFrame;
+  toggleShowBookmarksOverlay() {
+    this.showBookmarksOverlay = !this.showBookmarksOverlay;
+  },
+
+  toggleShowFoodOverlay() {
+    this.showFoodOverlay = !this.showFoodOverlay;
   },
 },
 
 async created() {
   try {
-    const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
-    //const response = await axios.get('https://wine.azurewebsites.net/api/wine');
+    //const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
+    const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
     this.wines = WineDataResponse.data;
     this.loading = false;
     const token = localStorage.getItem('jwt');
     if (token) {
-      const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
-      //const response = await this.$axios.get(`https://localhost:44322/api/user/userdata/`, {
+      //const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+      const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
         headers: {
           Authorization: `Bearer ${token}`,
           },
