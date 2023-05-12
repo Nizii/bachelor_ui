@@ -46,7 +46,7 @@ import WineInfo from '~/components/WineInfo.vue';
 import axios from 'axios';
 import OverlayFrame from '~/components/OverlayFrame.vue';
 import Bookmarks from '~/components/Bookmarks.vue';
-import DetailViewWine from '~/components/DetailViewWine.vue';
+import DetailViewWine from '~/components/DetailViewWIne.vue';
 
 
 export default {
