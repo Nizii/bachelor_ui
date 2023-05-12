@@ -148,8 +148,8 @@
           return;
         }
         try {
-          //const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
-          const response = await axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
+          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
+          //const response = await axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

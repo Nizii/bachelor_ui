@@ -121,14 +121,14 @@ methods: {
 
 async created() {
   try {
-    //const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
-    const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
+    const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
+    //const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
     this.wines = WineDataResponse.data;
     this.loading = false;
     const token = localStorage.getItem('jwt');
     if (token) {
-      //const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
-      const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
+      const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+      //const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
         headers: {
           Authorization: `Bearer ${token}`,
           },
