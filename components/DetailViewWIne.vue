@@ -8,6 +8,7 @@
   </template>
   
   <script>
+  // Commit erzwingen
   export default {
     name: 'DetailViewWine',
     props: {
