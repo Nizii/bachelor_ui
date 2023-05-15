@@ -11,12 +11,12 @@
     </div>
     <div v-if="userData" class="wine-cellar">
       <div class="regal">
-        <div v-for="wine, index in userData.favoriten" :key="wine._id.$oid" class="wine-item" v-if="index <= 3">
+        <div v-for="wine in userData.favoriten" :key="wine._id.$oid" class="wine-item" >
           <CellarItem />
         </div>
       </div>
       <div class="regal">
-        <div v-for="wine, index in userData.favoriten" :key="wine._id.$oid" class="wine-item" v-if="index > 3">
+        <div v-for="wine in userData.favoriten" :key="wine._id.$oid" class="wine-item">
           <CellarItem />
         </div>
       </div>

@@ -33,6 +33,7 @@
             <p>Bereits einen Account? <a href="#" @click="showRegister = false">Anmelden</a></p>
           </div>
         </div>
+        <router-link to="/InternLogin" class="internal-link">Intern</router-link>
       </div>
       <Tabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
     </div>

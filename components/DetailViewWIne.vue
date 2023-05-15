@@ -5,10 +5,9 @@
         <p>{{ wine.description }}</p>
         <button @click="closeDetails">Schließen</button>
     </div>
-  </template>
+</template>
   
   <script>
-  // Commit erzwingen
   export default {
     name: 'DetailViewWine',
     props: {
