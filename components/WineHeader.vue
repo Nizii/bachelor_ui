@@ -19,5 +19,4 @@ export default {
   margin: 20px;
   font-family: sans-serif;
 }
-
 </style>

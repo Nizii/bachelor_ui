@@ -34,7 +34,7 @@
   </div>
   <OverlayFrame v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
   <bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" />
-  <DetailViewWine v-if="showWineDetail" :wine="selectedWine" @close="showWineDetail = false" />
+  <DetailWineView v-if="showWineDetail" :wine="selectedWine" @close="showWineDetail = false" />
   <Tabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
 </div>
 </template>
@@ -46,7 +46,7 @@ import WineInfo from '~/components/WineInfo.vue';
 import axios from 'axios';
 import OverlayFrame from '~/components/OverlayFrame.vue';
 import Bookmarks from '~/components/Bookmarks.vue';
-import DetailViewWine from '~/components/DetailViewWIne.vue';
+import DetailWineView from '~/components/DetailWineView.vue';
 
 
 export default {
@@ -56,7 +56,7 @@ components: {
   WineInfo,
   OverlayFrame,
   Bookmarks,
-  DetailViewWine,
+  DetailWineView,
 },
 data() {
   return {

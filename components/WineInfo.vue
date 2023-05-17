@@ -40,11 +40,11 @@
 </template>
   
   <script>
-  import DetailViewWine from '~/components/DetailViewWine.vue';
+  import DetailWineView from '~/components/DetailWineView.vue';
   import axios from 'axios';
   export default {
     components:{
-      DetailViewWine,
+      DetailWineView,
     },
 
     data() {

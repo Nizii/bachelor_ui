@@ -1,6 +1,6 @@
 <template>
     <div class="detail-view">
-        <WineHeader title="DetailViewWine" />
+        <WineHeader title="DetailWineView" />
         <h2>{{ wine.name }}</h2>
         <p>{{ wine.description }}</p>
         <button @click="closeDetails">Schließen</button>
@@ -9,7 +9,7 @@
   
   <script>
   export default {
-    name: 'DetailViewWine',
+    name: 'DetailWineView',
     props: {
       wine: {
         type: Object,

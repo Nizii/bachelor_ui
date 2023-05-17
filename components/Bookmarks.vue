@@ -18,12 +18,14 @@
       WineHeader,
       WineInfo,
     },
+
     props: {
       wines: {
         type: Array,
         required: true,
       },
     },
+    
     methods: {
       showWinesForDish(dish) {
         this.selectedDish = dish;
@@ -38,7 +40,7 @@
     },
     data() {
       return {
-                frameOpen: false,
+        frameOpen: false,
       };
     },
 
