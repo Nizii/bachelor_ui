@@ -3,8 +3,10 @@
     <Header />
     <div class="inputrow">
       <input type="text" class="search-input" placeholder="Suche" @input="onSearchInput" />
-      <button class="toggle-btn" @click="toggleShowFoodOverlay">Essen</button>
+      <button class="toggle-btn" @click="toggleShowFoodOverlay">Fillter</button>
+      <!--<button class="toggle-btn" @click="showFilterContainer = !showFilterContainer">Fillter</button>-->
     </div>
+
     <div class="button-group">
       <button @click="filterWines('all')" class="button">Für dich</button>
       <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
@@ -83,6 +85,7 @@ computed: {
   }
 },
 methods: {
+
   onFavoriteUpdated() {
     this.loadWines(); 
   },

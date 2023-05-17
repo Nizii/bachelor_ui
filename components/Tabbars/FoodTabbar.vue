@@ -26,7 +26,6 @@ export default {
 </script>
 
 <style scoped>
-
 .button-group {
   display: flex;
   flex-direction: row;
@@ -75,11 +74,6 @@ export default {
 .button-3 span,
 .button-4 span {
   font-size: 12px;
-}
-
-.active {
-  background-color: #D9D9D9;
-  color: black;
 }
 
 </style>

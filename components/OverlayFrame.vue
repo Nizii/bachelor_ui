@@ -1,25 +1,45 @@
 <template>
   <div class="overlay-frame" :class="{ open: frameOpen }">
+
     <div class="frame-header">
-        <div></div>
-        <h2>Essen</h2>
-        <button class="close-button" @click="closeOverlay">X</button>
-      </div>
-      <FoodTabbar @show-wines="showWinesForDish" />
-      <div v-if="selectedDish !== ''">
-        <p id="matchingTitle">Passend zu <span class="bold">{{ selectedDish }}</span></p>
-        <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
-            <div class="wine-container">
-                <WineHeader :title="wine.winetype" id="overwritingParent"/>
-                <WineInfo v-if="wine.match && wine.match.indexOf(selectedDish) !== -1" :wine="wine" wineType="Rotwein" :matchType="selectedDish" />
-            </div>
+      <div></div>
+      <WineHeader title="Filter Optionen" />
+      <button class="close-button" @click="closeOverlay">X</button>
+    </div>
+      
+    <div class="button-group">
+      <button @click="openTab('food')" class="button">Essen</button>
+      <button @click="openTab('nation')" class="button">Land</button>
+      <button @click="openTab('grape')" class="button">Traube</button>
+      <button @click="openTab('character')" class="button">Charakter</button>
+    </div>
+
+    <FoodTabbar v-if="currentTab === 'food'" @show-wines="showWinesForFood" />
+    <NationTabbar v-if="currentTab === 'nation'" @show-wines="showWinesForNation" />
+    <GrapeTabbar v-if="currentTab === 'grape'" @show-wines="showWinesForGrape" />
+    <CharacterTabbar v-if="currentTab === 'character'" @show-wines="showWinesForCharacter" />
+
+    <div v-if="selectedTag !== ''">
+      <div v-for="wine in displayedWines" :key="wine.id" style="margin: 20px;">
+        <div class="wine-container" 
+          v-if="wine.foodTags && wine.foodTags.indexOf(selectedTag) !== -1 ||
+          wine.nationTag && wine.nationTag === selectedTag ||
+          wine.characterTags && wine.characterTags.indexOf(selectedTag) !== -1||
+          wine.grapeTags && wine.grapeTags.indexOf(selectedTag) !== -1">
+          <!--<WineHeader :title="wine.winetype" id="overwritingParent"/>-->
+          <WineInfo :wine="wine" wineType=wine.wineType :matchType="selectedTag" />
         </div>
       </div>
+    </div>
+
     </div>
   </template>
   
   <script>
-  import FoodTabbar from '~/components/FoodTabbar.vue';
+  import FoodTabbar from '~/components/Tabbars/FoodTabbar.vue';
+  import NationTabbar from '~/components/Tabbars/NationTabbar.vue';
+  import GrapeTabbar from '~/components/Tabbars/GrapeTabbar.vue';
+  import CharacterTabbar from '~/components/Tabbars/CharacterTabbar.vue';
   import WineHeader from '~/components/WineHeader.vue';
   import WineInfo from '~/components/WineInfo.vue';
   
@@ -27,39 +47,90 @@
     name: "OverlayFrame",
     components: {
       FoodTabbar,
+      CharacterTabbar,
+      NationTabbar,
+      GrapeTabbar,
       WineHeader,
       WineInfo,
     },
+
     props: {
       wines: {
         type: Array,
         required: true,
       },
     },
+
     methods: {
-      showWinesForDish(dish) {
-        this.selectedDish = dish;
+      showWinesForFood(dish) {
+        this.selectedTag = dish;
+        this.filterWines();
+      },
+
+      showWinesForNation(nation) {
+        this.selectedTag = nation;
+        this.filterWines();
+      },
+
+      showWinesForGrape(grape) {
+        this.selectedTag = grape;
+        this.filterWines();
+      },
+
+      showWinesForCharacter(character) {
+        this.selectedTag = character;
+        this.filterWines();
+      },
+
+      filterWines() {
+        console.log("Selected Tag "+this.selectedTag);
+        this.displayedWines = this.wines.filter(wine => {
+          switch (this.currentTab) {
+            case 'food':
+              return this.selectedTag ? wine.foodTags && wine.foodTags.includes(this.selectedTag) : true;
+            case 'nation':
+              console.log(wine.nationTag + " === "+this.selectedTag)
+              return this.selectedTag ? wine.nationTag === this.selectedTag : true;
+            case 'grape':
+              return this.selectedTag ? wine.grapeTags && wine.grapeTags.includes(this.selectedTag) : true;
+            case 'character':
+              return this.selectedTag ? wine.characterTags && wine.characterTags.includes(this.selectedTag) : true;
+            default:
+              return true;
+          }
+        });
+        console.log("Displ Wines " + this.displayedWines.wine);
+      },
+
+      openTab(tabName) {
+        this.currentTab = tabName;
+        this.selectedTag = '';
+        this.filterWines();
+        document.body.style.overflow = 'hidden'; // Verhindert das Scrollen auf dem Body
       },
 
       closeOverlay() {
+        this.currentTab = null;
         this.frameOpen = false;
+        document.body.style.overflow = 'auto'; // Erlaubt das Scrollen auf dem Body wieder
         setTimeout(() => {
           this.$emit('close');
         }, 300);
       }
     },
+
     data() {
       return {
-        selectedDish: '',
         frameOpen: false,
+        currentTab: null,
+        selectedTag: '',
+        displayedWines: [],
+
       };
     },
-    computed: {
-      filteredWines() {
-        return this.wines.filter(wine => wine.match && wine.match.indexOf(this.selectedDish) !== -1);
-      },
-    },
+
     mounted() {
+      console.log(this.wines);
       setTimeout(() => {
         this.frameOpen = true;
       }, 100); 
@@ -68,6 +139,16 @@
   </script>
   
   <style scoped>
+
+  .button-group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: whitesmoke;
+    height: 50px;
+    margin: 20px;
+    }
+
   #overwritingParent{
     margin-left: 0; 
   }
@@ -94,6 +175,8 @@
     /* Hier wird die Overlay Animation gemacht*/
     transition:transform 0.5s;
     transform: translateY(100%);
+    overflow-y: auto;
+
   }
 
   .open {

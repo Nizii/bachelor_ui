@@ -1,7 +1,7 @@
 <template>
   <div class="wine-card" @click="openDetailView">
     <div class="wine-card-row1">
-      <img class="wine-image" src="/wine.png" alt="Weinbild" width="30px" height="100px"/>
+      <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
       <div class="wine-details">
         <div class="wine-flag">CH</div>
         <h3 class="wine-title">{{ wine.name }}</h3>
@@ -148,8 +148,8 @@
           return;
         }
         try {
-          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
-          //const response = await axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
+          //const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
+          const response = await axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -223,7 +223,7 @@
     display: flex;
     background-color: #EDEDED;
     padding: 10px;
-    border-radius: 15px;
+    border-radius: 25px;
   }
   
   .wine-image {

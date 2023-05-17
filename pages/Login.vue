@@ -86,8 +86,8 @@
           return;
         }
         try {
-          const response = await axios.post('https://wine.azurewebsites.net/api/User/reg', {
-          //const response = await axios.post('https://localhost:44322/api/User/reg', {
+          //const response = await axios.post('https://wine.azurewebsites.net/api/User/reg', {
+          const response = await axios.post('https://localhost:44322/api/User/reg', {
             username: this.username,
             password: this.password
           });
