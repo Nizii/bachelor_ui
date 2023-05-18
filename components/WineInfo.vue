@@ -25,10 +25,11 @@
           <br />
           {{ wine.bottleprice}} .- / 0.75 l
         </div>
+        <!--
         <button :class="favoriteButtonClass" @click.stop="toggleFavorite">
           {{ favoriteButtonText }}
         </button>
-        
+        -->
         <!--
         <div class="star-rating">
           <star-rating v-model="rating" @rating-selected="saveRating" />
@@ -40,7 +41,7 @@
 </template>
   
   <script>
-  import DetailWineView from '~/components/DetailWineView.vue';
+  import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
   import axios from 'axios';
   export default {
     components:{
@@ -103,8 +104,8 @@
     methods: {
       async saveRating() {
         try {
-          const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
-          //const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
+          //const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
+          const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
           this.rating++;
           console.log(response.data);
         } catch (error) {
@@ -113,6 +114,7 @@
       },
     
       openDetailView() {
+        console.log('open-detail-view event triggered');
         this.$emit('open-detail-view', this.wine);
       },
       

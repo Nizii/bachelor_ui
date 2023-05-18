@@ -35,7 +35,7 @@
         </div>
         <router-link to="/InternLogin" class="internal-link">Intern</router-link>
       </div>
-      <Tabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
+      <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
     </div>
   </template>
   
@@ -67,8 +67,8 @@
     methods: {
       async login() {
         try {
-          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
-          //const response = await axios.post('https://localhost:44322/api/User/login', {
+          //const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+          const response = await axios.post('https://localhost:44322/api/User/login', {
             username: this.username,
             password: this.password
           });

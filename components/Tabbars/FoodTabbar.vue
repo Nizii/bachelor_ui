@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style scoped>
+.button-group::-webkit-scrollbar {
+  display: none;
+}
 .button-group {
   display: flex;
   flex-direction: row;

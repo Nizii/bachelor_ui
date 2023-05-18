@@ -18,26 +18,26 @@
     <!--<WineHeader v-if="hasWineType('Weisswein')" title="Weissweine" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Weisswein'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="openDetailViewWine" />      
+        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
       </div>
     </div>
     <!--<WineHeader v-if="hasWineType('Rotwein')" title="Rotweine" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Rotwein'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="openDetailViewWine" />      
+        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
       </div>
     </div>
     <!--<WineHeader v-if="hasWineType('Rosé')" title="Rosé" />-->
     <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
       <div v-if="wine.winetype === 'Rosé'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="openDetailViewWine" />      
+        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
       </div>
     </div>
   </div>
-  <OverlayFrame v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
-  <bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" />
-  <DetailWineView v-if="showWineDetail" :wine="selectedWine" @close="showWineDetail = false" />
-  <Tabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
+  <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
+  <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" />
+  <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" />
+  <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
 </div>
 </template>
 
@@ -46,9 +46,10 @@
 import Header from '~/components/Header.vue';
 import WineInfo from '~/components/WineInfo.vue';
 import axios from 'axios';
-import OverlayFrame from '~/components/OverlayFrame.vue';
-import Bookmarks from '~/components/Bookmarks.vue';
-import DetailWineView from '~/components/DetailWineView.vue';
+import Fillter from '~/components/OverlayFrames/Fillter.vue';
+import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
+import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
+import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
 
 
 export default {
@@ -56,9 +57,10 @@ name: 'WineList',
 components: {
   Header,
   WineInfo,
-  OverlayFrame,
+  Fillter,
   Bookmarks,
   DetailWineView,
+  BottomTabbar,
 },
 data() {
   return {
@@ -69,7 +71,7 @@ data() {
     showBookmarksOverlay: false,
     userData: null,
     selectedWine: null,
-    showWineDetail: false,
+    showDetailWineView: false,
   }
 },
 computed: {
@@ -102,13 +104,6 @@ methods: {
     }
   },
 
-  openDetailViewWine(wine) {
-    console.log("Click");
-    console.log("Wine" +wine);
-    this.selectedWine = wine;
-    this.showWineDetail = true;
-  },
-
   hasWineType(winetype) {
     return this.filteredWines.some(wine => wine.winetype === winetype);
   },
@@ -120,18 +115,26 @@ methods: {
   toggleShowFoodOverlay() {
     this.showFoodOverlay = !this.showFoodOverlay;
   },
+
+  toggleDetailViewWine(wine) {
+    console.log('toggleDetailViewWine method called', wine);
+    this.selectedWine = wine;
+    this.showDetailWineView = !this.showDetailWineView;
+    console.log('showDetailWineView is now', this.showDetailWineView);
+  }
+
 },
 
 async created() {
   try {
-    const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
-    //const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
+    //const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
+    const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
     this.wines = WineDataResponse.data;
     this.loading = false;
     const token = localStorage.getItem('jwt');
     if (token) {
-      const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
-      //const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
+      //const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+      const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
         headers: {
           Authorization: `Bearer ${token}`,
           },

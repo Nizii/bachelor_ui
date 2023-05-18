@@ -1,14 +1,23 @@
 <template>
-  <div class="overlay-frame" :class="{ open: frameOpen }">
-    <div class="frame-header">
+  <div>
+    <div class="background-overlay" v-if="frameOpen" />
+    <div class="overlay-frame" :class="{ open: frameOpen }">
+      <div class="frame-header">
         <div></div>
         <h2>Merkliste</h2>
         <button class="close-button" @click="closeOverlay">X</button>
       </div>
+      <!--
+      <div class="wine-container" v-for="(wine, index) in bookmarkedWines" :key="index">
+        <WineInfo :wine="wine"/>
+      </div>
+      -->
+
     </div>
-  </template>
+  </div>
+</template>
   
-  <script>
+<script>
   import WineHeader from '~/components/WineHeader.vue';
   import WineInfo from '~/components/WineInfo.vue';
   
@@ -19,11 +28,11 @@
       WineInfo,
     },
 
-    props: {
-      wines: {
-        type: Array,
-        required: true,
-      },
+    data() {
+      return {
+        frameOpen: false,
+        bookmarkedWines: [],
+      }
     },
     
     methods: {
@@ -48,6 +57,7 @@
       setTimeout(() => {
         this.frameOpen = true;
       }, 100); 
+      //this.bookmarkedWines = JSON.parse(localStorage.getItem('bookmarkedWines')) || [];
     },
   };
   </script>
@@ -72,13 +82,23 @@
     left: 0;
     right: 0;
     height: 95%;
-    background-color: lightgray;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
+    background-color: white;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
     z-index: 1000;
     /* Hier wird die Overlay Animation gemacht*/
     transition:transform 0.5s;
     transform: translateY(100%);
+  }
+
+  .background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999; /* Muss unbedingt kleiner als der z-index von overlay-frame sein */
   }
 
   .open {

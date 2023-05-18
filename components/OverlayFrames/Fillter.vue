@@ -1,4 +1,6 @@
 <template>
+  <div>
+  <div class="background-overlay" v-if="frameOpen" />
   <div class="overlay-frame" :class="{ open: frameOpen }">
 
     <div class="frame-header">
@@ -33,6 +35,7 @@
     </div>
 
     </div>
+  </div>
   </template>
   
   <script>
@@ -44,7 +47,7 @@
   import WineInfo from '~/components/WineInfo.vue';
   
   export default {
-    name: "OverlayFrame",
+    name: "Fillter",
     components: {
       FoodTabbar,
       CharacterTabbar,
@@ -106,7 +109,6 @@
         this.currentTab = tabName;
         this.selectedTag = '';
         this.filterWines();
-        document.body.style.overflow = 'hidden'; // Verhindert das Scrollen auf dem Body
       },
 
       closeOverlay() {
@@ -130,10 +132,10 @@
     },
 
     mounted() {
-      console.log(this.wines);
       setTimeout(() => {
         this.frameOpen = true;
       }, 100); 
+      document.body.style.overflow = 'hidden'; // Verhindert das Scrollen auf dem Body
     },
   };
   </script>
@@ -177,6 +179,16 @@
     transform: translateY(100%);
     overflow-y: auto;
 
+  }
+
+  .background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999; /* Muss unbedingt kleiner als der z-index von overlay-frame sein */
   }
 
   .open {
