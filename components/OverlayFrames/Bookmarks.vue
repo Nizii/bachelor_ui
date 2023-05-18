@@ -107,8 +107,8 @@
   }
 
   .wine-container {
-    padding-left: 3em;
-    padding-right: 3em;
+    padding-left: 1em;
+    padding-right: 1em;
   }
   
   h2 {
