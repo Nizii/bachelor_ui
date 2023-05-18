@@ -35,9 +35,9 @@
     </div>
   </div>
   <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
-  <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" />
-  <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" />
-  <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
+  <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" @bookmark-removed="updateBookmarkedWinesCount" />
+  <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" ref="bottomTabbar" />
+  <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
 </div>
 </template>
 
@@ -88,6 +88,10 @@ computed: {
 },
 methods: {
 
+  updateBookmarkedWinesCount() {
+    this.$refs.bottomTabbar.updateBookmarkedWinesCount();
+  },
+
   onFavoriteUpdated() {
     this.loadWines(); 
   },
@@ -117,24 +121,22 @@ methods: {
   },
 
   toggleDetailViewWine(wine) {
-    console.log('toggleDetailViewWine method called', wine);
     this.selectedWine = wine;
     this.showDetailWineView = !this.showDetailWineView;
-    console.log('showDetailWineView is now', this.showDetailWineView);
   }
 
 },
 
 async created() {
   try {
-    //const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
-    const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
+    const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
+    //const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
     this.wines = WineDataResponse.data;
     this.loading = false;
     const token = localStorage.getItem('jwt');
     if (token) {
-      //const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
-      const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
+      const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+      //const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
         headers: {
           Authorization: `Bearer ${token}`,
           },

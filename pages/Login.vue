@@ -35,40 +35,69 @@
         </div>
         <router-link to="/InternLogin" class="internal-link">Intern</router-link>
       </div>
-      <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
+      <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
+      <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" @bookmark-removed="updateBookmarkedWinesCount" />
+      <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" ref="bottomTabbar" />
+      <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
     </div>
-  </template>
+</template>
   
-  <script>
-  import Header from '~/components/Header.vue';
-  import axios from 'axios';
+<script>
+import Header from '~/components/Header.vue';
+import WineInfo from '~/components/WineInfo.vue';
+import axios from 'axios';
+import Fillter from '~/components/OverlayFrames/Fillter.vue';
+import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
+import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
+import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
   
-  export default {
+export default {
     components: {
       Header,
-    },
+      WineInfo,
+      Fillter,
+      Bookmarks,
+      DetailWineView,
+      BottomTabbar,
+  },
   
-    data() {
-      return {
-        showRegister: false,
-        username: '',
-        password: '',
-        confirmPassword: '',
-      }
-    },
+  data() {
+    return {
+      showRegister: false,
+      username: '',
+      password: '',
+      confirmPassword: '',
+      showFoodOverlay: false,
+      showBookmarksOverlay: false,
+      showDetailWineView: false,
+    }
+  },
   
-    created() {
-      const jwt = localStorage.getItem('jwt');
+  created() {
+    const jwt = localStorage.getItem('jwt');
       if (jwt) {
         this.$router.push('/profile');
       }
-    },
+  },
   
-    methods: {
-      async login() {
-        try {
-          //const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
-          const response = await axios.post('https://localhost:44322/api/User/login', {
+  methods: {
+    toggleShowBookmarksOverlay() {
+      this.showBookmarksOverlay = !this.showBookmarksOverlay;
+    },
+
+    toggleShowFoodOverlay() {
+      this.showFoodOverlay = !this.showFoodOverlay;
+    },
+
+    toggleDetailViewWine(wine) {
+      this.selectedWine = wine;
+      this.showDetailWineView = !this.showDetailWineView;
+    },
+      
+    async login() {
+      try {
+          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+          //const response = await axios.post('https://localhost:44322/api/User/login', {
             username: this.username,
             password: this.password
           });
@@ -78,16 +107,16 @@
         } catch (error) {
           console.error(error);
         }
-      },
+    },
   
-      async register() {
+    async register() {
         if (this.password !== this.confirmPassword) {
           alert('Passwörter stimmen nicht überein!');
           return;
         }
         try {
-          //const response = await axios.post('https://wine.azurewebsites.net/api/User/reg', {
-          const response = await axios.post('https://localhost:44322/api/User/reg', {
+          const response = await axios.post('https://wine.azurewebsites.net/api/User/reg', {
+          //const response = await axios.post('https://localhost:44322/api/User/reg', {
             username: this.username,
             password: this.password
           });

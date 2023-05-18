@@ -23,24 +23,40 @@
     </div>
     <WineHeader title="Statistiken" />
     <img class="wine-image" src="/stat.jpg" alt="Weinbild" width="200px" height="160px" margin="20px"/>
-    <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" />
+    <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
+    <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" @bookmark-removed="updateBookmarkedWinesCount" />
+    <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" ref="bottomTabbar" />
+    <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import Header from '~/components/Header.vue';
 import CellarItem from '~/components/CellarItem.vue';
+import Header from '~/components/Header.vue';
+import WineInfo from '~/components/WineInfo.vue';
+import Fillter from '~/components/OverlayFrames/Fillter.vue';
+import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
+import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
+import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
 
 export default {
   components: {
     Header,
     CellarItem,
+    WineInfo,
+    Fillter,
+    Bookmarks,
+    DetailWineView,
+    BottomTabbar,
   },
 
   data() {
     return {
       userData: null,
+      showFoodOverlay: false,
+      showBookmarksOverlay: false,
+      showDetailWineView: false,
     };
   },
 
@@ -49,11 +65,24 @@ export default {
   },
 
   methods: {
+    toggleShowBookmarksOverlay() {
+      this.showBookmarksOverlay = !this.showBookmarksOverlay;
+    },
+
+    toggleShowFoodOverlay() {
+      this.showFoodOverlay = !this.showFoodOverlay;
+    },
+
+    toggleDetailViewWine(wine) {
+      this.selectedWine = wine;
+      this.showDetailWineView = !this.showDetailWineView;
+    },
+
     async getUserData() {
       const token = localStorage.getItem('jwt');
       try {
-          //const response = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
-          const response = await this.$axios.get(`https://localhost:44322/api/user/userdata/`, {
+          const response = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+          //const response = await this.$axios.get(`https://localhost:44322/api/user/userdata/`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -66,27 +95,27 @@ export default {
     },
 
     filterWines(filterType) {
-    if (!this.userData) return;
-    let filteredWines = this.userData.favoriten.slice();
+      if (!this.userData) return;
+      let filteredWines = this.userData.favoriten.slice();
 
-    switch (filterType) {
-      case 'Weintyp':
-        filteredWines.sort((a, b) => a.winetype.localeCompare(b.winetype));
-        break;
-      case 'Herkunft':
-        filteredWines.sort((a, b) => a.origin.localeCompare(b.origin));
-        break;
-      case 'Trauben':
-        filteredWines.sort((a, b) => a.grape.localeCompare(b.grape));
-        break;
-      case 'Jahr':
-        filteredWines.sort((a, b) => a.year - b.year);
-        break;
-      case 'Preis':
-        filteredWines.sort((a, b) => a.bottleprice - b.bottleprice);
-        break;
-    }
-    this.userData.favoriten = filteredWines;
+      switch (filterType) {
+        case 'Weintyp':
+          filteredWines.sort((a, b) => a.winetype.localeCompare(b.winetype));
+          break;
+        case 'Herkunft':
+          filteredWines.sort((a, b) => a.origin.localeCompare(b.origin));
+          break;
+        case 'Trauben':
+          filteredWines.sort((a, b) => a.grape.localeCompare(b.grape));
+          break;
+        case 'Jahr':
+          filteredWines.sort((a, b) => a.year - b.year);
+          break;
+        case 'Preis':
+          filteredWines.sort((a, b) => a.bottleprice - b.bottleprice);
+          break;
+        }
+      this.userData.favoriten = filteredWines;
     },
   },
 };

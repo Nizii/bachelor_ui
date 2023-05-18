@@ -1,7 +1,7 @@
 <template>
   <div>
-  <div class="background-overlay" v-if="frameOpen" />
-  <div class="overlay-frame" :class="{ open: frameOpen }">
+    <div class="background-overlay" v-if="frameOpen" />
+    <div class="overlay-frame" :class="{ open: frameOpen }">
 
     <div class="frame-header">
       <div></div>
@@ -170,7 +170,7 @@
     left: 0;
     right: 0;
     height: 95%;
-    background-color: lightgray;
+    background-color: white;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
     z-index: 1000;

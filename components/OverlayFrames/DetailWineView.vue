@@ -56,31 +56,31 @@
       },
 
       addToBookmarks() {
-        /*
         // Erhalte die aktuelle Liste der gemerkten Weine (oder eine leere Liste, wenn noch keine Weine gemerkt wurden)
         const bookmarkedWines = JSON.parse(localStorage.getItem('bookmarkedWines')) || [];
         // Überprüfe, ob der aktuelle Wein bereits gemerkt wurde
-        const alreadyBookmarked = bookmarkedWines.some(bookmarkedWine => bookmarkedWine.id === this.wine.id);
+        const alreadyBookmarked = bookmarkedWines.some(bookmarkedWine => bookmarkedWine._id === this.wine._id);
         // Wenn der Wein noch nicht gemerkt wurde, wird der Wein hinzugefügt
         if (!alreadyBookmarked) {
           bookmarkedWines.push(this.wine);
           localStorage.setItem('bookmarkedWines', JSON.stringify(bookmarkedWines));
         }
-        */
+        this.$emit('bookmark-removed');
+        this.closeOverlay();
       },
+    },
 
-      mounted(){
-        setTimeout(() => {
-          this.frameOpen = true;
-          }, 100); 
-          document.body.style.overflow = 'hidden'; // Verbietet das Scrollen auf dem Background
-        },
-      },
+    mounted(){
+    setTimeout(() => {
+      this.frameOpen = true;
+    }, 100); 
+    document.body.style.overflow = 'hidden'; // Verbietet das Scrollen auf dem Background
+  },
 
-      created() {
-        console.log('DetailWineView component created');
-      }
-  };
+  created() {
+    console.log('DetailWineView component created');
+  }
+};
   </script>
   
   <style scoped>

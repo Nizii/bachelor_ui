@@ -104,8 +104,8 @@
     methods: {
       async saveRating() {
         try {
-          //const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
-          const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
+          const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
+          //const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
           this.rating++;
           console.log(response.data);
         } catch (error) {
@@ -150,8 +150,8 @@
           return;
         }
         try {
-          //const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
-          const response = await axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
+          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
+          //const response = await axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -168,8 +168,8 @@
           return;
         }
         try {
-          //const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${this.wine._id}`, {
-          const response = await this.$axios.post(`https://localhost:44322/api/user/add-favorite/${this.wine._id}`, {
+          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${this.wine._id}`, {
+          //const response = await this.$axios.post(`https://localhost:44322/api/user/add-favorite/${this.wine._id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

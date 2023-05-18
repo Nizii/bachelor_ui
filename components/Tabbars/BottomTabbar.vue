@@ -7,6 +7,7 @@
     <button @click="openBookmarkOverlay" class="bottom-bar-link">
       <i class="fas fa-user"></i>
       <span class="bottom-bar-label">Merkliste</span>
+      <span v-if="bookmarkedWinesCount > 0" class="bookmark-badge">{{ bookmarkedWinesCount }}</span>
     </button>
     <button @click="navigateTo('/Login')" class="bottom-bar-link">
       <i class="fas fa-user"></i>
@@ -28,9 +29,39 @@ export default {
   data() {
     return {
       activeTab: 'home',
+      bookmarkedWinesCount: (JSON.parse(localStorage.getItem('bookmarkedWines')) || []).length,
+      loggedIn: this.isLoggedIn(),
     }
   },
+
+  mounted() {
+    this.bookmarkedWinesCount = (JSON.parse(localStorage.getItem('bookmarkedWines')) || []).length;
+    console.log("Here "+ this.bookmarkedWinesCount);
+  },
+
+  // Observiert bookmarkedWinesCount und loggedIn ob sich der Wert ändert
+  watch: {
+    bookmarkedWinesCount: {
+      handler() {
+        this.updateBookmarkedWinesCount();
+      },
+      deep: true,
+    },
+
+    loggedIn: {
+      handler() {
+        this.loggedIn = this.isLoggedIn();
+      },
+      deep: true,
+    },
+  },
+
   methods: {
+    // Aktualisiert die Anzahl gemerkter Weine
+    updateBookmarkedWinesCount() {
+      this.bookmarkedWinesCount = JSON.parse(localStorage.getItem('bookmarkedWines')).length;
+    },
+
     navigateTo(route) {
       this.$router.push(route);
     },
@@ -44,7 +75,7 @@ export default {
 
     logout() {
       localStorage.removeItem('jwt');
-      console.log(localStorage.getItem('jwt'))
+      this.loggedIn = false;
       this.$router.push('/');
     },
     isLoggedIn() {
@@ -64,6 +95,20 @@ export default {
   *{
     font-family: sans-serif;
   }
+
+  .bookmark-badge {
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 20px;
+    left: 45%;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 10px;
+}
+
  .fixed-bottom-bar {
   display: flex;
   justify-content: flex-start; /* Ändert die Ausrichtung auf linksbündig */
