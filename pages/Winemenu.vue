@@ -194,7 +194,7 @@ body, html {
   border-radius: 10px;
   margin-left: 20px;
   margin-right: 20px;
-  background-image: url('@/icons/others/suche.png');
+  background-image: url('/icons/others/suche.png');
   background-repeat: no-repeat;
   background-position: 5px 4px;
   background-size: 40px 40px;
