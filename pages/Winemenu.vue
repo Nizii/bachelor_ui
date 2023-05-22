@@ -10,7 +10,7 @@
       <div class="inputrow">
         <input type="text" class="search-input" @input="onSearchInput">
         <button class="toggle-btn" @click="toggleShowFoodOverlay">
-          <img :src="require('/icons/others/filter.png')" class="icon" alt="Bookmark icon" />
+          <img :src="require('/icons/buttons/filter.png')" class="icon" alt="Bookmark icon" />
         </button>
       </div>
     </div>
