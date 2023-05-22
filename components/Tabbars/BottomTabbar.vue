@@ -105,8 +105,8 @@ export default {
     position: absolute;
     top: auto;
     right: auto;
-    bottom: 20px;
-    left: 45%;
+    bottom: 28px;
+    left: 50%;
     background-color: red;
     color: white;
     border-radius: 50%;

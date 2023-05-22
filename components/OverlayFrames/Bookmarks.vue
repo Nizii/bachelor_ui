@@ -4,8 +4,10 @@
     <div class="overlay-frame" :class="{ open: frameOpen }">
       <div class="frame-header">
         <div></div>
-        <h2>Merkliste</h2>
-        <button class="close-button" @click="closeOverlay">X</button>
+        <TitleOverlay :title="Merkliste" />
+        <button class="close-button" @click="closeOverlay">
+          <img :src="require('@/icons/buttons/close.png')" class="icon-small" alt="Bookmark icon" />
+        </button>
       </div>
       <div class="wine-container" v-for="(wine, index) in bookmarkedWines" :key="index">
         <button id="bookmarks-delete-button" @click="removeFromBookmarks(index)">
@@ -18,15 +20,15 @@
 </template>
   
 <script>
-  import WineHeader from '~/components/WineHeader.vue';
+  import TitleOverlay from '~/components/Titles/TitleOverlay.vue';
   import WineInfo from '~/components/WineInfo.vue';
   
   export default {
     name: "Bookmarks",
     components: {
-      WineHeader,
+      TitleOverlay,
       WineInfo,
-    },
+},
 
     data() {
       return {
