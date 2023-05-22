@@ -6,7 +6,7 @@
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
         <button id="detail-view-close-btn" @click="closeOverlay">
-          <img :src="require('@/icons/buttons/close.png')" class="icon-small" alt="Bookmark icon" />  
+          <img :src="require('/icons/buttons/close.png')" class="icon-small" alt="Bookmark icon" />  
         </button>
       </div>
       <div id="row2">

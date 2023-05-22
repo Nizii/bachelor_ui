@@ -8,11 +8,11 @@
         <div class="wine-attribute">
           <div class="wine-type_container">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+              <img :src="require('/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
             <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+              <img :src="require('/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
             <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+              <img :src="require('/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
             {{ wine.grape }}</div>
           </div>
           <!--
@@ -35,7 +35,7 @@
       </div>
       <div class="wine_card_row3">
         <button :class="favoriteButtonClass" @click.stop="toggleFavorite">
-          <img :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+          <img :src="require('/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
         </button>
         <!--
         <div class="star-rating">

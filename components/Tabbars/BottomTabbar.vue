@@ -2,20 +2,20 @@
   <div class="fixed-bottom-bar">
     <!-- Menü Button -->
     <button @click="navigateTo('/Winemenu')" class="bottom-bar-link">
-      <img :src="require('@/icons/buttons/karte.png')" class="icon" alt="Menu icon" />
+      <img :src="require('/icons/buttons/karte.png')" class="icon" alt="Menu icon" />
       <!--<span class="bottom-bar-label">Menü</span>-->
     </button>
 
     <!-- Merkliste Button -->
     <button @click="openBookmarkOverlay" class="bottom-bar-link">
-      <img :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+      <img :src="require('/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
       <!--<span class="bottom-bar-label">Merkliste</span>-->
       <span v-if="bookmarkedWinesCount > 0" class="bookmark-badge">{{ bookmarkedWinesCount }}</span>
     </button>
 
     <!-- Profil Button -->
     <button @click="navigateTo('/Login')" class="bottom-bar-link">
-      <img :src="require('@/icons/buttons/profil.png')" class="icon" alt="Profile icon" />
+      <img :src="require('/icons/buttons/profil.png')" class="icon" alt="Profile icon" />
       <!--<span class="bottom-bar-label">Profil</span>-->
     </button>
   </div>
