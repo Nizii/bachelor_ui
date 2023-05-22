@@ -4,7 +4,7 @@
       <img :src="require('/icons/nations/schweiz.png')" class="icon" alt="Profile icon" />
     </button>
     <button @click="showWinesForNation('Italien')" class="button button-2">Italien
-    <img :src="require('/icons/nations/italien.png')" class="icon" alt="Profile icon" />
+    <img :src="require('/icons/nations/superitalien.png')" class="icon" alt="Profile icon" />
       </button>
     <button @click="showWinesForNation('Frankreich')" class="button button-3">Frankreich
       <img :src="require('/icons/nations/frankreich.png')" class="icon" alt="Profile icon" />
