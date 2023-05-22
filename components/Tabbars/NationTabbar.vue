@@ -1,11 +1,17 @@
 <template>
   <div class="button-group">
-    <button @click="showWinesForNation('Schweiz')" class="button button-1">Schweiz</button>
-    <button @click="showWinesForNation('Italien')" class="button button-2">Italien</button>
-    <button @click="showWinesForNation('Frankreich')" class="button button-3">Frankreich</button>
-    <button @click="showWinesForNation('Spanien')" class="button button-3">Spanien</button>
-    <button @click="showWinesForNation('Usa')"  class="button button-4">Usa</button>
-    <button @click="showWinesForNation('Australien')"  class="button button-4">Australien</button>
+    <button @click="showWinesForNation('Schweiz')" class="button button-1">Schweiz
+      <img :src="require('@/icons/nations/schweiz.png')" class="icon" alt="Profile icon" />
+    </button>
+    <button @click="showWinesForNation('Italien')" class="button button-2">Italien
+    <img :src="require('@/icons/nations/italien.png')" class="icon" alt="Profile icon" />
+      </button>
+    <button @click="showWinesForNation('Frankreich')" class="button button-3">Frankreich
+      <img :src="require('@/icons/nations/frankreich.png')" class="icon" alt="Profile icon" />
+    </button>
+    <button @click="showWinesForNation('Spanien')" class="button button-3">Spanien
+      <img :src="require('@/icons/nations/spanien.png')" class="icon" alt="Profile icon" />
+    </button>
   </div>
 </template>
 <script>

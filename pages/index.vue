@@ -1,211 +1,85 @@
 <template>
   <div style="margin: 0; padding: 0; box-sizing: border-box;">
-    <Header />
-    <div class="inputrow">
-      <input type="text" class="search-input" placeholder="Suche" @input="onSearchInput" />
-      <button class="toggle-btn" @click="toggleShowFoodOverlay">Fillter</button>
-      <!--<button class="toggle-btn" @click="showFilterContainer = !showFilterContainer">Fillter</button>-->
-    </div>
-
-    <div class="button-group">
-      <button @click="filterWines('all')" class="button">Für dich</button>
-      <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
-      <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
-      <button @click="filterWines('Rosé')" class="button">Rosé</button>
-    </div>
-  <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
-  <div v-else>
-    <!--<WineHeader v-if="hasWineType('Weisswein')" title="Weissweine" />-->
-    <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
-      <div v-if="wine.winetype === 'Weisswein'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
-      </div>
-    </div>
-    <!--<WineHeader v-if="hasWineType('Rotwein')" title="Rotweine" />-->
-    <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
-      <div v-if="wine.winetype === 'Rotwein'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
-      </div>
-    </div>
-    <!--<WineHeader v-if="hasWineType('Rosé')" title="Rosé" />-->
-    <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
-      <div v-if="wine.winetype === 'Rosé'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
+    <div class="start-page-container">
+      <div class="block"></div>
+      <div class="block"></div>
+      <div class="content-container">
+        <TitleBig title="Finde DEINEN Wein!" />
+        <router-link to="/#" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
+        <router-link to="/Winemenu" class="start-page-link">Weiter zu Weinkarte</router-link>
       </div>
     </div>
   </div>
-  <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
-  <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" @bookmark-removed="updateBookmarkedWinesCount" />
-  <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" ref="bottomTabbar" />
-  <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
-</div>
 </template>
 
-
 <script>
-import Header from '~/components/Header.vue';
-import WineInfo from '~/components/WineInfo.vue';
-import axios from 'axios';
-import Fillter from '~/components/OverlayFrames/Fillter.vue';
-import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
-import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
-import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
-
+import AppHeader from '~/components/Titles/AppHeader.vue';
+import TitleBig from '~/components/Titles/TitleBig.vue';
 
 export default {
-name: 'WineList',
-components: {
-  Header,
-  WineInfo,
-  Fillter,
-  Bookmarks,
-  DetailWineView,
-  BottomTabbar,
-},
-data() {
-  return {
-    loading: true,
-    wines: [],
-    searchText: '',
-    showFoodOverlay: false,
-    showBookmarksOverlay: false,
-    userData: null,
-    selectedWine: null,
-    showDetailWineView: false,
+  name: 'index',
+  components: {
+    AppHeader,
+    TitleBig,
   }
-},
-computed: {
-  filteredWines() {
-    if (!this.searchText) {
-      return this.wines;
-    }
-
-    return this.wines.filter(wine =>
-      wine.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-      wine.winetype.toLowerCase().includes(this.searchText.toLowerCase())
-    );
-  }
-},
-methods: {
-
-  updateBookmarkedWinesCount() {
-    this.$refs.bottomTabbar.updateBookmarkedWinesCount();
-  },
-
-  onFavoriteUpdated() {
-    this.loadWines(); 
-  },
-
-  onSearchInput(event) {
-    this.searchText = event.target.value;
-  },
-
-  filterWines(filter) {
-    if (filter === 'all') {
-      this.searchText = '';
-    } else {
-      this.searchText = filter;
-    }
-  },
-
-  hasWineType(winetype) {
-    return this.filteredWines.some(wine => wine.winetype === winetype);
-  },
-
-  toggleShowBookmarksOverlay() {
-    this.showBookmarksOverlay = !this.showBookmarksOverlay;
-  },
-
-  toggleShowFoodOverlay() {
-    this.showFoodOverlay = !this.showFoodOverlay;
-  },
-
-  toggleDetailViewWine(wine) {
-    this.selectedWine = wine;
-    this.showDetailWineView = !this.showDetailWineView;
-  }
-
-},
-
-async created() {
-  try {
-    const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
-    //const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
-    this.wines = WineDataResponse.data;
-    this.loading = false;
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
-      //const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          },
-        });
-        this.userData = userDataResponse.data;
-      }
-  } catch (error) {
-    console.error(error);
-  }
-}
 }
 </script>
 
-<style scoped>
-* {
-font-family: sans-serif;
-}
-.inputrow {
-display: flex;
-justify-content: center;
-height: 40px;
-margin: 20px;
-}
-.search-input {
-background-color: #D9D9D9;
-width: 100%;
-padding-left: 30px;
-padding-right: 30px;
-box-sizing: border-box;
-border: none;
-text-align: left;
+<style>
+
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url("~@/imgs/glaswein.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.toggle-btn {
-border: none;
+.start-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertikal zentrieren */
+  align-items: center; /* Horizontal zentrieren */
+  text-align: left;
+  height: 100%;
 }
 
-.button-group {
-display: flex;
-justify-content: space-around;
-align-items: center;
-background-color: whitesmoke;
-height: 50px;
-margin: 20px;
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
 }
 
-.button {
-display: flex;
-justify-content: center;
-align-items: center;
-color: black;
-text-decoration: none;
-padding: 0 1rem;
-height: 100%;
-width: 25%;
-box-sizing: border-box;
-transition: color 0.3s;
-font-size: 12px;
-font-family: sans-serif;
-border: none;
+.block {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center; /* Vertikal zentrieren */
+  align-items: flex-start; /* Horizontal linksbündig ausrichten */
+  height: 30vh;
+  overflow: auto;
 }
 
-.button:hover,
-.button:focus {
-color: black;
-font-weight: bold;
-text-decoration: underline;
-text-decoration-color: black;
-text-decoration-thickness: 2px;
-text-decoration-offset: 5px;
+
+.start-page-link {
+  font-family: sans-serif;
+  margin-top: 20px;
+  color: white;
+}
+
+.red-button {
+  background-color: #781449;
+  color: white;
+  border-radius: 15px;
+  padding: 10px 20px;
+  text-decoration: none; 
+}
+
+
+.AppHeader {
+  text-align: center; /* Horizontal zentrieren */
 }
 </style>

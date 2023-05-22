@@ -1,6 +1,6 @@
 <template>
   <div style="margin: 0; padding: 0; box-sizing: border-box;">
-      <Header />
+      <AppHeader />
       <div class="login-container">
         <div class="form-container">
           <div v-if="!showRegister" class="form">
@@ -43,7 +43,7 @@
 </template>
   
 <script>
-import Header from '~/components/Header.vue';
+import AppHeader from '~/components/Titles/AppHeader.vue';
 import WineInfo from '~/components/WineInfo.vue';
 import axios from 'axios';
 import Fillter from '~/components/OverlayFrames/Fillter.vue';
@@ -53,7 +53,7 @@ import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
   
 export default {
     components: {
-      Header,
+      AppHeader,
       WineInfo,
       Fillter,
       Bookmarks,

@@ -1,7 +1,7 @@
   color: white;
   background-color: #762832;<template>
   <div style="margin: 0; padding: 0; box-sizing: border-box;">
-    <Header />
+    <AppHeader />
     <MainTabbar />
     <div class="custom-box">
       <div class="checkbox-group">
@@ -36,13 +36,13 @@
 
 
 <script>
-import Header from '~/components/Header.vue';
+import AppHeader from '~/components/Titles/AppHeader.vue';
 import Checkbox from '~/components/Checkbox.vue';
 import Slider from '~/components/Slider.vue';
 
 export default {
   components: {
-    Header,
+    AppHeader,
     Checkbox,
     Slider,
   },

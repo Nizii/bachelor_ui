@@ -5,7 +5,9 @@
     <div class="detail-view-header">
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
-        <button id="detail-view-close-btn" @click="closeOverlay">X</button>
+        <button id="detail-view-close-btn" @click="closeOverlay">
+          <img :src="require('@/icons/buttons/close.png')" class="icon-small" alt="Bookmark icon" />  
+        </button>
       </div>
       <div id="row2">
         <p id="detail-view-grape">{{wine.grape}}</p>
@@ -26,6 +28,21 @@
         <img class="detail-view-image" :src="wine.link"/>
       </div>
     </div>
+    <div class="detail-view-comment-container">
+      <h3>Kommentare</h3>
+      <div class="comment" v-for="(comment, index) in wine.comments" :key="index">
+        <p class="comment-content">{{ comment }}</p>
+      </div>
+      <div class="comment-input-container" v-if="isLoggedIn">
+        <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
+        <button @click="addComment">Kommentiere</button>
+      </div>
+      <div v-else>
+        <p>Du musst eingeloggt sein, um einen Kommentar abzugeben. 
+          <a @click="openPopup">Erstelle ein Profil</a>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 </template>
@@ -43,6 +60,8 @@
     data() {
       return{
         frameOpen: false,
+        newComment: '',
+        isLoggedIn: false,
       }
     },
 
@@ -53,6 +72,15 @@
         setTimeout(() => {
           this.$emit('close');
         }, 300);
+      },
+
+      addComment() {
+        this.wine.comments.push({ content: this.newComment, author: 'User', date: new Date().toISOString() });
+        this.newComment = '';
+      },
+
+      openPopup() {
+
       },
 
       addToBookmarks() {

@@ -5,15 +5,19 @@
 
     <div class="frame-header">
       <div></div>
-      <WineHeader title="Filter Optionen" />
-      <button class="close-button" @click="closeOverlay">X</button>
+      <TitleOverlay title="Filter Optionen" />
+      <button class="close-button" @click="closeOverlay">
+        <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
+      </button>
     </div>
       
-    <div class="button-group">
-      <button @click="openTab('food')" class="button">Essen</button>
-      <button @click="openTab('nation')" class="button">Land</button>
-      <button @click="openTab('grape')" class="button">Traube</button>
-      <button @click="openTab('character')" class="button">Charakter</button>
+    <div class="button-group-overlay">
+      <button @click="openTab('food')" class=".button-overlay">Essen
+        <!--<img :src="require('@/icons/buttons/nahrung.png')" class="icon-small" alt="Bookmark icon" />-->
+      </button>
+      <button @click="openTab('nation')" class=".button-overlay">Land</button>
+      <button @click="openTab('grape')" class=".button-overlay">Traube</button>
+      <button @click="openTab('character')" class=".button-overlay">Charakter</button>
     </div>
 
     <FoodTabbar v-if="currentTab === 'food'" @show-wines="showWinesForFood" />
@@ -29,7 +33,7 @@
           wine.characterTags && wine.characterTags.indexOf(selectedTag) !== -1||
           wine.grapeTags && wine.grapeTags.indexOf(selectedTag) !== -1">
           <!--<WineHeader :title="wine.winetype" id="overwritingParent"/>-->
-          <WineInfo :wine="wine" wineType=wine.wineType :matchType="selectedTag" />
+          <WineInfo :wine="wine" wineType=wine.wineType @open-detail-view="pushToggleDetailViewWineToIndex" :matchType="selectedTag" />
         </div>
       </div>
     </div>
@@ -43,7 +47,7 @@
   import NationTabbar from '~/components/Tabbars/NationTabbar.vue';
   import GrapeTabbar from '~/components/Tabbars/GrapeTabbar.vue';
   import CharacterTabbar from '~/components/Tabbars/CharacterTabbar.vue';
-  import WineHeader from '~/components/WineHeader.vue';
+  import TitleOverlay from '~/components/Titles/TitleOverlay.vue';
   import WineInfo from '~/components/WineInfo.vue';
   
   export default {
@@ -53,7 +57,7 @@
       CharacterTabbar,
       NationTabbar,
       GrapeTabbar,
-      WineHeader,
+      TitleOverlay,
       WineInfo,
     },
 
@@ -105,6 +109,10 @@
         console.log("Displ Wines " + this.displayedWines.wine);
       },
 
+      pushToggleDetailViewWineToIndex(wine) {
+        this.$emit('open-detail-view', wine);
+      },
+
       openTab(tabName) {
         this.currentTab = tabName;
         this.selectedTag = '';
@@ -127,7 +135,6 @@
         currentTab: null,
         selectedTag: '',
         displayedWines: [],
-
       };
     },
 
@@ -140,13 +147,17 @@
   };
   </script>
   
-  <style scoped>
+  <style>
+  
+  .button-overlay{
+    color:white;
+  }
 
-  .button-group {
+  .button-group-overlay {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: white;
     height: 50px;
     margin: 20px;
     }
@@ -173,7 +184,7 @@
     background-color: white;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    z-index: 1000;
+    z-index: 999;
     /* Hier wird die Overlay Animation gemacht*/
     transition:transform 0.5s;
     transform: translateY(100%);
@@ -188,7 +199,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 999; /* Muss unbedingt kleiner als der z-index von overlay-frame sein */
+    z-index: 998; /* Muss unbedingt kleiner als der z-index von overlay-frame sein */
   }
 
   .open {
@@ -200,7 +211,10 @@
     justify-content: space-between;
     align-items: center;
     height: 50px;
-    padding: 0 20px;
+    font-weight: bold;
+    padding-left: 40px;
+    padding-right: 20px;
+    padding-top: 20px;
   }
 
   .wine-container {

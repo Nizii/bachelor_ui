@@ -8,7 +8,9 @@
         <button class="close-button" @click="closeOverlay">X</button>
       </div>
       <div class="wine-container" v-for="(wine, index) in bookmarkedWines" :key="index">
-        <button id="bookmarks-delete-button" @click="removeFromBookmarks(index)">X</button>
+        <button id="bookmarks-delete-button" @click="removeFromBookmarks(index)">
+          <img :src="require('@/icons/buttons/close.png')" class="icon-small" alt="Bookmark icon" />
+        </button>
         <WineInfo :wine="wine"/>
       </div>
     </div>

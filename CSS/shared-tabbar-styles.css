@@ -15,11 +15,11 @@
 }
 
 .button {
+  color:black;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: Black;
   background-color: white;
   text-decoration: none;
   padding: 0 1rem;

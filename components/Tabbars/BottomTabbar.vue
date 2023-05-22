@@ -1,28 +1,27 @@
 <template>
   <div class="fixed-bottom-bar">
-    <button @click="navigateTo('/')" class="bottom-bar-link">
-      <i class="fas fa-user"></i>
-      <span class="bottom-bar-label">Menü</span>
+    <!-- Menü Button -->
+    <button @click="navigateTo('/Winemenu')" class="bottom-bar-link">
+      <img :src="require('@/icons/buttons/karte.png')" class="icon" alt="Menu icon" />
+      <!--<span class="bottom-bar-label">Menü</span>-->
     </button>
+
+    <!-- Merkliste Button -->
     <button @click="openBookmarkOverlay" class="bottom-bar-link">
-      <i class="fas fa-user"></i>
-      <span class="bottom-bar-label">Merkliste</span>
+      <img :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+      <!--<span class="bottom-bar-label">Merkliste</span>-->
       <span v-if="bookmarkedWinesCount > 0" class="bookmark-badge">{{ bookmarkedWinesCount }}</span>
     </button>
+
+    <!-- Profil Button -->
     <button @click="navigateTo('/Login')" class="bottom-bar-link">
-      <i class="fas fa-user"></i>
-      <span class="bottom-bar-label">Profil</span>
-    </button>
-    <button v-if="isLoggedIn()" @click.prevent="logout" class="bottom-bar-link">
-      <i class="fas fa-user"></i>
-      <span class="bottom-bar-label">Abmelden</span>
-    </button>
-    <button v-else @click="navigateTo('/Login')" class="bottom-bar-link">
-      <i class="fas fa-user"></i>
-      <span class="bottom-bar-label">Anmelden</span>
+      <img :src="require('@/icons/buttons/profil.png')" class="icon" alt="Profile icon" />
+      <!--<span class="bottom-bar-label">Profil</span>-->
     </button>
   </div>
 </template>
+
+
 
 <script>
 export default {
@@ -95,6 +94,12 @@ export default {
   *{
     font-family: sans-serif;
   }
+
+.icon {
+  width: 24px;
+  height: 24px;
+  fill: #333;
+}
 
   .bookmark-badge {
     position: absolute;

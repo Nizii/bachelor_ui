@@ -1,7 +1,7 @@
 <template>
   <div style="margin: 0; padding: 0; box-sizing: border-box;">
     <div style="text-align: center;">
-      <Header />
+      <AppHeader />
       <MainTabbar />
     </div>
     <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
@@ -30,14 +30,14 @@
 </template>
 
 <script>
-import Header from '~/components/Header.vue';
+import AppHeader from '~/components/Titles/AppHeader.vue';
 import WineHeader from '~/components/WineHeader.vue';
 import axios from 'axios';
 import WineMatchInfo from "@/components/WineMatchInfo.vue";
 
 export default {
   components: {
-    Header,
+    AppHeader,
     WineHeader,
     WineMatchInfo
   },

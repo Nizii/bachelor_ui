@@ -2,10 +2,20 @@
   <div class="wine-card" @click="openDetailView">
     <div class="wine-card-row1">
       <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
-      <div class="wine-details">
-        <div class="wine-flag">CH</div>
+      <div class="wine-card-row2">
+        <!--<div class="wine-flag">CH</div>-->
         <h3 class="wine-title">{{ wine.name }}</h3>
-        <div class="wine-attribute">{{ wine.grape }}</div>
+        <div class="wine-attribute">
+          <div class="wine-type_container">
+            <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
+              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+            <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
+              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+            <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
+              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+            {{ wine.grape }}</div>
+          </div>
+          <!--
         <div class="wine-attribute">
           <span v-for="(profileItem, index) in wine.profile" :key="index">
             {{ profileItem }}
@@ -18,18 +28,15 @@
             <span v-if="index < wine.match.length - 1">, </span>
           </span>
         </div>
-      </div>
-      <div class="wine-pricing-rating">
+      -->
         <div class="wine-price">
-          {{ wine.openprice }} .- / 1d l
-          <br />
-          {{ wine.bottleprice}} .- / 0.75 l
+          CHF {{ wine.bottleprice}}
         </div>
-        <!--
+      </div>
+      <div class="wine_card_row3">
         <button :class="favoriteButtonClass" @click.stop="toggleFavorite">
-          {{ favoriteButtonText }}
+          <img :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
         </button>
-        -->
         <!--
         <div class="star-rating">
           <star-rating v-model="rating" @rating-selected="saveRating" />
@@ -104,8 +111,8 @@
     methods: {
       async saveRating() {
         try {
-          const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
-          //const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
+          //const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
+          const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
           this.rating++;
           console.log(response.data);
         } catch (error) {
@@ -114,7 +121,6 @@
       },
     
       openDetailView() {
-        console.log('open-detail-view event triggered');
         this.$emit('open-detail-view', this.wine);
       },
       
@@ -183,17 +189,51 @@
   </script>
 
 
-  <style scoped>
+  <style>
 
   * {
     font-family: sans-serif;
+  }
+
+  .wine-type-case_1, .wine-type-case_2, .wine-type-case_3{
+    height: 20px;
+    padding:5px;
+    border-radius: 15px;
+    margin-right: 10px;
+  }
+
+  .wine-type-case_1{
+    background-color: #E8D954;
+  }
+
+  .wine-type-case_2{
+    background-color: #A15B80;
+  }
+
+  .wine-type-case_3{
+    background-color: #DE6058;
+  }
+
+  .icon-small {
+    width: 15px;
+    height: 15px;
+  }
+
+  .wine-type_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 10px;
   }
   
   .wine-card {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 150px;
     margin-bottom: 20px;
+    box-shadow: 5px 5px 5px 3px #888888;
+    border-radius: 10px;
   }
 
   .marked-favorite-button {
@@ -201,7 +241,6 @@
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
     text-align: center;
     font-size: 12px;
     cursor: pointer;
@@ -210,34 +249,42 @@
   
 
   .add-favorite-button {
-    background-color: #881111;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
     text-align: center;
     font-size: 12px;
     cursor: pointer;
     margin-top: 5px;
   }
-  
-  .wine-card-row1 {
-    display: flex;
-    background-color: #EDEDED;
-    padding: 10px;
-    border-radius: 25px;
-  }
-  
+
   .wine-image {
     height: 100%;
     object-fit: contain;
   }
-  
-  .wine-details {
-    flex: 1;
-    padding: 0 10px;
+
+  .wine-card-row1 {
+    display: flex;
+    background-color: white;
+    padding-left: 30px;
+    border-radius: 25px;
+    padding-top:15px
   }
   
+  .wine-card-row2 {
+    flex: 1;
+    margin-left: 15px;
+  }
+
+  .wine_card_row3{
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-right: 15px;
+  }
+
   .wine-flag {
     width: 100%;
     height: auto;
@@ -250,27 +297,21 @@
   }
   
   .wine-title {
-    font-size: 15px;
+    font-size: 16px;
     margin-top: 0;
-    color: #881111;
+    color: black;
   }
   
   .wine-attribute {
     font-size: 12px;
+    font-weight: bold;
   }
   
-  
-  .wine-pricing-rating {
-    flex: 0 0 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding-left: 10px;
-  }
   
   .wine-price {
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 10px;
   }
   
   .star-rating {

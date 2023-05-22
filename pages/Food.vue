@@ -1,6 +1,6 @@
 <template>
     <div style="margin: 0; padding: 0; box-sizing: border-box;">
-      <Header />
+      <AppHeader />
       <MainTabbar />
       <FoodTabbar @show-wines="showWinesForDish" />
       <Tabbar />
@@ -19,7 +19,7 @@
   </template>
   
   <script>
-  import Header from '~/components/Header.vue';
+  import AppHeader from '~/components/Titles/AppHeader.vue';
   import WineHeader from '~/components/WineHeader.vue';
   import ShowButton from "~/components/ShowButton.vue";
   import WineInfo from '~/components/WineInfo.vue';
@@ -27,7 +27,7 @@
   
   export default {
     components: {
-      Header,
+      AppHeader,
       WineHeader,
       WineInfo,
       ShowButton,
