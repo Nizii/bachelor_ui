@@ -3,7 +3,9 @@
     <div class="wine-card-row1">
       <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
       <div class="wine-card-row2">
-        <!--<div class="wine-flag">CH</div>-->
+        <!--<div class="wine-flag">
+          <img :src="require('@/icons/nations/traube.png')" class="icon-small" alt="Bookmark icon" />
+        </div>-->
         <h3 class="wine-title">{{ wine.name }}</h3>
         <div class="wine-attribute">
           <div class="wine-type_container">
@@ -190,28 +192,10 @@
 
 
   <style>
-
+  @import "@/CSS/shared-wine-type-styles.css";
+  
   * {
     font-family: sans-serif;
-  }
-
-  .wine-type-case_1, .wine-type-case_2, .wine-type-case_3{
-    height: 20px;
-    padding:5px;
-    border-radius: 15px;
-    margin-right: 10px;
-  }
-
-  .wine-type-case_1{
-    background-color: #E8D954;
-  }
-
-  .wine-type-case_2{
-    background-color: #A15B80;
-  }
-
-  .wine-type-case_3{
-    background-color: #DE6058;
   }
 
   .icon-small {
@@ -304,7 +288,6 @@
   
   .wine-attribute {
     font-size: 12px;
-    font-weight: bold;
   }
   
   

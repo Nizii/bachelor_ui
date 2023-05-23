@@ -1,0 +1,18 @@
+.wine-type-case_1, .wine-type-case_2, .wine-type-case_3{
+    height: 20px;
+    padding:6px;
+    border-radius: 15px;
+    margin-right: 10px;
+  }
+
+  .wine-type-case_1{
+    background-color: #E8D954;
+  }
+
+  .wine-type-case_2{
+    background-color: #A15B80;
+  }
+
+  .wine-type-case_3{
+    background-color: #DE6058;
+  }

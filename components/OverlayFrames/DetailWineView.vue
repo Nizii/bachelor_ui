@@ -6,36 +6,60 @@
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
         <button id="detail-view-close-btn" @click="closeOverlay">
-          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         </button>
+          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
         </button>
       </div>
       <div id="row2">
+        <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
+          <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
+            <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+          <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
+            <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+          <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
+            <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+        </div>
+        <br>
         <p id="detail-view-grape">{{wine.grape}}</p>
       </div>
     </div>
     <div class="detail-view-main-container">
       <div class="detail-view-left">
-        <p class="detail-view-label">Preis /75 cl</p>
-        <p class="detail-view-content">{{wine.bottleprice}}.- CHF</p>
-        <p class="detail-view-label">Preis /1 dl</p>
-        <p class="detail-view-content">{{wine.openprice}}.- CHF</p>
+        <br>
+        <p class="detail-view-label">Preis</p>
+        <p class="detail-view-content"><b>CHF {{wine.bottleprice}}.-</b></p>
+        <br>
         <p class="detail-view-label">Land</p>
-        <p class="detail-view-content">{{wine.regionTag}}, {{wine.nationTag}}</p>
+        <p class="detail-view-content"><b>{{wine.regionTag}}, {{wine.nationTag}}</b></p>
+        <br>
         <p class="detail-view-description">{{wine.charakter}}</p>
-        <button id="detail-view-add-btn" @click="addToBookmarks">Zur Merkliste</button>
+        <br>
+        <p class="detail-view-description">
+          Der Wein passt zu 
+          <span v-for="(meal, index) in wine.foodTags" :key="`meal-${index}`">
+            {{ meal }}
+            <span v-if="index !== wine.foodTags.length - 1">
+            ,
+            </span>
+          </span>
+        </p>
+        <br>
+        <p class="detail-view-description">{{wine.vinzer}}</p>
+        <div class="add-to-favorite-container" v-if="isLoggedIn">
+          <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToBookmarks">Zum Weinkeller hinzufügen</button>
+        </div>
       </div>
       <div class="detail-view-right">
         <img class="detail-view-image" :src="wine.link"/>
       </div>
     </div>
-    <div class="detail-view-comment-container">
-      <h3>Kommentare</h3>
+    <div class="detail-view-comment-container" :style="{ backgroundColor: getBackgroundColor() }">
+      <p id="detail-view-titel">Kommentare</p>
       <div class="comment" v-for="(comment, index) in wine.comments" :key="index">
         <p class="comment-content">{{ comment }}</p>
       </div>
       <div class="comment-input-container" v-if="isLoggedIn">
         <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
-        <button @click="addComment">Kommentiere</button>
+        <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">Kommentiere</button>
       </div>
       <div v-else>
         <p>Du musst eingeloggt sein, um einen Kommentar abzugeben. 
@@ -79,6 +103,38 @@
         this.newComment = '';
       },
 
+      getButtonColor() {
+        if (this.wine.winetype === 'Weisswein') {
+          return '#E8D954';
+        } else if (this.wine.winetype === 'Rotwein') {
+          return '#A15B80';
+        } else if (this.wine.winetype === 'Rose') {
+          return '#DE6058';
+        } else {
+          return '#781449';
+        }
+      },
+
+      getBackgroundColor() {
+        if (this.wine.winetype === 'Weisswein') {
+          return '#F5F5DC';
+        } else if (this.wine.winetype === 'Rotwein') {
+          return '#C9A1B3';
+        } else if (this.wine.winetype === 'Rose') {
+          return '#F28A87';
+        } else {
+          return '#781449';
+        }
+      },
+      
+      getButtonTextColor() {
+        if (this.wine.winetype === 'Weisswein') {
+          return 'black';
+        } else {
+          return 'white';
+        }
+      },
+      
       openPopup() {
 
       },
@@ -99,24 +155,31 @@
     },
 
     mounted(){
-    setTimeout(() => {
-      this.frameOpen = true;
-    }, 100); 
-    document.body.style.overflow = 'hidden'; // Verbietet das Scrollen auf dem Background
-  },
+      setTimeout(() => {
+        this.frameOpen = true;
+      }, 100); 
+      document.body.style.overflow = 'hidden'; // Verbietet das Scrollen auf dem Background
+      if(localStorage.getItem('jwt')){
+        this.isLoggedIn = true;
+      } 
+    },
 
-  created() {
-    console.log('DetailWineView component created');
-  }
+    created() {
+      console.log('DetailWineView component created');
+    }
 };
   </script>
   
-  <style scoped>
+  <style>
+
+  @import "@/CSS/shared-wine-type-styles.css";
 
   #row1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 0;
+    padding-top: 0;
   }
   
   #detail-view-close-btn {
@@ -124,6 +187,12 @@
     background: none;
     font-size: 1.5em;
     cursor: pointer;
+    margin-top: -1em;
+
+  }
+
+  .detail-view-button{
+    width: 100%;
   }
 
   .overlay-frame {
@@ -131,17 +200,17 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 70%;
+    height: 85%;
     background-color: white;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
     z-index: 1000;
     transition:transform 0.5s;
     transform: translateY(100%);
     overflow-y: auto;
-    padding-left: 3em;
+    padding-left: 2em;
     padding-right: 1em;
-    padding-top: 3em;
+    padding-top: 0em;
   }
 
   .background-overlay {
@@ -154,40 +223,59 @@
     z-index: 999; /* Muss unbedingt kleiner als der z-index von overlay-frame sein */
   }
   
+  .detail-view-button{
+    background-color: #781449;
+    color: white;
+    border-radius: 15px;
+    padding: 10px 20px;
+    text-decoration: none; 
+    margin-bottom: 20px;
+  }
+
   .overlay-frame.open {
     transform: translateY(0);
   }
   
   .detail-view-header {
     width: 100%;
+    margin-top: 30px;
   }
   
   .detail-view-main-container {
     display: flex;
+    border-bottom: 1px solid black;
+    margin: 1em 0;
   }
   
   .detail-view-left,
   .detail-view-right {
-    flex: 1; /* Erstellt zwei gleich große Spalten */
+    flex: 1; 
   }
   
-  .detail-view-label,
-  .detail-view-content {
-    margin-bottom: 1em;
+  .detail-view-label {
+    margin-bottom: 0.03em;
+    font-size: 14px;
+  }
+
+  .detail-view-content{
+    font-weight: blod;
+    font-size: 14px;
   }
   
   .detail-view-description {
     margin-top: 1em;
+    font-size: 13px;
   }
   
-  #detail-view-add-btn {
+  .detail-view-button {
     margin-top: 2em;
   }
   
   .detail-view-right {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding-bottom: 2em;
   }
   
   .detail-view-image {
@@ -195,7 +283,71 @@
     height: 450px;
     margin-bottom: 0;
     padding-bottom: 0;
+    margin-top: -6em; /* Negative Margin nach obe.*/
+
   }
+
+  #detail-view-titel{
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: sans-serif;
+    margin-bottom: 20px;
+  }
+
+  #detail-view-grape{
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+
+  .add-to-favorite-container{
+    align-items: center;;
+    padding-top: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+    /* Kommentarbereich */
+  .detail-view-comment-container {
+    width: 80%;
+    padding: 1em;
+    border-radius: 15px;
+    margin-top: 2em; 
+  }
+
+  /* Kommentare */
+  .comment {
+    background-color: white;
+    border-radius: 15px;
+    padding: 1em;
+    margin-bottom: 1em;
+  }
+
+  .comment-content {
+    color: black;
+  }
+
+  /* Eingabefeld */
+  .comment-input-container {
+    align-items: center;
+    border-top: 1px solid #0202027e;
+    padding-top: 1em;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comment-input-container input {
+    padding: 1em;
+    border-radius: 15px;
+    border: 1px solid #1110107c;
+    width:90%;
+  }
+
+
   
   </style>
   
