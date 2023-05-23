@@ -5,7 +5,8 @@
         <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
         <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
         <button @click="filterWines('Rosé')" class="button">Rosé</button>
-        <button @click="filterWines('all')" class="button">Für dich</button>
+        <button v-if="hasStoredPreferences" @click="filterWines('all')" class="button">Für dich</button>
+        <button v-else @click="pushToTasteprofile()" class="button">Individuell</button>
       </div>
       <div class="inputrow">
         <input type="text" class="search-input" @input="onSearchInput">
@@ -87,7 +88,16 @@ computed: {
       wine.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
       wine.winetype.toLowerCase().includes(this.searchText.toLowerCase())
     );
-  }
+  },
+
+  hasStoredPreferences() {
+    const savedPreferences = localStorage.getItem('preferences');
+    if (savedPreferences) {
+      return true;
+    } else {
+      return false;
+    }
+  },
 },
 methods: {
 
@@ -126,8 +136,34 @@ methods: {
   toggleDetailViewWine(wine) {
     this.selectedWine = wine;
     this.showDetailWineView = !this.showDetailWineView;
-  }
+  },
 
+  pushToTasteprofile() {
+    this.$router.push('Tasteprofile/Sweet');
+  },
+
+  calc() {
+    this.wines.forEach(wine => wine.matchedAttributes = []);
+    var match = 0;
+    for (var j = 0; j < this.wines.length; j++) {
+      for (var x = 0; x < this.wines[j].profile.length; x++) {
+        if (this.preferences) {
+          for (const [key, value] of Object.entries(this.preferences)) {
+            if (Boolean(value) && key === this.wines[j].profile[x]) {
+              match++;
+              this.wines[j].matchedAttributes.push(key);
+            }
+          }
+        }
+      }
+      if (match > 0) {
+        this.wines[j].rating = 100 + ((match - this.wines[j].profile.length) * 10);
+        //Berechnung anhand von Prozentsatz
+        //this.wines[j].rating = (match / this.wines[j].profile.length) * 100;
+      }
+      match = 0;
+    }
+  },
 },
 
 async created() {
@@ -135,21 +171,26 @@ async created() {
     const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
     //const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
     this.wines = WineDataResponse.data;
-    this.loading = false;
+    this.loading = false; 
+    if (this.wines.length > 0) {
+      this.calc();
+      } else {
+      console.log("Data in Array nicht bereit");
+    }
     const token = localStorage.getItem('jwt');
     if (token) {
       const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
       //const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          },
-        });
-        this.userData = userDataResponse.data;
+      headers: {
+        Authorization: `Bearer ${token}`,
+        },
+      });
+      this.userData = userDataResponse.data;
       }
-  } catch (error) {
-    console.error(error);
+    } catch (error) {
+      console.error(error);
+    }
   }
-}
 }
 </script>
 

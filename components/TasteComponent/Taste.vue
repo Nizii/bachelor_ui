@@ -5,7 +5,7 @@
       backgroundSize: 'cover', 
       backgroundPosition: 'center', 
       backgroundRepeat: 'no-repeat', 
-      height: '100vh', /* Hier wird die Höhe auf 100vh gesetzt */
+      height: '100vh', 
       margin: '0', 
       padding: '0'}"
     >
@@ -15,12 +15,12 @@
       <div class="block"></div>
       <div class="content-container">
         <div class="button-container">
-          <router-link :to="nextRoute" class="start-page-link red-button" @click="setPreference(preferenceKey, true)">
+          <button class="start-page-link red-button" @click="setPreferenceAndNavigate(preferenceKey, true)">
             Ja
-          </router-link>
-          <router-link :to="nextRoute" class="start-page-link red-button" @click="setPreference(preferenceKey, false)">
+          </button>        
+          <button class="start-page-link red-button" @click="setPreferenceAndNavigate(preferenceKey, false)">
             Nein
-          </router-link>
+          </button>  
         </div>
       </div>
     </div>
@@ -28,66 +28,67 @@
 </template>
 
   
-  <script>
-  import AppHeader from '~/components/Titles/AppHeader.vue';
-  import TitleBig from '~/components/Titles/TitleBig.vue';
-  
-  export default {
-    name: 'Taste',
-    components: {
-      AppHeader,
-      TitleBig,
-    },
-    props: {
-      title: {
-        type: String,
-        required: true
-      },
-      nextRoute: {
-        type: String,
-        required: true
-      },
-      preferenceKey: {
-        type: String,
-        required: true
-      },
-      bgImage: {
-        type: String,
-        required: true
-      }
-    },
-    data() {
-      return {
-        preferences: {
-          suss: false,
-          sauer: false,
-          intensiv: false,
-          mild: false,
-          fruchtig: false,
-          erdig: false,
-        },
-      }
-    },
-    methods: {
-      setPreference(preference, value) {
-        console.log("P: "+preference+" V: "+value)
-        this.preferences[preference] = value;
-        localStorage.setItem('preferences', JSON.stringify(this.preferences)); // Speichern der aktualisierten Präferenzen im LocalStorage
-      }
-    },
-    created() {
-      const storedPreferences = localStorage.getItem('preferences');
-      if (storedPreferences) {
-        this.preferences = JSON.parse(storedPreferences);
-      } else {
-        localStorage.setItem('preferences', JSON.stringify(this.preferences)); // Speichern der Standardpräferenzen im LocalStorage, falls sie noch nicht vorhanden sind
-      }
-}
+<script>
+import AppHeader from '~/components/Titles/AppHeader.vue';
+import TitleBig from '~/components/Titles/TitleBig.vue';
 
+export default {
+  name: 'Taste',
+  components: {
+    AppHeader,
+    TitleBig,
+  },
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    nextRoute: {
+      type: String,
+      required: true
+    },
+    preferenceKey: {
+      type: String,
+      required: true
+    },
+    bgImage: {
+      type: String,
+      required: true
+    }
+  },
+  data() {
+    return {
+      preferences: {
+        suss: false,
+        sauer: false,
+        intensiv: false,
+        mild: false,
+        fruchtig: false,
+        erdig: false,
+      },
+    }
+  },
+
+  methods: {
+    setPreferenceAndNavigate(preference, value) {
+      this.preferences[preference] = value;
+      localStorage.setItem('preferences', JSON.stringify(this.preferences));
+      this.$router.push(this.nextRoute);
+    }
+  },
+
+  created() {
+    const storedPreferences = localStorage.getItem('preferences');
+    if (storedPreferences) {
+      this.preferences = JSON.parse(storedPreferences);
+    } else {
+      localStorage.setItem('preferences', JSON.stringify(this.preferences)); 
+    }
   }
-  </script>
-  
-  <style>
+}
+</script>
+
+<style>
   
   .button-container{
     display: flex;
@@ -131,8 +132,7 @@
     margin-right: 30px;
     overflow: auto;
   }
-  
-  
+   
   .start-page-link {
     font-family: sans-serif;
     margin-top: 15px;
@@ -147,8 +147,7 @@
     padding: 10px 20px;
     text-decoration: none; 
   }
-  
-  
+   
   .AppHeader {
     text-align: center;
   }
