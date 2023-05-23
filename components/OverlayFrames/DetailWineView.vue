@@ -62,8 +62,9 @@
         <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">Kommentiere</button>
       </div>
       <div v-else>
-        <p>Du musst eingeloggt sein, um einen Kommentar abzugeben. 
-          <a @click="openPopup">Erstelle ein Profil</a>
+        <p>Registriere dich und kommentiere!!!. 
+          <br>
+          <router-link to="/Login"><b>Klick hier</b></router-link>
         </p>
       </div>
     </div>
@@ -211,6 +212,7 @@
     padding-left: 2em;
     padding-right: 1em;
     padding-top: 0em;
+    padding-bottom: 3em;
   }
 
   .background-overlay {
