@@ -49,8 +49,6 @@ export default {
   data() {
     return {
       preferences: {
-        weisswein: false,
-        rotwein: false,
         suss: false,
         sauer: false,
         intensiv: false,
@@ -58,8 +56,6 @@ export default {
         fruchtig: false,
         erdig: false,
       },
-      useSliders: false,
-      showPopup: false,
     }
   },
 

@@ -4,14 +4,13 @@
     <div class="overlay-frame" :class="{ open: frameOpen }">
       <div class="frame-header">
         <div></div>
-        <TitleOverlay :title="Merkliste" />
+        <TitleOverlay title="Merkliste" />
         <button class="close-button" @click="closeOverlay">
-          <img :src="require('@/icons/buttons/close.png')" class="icon-small" alt="Bookmark icon" />
-        </button>
+          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         </button>
       </div>
       <div class="wine-container" v-for="(wine, index) in bookmarkedWines" :key="index">
         <button id="bookmarks-delete-button" @click="removeFromBookmarks(index)">
-          <img :src="require('@/icons/buttons/close.png')" class="icon-small" alt="Bookmark icon" />
+          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         </button>
         </button>
         <WineInfo :wine="wine"/>
       </div>
@@ -59,7 +58,7 @@
   };
   </script>
   
-  <style scoped>
+  <style>
   #overwritingParent{
     margin-left: 0; 
   }

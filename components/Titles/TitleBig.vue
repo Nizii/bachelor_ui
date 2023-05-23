@@ -1,5 +1,5 @@
 <template>
-  <div class="big-bold-white-title">
+  <div class="big-bold-white-title" :style="{ fontSize: fontSize + 'px' }">
       {{title}}
   </div>
 </template>
@@ -11,14 +11,19 @@ export default {
       type: String,
       required: true,
     },
+    fontSize: {
+      type: Number,
+      required: false,
+      default: 20, 
+    },
   },
 };
 </script>
 
 <style scoped>
 .big-bold-white-title {
+  /*color: #FF69B4;*/
   color: white;
-  font-size: 25px;
   font-weight: bold;
   font-family: sans-serif;
 }

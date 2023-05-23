@@ -15,7 +15,7 @@
   };
   </script>
   
-  <style scoped>
+  <style>
   .overlay-title{
     color: black;
     font-size: 25px;
