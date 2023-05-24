@@ -89,7 +89,7 @@ export default {
     },
 
     navigateTo(route, input) {
-      if(this.isProfile) this.$emit('toggle-login');
+      if(this.isProfile) this.$emit('toggle-profilen');
       if(this.isBookmark) this.$emit('toggle-Bookmark-Overlay');
       this.$emit('reset-filters');
       this.toggleMenuButtons(input);
@@ -98,7 +98,7 @@ export default {
 
     toggleBookmarkOverlay(input) {
       if(this.isBookmark) return;
-      if(this.isProfile) this.$emit('toggle-login');
+      if(this.isProfile) this.$emit('toggle-profile');
       this.toggleMenuButtons(input);
       this.frameOpen = true;
       setTimeout(() => {
@@ -107,10 +107,14 @@ export default {
     },
 
     openLogin(input) {
-      if(this.isProfile) return;
+      if(!this.isLoggedIn()){
+        console.log("Not Logged in");
+        this.$emit('toggle-login');
+      }
       if(this.isBookmark) this.$emit('toggle-Bookmark-Overlay');
       this.toggleMenuButtons(input);
-      this.$emit('toggle-login');
+      console.log("Yes Logged in");
+      this.$emit('toggle-profile');
     },
 
     logout() {

@@ -96,7 +96,7 @@ export default {
           });
 
           localStorage.setItem('jwt', response.data.token);
-          this.$router.push('/profile');
+          this.$emit('login-succeed');
         } catch (error) {
           console.error(error);
         }
@@ -114,7 +114,7 @@ export default {
             password: this.password
           });
           localStorage.setItem('jwt', response.data.token);
-          this.$router.push('/profile');
+          this.$emit('login-succeed');
         } catch (error) {
           console.error(error);
         }

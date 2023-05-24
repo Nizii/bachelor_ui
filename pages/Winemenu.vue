@@ -1,6 +1,7 @@
 <template>
   <div class="main-container" style="margin: 0; padding: 0; box-sizing: border-box;">
-      <Login v-if="showLogin"/>
+      <Profile v-if="showProfile"/>
+      <Login v-else-if ="showLogin" @login-succeed="navigateToProfile()" />
       <div v-else>
         <div class="top-section">
           <div class="button-group">
@@ -63,6 +64,7 @@
       <BottomTabbar 
         @toggle-Bookmark-Overlay="toggleShowBookmarksOverlay" 
         @close-bookmark-frame="closeBookmarkFrame" 
+        @toggle-profile="toggleShowProfile" 
         @toggle-login="toggleShowLogin" 
         @reset-filters="resetFilters"
         ref="bottomTabbar" />
@@ -79,6 +81,7 @@ import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
 import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
 import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
 import Login from '~/components/Login.vue';
+import Profile from '~/components/Profile.vue';
 
 
 export default {
@@ -91,6 +94,7 @@ components: {
   DetailWineView,
   BottomTabbar,
   Login,
+  Profile,
 },
 data() {
   return {
@@ -98,6 +102,7 @@ data() {
     wines: [],
     searchText: '',
     showFoodOverlay: false,
+    showProfile: false,
     showLogin: false,
     showBookmarksOverlay: false,
     userData: null,
@@ -173,6 +178,15 @@ methods: {
 
   toggleShowFoodOverlay() {
     this.showFoodOverlay = !this.showFoodOverlay;
+  },
+
+  toggleShowProfile() {
+    this.showProfile = !this.showProfile;
+  },
+
+  navigateToProfile() {
+    this.showProfile = !this.showProfile;
+    this.showLogin = !this.showLogin;
   },
 
   toggleShowLogin() {
