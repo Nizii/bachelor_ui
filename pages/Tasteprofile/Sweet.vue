@@ -9,10 +9,11 @@
 
 <script>
 import Taste from '~/components/TasteComponent/Taste.vue';
+import InfoPopUp from '~/components/InfoPopup.vue';
 
 export default {
   components: {
-    Taste
+    Taste,
   },
 }
 </script>

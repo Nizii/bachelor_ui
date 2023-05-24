@@ -1,34 +1,35 @@
-<!-- InfoPopup.vue -->
 <template>
   <div v-if="show" class="popup">
     <div class="popup-content">
-      <button class="close-popup" @click="$emit('close')">X</button>
-      <div class="popup-text">
+      <button class="close-popup" @click="$emit('close')">
+        <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
+      </button>
+      <div class="popup-text" v-if="infoKey === 'suss'">
         <span class="popup-tag">Süss:</span>
         <br>
         <p class="infotxt">Schmeckt der Wein angenehm süß und zeigt deutliche Aromen von Zucker, Honig oder kandierten Früchten, die den Gaumen betören?</p>
       </div>
-      <div class="popup-text">
+      <div class="popup-text" v-if="infoKey === 'sauer'">
         <span class="popup-tag">Sauer:</span>
         <br>
         <p class="infotxt">Wein eine ausgeprägte Säure, die sich durch erfrischende und lebhafte Zitrus- oder grüne Fruchtnoten bemerkbar macht und den Gaumen anregt?</p>
       </div>
-      <div class="popup-text">
+      <div class="popup-text" v-if="infoKey === 'intensiv'">
         <span class="popup-tag">Intensiv:</span>
         <br>
         <p class="infotxt">Hat der Wein ein intensives Geruchsbouquet oder muss ich das Glas mehrmals schwenken, bis ich etwas wahrnehme?</p>
       </div>
-      <div class="popup-text">
+      <div class="popup-text" v-if="infoKey === 'mild'">
         <span class="popup-tag">Mild:</span>
         <br>
         <p class="infotxt">Ist der Wein sanft und zurückhaltend im Geruch, sodass er einen leichten und unaufdringlichen Eindruck hinterlässt?</p>
       </div>
-      <div class="popup-text">
+      <div class="popup-text" v-if="infoKey === 'fruchtig'">
         <span class="popup-tag">Fruchtig:</span>
         <br>
         <p class="infotxt">Besitzt der Wein ausgeprägte fruchtige Aromen, wie z.B. Beeren, Zitrusfrüchte oder tropische Früchte, die sofort ins Auge fallen?</p>
       </div>
-      <div class="popup-text">
+      <div class="popup-text" v-if="infoKey === 'erdig'">
         <span class="popup-tag">Erdig:</span>
         <br>
         <p class="infotxt">Nimmt man beim Riechen und Schmecken des Weins erdige Nuancen wahr, wie etwa mineralische, pilzartige oder waldbodenähnliche Noten?</p>
@@ -44,6 +45,10 @@ export default {
       type: Boolean,
       required: true,
     },
+    infoKey: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>
@@ -53,17 +58,6 @@ export default {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: hsl(0, 45%, 29%);
-  color:#fff;
-  border: 1px solid #aaa;
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 10px;
-  cursor: pointer;
-  user-select: none;
-  height: 30px;
-  width: 30px;
-  font-size: 15px;
 }
 
 .popup {

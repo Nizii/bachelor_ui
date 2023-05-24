@@ -9,6 +9,11 @@
       margin: '0', 
       padding: '0'}"
     >
+      <div class="info-container">
+        <button class="start-page-link red-button" @click="openPopup(preferenceKey)">
+          Hilfe
+        </button>  
+      </div>
       <div class="block">
         <TitleBig :title="title" :fontSize="30" />
       </div>
@@ -23,20 +28,21 @@
           </button>  
         </div>
       </div>
+      <InfoPopUp v-if="showInfo" :infoKey="preferenceKey" :show="showInfo" @close="showInfo = false"/>
     </div>
   </div>
 </template>
-
   
 <script>
 import AppHeader from '~/components/Titles/AppHeader.vue';
 import TitleBig from '~/components/Titles/TitleBig.vue';
+import InfoPopUp from '~/components/InfoPopup.vue';
 
 export default {
   name: 'Taste',
   components: {
-    AppHeader,
     TitleBig,
+    InfoPopUp,
   },
   props: {
     title: {
@@ -58,6 +64,7 @@ export default {
   },
   data() {
     return {
+      showInfo: false,
       preferences: {
         suss: false,
         sauer: false,
@@ -74,6 +81,10 @@ export default {
       this.preferences[preference] = value;
       localStorage.setItem('preferences', JSON.stringify(this.preferences));
       this.$router.push(this.nextRoute);
+    }, 
+
+    openPopup() {
+      this.showInfo = true;
     }
   },
 
@@ -89,6 +100,10 @@ export default {
 </script>
 
 <style>
+
+  .info-container{
+    
+  }
   
   .button-container{
     display: flex;
@@ -105,9 +120,6 @@ export default {
   }
   
   .start-page-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: left;
     height: 100%;
@@ -131,6 +143,7 @@ export default {
     margin-left: 30px;
     margin-right: 30px;
     overflow: auto;
+    text-align: center;
   }
    
   .start-page-link {
