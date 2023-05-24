@@ -57,6 +57,13 @@
         <img class="detail-view-image" :src="wine.link"/>
       </div>
     </div>
+
+    <div class="line-1"></div>
+
+    <TasteInfo :background-color="getBackgroundColor()" @get-background-color="getBackgroundColor"/>
+
+    <div class="line-2"></div>
+
     <div class="detail-view-comment-container" :style="{ backgroundColor: getBackgroundColor() }">
       <p id="detail-view-titel">Kommentare</p>
       <div class="comment" v-for="(comment, index) in wine.comments" :key="index">
@@ -80,8 +87,14 @@
 </template>
   
   <script>
+  import TasteInfo from '~/components/TasteComponent/TasteInfo.vue';
+
   export default {
     name: 'DetailWineView',
+    components: {
+      TasteInfo,
+    },
+
     props: {
       wine: {
         type: Object,
@@ -239,10 +252,8 @@
     transition:transform 0.5s;
     transform: translateY(100%);
     overflow-y: auto;
-    padding-left: 2em;
+    padding-left: 1em;
     padding-right: 1em;
-    padding-top: 0em;
-    padding-bottom: 6em;   
   }
 
   .background-overlay {
@@ -269,14 +280,13 @@
   }
   
   .detail-view-header {
-    width: 100%;
+    width: 90%;
     margin-top: 30px;
   }
   
   .detail-view-main-container {
     display: flex;
-    border-bottom: 1px solid black;
-    margin: 1em 0;
+    width: 90%;
   }
   
   .detail-view-left,
@@ -348,6 +358,7 @@
     padding: 1em;
     border-radius: 15px;
     margin-top: 2em; 
+    margin-bottom: 4em;
   }
 
   /* Kommentare */
@@ -379,7 +390,19 @@
     width:90%;
   }
 
+  .line-1{
+    border-bottom: 1px solid black;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 90%;
+  }
 
+  .line-2{
+    border-bottom: 1px solid black;
+    margin-top: 3em;
+    margin-bottom: 1em;
+    width: 90%;
+  }
   
   </style>
   

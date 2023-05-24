@@ -28,7 +28,7 @@
           </button>  
         </div>
       </div>
-      <InfoPopUp v-if="showInfo" :infoKey="preferenceKey" :show="showInfo" @close="showInfo = false"/>
+      <TasteInfoPopup v-if="showInfo" :infoKey="preferenceKey" :show="showInfo" @close="showInfo = false"/>
     </div>
   </div>
 </template>
@@ -36,13 +36,13 @@
 <script>
 import AppHeader from '~/components/Titles/AppHeader.vue';
 import TitleBig from '~/components/Titles/TitleBig.vue';
-import InfoPopUp from '~/components/InfoPopup.vue';
+import TasteInfoPopup from '~/components/TasteComponent/TasteInfoPopup.vue';
 
 export default {
   name: 'Taste',
   components: {
     TitleBig,
-    InfoPopUp,
+    TasteInfoPopup,
   },
   props: {
     title: {

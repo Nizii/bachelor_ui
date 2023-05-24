@@ -81,6 +81,8 @@
     /* Hier wird die Overlay Animation gemacht*/
     transition:transform 0.5s;
     transform: translateY(100%);
+    padding-left: 2em;
+    padding-right: 1em;
   }
 
   .background-overlay {
