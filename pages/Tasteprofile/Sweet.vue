@@ -3,7 +3,7 @@
     title="Magst du deinen Wein süss?" 
     nextRoute="/Tasteprofile/Sour"
     preferenceKey="suss"
-    bgImage="/dessert.jpg"
+    bgImage="/background/dessert.jpg"
   />
 </template>
 

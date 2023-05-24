@@ -3,7 +3,7 @@
     title="Magst du deinen Wein erdig?" 
     nextRoute="/Winemenu"
     preferenceKey="erdig"
-    bgImage="/holz.jpg"
+    bgImage="/background/holz.jpg"
   />
 </template>
 

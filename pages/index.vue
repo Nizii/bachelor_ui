@@ -31,7 +31,7 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-  background-image: url("/glaswein.jpg");
+  background-image: url("/background/glaswein.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

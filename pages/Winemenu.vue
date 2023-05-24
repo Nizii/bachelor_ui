@@ -257,7 +257,7 @@ async created() {
 body, html {
   margin: 0;
   padding: 0;
-  background-image: url("/weinfleck rot.png");
+  background-image: url("/background/weinfleck rot.png");
   background-position: center;
   background-repeat: repeat-y;
   background-attachment: scroll; 

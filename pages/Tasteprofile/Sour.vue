@@ -3,7 +3,7 @@
     title="Magst du deinen Wein sauer?" 
     nextRoute="/Tasteprofile/Mild"
     preferenceKey="sauer"
-    bgImage="/gurken.jpg"
+    bgImage="/background/gurken.jpg"
   />
 </template>
 

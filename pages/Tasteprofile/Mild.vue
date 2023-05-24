@@ -3,7 +3,7 @@
     title="Magst du deinen Wein mild?" 
     nextRoute="/Tasteprofile/Intensive"
     preferenceKey="mild"
-    bgImage="/vanille.jpg"
+    bgImage="/background/vanille.jpg"
   />
 </template>
 

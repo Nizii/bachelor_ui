@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="background-overlay" v-if="frameOpen" />
-  <div class="overlay-frame" :class="{ open: frameOpen }" :style="{ backgroundImage: 'url(' + getBackgroundImage() + ')' }">
+  <div class="overlay-frame" :class="{ open: frameOpen }" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }">
     <div class="detail-view-header">
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>

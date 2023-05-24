@@ -3,7 +3,7 @@
     title="Magst du deinen Wein fruchtig?" 
     nextRoute="/Tasteprofile/Earthy"
     preferenceKey="fruchtig"
-    bgImage="/steinfrucht.jpg"
+    bgImage="/background/steinfrucht.jpg"
   />
 </template>
 

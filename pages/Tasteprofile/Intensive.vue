@@ -3,7 +3,7 @@
     title="Magst du deinen Wein intensiv?" 
     nextRoute="/Tasteprofile/Fruity"
     preferenceKey="intensiv"
-    bgImage="/beeren.jpg"
+    bgImage="/background/beeren.jpg"
   />
 </template>
 
