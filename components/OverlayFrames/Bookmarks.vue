@@ -1,18 +1,16 @@
 <template>
-  <div>
+  <div style="margin: 0; padding: 0; box-sizing: border-box;">
     <div class="background-overlay" v-if="frameOpen" />
     <div class="overlay-frame" :class="{ open: frameOpen }">
       <div class="frame-header">
         <div></div>
         <TitleOverlay title="Merkliste" />
         <button class="close-button" @click="closeOverlay">
-          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         </button>
+          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         
+        </button>
       </div>
       <div class="wine-container" v-for="(wine, index) in bookmarkedWines" :key="index">
-        <button id="bookmarks-delete-button" @click="removeFromBookmarks(index)">
-          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         </button>
-        </button>
-        <WineInfo :wine="wine"/>
+        <WineInfo :wine="wine" :isBookmark="true" @remove-wine-element="removeFromBookmarks(index)" />
       </div>
     </div>
   </div>
@@ -40,6 +38,7 @@
       closeOverlay() {
         this.frameOpen = false;
         setTimeout(() => { this.$emit('close'); }, 300);
+        document.body.style.overflow = 'auto'; 
       },
 
       removeFromBookmarks(index) {
@@ -50,6 +49,7 @@
     },
 
     mounted() {
+      document.body.style.overflow = 'hidden'; 
       setTimeout(() => {
         this.frameOpen = true;
       }, 100); 
@@ -77,7 +77,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 95%;
+    height: 70%;
     background-color: white;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
@@ -110,8 +110,7 @@
   }
 
   .wine-container {
-    padding-left: 1em;
-    padding-right: 1em;
+
   }
   
   h2 {

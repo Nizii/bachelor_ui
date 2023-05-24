@@ -36,8 +36,12 @@
         </div>
       </div>
       <div class="wine_card_row3">
-        <button :class="favoriteButtonClass" @click.stop="toggleFavorite">
-          <img :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+        <button v-if="!isBookmark" @click.stop="addToBookmarks">
+          <img v-if="!isFavorite" :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+          <img v-else :src="require('@/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
+        </button>
+        <button v-else @click.stop="removeWineInBookmark">
+          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
         </button>
         <!--
         <div class="star-rating">
@@ -61,6 +65,8 @@
       return {
         rating: 0,
         selectedWine: null,
+        isFavorite: false,
+        bookmarkFrameIsOpen: false,
       }
     },
 
@@ -75,39 +81,21 @@
         type: Object,
         default: null,
       },
+      isBookmark: {
+        type: Boolean,
+        default: false,
+      },
     },
 
     computed: {
-      isFavorite() {
-        if (!this.isLoggedIn) {
-          return false;
-        }
-        return this.userData.favoriten.some((favorite) => favorite._id === this.wine._id);
-      },
-
       isLoggedIn() {
         return this.userData !== null;
       },
+    },
 
-      favoriteButtonClass() {
-        if (!this.isLoggedIn) {
-          return "add-favorite-button";
-        }
-        const isFavorite = this.userData.favoriten.some(
-          (favorite) => favorite._id === this.wine._id
-        );
-        return isFavorite ? "marked-favorite-button" : "add-favorite-button";
-      },
-
-      favoriteButtonText() {
-        if (!this.isLoggedIn) {
-          return "Favoriten";
-        }
-        const isFavorite = this.userData.favoriten.some(
-          (favorite) => favorite._id === this.wine._id
-        );
-        return isFavorite ? "Markiert" : "Favoriten";
-      },
+    created() {
+      const bookmarkedWines = JSON.parse(localStorage.getItem('bookmarkedWines')) || [];
+      this.isFavorite = bookmarkedWines.some(bookmarkedWine => bookmarkedWine._id === this.wine._id);
     },
 
     methods: {
@@ -121,25 +109,35 @@
           console.error(error);
         }
       },
+
+      removeWineInBookmark() {
+        this.$emit('remove-wine-element');
+      },
+
+      addToBookmarks() {
+        // Erhalte die aktuelle Liste der gemerkten Weine (oder eine leere Liste, wenn noch keine Weine gemerkt wurden)
+        const bookmarkedWines = JSON.parse(localStorage.getItem('bookmarkedWines')) || [];
+        // Überprüfe, ob der aktuelle Wein bereits gemerkt wurde
+        const alreadyBookmarked = bookmarkedWines.some(bookmarkedWine => bookmarkedWine._id === this.wine._id);
+        // Wenn der Wein noch nicht gemerkt wurde, wird der Wein hinzugefügt
+        if (!alreadyBookmarked) {
+          bookmarkedWines.push(this.wine);
+          localStorage.setItem('bookmarkedWines', JSON.stringify(bookmarkedWines));
+          this.isFavorite = true;
+        } else {
+          // Wenn der Wein bereits gemerkt wurde, wird er aus der Liste entfernt
+          const updatedBookmarkedWines = bookmarkedWines.filter(bookmarkedWine => bookmarkedWine._id !== this.wine._id);
+          localStorage.setItem('bookmarkedWines', JSON.stringify(updatedBookmarkedWines));
+          this.isFavorite = false;
+        }
+        this.$emit('bookmark-removed');
+      },
     
       openDetailView() {
         this.$emit('open-detail-view', this.wine);
       },
-      
-      async toggleFavorite() {
-        if (!this.isLoggedIn) {
-          //Alert("User muss sich einloggen");
-        return;
-        }
-
-        if (this.isFavorite) {
-          await this.deleteFavorites();
-        } else {
-          await this.addToFavorites();
-        }
-        this.updateFavoriteList(); 
-      },
-
+  
+/*
       updateFavoriteList() {
       if (this.isFavorite) {
         this.userData.favoriten = this.userData.favoriten.filter(
@@ -186,6 +184,7 @@
           console.error(error);
         }
       },
+      */
     },
   }
   </script>

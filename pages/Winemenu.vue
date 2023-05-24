@@ -1,48 +1,56 @@
 <template>
   <div class="main-container" style="margin: 0; padding: 0; box-sizing: border-box;">
-    <div class="top-section">
-      <div class="button-group">
-        <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
-        <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
-        <button @click="filterWines('Rosé')" class="button">Rosé</button>
-        <button v-if="hasStoredPreferences" @click="filterWines('all')" class="button">Für dich</button>
-        <button v-else @click="pushToTasteprofile()" class="button">Individuell</button>
+      <Login v-if="showLogin"/>
+      <div v-else>
+        <div class="top-section">
+          <div class="button-group">
+            <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
+            <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
+            <button @click="filterWines('Rosé')" class="button">Rosé</button>
+            <button v-if="hasStoredPreferences" @click="filterWines('all')" class="button">Für dich</button>
+            <button v-else @click="pushToTasteprofile()" class="button">Individuell</button>
+          </div>
+          <div class="inputrow">
+            <input type="text" class="search-input" @input="onSearchInput">
+            <button class="toggle-btn" @click="toggleShowFoodOverlay">
+              <img :src="require('@/icons/buttons/filter.png')" class="icon" alt="Bookmark icon" />
+            </button>
+          </div>
+        </div>
+        <div v-if="loading" style="text-align: center; margin: 20px;">
+          Loading...
+        </div>
+        <div v-else>
+          <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
+            <div v-if="wine.winetype === 'Weisswein'">
+              <WineInfo :wine="wine" :userData="userData" 
+              @open-detail-view="toggleDetailViewWine" 
+              @bookmark-removed="updateBookmarkedWinesCount" />    
+            </div>
+          </div>
+          <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
+            <div v-if="wine.winetype === 'Rotwein'">
+              <WineInfo :wine="wine" :userData="userData" 
+              @open-detail-view="toggleDetailViewWine"
+              @bookmark-removed="updateBookmarkedWinesCount" />      
+            </div>
+          </div>
+          <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
+            <div v-if="wine.winetype === 'Rosé'">
+              <WineInfo :wine="wine" :userData="userData" 
+              @open-detail-view="toggleDetailViewWine"
+              @bookmark-removed="updateBookmarkedWinesCount" /> 
+            </div>
+          </div>
+        </div>
+        <div class="bottom-placeholder">
+        </div>
+        <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" @open-detail-view="toggleDetailViewWine" :wines="wines" />
+        <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" ref="bookmark" @bookmark-removed="updateBookmarkedWinesCount" />
+        <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
       </div>
-      <div class="inputrow">
-        <input type="text" class="search-input" @input="onSearchInput">
-        <button class="toggle-btn" @click="toggleShowFoodOverlay">
-          <img :src="require('@/icons/buttons/filter.png')" class="icon" alt="Bookmark icon" />
-        </button>
-      </div>
-    </div>
-  <div v-if="loading" style="text-align: center; margin: 20px;">Loading...</div>
-  <div v-else>
-    <!--<WineHeader v-if="hasWineType('Weisswein')" title="Weissweine" />-->
-    <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
-      <div v-if="wine.winetype === 'Weisswein'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
-      </div>
-    </div>
-    <!--<WineHeader v-if="hasWineType('Rotwein')" title="Rotweine" />-->
-    <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
-      <div v-if="wine.winetype === 'Rotwein'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
-      </div>
-    </div>
-    <!--<WineHeader v-if="hasWineType('Rosé')" title="Rosé" />-->
-    <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
-      <div v-if="wine.winetype === 'Rosé'">
-        <WineInfo :wine="wine" :userData="userData" @open-detail-view="toggleDetailViewWine" />      
-      </div>
-    </div>
+      <BottomTabbar @toggle-Bookmark-Overlay="toggleShowBookmarksOverlay" ref="bottomTabbar" @close-bookmark-frame="closeBookmarkFrame" @toggle-login="toggleShowLogin"/>
   </div>
-  <div class="bottom-placeholder">
-  </div>
-  <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" @open-detail-view="toggleDetailViewWine" :wines="wines" />
-  <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" @bookmark-removed="updateBookmarkedWinesCount" />
-  <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" ref="bottomTabbar" />
-  <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
-</div>
 </template>
 
 
@@ -54,6 +62,7 @@ import Fillter from '~/components/OverlayFrames/Fillter.vue';
 import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
 import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
 import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
+import Login from '~/components/Login.vue';
 
 
 export default {
@@ -65,6 +74,7 @@ components: {
   Bookmarks,
   DetailWineView,
   BottomTabbar,
+  Login,
 },
 data() {
   return {
@@ -72,6 +82,7 @@ data() {
     wines: [],
     searchText: '',
     showFoodOverlay: false,
+    showLogin: false,
     showBookmarksOverlay: false,
     userData: null,
     selectedWine: null,
@@ -105,6 +116,12 @@ methods: {
     this.$refs.bottomTabbar.updateBookmarkedWinesCount();
   },
 
+  closeBookmarkFrame() {
+    if(this.showBookmarksOverlay){
+      this.$refs.bookmark.closeOverlay();
+    }
+  },
+
   onFavoriteUpdated() {
     this.loadWines(); 
   },
@@ -131,6 +148,10 @@ methods: {
 
   toggleShowFoodOverlay() {
     this.showFoodOverlay = !this.showFoodOverlay;
+  },
+
+  toggleShowLogin() {
+    this.showLogin = !this.showLogin;
   },
 
   toggleDetailViewWine(wine) {
@@ -164,6 +185,10 @@ methods: {
       match = 0;
     }
   },
+},
+
+mounted() {
+  this.$refs.bottomTabbar.toggleMenuButtons('Winemenu');
 },
 
 async created() {

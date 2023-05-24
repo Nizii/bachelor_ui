@@ -180,7 +180,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 95%;
+    height: 70%;
     background-color: white;
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;

@@ -44,8 +44,13 @@
         </p>
         <br>
         <p class="detail-view-description">{{wine.vinzer}}</p>
-        <div class="add-to-favorite-container" v-if="isLoggedIn">
-          <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToBookmarks">Zum Weinkeller hinzufügen</button>
+        <div class="add-to-favorite-container">
+          <button v-if="isLoggedIn" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
+            Zum Weinkeller hinzufügen
+          </button>
+          <button   v-else class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToBookmarks">
+            Zur Merkliste
+          </button>
         </div>
       </div>
       <div class="detail-view-right">
@@ -59,7 +64,9 @@
       </div>
       <div class="comment-input-container" v-if="isLoggedIn">
         <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
-        <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">Kommentiere</button>
+        <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">
+          Kommentiere
+        </button>
       </div>
       <div v-else>
         <p>Registriere dich und kommentiere!!!. 
@@ -153,6 +160,25 @@
         this.$emit('bookmark-removed');
         this.closeOverlay();
       },
+
+      addToWineCellar() {
+        // Erhalte die aktuelle Liste der Weine im Weinkeller (oder eine leere Liste, wenn noch keine Weine hinzugefügt wurden)
+        const wineCellar = JSON.parse(localStorage.getItem('wineCellar')) || [];
+        // Überprüfe, ob der aktuelle Wein bereits im Weinkeller ist
+        const alreadyAdded = wineCellar.some(wine => wine._id === this.wine._id);
+        // Wenn der Wein noch nicht im Weinkeller ist, wird er hinzugefügt
+        if (!alreadyAdded) {
+          wineCellar.push(this.wine);
+          localStorage.setItem('wineCellar', JSON.stringify(wineCellar));
+          this.isFavorite = true;
+        } else {
+          // Wenn der Wein bereits im Weinkeller ist, wird er entfernt
+          const updatedWineCellar = wineCellar.filter(wine => wine._id !== this.wine._id);
+          localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
+          this.isFavorite = false;
+        }
+      },
+
     },
 
     mounted(){
@@ -201,7 +227,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 85%;
+    height: 70%;
     background-color: white;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;

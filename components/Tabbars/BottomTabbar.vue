@@ -1,21 +1,24 @@
 <template>
   <div class="fixed-bottom-bar">
     <!-- Menü Button -->
-    <button @click="navigateTo('/Winemenu')" class="bottom-bar-link">
-      <img :src="require('@/icons/buttons/karte.png')" class="icon" alt="Menu icon" />
+    <button @click="navigateTo('/Winemenu', 'Winemenu')" class="bottom-bar-link">
+      <img v-if="!isWinemenu" :src="require('@/icons/buttons/karte.png')" class="icon" alt="Menu icon" />
+      <img v-else :src="require('@/icons/buttons/karte_an.png')" class="icon" alt="Menu icon" />
       <!--<span class="bottom-bar-label">Menü</span>-->
     </button>
 
     <!-- Merkliste Button -->
-    <button @click="openBookmarkOverlay" class="bottom-bar-link">
-      <img :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+    <button @click="toggleBookmarkOverlay('Bookmark')" class="bottom-bar-link">
+      <img v-if="!isBookmark" :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+      <img v-else :src="require('@/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
       <!--<span class="bottom-bar-label">Merkliste</span>-->
       <span v-if="bookmarkedWinesCount > 0" class="bookmark-badge">{{ bookmarkedWinesCount }}</span>
     </button>
 
     <!-- Profil Button -->
-    <button @click="navigateTo('/Login')" class="bottom-bar-link">
-      <img :src="require('@/icons/buttons/profil.png')" class="icon" alt="Profile icon" />
+    <button @click="openLogin('Profile')" class="bottom-bar-link">
+      <img v-if="!isProfile" :src="require('@/icons/buttons/profil.png')" class="icon" alt="Profile icon" />
+      <img v-else :src="require('@/icons/buttons/profil_an.png')" class="icon" alt="Profile icon" />
       <!--<span class="bottom-bar-label">Profil</span>-->
     </button>
   </div>
@@ -30,6 +33,9 @@ export default {
       activeTab: 'home',
       bookmarkedWinesCount: (JSON.parse(localStorage.getItem('bookmarkedWines')) || []).length,
       loggedIn: this.isLoggedIn(),
+      isWinemenu: false,
+      isBookmark: false,
+      isProfile: false, 
     }
   },
 
@@ -56,20 +62,54 @@ export default {
   },
 
   methods: {
+
+    toggleMenuButtons(input) {
+      switch(input) {
+        case 'Winemenu':
+          this.isWinemenu = true;
+          this.isBookmark = false;
+          this.isProfile = false;
+        break;
+        case 'Bookmark':
+          this.isWinemenu = false;
+          this.isBookmark = true;
+          this.isProfile = false;
+        break;
+        case 'Profile':
+          this.isWinemenu = false;
+          this.isBookmark = false;
+          this.isProfile = true;
+        break;
+      }
+    },
+
     // Aktualisiert die Anzahl gemerkter Weine
     updateBookmarkedWinesCount() {
       this.bookmarkedWinesCount = JSON.parse(localStorage.getItem('bookmarkedWines')).length;
     },
 
-    navigateTo(route) {
+    navigateTo(route, input) {
+      if(this.isProfile) this.$emit('toggle-login');
+      if(this.isBookmark) this.$emit('toggle-Bookmark-Overlay');
+      this.toggleMenuButtons(input);
       this.$router.push(route);
     },
 
-    openBookmarkOverlay() {
-        this.frameOpen = true;
-        setTimeout(() => {
-          this.$emit('openBookmarkOverlay');
-        }, 300);
+    toggleBookmarkOverlay(input) {
+      if(this.isBookmark) return;
+      if(this.isProfile) this.$emit('toggle-login');
+      this.toggleMenuButtons(input);
+      this.frameOpen = true;
+      setTimeout(() => {
+        this.$emit('toggle-Bookmark-Overlay');
+      }, 300);
+    },
+
+    openLogin(input) {
+      if(this.isProfile) return;
+      if(this.isBookmark) this.$emit('toggle-Bookmark-Overlay');
+      this.toggleMenuButtons(input);
+      this.$emit('toggle-login');
     },
 
     logout() {
@@ -124,6 +164,7 @@ export default {
   left: 0;
   width: 100%;
   height: 50px;
+  z-index: 1000;
 }
 
 .bottom-bar-link {

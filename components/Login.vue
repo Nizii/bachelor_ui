@@ -1,45 +1,40 @@
 <template>
-  <div style="margin: 0; padding: 0; box-sizing: border-box;">
-      <div class="login-container">
-        <div class="form-container">
-          <div v-if="!showRegister" class="form">
-          <WineHeader class="overrideMargin" title="Melde dich an!"/>
-            <form @submit.prevent="login">
-              <div class="input-container">
-                <input type="text" id="username" placeholder="Email" v-model="username" required>
-              </div>
-              <div class="input-container">
-                <input type="password" id="password" placeholder="Passwort" v-model="password" required>
-              </div>
-              <button type="submit">Anmelden</button>
-            </form>
-            <p>Noch keinen Account? <a href="#" @click="showRegister = true">Registrieren</a></p>
+  <div class="login-container">
+    <div class="form-container">
+      <div v-if="!showRegister" class="form">
+      <WineHeader class="overrideMargin" title="Melde dich an!"/>
+        <form @submit.prevent="login">
+          <div class="input-container">
+            <input type="text" id="username" placeholder="Email" v-model="username" required>
           </div>
-          <div v-if="showRegister" class="form">
-            <WineHeader class="overrideMargin" title="Erstelle ein Profil!"/>
-            <form @submit.prevent="register">
-              <div class="input-container">
-                <input type="text" id="username" placeholder="Email" v-model="username" required>
-              </div>
-              <div class="input-container">
-                <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="4" required>
-              </div>
-              <div class="input-container">
-                <input type="password" id="password" placeholder="Passwort" v-model="confirmPassword" minlength="4" required>
-              </div>
-              <button type="submit">Registrieren</button>
-            </form>
-            <p>Bereits einen Account? <a href="#" @click="showRegister = false">Anmelden</a></p>
+          <div class="input-container">
+            <input type="password" id="password" placeholder="Passwort" v-model="password" required>
           </div>
-        </div>
+          <button type="submit">Anmelden</button>
+        </form>
+        <p>Noch keinen Account? <a href="#" @click="showRegister = true">Registrieren</a></p>
       </div>
-      <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
-      <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" ref@bookmark-removed="updateBookmarkedWinesCount" />
-      <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" ref="bottomTabbar" />
-      <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
+      <div v-if="showRegister" class="form">
+        <WineHeader class="overrideMargin" title="Erstelle ein Profil!"/>
+        <form @submit.prevent="register">
+          <div class="input-container">
+            <input type="text" id="username" placeholder="Email" v-model="username" required>
+          </div>
+          <div class="input-container">
+            <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="4" required>
+          </div>
+          <div class="input-container">
+            <input type="password" id="password" placeholder="Passwort" v-model="confirmPassword" minlength="4" required>
+          </div>
+          <button type="submit">Registrieren</button>
+        </form>
+        <p>Bereits einen Account? <a href="#" @click="showRegister = false">Anmelden</a></p>
+      </div>
     </div>
+  </div>
 </template>
-  
+
+
 <script>
 import AppHeader from '~/components/Titles/AppHeader.vue';
 import WineInfo from '~/components/WineInfo.vue';
