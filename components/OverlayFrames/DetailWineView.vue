@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="background-overlay" v-if="frameOpen" />
-  <div class="overlay-frame" :class="{ open: frameOpen }">
+  <div class="overlay-frame" :class="{ open: frameOpen }" :style="{ backgroundImage: 'url(' + getBackgroundImage() + ')' }">
     <div class="detail-view-header">
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
@@ -142,6 +142,18 @@
           return 'white';
         }
       },
+
+      getBackgroundImage() {
+        if (this.wine.winetype === 'Weisswein') {
+          return '/weinflecke_weiss.png';
+        } else if (this.wine.winetype === 'Rotwein') {
+          return '/weinflecke_rot.png';
+        } else if (this.wine.winetype === 'Rose') {
+          return '/weinflecke_rose.png';
+        } else {
+          return '/weinflecke_weiss.png'; 
+        }
+      },
       
       openPopup() {
 
@@ -223,14 +235,6 @@
   }
 
   .overlay-frame {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70%;
-    background-color: white;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
     z-index: 1000;
     transition:transform 0.5s;
     transform: translateY(100%);
@@ -238,7 +242,7 @@
     padding-left: 2em;
     padding-right: 1em;
     padding-top: 0em;
-    padding-bottom: 3em;
+    padding-bottom: 6em;   
   }
 
   .background-overlay {

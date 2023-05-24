@@ -135,9 +135,10 @@ export default {
    
   .start-page-link {
     font-family: sans-serif;
-    margin-top: 15px;
     color: white;
     text-align: center;
+    margin:20px;
+    width: 70px;
   }
   
   .red-button {

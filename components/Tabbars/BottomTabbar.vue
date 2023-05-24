@@ -91,6 +91,7 @@ export default {
     navigateTo(route, input) {
       if(this.isProfile) this.$emit('toggle-login');
       if(this.isBookmark) this.$emit('toggle-Bookmark-Overlay');
+      this.$emit('reset-filters');
       this.toggleMenuButtons(input);
       this.$router.push(route);
     },

@@ -11,14 +11,7 @@
       </button>
     </div>
       
-    <div class="button-group-overlay">
-      <button @click="openTab('food')" class=".button-overlay">Essen
-        <!--<img :src="require('@/icons/buttons/nahrung.png')" class="icon-small" alt="Bookmark icon" />-->
-      </button>
-      <button @click="openTab('nation')" class=".button-overlay">Land</button>
-      <button @click="openTab('grape')" class=".button-overlay">Traube</button>
-      <button @click="openTab('character')" class=".button-overlay">Charakter</button>
-    </div>
+    <MainFillterTabbar @fillter="openTab"/>
 
     <FoodTabbar v-if="currentTab === 'food'" @show-wines="showWinesForFood" />
     <NationTabbar v-if="currentTab === 'nation'" @show-wines="showWinesForNation" />
@@ -43,6 +36,7 @@
   </template>
   
   <script>
+  import MainFillterTabbar from '~/components/Tabbars/MainFillterTabbar.vue';
   import FoodTabbar from '~/components/Tabbars/FoodTabbar.vue';
   import NationTabbar from '~/components/Tabbars/NationTabbar.vue';
   import GrapeTabbar from '~/components/Tabbars/GrapeTabbar.vue';
@@ -59,6 +53,7 @@
       GrapeTabbar,
       TitleOverlay,
       WineInfo,
+      MainFillterTabbar,
     },
 
     props: {
@@ -114,6 +109,7 @@
       },
 
       openTab(tabName) {
+        console.log("Tabname " + tabName);
         this.currentTab = tabName;
         this.selectedTag = '';
         this.filterWines();
@@ -176,21 +172,18 @@
   }
 
   .overlay-frame {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70%;
-    background-color: white;
-    border-top-left-radius: 16px;
-    border-top-right-radius: 16px;
     z-index: 999;
     /* Hier wird die Overlay Animation gemacht*/
     transition:transform 0.5s;
     transform: translateY(100%);
     overflow-y: auto;
-
+    padding-bottom: 3em;
+    background-image: url("/weinflecke_rose.png");
+    background-position: center 300px;
+    background-repeat: repeat-y;
+    background-attachment: scroll; 
   }
+  
 
   .background-overlay {
     position: fixed;

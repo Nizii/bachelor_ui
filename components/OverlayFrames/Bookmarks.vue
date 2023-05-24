@@ -39,6 +39,7 @@
         this.frameOpen = false;
         setTimeout(() => { this.$emit('close'); }, 300);
         document.body.style.overflow = 'auto'; 
+        this.$emit('close-button-pressed');
       },
 
       removeFromBookmarks(index) {
@@ -59,6 +60,9 @@
   </script>
   
   <style>
+
+  @import "@/CSS/shared-overlay-styles.css";
+
   #overwritingParent{
     margin-left: 0; 
   }
@@ -73,14 +77,6 @@
   }
 
   .overlay-frame {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70%;
-    background-color: white;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
     z-index: 1000;
     /* Hier wird die Overlay Animation gemacht*/
     transition:transform 0.5s;

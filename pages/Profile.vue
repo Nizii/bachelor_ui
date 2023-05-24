@@ -23,9 +23,24 @@
     </div>
     <WineHeader title="Statistiken" />
     <img class="wine-image" src="/stat.jpg" alt="Weinbild" width="200px" height="160px" margin="20px"/>
-    <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" :wines="wines" />
-    <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" @bookmark-removed="updateBookmarkedWinesCount" />
-    <BottomTabbar @openBookmarkOverlay="toggleShowBookmarksOverlay" ref="bottomTabbar" />
+
+    <Fillter v-if="showFoodOverlay" 
+      @close="toggleShowFoodOverlay" 
+      @open-detail-view="toggleDetailViewWine" :wines="wines" />
+
+    <Bookmarks v-if="showBookmarksOverlay" 
+      @close="toggleShowBookmarksOverlay" 
+      @close-button-pressed="closeBookmarkPressed"
+      @bookmark-removed="updateBookmarkedWinesCount"
+      ref="bookmark" />
+    
+    <BottomTabbar 
+      @toggle-Bookmark-Overlay="toggleShowBookmarksOverlay" 
+      @close-bookmark-frame="closeBookmarkFrame" 
+      @toggle-login="toggleShowLogin" 
+      @reset-filters="resetFilters"
+      ref="bottomTabbar" />
+
     <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
   </div>
 </template>

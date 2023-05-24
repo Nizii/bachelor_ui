@@ -7,8 +7,7 @@
             <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
             <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
             <button @click="filterWines('Rosé')" class="button">Rosé</button>
-            <button v-if="hasStoredPreferences" @click="filterWines('all')" class="button">Für dich</button>
-            <button v-else @click="pushToTasteprofile()" class="button">Individuell</button>
+            <button @click="pushToTasteprofile()" class="button">Your Taste</button>
           </div>
           <div class="inputrow">
             <input type="text" class="search-input" @input="onSearchInput">
@@ -45,11 +44,28 @@
         </div>
         <div class="bottom-placeholder">
         </div>
-        <Fillter v-if="showFoodOverlay" @close="toggleShowFoodOverlay" @open-detail-view="toggleDetailViewWine" :wines="wines" />
-        <Bookmarks v-if="showBookmarksOverlay" @close="toggleShowBookmarksOverlay" ref="bookmark" @bookmark-removed="updateBookmarkedWinesCount" />
-        <DetailWineView v-if="showDetailWineView" :wine="selectedWine" @close="toggleDetailViewWine" @bookmark-removed="updateBookmarkedWinesCount" />
+
+        <Fillter v-if="showFoodOverlay" 
+          @close="toggleShowFoodOverlay" 
+          @open-detail-view="toggleDetailViewWine" :wines="wines" />
+
+        <Bookmarks v-if="showBookmarksOverlay" 
+          @close="toggleShowBookmarksOverlay" 
+          @close-button-pressed="closeBookmarkPressed"
+          @bookmark-removed="updateBookmarkedWinesCount"
+          ref="bookmark" />
+
+        <DetailWineView v-if="showDetailWineView" :wine="selectedWine" 
+          @close="toggleDetailViewWine" 
+          @bookmark-removed="updateBookmarkedWinesCount" />
+
       </div>
-      <BottomTabbar @toggle-Bookmark-Overlay="toggleShowBookmarksOverlay" ref="bottomTabbar" @close-bookmark-frame="closeBookmarkFrame" @toggle-login="toggleShowLogin"/>
+      <BottomTabbar 
+        @toggle-Bookmark-Overlay="toggleShowBookmarksOverlay" 
+        @close-bookmark-frame="closeBookmarkFrame" 
+        @toggle-login="toggleShowLogin" 
+        @reset-filters="resetFilters"
+        ref="bottomTabbar" />
   </div>
 </template>
 
@@ -87,6 +103,8 @@ data() {
     userData: null,
     selectedWine: null,
     showDetailWineView: false,
+    matchedAttributes:[],
+    preferences: JSON.parse(localStorage.getItem('preferences')),
   }
 },
 computed: {
@@ -111,6 +129,9 @@ computed: {
   },
 },
 methods: {
+  resetFilters() {
+    this.searchText = '';
+  },
 
   updateBookmarkedWinesCount() {
     this.$refs.bottomTabbar.updateBookmarkedWinesCount();
@@ -146,6 +167,10 @@ methods: {
     this.showBookmarksOverlay = !this.showBookmarksOverlay;
   },
 
+  closeBookmarkPressed() {
+    this.$refs.bottomTabbar.toggleMenuButtons('Winemenu');
+  },
+
   toggleShowFoodOverlay() {
     this.showFoodOverlay = !this.showFoodOverlay;
   },
@@ -167,6 +192,7 @@ methods: {
     this.wines.forEach(wine => wine.matchedAttributes = []);
     var match = 0;
     for (var j = 0; j < this.wines.length; j++) {
+      console.log("Match "+match);
       for (var x = 0; x < this.wines[j].profile.length; x++) {
         if (this.preferences) {
           for (const [key, value] of Object.entries(this.preferences)) {
@@ -182,6 +208,12 @@ methods: {
         //Berechnung anhand von Prozentsatz
         //this.wines[j].rating = (match / this.wines[j].profile.length) * 100;
       }
+
+      if (this.wines[j].rating < 5) {
+        this.wines[j].rating = 0;
+        console.log("Müsste null  " + this.wines[j].rating);
+      }
+
       match = 0;
     }
   },
@@ -225,7 +257,10 @@ async created() {
 body, html {
   margin: 0;
   padding: 0;
-  background-image: none;
+  background-image: url("/weinfleck rot.png");
+  background-position: center;
+  background-repeat: repeat-y;
+  background-attachment: scroll; 
 }
 
 * {

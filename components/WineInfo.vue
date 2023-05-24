@@ -10,44 +10,53 @@
         <div class="wine-attribute">
           <div class="wine-type_container">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+            </p>
             <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+            </p>
             <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
-            {{ wine.grape }}</div>
+              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+            </p>
+            <p>
+              {{ wine.grape }}
+            </p>
           </div>
-          <!--
-        <div class="wine-attribute">
-          <span v-for="(profileItem, index) in wine.profile" :key="index">
-            {{ profileItem }}
-            <span v-if="index < wine.profile.length - 1">, </span>
-          </span>
         </div>
-        <div class="wine-attribute">Passt zu 
-          <span v-for="(matchItem, index) in wine.match" :key="index">
-            {{ matchItem }}
-            <span v-if="index < wine.match.length - 1">, </span>
-          </span>
-        </div>
-      -->
         <div class="wine-price">
-          CHF {{ wine.bottleprice}}
+          <div class="bottle-price">
+            CHF {{ wine.bottleprice}}
+          </div>
+          <div class="open-price">
+            CHF {{ wine.openprice}}
+          </div>
         </div>
       </div>
       <div class="wine_card_row3">
-        <button v-if="!isBookmark" @click.stop="addToBookmarks">
-          <img v-if="!isFavorite" :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
-          <img v-else :src="require('@/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
-        </button>
-        <button v-else @click.stop="removeWineInBookmark">
-          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
-        </button>
-        <!--
-        <div class="star-rating">
-          <star-rating v-model="rating" @rating-selected="saveRating" />
+        <div class="container-above">
+          <button v-if="!isBookmark" @click.stop="addToBookmarks">
+            <img v-if="!isFavorite" :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+            <img v-else :src="require('@/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
+          </button>
+          <button v-else @click.stop="removeWineInBookmark">
+            <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
+          </button>
         </div>
-        -->
+        <div class="container-below">
+          <p class="wine-rating-title">
+            Your Taste
+          </p>
+          <div class="container-below-child">
+            <div class="wine-rating-left">
+              <img :src="require('@/icons/others/Wein.png')" class="icon" alt="Bookmark icon" />  
+            </div>
+            <div class="wine-rating-right">
+              <div class="wine-rating">
+                {{wine.rating}}%
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -191,15 +200,11 @@
 
 
   <style>
+
   @import "@/CSS/shared-wine-type-styles.css";
   
   * {
     font-family: sans-serif;
-  }
-
-  .icon-small {
-    width: 15px;
-    height: 15px;
   }
 
   .wine-type_container {
@@ -213,33 +218,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 150px;
+    height: auto;
     margin-bottom: 20px;
     box-shadow: 5px 5px 5px 3px #888888;
     border-radius: 10px;
-  }
-
-  .marked-favorite-button {
-    background-color: green;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 12px;
-    cursor: pointer;
-    margin-top: 5px;
-  }
-  
-
-  .add-favorite-button {
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 12px;
-    cursor: pointer;
-    margin-top: 5px;
-  }
+  }  
 
   .wine-image {
     height: 100%;
@@ -257,6 +240,9 @@
   .wine-card-row2 {
     flex: 1;
     margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
 
   .wine_card_row3{
@@ -293,11 +279,45 @@
   .wine-price {
     font-size: 13px;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 5px;
   }
   
   .star-rating {
     width: 100%;
     transform: scale(0.5);
   }
+
+  .container-below {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: #808080;
+  }
+  
+  .container-below-child {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .wine-rating-title{
+    font-size: 12px;
+  }
+
+  .wine-rating-right {
+    padding-top: 7px;
+    font-weight: bold;
+    font-size: 15px;
+    padding-left: 10px;
+  }
+  .wine-rating-left {
+
+  }
+
+  .icon-small {
+    width: 15px;
+    height: 15px;
+  }
+
+  
   </style>

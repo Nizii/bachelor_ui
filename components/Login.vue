@@ -141,8 +141,13 @@ export default {
     align-items: center;
     justify-content: center;
     height: 100%;
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
     background-color: #FFFF;
     margin-top: 30px;
+    border-radius: 10px;
+    overflow: hidden;
   }
   
   .form-container {
