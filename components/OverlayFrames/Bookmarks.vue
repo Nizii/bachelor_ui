@@ -76,7 +76,7 @@
     font-weight: bold;
   }
 
-  .overlay-frame {
+  .overlay-frame-bookmark {
     z-index: 1000;
     /* Hier wird die Overlay Animation gemacht*/
     transition:transform 0.5s;
@@ -108,7 +108,7 @@
   }
 
   .wine-container {
-
+    margin: 15px;
   }
   
   h2 {

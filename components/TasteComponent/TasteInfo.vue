@@ -53,7 +53,6 @@
 <style>
     .detail-view-info-container{
         padding: 20px;
-        width: 80%;
         padding: 1em;
         border-radius: 15px;
         margin-top: 2em; 

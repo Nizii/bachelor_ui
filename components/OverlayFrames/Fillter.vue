@@ -10,14 +10,15 @@
         <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
       </button>
     </div>
-      
-    <button @click="openTab('food')" class=".button-overlay">Essen
-      <!--<img :src="require('@/icons/buttons/nahrung.png')" class="icon-small" alt="Bookmark icon" />-->
-    </button>
-    <button @click="openTab('nation')" class=".button-overlay">Land</button>
-    <button @click="openTab('grape')" class=".button-overlay">Traube</button>
-    <button @click="openTab('character')" class=".button-overlay">Charakter</button>
-    <button @click="openTab('')" class=".button-overlay">Preis</button>
+    
+    <div class="button-container">
+      <button @click="openTab('food')" class="button-overlay">Essen</button>
+      <button @click="openTab('nation')" class="button-overlay">Land</button>
+      <button @click="openTab('grape')" class="button-overlay">Traube</button>
+      <button @click="openTab('character')" class="button-overlay">Charakter</button>
+      <button @click="openTab('')" class="button-overlay">Preis</button>
+    </div>
+    
 
     <FoodTabbar v-if="currentTab === 'food'" @show-wines="showWinesForFood" />
     <NationTabbar v-if="currentTab === 'nation'" @show-wines="showWinesForNation" />
@@ -149,9 +150,18 @@
   
   <style>
   
-  .button-overlay{
-    color:white;
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
   }
+  
+  .button-overlay {
+    color: black;
+    flex-grow: 1;
+    text-align: center;
+  }
+  
 
   .button-group-overlay {
     display: flex;

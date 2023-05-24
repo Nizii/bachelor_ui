@@ -2,84 +2,88 @@
 <div>
   <div class="background-overlay" v-if="frameOpen" />
   <div class="overlay-frame" :class="{ open: frameOpen }" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }">
-    <div class="detail-view-header">
-      <div id="row1">
-        <p id="detail-view-titel">{{wine.name}}</p>
-        <button id="detail-view-close-btn" @click="closeOverlay">
-          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
-        </button>
-      </div>
-      <div id="row2">
-        <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
-          <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-            <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
-          <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-            <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
-          <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-            <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
-        </div>
-        <br>
-        <p id="detail-view-grape">{{wine.grape}}</p>
-      </div>
-    </div>
-    <div class="detail-view-main-container">
-      <div class="detail-view-left">
-        <br>
-        <p class="detail-view-label">Preis</p>
-        <p class="detail-view-content"><b>CHF {{wine.bottleprice}}.-</b></p>
-        <br>
-        <p class="detail-view-label">Land</p>
-        <p class="detail-view-content"><b>{{wine.regionTag}}, {{wine.nationTag}}</b></p>
-        <br>
-        <p class="detail-view-description">{{wine.charakter}}</p>
-        <br>
-        <p class="detail-view-description">
-          Der Wein passt zu 
-          <span v-for="(meal, index) in wine.foodTags" :key="`meal-${index}`">
-            {{ meal }}
-            <span v-if="index !== wine.foodTags.length - 1">
-            ,
-            </span>
-          </span>
-        </p>
-        <br>
-        <p class="detail-view-description">{{wine.vinzer}}</p>
-        <div class="add-to-favorite-container">
-          <button v-if="isLoggedIn" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
-            Zum Weinkeller hinzufügen
-          </button>
-          <button   v-else class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToBookmarks">
-            Zur Merkliste
+    <div class="inner-overlay">
+      <div class="detail-view-header">
+        <div id="row1">
+          <p id="detail-view-titel">{{wine.name}}</p>
+          <button id="detail-view-close-btn" @click="closeOverlay">
+            <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
           </button>
         </div>
-      </div>
-      <div class="detail-view-right">
-        <img class="detail-view-image" :src="wine.link"/>
-      </div>
-    </div>
-
-    <div class="line-1"></div>
-
-    <TasteInfo :background-color="getBackgroundColor()" @get-background-color="getBackgroundColor"/>
-
-    <div class="line-2"></div>
-
-    <div class="detail-view-comment-container" :style="{ backgroundColor: getBackgroundColor() }">
-      <p id="detail-view-titel">Kommentare</p>
-      <div class="comment" v-for="(comment, index) in wine.comments" :key="index">
-        <p class="comment-content">{{ comment }}</p>
-      </div>
-      <div class="comment-input-container" v-if="isLoggedIn">
-        <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
-        <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">
-          Kommentiere
-        </button>
-      </div>
-      <div v-else>
-        <p>Registriere dich und kommentiere!!!. 
+        <div id="row2">
+          <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
+            <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
+              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+            <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
+              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+            <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
+              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+          </div>
           <br>
-          <router-link to="/Login"><b>Klick hier</b></router-link>
-        </p>
+          <p id="detail-view-grape">{{wine.grape}}</p>
+        </div>
+      </div>
+      <div class="detail-view-main-container">
+        <div class="detail-view-left">
+          <br>
+          <p class="detail-view-label">Preis</p>
+          <p class="detail-view-content"><b>CHF {{wine.bottleprice}}.-</b></p>
+          <br>
+          <p class="detail-view-label">Land</p>
+          <p class="detail-view-content"><b>{{wine.regionTag}}, {{wine.nationTag}}</b></p>
+          <br>
+          <p class="detail-view-description">{{wine.charakter}}</p>
+          <br>
+          <p class="detail-view-description">
+            Der Wein passt zu 
+            <span v-for="(meal, index) in wine.foodTags" :key="`meal-${index}`">
+              {{ meal }}
+              <span v-if="index !== wine.foodTags.length - 1">
+              ,
+              </span>
+            </span>
+          </p>
+          <br>
+          <p class="detail-view-description">{{wine.vinzer}}</p>
+          <div class="add-to-favorite-container">
+            <button v-if="isLoggedIn" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
+              Zum Weinkeller hinzufügen
+            </button>
+            <button   v-else class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToBookmarks">
+              Zur Merkliste
+            </button>
+          </div>
+        </div>
+        <div class="detail-view-right">
+          <img class="detail-view-image" :src="wine.link"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="inner-overlay-2">
+      <div class="line-1"></div>
+
+      <TasteInfo :background-color="getBackgroundColor()" @get-background-color="getBackgroundColor"/>
+
+      <div class="line-2"></div>
+
+      <div class="detail-view-comment-container" :style="{ backgroundColor: getBackgroundColor() }">
+        <p id="detail-view-titel">Kommentare</p>
+        <div class="comment" v-for="(comment, index) in wine.comments" :key="index">
+          <p class="comment-content">{{ comment }}</p>
+        </div>
+        <div class="comment-input-container" v-if="isLoggedIn">
+          <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
+          <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">
+            Kommentiere
+          </button>
+        </div>
+        <div v-else>
+          <p>Registriere dich und kommentiere!!!. 
+            <br>
+            <router-link to="/Login"><b>Klick hier</b></router-link>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -251,9 +255,15 @@
     z-index: 1000;
     transition:transform 0.5s;
     transform: translateY(100%);
-    overflow-y: auto;
-    padding-left: 1em;
-    padding-right: 1em;
+    flex-direction: column;
+  }
+
+  .inner-overlay{
+    padding-left: 15px;
+    padding-right: 5px;
+  }
+  .inner-overlay-2{
+    padding: 15px;
   }
 
   .background-overlay {
@@ -280,13 +290,12 @@
   }
   
   .detail-view-header {
-    width: 90%;
     margin-top: 30px;
   }
   
   .detail-view-main-container {
     display: flex;
-    width: 90%;
+
   }
   
   .detail-view-left,
@@ -354,11 +363,10 @@
 
     /* Kommentarbereich */
   .detail-view-comment-container {
-    width: 80%;
     padding: 1em;
     border-radius: 15px;
     margin-top: 2em; 
-    margin-bottom: 4em;
+    margin-bottom: 3em;
   }
 
   /* Kommentare */
@@ -393,17 +401,19 @@
   .line-1{
     border-bottom: 1px solid black;
     margin-top: 1em;
-    margin-bottom: 1em;
-    width: 90%;
+    margin-bottom: 3em;
+    width: 100%;
   }
 
   .line-2{
     border-bottom: 1px solid black;
     margin-top: 3em;
-    margin-bottom: 1em;
-    width: 90%;
+    margin-bottom: 3em;
+    width: 100%;
   }
   
+
+
   </style>
   
   
