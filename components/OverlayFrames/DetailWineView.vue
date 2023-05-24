@@ -6,17 +6,17 @@
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
         <button id="detail-view-close-btn" @click="closeOverlay">
-          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
+          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
         </button>
       </div>
       <div id="row2">
         <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
           <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-            <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+            <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
           <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-            <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+            <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
           <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-            <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+            <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
         </div>
         <br>
         <p id="detail-view-grape">{{wine.grape}}</p>

@@ -12,7 +12,7 @@
           <div class="inputrow">
             <input type="text" class="search-input" @input="onSearchInput">
             <button class="toggle-btn" @click="toggleShowFoodOverlay">
-              <img :src="require('@/icons/buttons/filter.png')" class="icon" alt="Bookmark icon" />
+              <img :src="require('static/icons/buttons/filter.png')" class="icon" alt="Bookmark icon" />
             </button>
           </div>
         </div>
@@ -295,7 +295,7 @@ body, html {
   border-radius: 10px;
   margin-left: 15px;
   margin-right: 15px;
-  background-image: url('@/icons/buttons/suche.png');
+  background-image: url('static/icons/buttons/suche.png');
   background-repeat: no-repeat;
   background-position: 5px 4px;
   background-size: 40px 40px;

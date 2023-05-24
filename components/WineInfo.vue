@@ -4,19 +4,19 @@
       <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
       <div class="wine-card-row2">
         <!--<div class="wine-flag">
-          <img :src="require('@/icons/nations/traube.png')" class="icon-small" alt="Bookmark icon" />
+          <img :src="require('static/icons/nations/traube.png')" class="icon-small" alt="Bookmark icon" />
         </div>-->
         <h3 class="wine-title">{{ wine.name }}</h3>
         <div class="wine-attribute">
           <div class="wine-type_container">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
             </p>
             <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
             </p>
             <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-              <img :src="require('@/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
             </p>
             <p>
               {{ wine.grape }}
@@ -35,11 +35,11 @@
       <div class="wine_card_row3">
         <div class="container-above">
           <button v-if="!isBookmark" @click.stop="addToBookmarks">
-            <img v-if="!isFavorite" :src="require('@/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
-            <img v-else :src="require('@/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
+            <img v-if="!isFavorite" :src="require('static/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+            <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
           </button>
           <button v-else @click.stop="removeWineInBookmark">
-            <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
+            <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
           </button>
         </div>
         <div class="container-below">
@@ -48,7 +48,7 @@
           </p>
           <div class="container-below-child">
             <div class="wine-rating-left">
-              <img :src="require('@/icons/others/Wein.png')" class="icon" alt="Bookmark icon" />  
+              <img :src="require('static/icons/others/Wein.png')" class="icon" alt="Bookmark icon" />  
             </div>
             <div class="wine-rating-right">
               <div class="wine-rating">

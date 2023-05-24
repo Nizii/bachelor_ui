@@ -7,7 +7,7 @@
       <div></div>
       <TitleOverlay title="Filter Optionen" />
       <button class="close-button" @click="closeOverlay">
-        <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
+        <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
       </button>
     </div>
       

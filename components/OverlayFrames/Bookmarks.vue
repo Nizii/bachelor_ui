@@ -6,7 +6,7 @@
         <div></div>
         <TitleOverlay title="Merkliste" />
         <button class="close-button" @click="closeOverlay">
-          <img :src="require('@/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         
+          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         
         </button>
       </div>
       <div class="wine-container" v-for="(wine, index) in bookmarkedWines" :key="index">
