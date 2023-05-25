@@ -69,10 +69,12 @@
 
     .infotxt{
         margin-bottom: 20px;
+        font-size: 13px;
     }
 
     .popup-tag{
         font-weight: bold;
+        font-size: 15px;
     }
 
     

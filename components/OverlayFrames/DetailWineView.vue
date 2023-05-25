@@ -61,6 +61,11 @@
     </div>
 
     <div class="inner-overlay-2">
+
+      <div class="line-1"></div>
+      <p id="detail-view-titel">Geschmacksprofil</p>
+      <radar-chart :data="chartData" :options="chartOptions" />
+
       <div class="line-1"></div>
 
       <TasteInfo :background-color="getBackgroundColor()" @get-background-color="getBackgroundColor"/>
@@ -92,11 +97,15 @@
   
   <script>
   import TasteInfo from '~/components/TasteComponent/TasteInfo.vue';
+  import RadarChart from '~/components/RadarChart.vue';
+
+
 
   export default {
     name: 'DetailWineView',
     components: {
       TasteInfo,
+      RadarChart,
     },
 
     props: {
@@ -106,13 +115,63 @@
       },
     },
 
+    created() {
+      console.log('DetailWineView component created');
+    },
+
     data() {
-      return{
+      return {
         frameOpen: false,
         newComment: '',
         isLoggedIn: false,
+        chartData: {
+          labels: ['Säure', 'Zucker', 'Intensität', 'Ausbau', 'Tannine'],
+          datasets: [
+            {
+              label: this.wine.name,
+              backgroundColor: 'rgba(255, 99, 132, 0.2)',
+              borderColor: 'rgba(255, 99, 132, 0.8)',
+              pointBackgroundColor: 'red',
+              pointBorderColor: 'red',
+              pointHoverBackgroundColor: 'red',
+              pointHoverBorderColor: 'red',
+              data: [
+                this.wine.radarchart[0],
+                this.wine.radarchart[1],
+                this.wine.radarchart[2],
+                this.wine.radarchart[3],
+                this.wine.radarchart[4] 
+              ]
+            },
+            {
+              label: 'Mein Geschmacksprofil',
+              data: [8, 4, 4, 5, 3],
+ 
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 0.8)',
+              pointBackgroundColor: 'blue',
+              pointBorderColor: 'blue',
+              pointHoverBackgroundColor: 'blue',
+              pointHoverBorderColor: 'blue'
+            }
+          ]
+        },
+        chartOptions: {
+          title: {
+            display: false,
+          },
+          scale: {
+            ticks: {
+              beginAtZero: true,
+              min: 1,
+              max: 10,
+              stepSize: 1
+            }
+          }
+        },
       }
     },
+
 
     methods: {
       closeOverlay() {
@@ -214,15 +273,13 @@
       setTimeout(() => {
         this.frameOpen = true;
       }, 100); 
-      document.body.style.overflow = 'hidden'; // Verbietet das Scrollen auf dem Background
+
+      document.body.style.overflow = 'hidden';
+       // Verbietet das Scrollen auf dem Background
       if(localStorage.getItem('jwt')){
         this.isLoggedIn = true;
       } 
     },
-
-    created() {
-      console.log('DetailWineView component created');
-    }
 };
   </script>
   
