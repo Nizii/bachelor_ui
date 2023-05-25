@@ -2,7 +2,7 @@
   <Taste 
     title="Magst du deinen Wein erdig?" 
     nextRoute="/Winemenu"
-    preferenceKey="erdig"
+    preferenceKey="tannine"
     bgImage="/background/holz.jpg"
   />
 </template>

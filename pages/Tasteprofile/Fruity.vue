@@ -1,7 +1,7 @@
 <template>
   <Taste 
     title="Magst du deinen Wein fruchtig?" 
-    nextRoute="/Tasteprofile/Earthy"
+    nextRoute="/Tasteprofile/Tannine"
     preferenceKey="fruchtig"
     bgImage="/background/steinfrucht.jpg"
   />

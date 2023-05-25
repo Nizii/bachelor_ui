@@ -1,48 +1,47 @@
 <template>
   <div style="margin: 0; padding: 0; box-sizing: border-box;">
     <div class="start-page-container" :style="{
-      backgroundImage: `url(${bgImage})`, 
-      backgroundSize: 'cover', 
-      backgroundPosition: 'center', 
-      backgroundRepeat: 'no-repeat', 
-      height: '100vh', 
-      margin: '0', 
-      padding: '0'}"
-    >
+      backgroundImage: `url(${bgImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      height: '100vh',
+      margin: '0',
+      padding: '0'
+    }">
       <div class="info-container">
-        <button class="start-page-link red-button" @click="openPopup(preferenceKey)">
+        <button class="help-button" @click="openPopup(preferenceKey)">
           Hilfe
-        </button>  
+        </button>
       </div>
       <div class="block">
         <TitleBig :title="title" :fontSize="30" />
       </div>
-      <div class="block"></div>
-      <div class="content-container">
-        <div class="button-container">
-          <button class="start-page-link red-button" @click="setPreferenceAndNavigate(preferenceKey, true)">
-            Ja
-          </button>        
-          <button class="start-page-link red-button" @click="setPreferenceAndNavigate(preferenceKey, false)">
-            Nein
-          </button>  
-        </div>
+      <div class="block">
+        <Slider ref="slider" @emit-value="setPreferenceAndNavigate" />
       </div>
-      <TasteInfoPopup v-if="showInfo" :infoKey="preferenceKey" :show="showInfo" @close="showInfo = false"/>
+      <div class="block">
+        <button class="navigation-button" @click="startProcess()">
+          Weiter
+        </button>
+      </div>
+      <TasteInfoPopup v-if="showInfo" :infoKey="preferenceKey" :show="showInfo" @close="showInfo = false" />
     </div>
   </div>
 </template>
-  
+
 <script>
 import AppHeader from '~/components/Titles/AppHeader.vue';
 import TitleBig from '~/components/Titles/TitleBig.vue';
 import TasteInfoPopup from '~/components/TasteComponent/TasteInfoPopup.vue';
+import Slider from '~/components/TasteComponent/Slider.vue';
 
 export default {
   name: 'Taste',
   components: {
     TitleBig,
     TasteInfoPopup,
+    Slider,
   },
   props: {
     title: {
@@ -65,23 +64,28 @@ export default {
   data() {
     return {
       showInfo: false,
+      value: 0,
       preferences: {
-        suss: false,
-        sauer: false,
-        intensiv: false,
-        mild: false,
-        fruchtig: false,
-        erdig: false,
+        suss: 0,
+        sauer: 0,
+        intensiv: 0,
+        mild: 0,
+        fruchtig: 0,
+        erdig: 0,
       },
     }
   },
 
   methods: {
-    setPreferenceAndNavigate(preference, value) {
-      this.preferences[preference] = value;
+    startProcess() {
+      this.$refs.slider.emitValue();
+    },
+
+    setPreferenceAndNavigate(value) {
+      this.preferences[this.preferenceKey] = parseInt(value);
       localStorage.setItem('preferences', JSON.stringify(this.preferences));
       this.$router.push(this.nextRoute);
-    }, 
+    },
 
     openPopup() {
       this.showInfo = true;
@@ -93,52 +97,14 @@ export default {
     if (storedPreferences) {
       this.preferences = JSON.parse(storedPreferences);
     } else {
-      localStorage.setItem('preferences', JSON.stringify(this.preferences)); 
+      localStorage.setItem('preferences', JSON.stringify(this.preferences));
     }
   }
 }
 </script>
 
-<style>
-
-  .info-container{
-    
-  }
-  
-  .button-container{
-    display: flex;
-    justify-content: center;
-    flex: wrap;
-  }
-  
-  .taste-button{
-    height: 50px;
-    width: 50px;
-    background-color: white;
-    border-radius: 15px;
-    margin: 25px;
-  }
-  
-  .start-page-container {
-    align-items: center;
-    text-align: left;
-    height: 100%;
-  }
-  
-  .content-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 50%;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  
+<style>  
   .block {
-    display: flex; 
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
     height: 31vh;
     margin-left: 30px;
     margin-right: 30px;
@@ -146,20 +112,31 @@ export default {
     text-align: center;
   }
    
-  .start-page-link {
+  
+  .navigation-button {
+    background-color: #781449;
+    color: white;
+    border-radius: 15px;
+    text-decoration: none; 
     font-family: sans-serif;
     color: white;
     text-align: center;
     margin:20px;
-    width: 70px;
+    padding: 15px;
+    width: 200px;
   }
-  
-  .red-button {
+
+  .help-button{
     background-color: #781449;
     color: white;
     border-radius: 15px;
-    padding: 10px 20px;
     text-decoration: none; 
+    font-family: sans-serif;
+    color: white;
+    text-align: center;
+    margin:20px;
+    padding: 20px;
+    width: 70px;
   }
    
   .AppHeader {

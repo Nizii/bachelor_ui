@@ -1,7 +1,7 @@
 <template>
   <Taste 
     title="Magst du deinen Wein süss?" 
-    nextRoute="/Tasteprofile/Sour"
+    nextRoute="/Tasteprofile/Intensive"
     preferenceKey="suss"
     bgImage="/background/dessert.jpg"
   />
