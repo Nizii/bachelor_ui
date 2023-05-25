@@ -105,6 +105,10 @@
     align-items: center;
     height: 50px;
     padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1001; 
+    background-color: white; 
   }
 
   .wine-container {

@@ -42,7 +42,7 @@
             <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
           </button>
         </div>
-        <div class="container-below">
+        <div v-if="wine.rating > 10" class="container-below">
           <p class="wine-rating-title">
             Your Taste
           </p>

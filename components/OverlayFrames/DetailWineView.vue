@@ -10,6 +10,7 @@
             <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
           </button>
         </div>
+      </div>
         <div id="row2">
           <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
@@ -22,7 +23,6 @@
           <br>
           <p id="detail-view-grape">{{wine.grape}}</p>
         </div>
-      </div>
       <div class="detail-view-main-container">
         <div class="detail-view-left">
           <br>
@@ -133,7 +133,7 @@
         newComment: '',
         isLoggedIn: false,
         chartData: {
-          labels: ['Säure', 'Zucker', 'Intensität', 'Ausbau', 'Tannine'],
+          labels: ['Säure', 'Zucker', 'Intensität', 'Fruchtig', 'Holzig'],
           datasets: [
             {
               label: this.wine.name,
@@ -176,7 +176,7 @@
           scale: {
             ticks: {
               beginAtZero: true,
-              min: 1,
+              min: 0,
               max: 10,
               stepSize: 1
             }
@@ -305,7 +305,9 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 0;
-    padding-top: 0;
+    padding-top: 20px;
+    position: sticky;
+
   }
   
   #detail-view-close-btn {
@@ -343,7 +345,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 999; /* Muss unbedingt kleiner als der z-index von overlay-frame sein */
+    z-index: 999;
   }
   
   .detail-view-button{
@@ -358,9 +360,16 @@
   .overlay-frame.open {
     transform: translateY(0);
   }
+
+  .detail-view-fixed-title{
+
+  }
   
   .detail-view-header {
-    margin-top: 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1001; 
+    background-color: white; 
   }
   
   .detail-view-main-container {

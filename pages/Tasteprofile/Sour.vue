@@ -1,5 +1,5 @@
 <template>
-  <Taste 
+  <Taste class="taste"
     title="Magst du deinen Wein sauer?" 
     nextRoute="/Tasteprofile/Sweet"
     preferenceKey="sauer"
@@ -16,3 +16,9 @@ export default {
   },
 }
 </script>
+
+<style>
+  .taste{
+    background-image: none;
+  }
+</style>

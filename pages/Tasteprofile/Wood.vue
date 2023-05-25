@@ -1,8 +1,8 @@
 <template>
   <Taste 
-    title="Magst du deinen Wein erdig?" 
+    title="Magst du frischen Holzgeschmack?" 
     nextRoute="/Winemenu"
-    preferenceKey="tannine"
+    preferenceKey="holz"
     bgImage="/background/holz.jpg"
   />
 </template>

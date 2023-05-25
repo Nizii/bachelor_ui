@@ -1,43 +1,42 @@
 <template>
   <div>
     <div class="background-overlay" v-if="frameOpen" />
-    <div class="overlay-frame" :class="{ open: frameOpen }">
+      <div class="overlay-frame" :class="{ open: frameOpen }">
 
-    <div class="frame-header">
-      <div></div>
-      <TitleOverlay title="Filter Optionen" />
-      <button class="close-button" @click="closeOverlay">
-        <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
-      </button>
-    </div>
-    
-    <div class="button-container">
-      <button @click="openTab('food')" class="button-overlay">Essen</button>
-      <button @click="openTab('nation')" class="button-overlay">Land</button>
-      <button @click="openTab('grape')" class="button-overlay">Traube</button>
-      <button @click="openTab('character')" class="button-overlay">Charakter</button>
-      <button @click="openTab('')" class="button-overlay">Preis</button>
-    </div>
-    
+      <div class="frame-header">
+        <div></div>
+        <TitleOverlay title="Filter Optionen" />
+        <button class="close-button" @click="closeOverlay">
+          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
+        </button>
+      </div>
+      
+      <div class="button-container">
+        <button @click="openTab('food')" class="button-overlay">Essen</button>
+        <button @click="openTab('nation')" class="button-overlay">Land</button>
+        <button @click="openTab('grape')" class="button-overlay">Traube</button>
+        <button @click="openTab('character')" class="button-overlay">Charakter</button>
+        <button @click="openTab('')" class="button-overlay">Preis</button>
+      </div>
+      
 
-    <FoodTabbar v-if="currentTab === 'food'" @show-wines="showWinesForFood" />
-    <NationTabbar v-if="currentTab === 'nation'" @show-wines="showWinesForNation" />
-    <GrapeTabbar v-if="currentTab === 'grape'" @show-wines="showWinesForGrape" />
-    <CharacterTabbar v-if="currentTab === 'character'" @show-wines="showWinesForCharacter" />
+      <FoodTabbar v-if="currentTab === 'food'" @show-wines="showWinesForFood" />
+      <NationTabbar v-if="currentTab === 'nation'" @show-wines="showWinesForNation" />
+      <GrapeTabbar v-if="currentTab === 'grape'" @show-wines="showWinesForGrape" />
+      <CharacterTabbar v-if="currentTab === 'character'" @show-wines="showWinesForCharacter" />
 
-    <div v-if="selectedTag !== ''">
-      <div v-for="wine in displayedWines" :key="wine.id" style="margin: 20px;">
-        <div class="wine-container" 
-          v-if="wine.foodTags && wine.foodTags.indexOf(selectedTag) !== -1 ||
-          wine.nationTag && wine.nationTag === selectedTag ||
-          wine.characterTags && wine.characterTags.indexOf(selectedTag) !== -1||
-          wine.grapeTags && wine.grapeTags.indexOf(selectedTag) !== -1">
-          <!--<WineHeader :title="wine.winetype" id="overwritingParent"/>-->
-          <WineInfo :wine="wine" wineType=wine.wineType @open-detail-view="pushToggleDetailViewWineToIndex" :matchType="selectedTag" />
+      <div v-if="selectedTag !== ''">
+        <div v-for="wine in displayedWines" :key="wine.id" style="margin: 20px;">
+          <div class="wine-container" 
+            v-if="wine.foodTags && wine.foodTags.indexOf(selectedTag) !== -1 ||
+            wine.nationTag && wine.nationTag === selectedTag ||
+            wine.characterTags && wine.characterTags.indexOf(selectedTag) !== -1||
+            wine.grapeTags && wine.grapeTags.indexOf(selectedTag) !== -1">
+            <!--<WineHeader :title="wine.winetype" id="overwritingParent"/>-->
+            <WineInfo :wine="wine" wineType=wine.wineType @open-detail-view="pushToggleDetailViewWineToIndex" :matchType="selectedTag" />
+          </div>
         </div>
       </div>
-    </div>
-
     </div>
   </div>
   </template>
@@ -222,6 +221,10 @@
     padding-left: 40px;
     padding-right: 20px;
     padding-top: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1001; 
+    background-color: white; 
   }
 
   .wine-container {

@@ -17,7 +17,7 @@
             </button>
           </div>
         </div>
-        <div v-if="loading" style="text-align: center; margin: 20px;">
+        <div v-if="loading" class="loading" style="text-align: center; margin: 20px;">
           Loading...
         </div>
         <div v-else>
@@ -213,6 +213,11 @@ methods: {
  */
   // Eine Funktion, die die Übereinstimmung zwischen dem Geschmacksprofil eines Benutzers und eines Weins berechnet
   calculateMatch(userProfile, wineProfile) {
+    if(userProfile[0] == 0 &&
+      userProfile[1] == 0 &&
+      userProfile[2] == 0 &&
+      userProfile[3] == 0 &&
+      userProfile[4] == 0) return 0;
 
   // Eine Variable, um die Gesamtdifferenz zwischen den Profilen zu speichern
     var totalDifference = 0;
@@ -349,6 +354,12 @@ body, html {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+}
+
+.loading{
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .main-container {
