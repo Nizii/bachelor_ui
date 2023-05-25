@@ -115,11 +115,19 @@
       },
     },
 
-    created() {
-      console.log('DetailWineView component created');
+    beforeCreate() {
+      const storedPreferences = localStorage.getItem('preferences');
+      if (storedPreferences) {
+        this.preferences = JSON.parse(storedPreferences);
+      } else {
+        console.log("Keine Präferenzen verfügbar");
+        this.preferences = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, tannine: 0 };
+      }
     },
 
+
     data() {
+      const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, tannine: 0 };
       return {
         frameOpen: false,
         newComment: '',
@@ -144,15 +152,20 @@
               ]
             },
             {
-              label: 'Mein Geschmacksprofil',
-              data: [8, 4, 4, 5, 3],
- 
+              label: 'Mein Geschmacksprofil', 
               backgroundColor: 'rgba(54, 162, 235, 0.2)',
               borderColor: 'rgba(54, 162, 235, 0.8)',
               pointBackgroundColor: 'blue',
               pointBorderColor: 'blue',
               pointHoverBackgroundColor: 'blue',
-              pointHoverBorderColor: 'blue'
+              pointHoverBorderColor: 'blue',
+              data: [
+                preferences.sauer,
+                preferences.suss,
+                preferences.intensiv,
+                preferences.fruchtig,
+                preferences.tannine
+              ],
             }
           ]
         },
@@ -280,7 +293,7 @@
         this.isLoggedIn = true;
       } 
     },
-};
+  };
   </script>
   
   <style>

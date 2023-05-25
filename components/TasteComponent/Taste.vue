@@ -69,7 +69,6 @@ export default {
         suss: 0,
         sauer: 0,
         intensiv: 0,
-        mild: 0,
         fruchtig: 0,
         erdig: 0,
       },

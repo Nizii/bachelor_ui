@@ -199,7 +199,7 @@ methods: {
   },
 
   pushToTasteprofile() {
-    this.$router.push('Tasteprofile/Sweet');
+    this.$router.push('Tasteprofile/Sour');
   },
 
   calc() {
