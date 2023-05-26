@@ -2,15 +2,15 @@
 <div>
   <div class="background-overlay" v-if="frameOpen" />
   <div class="overlay-frame" :class="{ open: frameOpen }" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }">
-    <div class="inner-overlay">
-      <div class="detail-view-header">
-        <div id="row1">
-          <p id="detail-view-titel">{{wine.name}}</p>
-          <button id="detail-view-close-btn" @click="closeOverlay">
-            <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
-          </button>
-        </div>
+    <div class="detail-view-header">
+      <div id="row1">
+        <p id="detail-view-titel">{{wine.name}}</p>
+        <button id="detail-view-close-btn" @click="closeOverlay">
+          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
+        </button>
       </div>
+    </div>
+    <div class="inner-overlay">
         <div id="row2">
           <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
@@ -63,8 +63,12 @@
     <div class="inner-overlay-2">
 
       <div class="line-1"></div>
+
       <p id="detail-view-titel">Geschmacksprofil</p>
       <radar-chart :data="chartData" :options="chartOptions" />
+      <button class="detail-view-button" @click="calcTasteProfile" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }">
+        Geschmacksprofil berechnen
+      </button>
 
       <div class="line-1"></div>
 
@@ -121,19 +125,19 @@
         this.preferences = JSON.parse(storedPreferences);
       } else {
         console.log("Keine Präferenzen verfügbar");
-        this.preferences = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, tannine: 0 };
+        this.preferences = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       }
     },
 
 
     data() {
-      const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, tannine: 0 };
+      const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       return {
         frameOpen: false,
         newComment: '',
         isLoggedIn: false,
         chartData: {
-          labels: ['Säure', 'Zucker', 'Intensität', 'Fruchtig', 'Holzig'],
+          labels: ['Säure', 'Zucker', 'Intensität', 'Fruchtig', 'Holzig', 'Trocken'],
           datasets: [
             {
               label: this.wine.name,
@@ -148,7 +152,8 @@
                 this.wine.radarchart[1],
                 this.wine.radarchart[2],
                 this.wine.radarchart[3],
-                this.wine.radarchart[4] 
+                this.wine.radarchart[4],
+                this.wine.radarchart[5] 
               ]
             },
             {
@@ -164,7 +169,8 @@
                 preferences.suss,
                 preferences.intensiv,
                 preferences.fruchtig,
-                preferences.tannine
+                preferences.holzig,
+                preferences.trocken
               ],
             }
           ]
@@ -177,7 +183,7 @@
             ticks: {
               beginAtZero: true,
               min: 0,
-              max: 10,
+              max: 5,
               stepSize: 1
             }
           }
@@ -187,6 +193,10 @@
 
 
     methods: {
+      calcTasteProfile() {
+        this.$router.push('Tasteprofile/Sour');
+      },
+
       closeOverlay() {
         this.frameOpen = false;
         document.body.style.overflow = 'auto'; // Erlaubt das Scrollen auf dem Body wieder
@@ -305,7 +315,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 0;
-    padding-top: 20px;
+    padding: 10px;
     position: sticky;
 
   }
@@ -315,12 +325,6 @@
     background: none;
     font-size: 1.5em;
     cursor: pointer;
-    margin-top: -1em;
-
-  }
-
-  .detail-view-button{
-    width: 100%;
   }
 
   .overlay-frame {
@@ -349,12 +353,11 @@
   }
   
   .detail-view-button{
-    background-color: #781449;
-    color: white;
     border-radius: 15px;
     padding: 10px 20px;
     text-decoration: none; 
     margin-bottom: 20px;
+    margin-top: 2em;
   }
 
   .overlay-frame.open {
@@ -370,6 +373,8 @@
     top: 0;
     z-index: 1001; 
     background-color: white; 
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin-bottom: 3em;
   }
   
   .detail-view-main-container {
@@ -397,10 +402,6 @@
     font-size: 13px;
   }
   
-  .detail-view-button {
-    margin-top: 2em;
-  }
-  
   .detail-view-right {
     display: flex;
     justify-content: center;
@@ -422,7 +423,6 @@
     font-size: 30px;
     font-weight: bold;
     font-family: sans-serif;
-    margin-bottom: 20px;
   }
 
   #detail-view-grape{
@@ -478,14 +478,14 @@
   }
 
   .line-1{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(214, 214, 214);
     margin-top: 1em;
     margin-bottom: 3em;
     width: 100%;
   }
 
   .line-2{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid rgb(214, 214, 214);
     margin-top: 3em;
     margin-bottom: 3em;
     width: 100%;

@@ -64,13 +64,14 @@ export default {
   data() {
     return {
       showInfo: false,
-      value: 0,
+      value: 3,
       preferences: {
         suss: 0,
         sauer: 0,
         intensiv: 0,
         fruchtig: 0,
-        erdig: 0,
+        holzig: 0,
+        trocken: 0,
       },
     }
   },

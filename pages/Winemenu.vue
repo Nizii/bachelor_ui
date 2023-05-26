@@ -217,7 +217,8 @@ methods: {
       userProfile[1] == 0 &&
       userProfile[2] == 0 &&
       userProfile[3] == 0 &&
-      userProfile[4] == 0) return 0;
+      userProfile[4] == 0 &&
+      userProfile[5] == 0) return 0;
 
   // Eine Variable, um die Gesamtdifferenz zwischen den Profilen zu speichern
     var totalDifference = 0;
@@ -324,7 +325,8 @@ async created() {
           this.preferences.sauer,
           this.preferences.intensiv,
           this.preferences.fruchtig,
-          this.preferences.tannine, 
+          this.preferences.holzig, 
+          this.preferences.trocken, 
         ]
       );
     } else {

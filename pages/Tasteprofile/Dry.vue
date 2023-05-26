@@ -1,9 +1,9 @@
 <template>
   <Taste 
-    title="Magst du frischen Holzgeschmack?" 
-    nextRoute="/Tasteprofile/Dry"
-    preferenceKey="holzig"
-    bgImage="/background/holz.jpg"
+    title="Magst du deinen Wein Trocken?" 
+    nextRoute="/Winemenu"
+    preferenceKey="trocken"
+    bgImage="/background/pfeffer.jpg"
   />
 </template>
 

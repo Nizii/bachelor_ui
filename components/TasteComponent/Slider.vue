@@ -1,11 +1,10 @@
 <template>
   <div class="slider-container">
     <div class="slider-titel">
-      Auf einer Skala von 1-10
+      Auf einer Skala von 1-5
     </div>
     <div class="slider">
-      <label>0</label>
-      <input type="range" min="0" max="10" v-model="value"/>
+      <input type="range" min="1" max="5" v-model="value"/>
       <span>{{ value }}</span>
     </div>
   </div>
@@ -15,7 +14,7 @@
 export default {
   data() {
     return {
-      value: 0,
+      value: 3,
     } 
   },
   methods: {

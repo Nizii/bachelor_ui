@@ -220,7 +220,7 @@
     width: 100%;
     height: auto;
     margin-bottom: 20px;
-    box-shadow: 5px 5px 5px 3px #888888;
+    box-shadow: 2.5px 2.5px 2.5px 1.5px rgba(136, 136, 136, 0.5);
     border-radius: 10px;
   }  
 

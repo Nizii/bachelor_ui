@@ -109,6 +109,9 @@
     top: 0;
     z-index: 1001; 
     background-color: white; 
+    position: sticky;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin-bottom: 3em;
   }
 
   .wine-container {
