@@ -1,7 +1,7 @@
 <template>
   <div class="main-container" style="margin: 0; padding: 0; box-sizing: border-box;">
     <Profile v-if="showProfile && !showLogin" @logout="navigateToWinemenu" />
-    <Login v-else-if="showLogin" @login-succeed="navigateToProfile()" />
+    <Login v-else-if="showLogin" @login-succeed="navigateToProfileAfterLogin()" />
     <div v-else-if="!showLogin && !showProfile">
         <div class="top-section">
           <div class="button-group">
@@ -51,7 +51,7 @@
           @open-detail-view="toggleDetailViewWine" :wines="wines" />
 
         <Bookmarks v-if="showBookmarksOverlay" 
-          @close="toggleShowBookmarksOverlay" 
+          @close="setBookmarkFalse" 
           @close-button-pressed="closeBookmarkPressed"
           @bookmark-removed="updateBookmarkedWinesCount"
           ref="bookmark" />
@@ -62,10 +62,14 @@
 
       </div>
       <BottomTabbar 
-        @toggle-Bookmark-Overlay="toggleShowBookmarksOverlay" 
+        @login-and-profile-false="setLogginAndProfileFalse"
+        @bookmark-true="setBookmarkTrue" 
+        @bookmark-false="setBookmarkFalse" 
         @close-bookmark-frame="closeBookmarkFrame" 
-        @toggle-profile="toggleShowProfile" 
-        @toggle-login="toggleShowLogin" 
+        @profile-true="setProfileTrue" 
+        @login-true="setLoginTrue" 
+        @profile-false="setProfileFalse" 
+        @login-false="setLoginFalse" 
         @reset-filters="resetFilters"
         ref="bottomTabbar" />
   </div>
@@ -174,6 +178,19 @@ methods: {
     this.showBookmarksOverlay = !this.showBookmarksOverlay;
   },
 
+  setBookmarkFalse(){
+    this.showBookmarksOverlay = false;
+  },
+
+  setBookmarkTrue(){
+    this.showBookmarksOverlay = true;
+  },
+
+  setLogginAndProfileFalse(){
+    this.showProfile = false;
+    this.showLogin = false;
+  },
+
   closeBookmarkPressed() {
     this.$refs.bottomTabbar.toggleMenuButtons('Winemenu');
   },
@@ -182,21 +199,29 @@ methods: {
     this.showFoodOverlay = !this.showFoodOverlay;
   },
 
-  toggleShowProfile() {
-    this.showProfile = !this.showProfile;
+  setProfileTrue() {
+    this.showProfile = true;
   },
 
-  navigateToProfile() {
-    this.showProfile = !this.showProfile;
-    this.showLogin = !this.showLogin;
+  setLoginTrue() {
+    this.showLogin = true;
+  },
+
+  setProfileFalse() {
+    this.showProfile = false;
+  },
+
+  setLoginFalse() {
+    this.showLogin = false;
+  },
+
+  navigateToProfileAfterLogin() {
+    this.showProfile = true;
+    this.showLogin = false;
   },
 
   navigateToWinemenu() {
     this.$refs.bottomTabbar.pressWinemenu('/Winemenu', 'Winemenu');
-  },
-
-  toggleShowLogin() {
-    this.showLogin = !this.showLogin;
   },
 
   toggleDetailViewWine(wine) {

@@ -66,26 +66,8 @@ export default {
     }
   },
   
-  created() {
-    const jwt = localStorage.getItem('jwt');
-      if (jwt) {
-        this.$router.push('/profile');
-      }
-  },
-  
   methods: {
-    toggleShowBookmarksOverlay() {
-      this.showBookmarksOverlay = !this.showBookmarksOverlay;
-    },
 
-    toggleShowFoodOverlay() {
-      this.showFoodOverlay = !this.showFoodOverlay;
-    },
-
-    toggleDetailViewWine(wine) {
-      this.selectedWine = wine;
-      this.showDetailWineView = !this.showDetailWineView;
-    },
       
     async login() {
       try {

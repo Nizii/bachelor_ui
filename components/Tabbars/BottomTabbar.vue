@@ -88,15 +88,10 @@ export default {
     },
 
     pressWinemenu(route, input) {
-      // Nach Logout
-      if(this.isProfile){
-        this.$emit('toggle-profile');
-        this.$emit('toggle-login');
-        this.toggleMenuButtons('Profile');
-        return;
-      }
+      this.$emit('login-and-profile-false');
+
       if(this.isBookmark){
-        this.$emit('toggle-Bookmark-Overlay');
+        this.$emit('bookmark-false');
       }
       this.toggleMenuButtons(input);
       this.$router.push(route);
@@ -105,26 +100,27 @@ export default {
 
     pressBookmark(input) {
       if(this.isProfile){
-        this.$emit('toggle-login');
+        this.$emit('profile-false');
+        this.$emit('login-false');
       }
       this.toggleMenuButtons(input);
       this.frameOpen = true;
       setTimeout(() => {
-        this.$emit('toggle-Bookmark-Overlay');
+        this.$emit('bookmark-true');
       }, 300);
     },
 
     pressProfile(input) {
       if(this.isProfile) return;
       if(this.isBookmark){
-        this.$emit('toggle-Bookmark-Overlay');
+        this.$emit('bookmark-false');
       }
       this.toggleMenuButtons(input);
 
       if(this.isLoggedIn()) {
-        this.$emit('toggle-profile');
+        this.$emit('profile-true');
       } else {
-        this.$emit('toggle-login');
+        this.$emit('login-true');
       }
     },
 
