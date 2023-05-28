@@ -95,9 +95,9 @@
           </button>
         </div>
         <div v-else>
-          <p>Registriere dich und kommentiere!!!. 
+          <p>Registriere dich und kommentiere!. 
             <br>
-            <router-link to="/Login"><b>Klick hier</b></router-link>
+            <b>Unten rechts</b>
           </p>
         </div>
       </div>
