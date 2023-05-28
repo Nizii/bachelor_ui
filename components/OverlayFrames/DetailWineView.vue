@@ -84,8 +84,10 @@
       <div class="detail-view-comment-container" :style="{ backgroundColor: getBackgroundColor() }">
         <p id="detail-view-titel">Kommentare</p>
         <div class="comment" v-for="(comment, index) in wine.comments" :key="index">
-          <p class="comment-content">{{ comment }}</p>
+          <p class="comment-user">{{ comment[0] }}</p>
+          <p class="comment-content">{{ comment[1] }}</p>
         </div>
+      
         <div class="comment-input-container" v-if="isLoggedIn">
           <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
           <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">
@@ -210,11 +212,6 @@
         }, 300);
       },
 
-      addComment() {
-        this.wine.comments.push({ content: this.newComment, author: 'User', date: new Date().toISOString() });
-        this.newComment = '';
-      },
-
       getButtonColor() {
         if (this.wine.winetype === 'Weisswein') {
           return '#E8D954';
@@ -292,6 +289,25 @@
           const updatedWineCellar = wineCellar.filter(wine => wine._id !== this.wine._id);
           localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
           this.isFavorite = false;
+        }
+      },
+
+      async addComment() {
+        const comment = this.newComment;
+        const wineId = this.wine._id;
+        const username = localStorage.getItem('user');
+
+        console.log("Username "+ username);
+
+        try {
+          const response = await this.$axios.post(
+            `https://wine.azurewebsites.net/api/wine/${wineId}/comments`,
+            { author: username, content: comment }
+          );
+          this.wine.comments.push([username, comment]);
+          this.newComment = '';
+        } catch (error) {
+            console.error(error);
         }
       },
 
