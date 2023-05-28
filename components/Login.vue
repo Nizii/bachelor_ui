@@ -18,7 +18,12 @@
         <WineHeader class="overrideMargin" title="Erstelle ein Profil!"/>
         <form @submit.prevent="register">
           <div class="input-container">
-            <input type="text" id="username" placeholder="Email" v-model="username" required>
+            <!--Für Werkschau Resgistartion möglich nur mit Username-->
+            <!--<input type="text" id="username" placeholder="Email" v-model="username" required>-->
+            <input type="email" id="username" placeholder="Email" v-model="username" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            <div v-if="errorMessage" class="error-message">
+              {{ errorMessage }}
+            </div>
           </div>
           <div class="input-container">
             <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="8" required>
@@ -63,6 +68,7 @@ export default {
       showFoodOverlay: false,
       showBookmarksOverlay: false,
       showDetailWineView: false,
+      errorMessage: '',
     }
   },
   
@@ -98,7 +104,7 @@ export default {
           localStorage.setItem('jwt', response.data.token);
           this.$emit('login-succeed');
         } catch (error) {
-          if (error.response && error.response.status === 400) {
+        if (error.response && error.response.status === 400) {
           this.errorMessage = error.response.data;
         } else {
           this.errorMessage = "Registrierung nicht möglich";
@@ -113,6 +119,12 @@ export default {
   .overrideMargin{
     margin: 0;
     margin-bottom: 10px;
+  }
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
   }
   
   *{

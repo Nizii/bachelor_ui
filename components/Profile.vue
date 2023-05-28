@@ -77,9 +77,11 @@
             });
             this.userData = response.data;
             } catch (error) {
-            this.$router.push('Login');
           }
-          if(!token) this.$router.push('/Login');
+          if(!token) {
+            localStorage.removeItem('jwt');
+            this.$emit('logout');
+          }
       },
 
       logout() {
