@@ -3,10 +3,10 @@
     <div class="wine-card-row1">
       <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
       <div class="wine-card-row2">
-        <!--<div class="wine-flag">
-          <img :src="require('static/icons/nations/traube.png')" class="icon-small" alt="Bookmark icon" />
-        </div>-->
-        <h3 class="wine-title">{{ wine.name }}</h3>
+        <div class="wine-flag">
+          <img :src="require(`/static/icons/nations/${wine.nationTag}`)" class="icon" alt="Profile icon" />
+        </div>
+          <h3 class="wine-title">{{ wine.name }}</h3>
         <div class="wine-attribute">
           <div class="wine-type_container">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
