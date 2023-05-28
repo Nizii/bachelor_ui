@@ -1,8 +1,8 @@
 <template>
   <div class="main-container" style="margin: 0; padding: 0; box-sizing: border-box;">
-      <Profile v-if="showProfile"/>
-      <Login v-else-if ="showLogin" @login-succeed="navigateToProfile()" />
-      <div v-else>
+    <Profile v-if="showProfile && !showLogin" @logout="navigateToWinemenu" />
+    <Login v-else-if="showLogin" @login-succeed="navigateToProfile()" />
+    <div v-else-if="!showLogin && !showProfile">
         <div class="top-section">
           <div class="button-group">
             <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
@@ -102,9 +102,11 @@ data() {
     wines: [],
     searchText: '',
     showFoodOverlay: false,
+
     showProfile: false,
     showLogin: false,
     showBookmarksOverlay: false,
+    
     userData: null,
     selectedWine: null,
     showDetailWineView: false,
@@ -187,6 +189,10 @@ methods: {
   navigateToProfile() {
     this.showProfile = !this.showProfile;
     this.showLogin = !this.showLogin;
+  },
+
+  navigateToWinemenu() {
+    this.$refs.bottomTabbar.pressWinemenu('/Winemenu', 'Winemenu');
   },
 
   toggleShowLogin() {

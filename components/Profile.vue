@@ -1,6 +1,7 @@
 <template>
     <div style="margin: 0; padding: 0; box-sizing: border-box;">
       <WineHeader title="Deine Weine" />
+      <button @click="logout()" class="button">Logout</button>
       <div class="button-group">
         <button @click="filterWines('Weintyp')" class="button">Weintyp</button>
         <button @click="filterWines('Herkunft')" class="button">Herkunft</button>
@@ -75,10 +76,16 @@
               },
             });
             this.userData = response.data;
-            console.log("Userdata " + response.data);
             } catch (error) {
-            console.error(error);
+            this.$router.push('Login');
           }
+          if(!token) this.$router.push('/Login');
+      },
+
+      logout() {
+        localStorage.removeItem('jwt');
+        //this.$router.push('/Winemenu');
+        this.$emit('logout');
       },
   
       filterWines(filterType) {

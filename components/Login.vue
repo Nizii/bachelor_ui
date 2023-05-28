@@ -21,7 +21,7 @@
             <input type="text" id="username" placeholder="Email" v-model="username" required>
           </div>
           <div class="input-container">
-            <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="4" required>
+            <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="8" required>
           </div>
           <div class="input-container">
             <input type="password" id="password" placeholder="Passwort" v-model="confirmPassword" minlength="4" required>
@@ -116,7 +116,11 @@ export default {
           localStorage.setItem('jwt', response.data.token);
           this.$emit('login-succeed');
         } catch (error) {
-          console.error(error);
+          if (error.response && error.response.status === 400) {
+          this.errorMessage = error.response.data;
+        } else {
+          this.errorMessage = "Registrierung nicht möglich";
+        }
         }
       },
     },
@@ -148,6 +152,7 @@ export default {
     margin-top: 30px;
     border-radius: 10px;
     overflow: hidden;
+    z-index: 1001; 
   }
   
   .form-container {

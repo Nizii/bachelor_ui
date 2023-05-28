@@ -3,11 +3,9 @@
     <div class="wine-card-row1">
       <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
       <div class="wine-card-row2">
-        <div class="wine-flag">
-          <img :src="require(`/static/icons/nations/${wine.nationTag}`)" class="icon" alt="Profile icon" />
-        </div>
-          <h3 class="wine-title">{{ wine.name }}</h3>
+        <h3 class="wine-title">{{ wine.name }}</h3>
         <div class="wine-attribute">
+
           <div class="wine-type_container">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
               <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
@@ -22,7 +20,13 @@
               {{ wine.grape }}
             </p>
           </div>
+
         </div>
+
+        <div class="wine-flag">
+          <img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="wine-info-flag" alt="Profile icon" />
+        </div>
+
         <div class="wine-price">
           <div class="bottle-price">
             CHF {{ wine.bottleprice}}
@@ -211,7 +215,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 10px;
+    margin-top:5px;
   }
   
   .wine-card {
@@ -228,6 +232,12 @@
     height: 100%;
     object-fit: contain;
   }
+
+  .wine-info-flag{
+    width: 20px;
+    height: 13px;
+  }
+
 
   .wine-card-row1 {
     display: flex;
@@ -261,8 +271,9 @@
     /*background-image: url("/flag.png");*/
     background-size: contain;
     background-repeat: no-repeat;
-    height: 30px;
     margin-bottom: 0;
+    margin-top:5px;
+    margin-bottom: 5px;
   }
   
   .wine-title {
@@ -279,7 +290,7 @@
   .wine-price {
     font-size: 13px;
     font-weight: bold;
-    margin-top: 5px;
+    margin-bottom: 10px;
   }
   
   .star-rating {

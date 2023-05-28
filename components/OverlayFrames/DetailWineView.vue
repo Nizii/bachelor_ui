@@ -30,7 +30,12 @@
           <p class="detail-view-content"><b>CHF {{wine.bottleprice}}.-</b></p>
           <br>
           <p class="detail-view-label">Land</p>
-          <p class="detail-view-content"><b>{{wine.regionTag}}, {{wine.nationTag}}</b></p>
+          <b>
+          <p class="detail-view-content">
+            {{wine.regionTag}}, {{wine.nationTag}} 
+            <img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="detail-view-flag" alt="Profile icon" />
+          </p>
+          </b> 
           <br>
           <p class="detail-view-description">{{wine.charakter}}</p>
           <br>
@@ -358,6 +363,12 @@
     text-decoration: none; 
     margin-bottom: 20px;
     margin-top: 2em;
+  }
+
+  .detail-view-flag{
+    width: 28px;
+    height: 18px;
+    margin-left: 15px;
   }
 
   .overlay-frame.open {

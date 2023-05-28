@@ -1,14 +1,14 @@
 <template>
   <div class="fixed-bottom-bar">
     <!-- Menü Button -->
-    <button @click="navigateTo('/Winemenu', 'Winemenu')" class="bottom-bar-link">
+    <button @click="pressWinemenu('/Winemenu', 'Winemenu')" class="bottom-bar-link">
       <img v-if="!isWinemenu" :src="require('static/icons/buttons/karte.png')" class="icon" alt="Menu icon" />
       <img v-else :src="require('static/icons/buttons/karte_an.png')" class="icon" alt="Menu icon" />
       <!--<span class="bottom-bar-label">Menü</span>-->
     </button>
 
     <!-- Merkliste Button -->
-    <button @click="toggleBookmarkOverlay('Bookmark')" class="bottom-bar-link">
+    <button @click="pressBookmark('Bookmark')" class="bottom-bar-link">
       <img v-if="!isBookmark" :src="require('static/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
       <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
       <!--<span class="bottom-bar-label">Merkliste</span>-->
@@ -16,7 +16,7 @@
     </button>
 
     <!-- Profil Button -->
-    <button @click="openLogin('Profile')" class="bottom-bar-link">
+    <button @click="pressProfile('Profile')" class="bottom-bar-link">
       <img v-if="!isProfile" :src="require('static/icons/buttons/profil.png')" class="icon" alt="Profile icon" />
       <img v-else :src="require('static/icons/buttons/profil_an.png')" class="icon" alt="Profile icon" />
       <!--<span class="bottom-bar-label">Profil</span>-->
@@ -33,7 +33,7 @@ export default {
       activeTab: 'home',
       bookmarkedWinesCount: (JSON.parse(localStorage.getItem('bookmarkedWines')) || []).length,
       loggedIn: this.isLoggedIn(),
-      isWinemenu: false,
+      isWinemenu: true,
       isBookmark: false,
       isProfile: false, 
     }
@@ -41,7 +41,6 @@ export default {
 
   mounted() {
     this.bookmarkedWinesCount = (JSON.parse(localStorage.getItem('bookmarkedWines')) || []).length;
-    console.log("Here "+ this.bookmarkedWinesCount);
   },
 
   // Observiert bookmarkedWinesCount und loggedIn ob sich der Wert ändert
@@ -88,17 +87,26 @@ export default {
       this.bookmarkedWinesCount = JSON.parse(localStorage.getItem('bookmarkedWines')).length;
     },
 
-    navigateTo(route, input) {
-      if(this.isProfile) this.$emit('toggle-profilen');
-      if(this.isBookmark) this.$emit('toggle-Bookmark-Overlay');
-      this.$emit('reset-filters');
+    pressWinemenu(route, input) {
+      // Nach Logout
+      if(this.isProfile){
+        this.$emit('toggle-profile');
+        this.$emit('toggle-login');
+        this.toggleMenuButtons('Profile');
+        return;
+      }
+      if(this.isBookmark){
+        this.$emit('toggle-Bookmark-Overlay');
+      }
       this.toggleMenuButtons(input);
       this.$router.push(route);
+      this.$emit('reset-filters');
     },
 
-    toggleBookmarkOverlay(input) {
-      if(this.isBookmark) return;
-      if(this.isProfile) this.$emit('toggle-profile');
+    pressBookmark(input) {
+      if(this.isProfile){
+        this.$emit('toggle-login');
+      }
       this.toggleMenuButtons(input);
       this.frameOpen = true;
       setTimeout(() => {
@@ -106,15 +114,18 @@ export default {
       }, 300);
     },
 
-    openLogin(input) {
-      if(!this.isLoggedIn()){
-        console.log("Not Logged in");
+    pressProfile(input) {
+      if(this.isProfile) return;
+      if(this.isBookmark){
+        this.$emit('toggle-Bookmark-Overlay');
+      }
+      this.toggleMenuButtons(input);
+
+      if(this.isLoggedIn()) {
+        this.$emit('toggle-profile');
+      } else {
         this.$emit('toggle-login');
       }
-      if(this.isBookmark) this.$emit('toggle-Bookmark-Overlay');
-      this.toggleMenuButtons(input);
-      console.log("Yes Logged in");
-      this.$emit('toggle-profile');
     },
 
     logout() {
@@ -122,10 +133,12 @@ export default {
       this.loggedIn = false;
       this.$router.push('/');
     },
+
     isLoggedIn() {
       return localStorage.getItem('jwt') !== null;
     }
   }
+
 };
 </script>
 
