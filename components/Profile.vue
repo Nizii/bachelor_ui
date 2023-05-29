@@ -39,6 +39,10 @@
           <DoughnutChart :chartData="chartData" :options="chartOptions" />
         </div>
       </div>
+
+      <div class="bottom-placeholder">
+
+      </div>
     </div>
   </template>
   
@@ -154,7 +158,7 @@
     },
   };
   </script>
-  
+
   <style>
   h1 {
     font-size: 48px;
@@ -175,7 +179,7 @@
   }
 
   .profile-chart-title{
-    color: white;
+    color: black;
     font-size: 30px;
     font-weight: bold;
     font-family: sans-serif;
@@ -197,7 +201,6 @@
   .profile-content{
     padding-left: 20px;
     padding-right: 20px;
-    margin-bottom: 5em;
   }
 
   .profile-line-1{
@@ -226,8 +229,8 @@
     justify-content: space-around;
     align-items: center;
     background-color: whitesmoke;
-    border-radius: 10px;
     height: 50px;
+    width: 100%;
   }
 
 
@@ -278,6 +281,10 @@
     border-radius: 5px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .bottom-placeholder{
+    height: 80px;
   }
 
 

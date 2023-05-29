@@ -372,8 +372,7 @@ async created() {
 </script>
 
 
-<style>
-
+<style scoped>
 body, html {
   margin: 0;
   padding: 0;
@@ -382,6 +381,9 @@ body, html {
   background-repeat: repeat-y;
   background-attachment: scroll; 
 }
+</style>
+
+<style>
 
 * {
   margin: 0;
