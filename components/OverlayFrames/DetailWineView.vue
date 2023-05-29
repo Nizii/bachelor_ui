@@ -49,7 +49,7 @@
             </span>
           </p>
           <br>
-          <p class="detail-view-description">{{wine.vinzer}}</p>
+          <p class="detail-view-description">{{wine.winzer}}</p>
           <div class="add-to-favorite-container">
             <button v-if="isLoggedIn" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
               Zum Weinkeller hinzufügen
