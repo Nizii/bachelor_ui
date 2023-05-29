@@ -1,8 +1,15 @@
 <template>
-    <div style="margin: 0; padding: 0; box-sizing: border-box;">
-      <WineHeader title="Deine Weine" />
-      <button @click="logout()" class="button">Logout</button>
-      <div class="button-group">
+    <div class="profile-content">
+      <div class="profile-header">
+        <div class="profile-title">
+          Weinkeller
+        </div>
+        <div class="logout-container">
+          <button @click="logout()" class="logout-button">Logout</button>
+        </div>
+      </div>
+
+      <div class="profile-button-group">
         <button @click="filterWines('Weintyp')" class="button">Weintyp</button>
         <button @click="filterWines('Herkunft')" class="button">Herkunft</button>
         <button @click="filterWines('Trauben')" class="button">Trauben</button>
@@ -21,8 +28,17 @@
           </div>
         </div>
       </div>
-      <WineHeader title="Statistiken" />
-      <img class="wine-image" src="/stat.jpg" alt="Weinbild" width="200px" height="160px" margin="20px"/>
+
+      <div class="profile-line-1"></div>
+
+      <div class="chart-container">
+        <div class="profile-chart-title"> 
+          <p>Meine getrunkenen Weine</p>
+        </div>
+        <div class="doughnut-chart">
+          <DoughnutChart :chartData="chartData" :options="chartOptions" />
+        </div>
+      </div>
     </div>
   </template>
   
@@ -31,12 +47,15 @@
   import CellarItem from '~/components/CellarItem.vue';
   import WineInfo from '~/components/WineInfo.vue';
   import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
+  import DoughnutChart from '~/components/Charts/DoughnutChart.vue';
+
   
   export default {
     components: {
       CellarItem,
       WineInfo,
       DetailWineView,
+      DoughnutChart,
     },
   
     data() {
@@ -45,6 +64,25 @@
         showFoodOverlay: false,
         showBookmarksOverlay: false,
         showDetailWineView: false,
+        chartData: {
+          labels: ['Red', 'Blue', 'Yellow'],
+          datasets: [{
+            data: [300, 50, 100],
+            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+            hoverOffset: 4
+          }]
+        },
+        chartOptions: {
+          title: {
+            /*
+            display: true, 
+            text: 'Mein Doughnut-Chart', 
+            fontColor: 'black',
+            fontSize: 16, 
+            */
+          },
+        }
+
       };
     },
   
@@ -117,32 +155,87 @@
   };
   </script>
   
-  <style scoped>
+  <style>
   h1 {
     font-size: 48px;
     text-align: center;
     margin-top: 50px;
     margin-bottom: 30px;
   }
+
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1001; 
+    background-color: white; 
+    border-bottom: 1px solid rgb(214, 214, 214);
+  }
+
+  .profile-chart-title{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: sans-serif;
+  }
+  
+  .profile-title {
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: sans-serif;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .doughnut-chart{
+
+  }
+
+  .profile-content{
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 5em;
+  }
+
+  .profile-line-1{
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin-top: 3em;
+    margin-bottom: 1em;
+    width: 100%;
+  }
   
   .toggle-btn {
     border: none;
   }
+
+  .logout-container {
+    margin-right: 20px;
+  }
+
+  .logout-button{
+    width: 40px;
+    height: 40px;
+    font-weight: bold;
+  }
   
-  .button-group {
+  .profile-button-group {
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: whitesmoke;
+    border-radius: 10px;
     height: 50px;
-    margin: 20px;
   }
-  
+
+
   .button {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: white;
     text-decoration: none;
     padding: 0 1rem;
     height: 100%;
@@ -154,21 +247,14 @@
     border: none;
   }
   
-  .button:hover,
-  .button:focus {
-    color: black;
-    font-weight: bold;
-    text-decoration: underline;
-    text-decoration-color: black;
-    text-decoration-thickness: 2px;
-    text-decoration-offset: 5px;
-  }
-  
   .wine-cellar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 20px;
+    background-image: url("/background/weinkeller.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   
   .regal {
@@ -177,8 +263,8 @@
     align-items: flex-start;
     width: 100%;
     height: auto;
-    background-color: white;
-    border-bottom: 3px solid brown; /* Fügen Sie diese Zeile hinzu */
+    
+    border-bottom: 3px solid brown;
     box-sizing: border-box;
     overflow-y: auto;
     padding-top: 10px;
@@ -193,4 +279,6 @@
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
+
+
   </style>

@@ -108,9 +108,7 @@
   
   <script>
   import TasteInfo from '~/components/TasteComponent/TasteInfo.vue';
-  import RadarChart from '~/components/RadarChart.vue';
-
-
+  import RadarChart from '~/components/Charts/RadarChart.vue';
 
   export default {
     name: 'DetailWineView',
