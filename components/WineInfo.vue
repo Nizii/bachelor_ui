@@ -239,7 +239,7 @@
   
   
 .wine-price {
-  font-size: 13px;
+  font-size: 12px;
 
   margin-bottom: 10px;
   display: flex;
