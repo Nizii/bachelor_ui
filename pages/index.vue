@@ -67,7 +67,6 @@ body, html {
 
 
 .start-page-link {
-  font-family: sans-serif;
   margin-top: 15px;
   color: white;
 }

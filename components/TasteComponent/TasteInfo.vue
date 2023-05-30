@@ -1,5 +1,5 @@
 <template>
-    <div class="detail-view-info-container" :style="{ backgroundColor: backgroundColor }">
+    <div class="detail-view-info-container" :style="{ backgroundColor: backgroundColor, color: getColor}">
         <p id="detail-view-titel">Was bedeutet?</p>
         <span class="popup-tag">Süss</span>
         <br>
@@ -44,38 +44,43 @@
     },
     methods: {
         getBackgroundColor() {
-            this.$emit(get-background-color);
+            this.$emit('get-background-color');
+        },
+        getColor() {
+            this.$emit('get-color');
         }
     },
 }
 </script>
 
 <style>
-    .detail-view-info-container{
-        padding: 20px;
-        padding: 1em;
-        border-radius: 15px;
-        margin-top: 2em; 
+    /* @import url('https://fonts.googleapis.com/css2?family=Semplicita:wght@400;700&display=swap'); */
 
-    }
+.detail-view-info-container{
+    padding: 20px;
+    padding: 1em;
+    border-radius: 15px;
+    margin-top: 2em; 
+    font-family: 'Semplicita', sans-serif;
+}
 
-    .detail-view-title{
-        color: black;
-        font-size: 30px;
-        font-weight: bold;
-        font-family: sans-serif;
-        margin-bottom: 20px;
-    }
+.detail-view-title{
+    color: black;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Semplicita', sans-serif;
+    margin-bottom: 20px;
+}
 
-    .infotxt{
-        margin-bottom: 20px;
-        font-size: 13px;
-    }
+.infotxt{
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    font-family: 'Semplicita', sans-serif;
+}
 
-    .popup-tag{
-        font-weight: bold;
-        font-size: 15px;
-    }
-
-    
+.popup-tag{
+    font-weight: 700;
+    font-size: 15px;
+}
 </style>

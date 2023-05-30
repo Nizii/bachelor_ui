@@ -13,7 +13,7 @@
           <div class="inputrow">
             <input type="text" class="search-input" @input="onSearchInput">
             <button class="toggle-btn" @click="toggleShowFoodOverlay">
-              <img :src="require('static/icons/buttons/filter.png')" class="icon" alt="Bookmark icon" />
+              <img :src="require('static/icons/buttons/fillter2.png')" class="icon" alt="Filter icon" />
             </button>
           </div>
         </div>
@@ -388,7 +388,6 @@ body, html {
 * {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
 }
 
 .loading{
@@ -423,7 +422,7 @@ body, html {
   border-radius: 10px;
   margin-left: 15px;
   margin-right: 15px;
-  background-image: url('static/icons/buttons/suche.png');
+  background-image: url('static/icons/buttons/suche.svg');
   background-repeat: no-repeat;
   background-position: 5px 4px;
   background-size: 40px 40px;
@@ -463,7 +462,6 @@ width: 25%;
 box-sizing: border-box;
 transition: color 0.3s;
 font-size: 12px;
-font-family: sans-serif;
 border: none;
 }
 

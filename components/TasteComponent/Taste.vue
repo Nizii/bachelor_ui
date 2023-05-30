@@ -118,7 +118,6 @@ export default {
     color: white;
     border-radius: 15px;
     text-decoration: none; 
-    font-family: sans-serif;
     color: white;
     text-align: center;
     margin:20px;
@@ -131,7 +130,6 @@ export default {
     color: white;
     border-radius: 15px;
     text-decoration: none; 
-    font-family: sans-serif;
     color: white;
     text-align: center;
     margin:20px;

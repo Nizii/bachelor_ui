@@ -14,11 +14,11 @@
         <div id="row2">
           <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" /></p>
             <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" /></p>
             <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" /></p>
+              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" /></p>
           </div>
           <br>
           <p id="detail-view-grape">{{wine.grape}}</p>

@@ -2,23 +2,23 @@
   <div class="fixed-bottom-bar">
     <!-- Menü Button -->
     <button @click="pressWinemenu('/Winemenu', 'Winemenu')" class="bottom-bar-link">
-      <img v-if="!isWinemenu" :src="require('static/icons/buttons/karte.png')" class="icon" alt="Menu icon" />
-      <img v-else :src="require('static/icons/buttons/karte_an.png')" class="icon" alt="Menu icon" />
+      <img v-if="!isWinemenu" :src="require('static/icons/buttons/karte.svg')" class="icon" alt="Menu icon" />
+      <img v-else :src="require('static/icons/buttons/karte_an.svg')" class="icon" alt="Menu icon" />
       <!--<span class="bottom-bar-label">Menü</span>-->
     </button>
 
     <!-- Merkliste Button -->
     <button @click="pressBookmark('Bookmark')" class="bottom-bar-link">
-      <img v-if="!isBookmark" :src="require('static/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
-      <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
+      <img v-if="!isBookmark" :src="require('static/icons/buttons/merkliste.svg')" class="icon" alt="Bookmark icon" />
+      <img v-else :src="require('static/icons/buttons/merkliste_an.svg')" class="icon" alt="Bookmark icon" />
       <!--<span class="bottom-bar-label">Merkliste</span>-->
       <span v-if="bookmarkedWinesCount > 0" class="bookmark-badge">{{ bookmarkedWinesCount }}</span>
     </button>
 
     <!-- Profil Button -->
     <button @click="pressProfile('Profile')" class="bottom-bar-link">
-      <img v-if="!isProfile" :src="require('static/icons/buttons/profil.png')" class="icon" alt="Profile icon" />
-      <img v-else :src="require('static/icons/buttons/profil_an.png')" class="icon" alt="Profile icon" />
+      <img v-if="!isProfile" :src="require('static/icons/buttons/profil.svg')" class="icon" alt="Profile icon" />
+      <img v-else :src="require('static/icons/buttons/profil_an.svg')" class="icon" alt="Profile icon" />
       <!--<span class="bottom-bar-label">Profil</span>-->
     </button>
   </div>

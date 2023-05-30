@@ -1,0 +1,53 @@
+@font-face {
+    font-family: 'Semplicita';
+    src: url('/fonts/SemplicitaBoldItalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Semplicita';
+    src: url('/fonts/SemplicitaBold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Semplicita';
+    src: url('/fonts/SemplicitaLightItalic.otf') format('opentype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Semplicita';
+    src: url('/fonts/SemplicitaLight.otf') format('opentype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Semplicita';
+    src: url('/fonts/SemplicitaMediumItalic.otf') format('opentype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Semplicita';
+    src: url('/fonts/SemplicitaMedium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Semplicita Ombra';
+    src: url('/fonts/SemplicitaOmbra.otf') format('opentype');
+    font-display: swap;
+}

@@ -8,13 +8,13 @@
 
           <div class="wine-type_container">
             <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
             <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
             <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-              <img :src="require('static/icons/others/traube.png')" class="icon-small" alt="Bookmark icon" />
+              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
             <p>
               {{ wine.grape }}
@@ -39,8 +39,8 @@
       <div class="wine_card_row3">
         <div class="container-above">
           <button v-if="!isBookmark" @click.stop="addToBookmarks">
-            <img v-if="!isFavorite" :src="require('static/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
-            <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
+            <img v-if="!isFavorite" :src="require('static/icons/buttons/merkliste.svg')" class="icon" alt="Bookmark icon" />
+            <img v-else :src="require('static/icons/buttons/merkliste_an.svg')" class="icon" alt="Bookmark icon" />
           </button>
           <button v-else @click.stop="removeWineInBookmark">
             <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
@@ -208,7 +208,7 @@
   @import "@/CSS/shared-wine-type-styles.css";
   
   * {
-    font-family: sans-serif;
+    font-family: 'Semplicita', sans-serif;
   }
 
   .wine-type_container {
