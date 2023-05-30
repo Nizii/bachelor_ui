@@ -240,7 +240,7 @@
   
 .wine-price {
   font-size: 13px;
-  font-weight: bold;
+
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
