@@ -29,10 +29,10 @@
 
         <div class="wine-price">
           <div class="bottle-price">
-            CHF {{ wine.bottleprice}}
+            Flasche CHF {{ wine.bottleprice}}
           </div>
           <div class="open-price">
-            CHF {{ wine.openprice}}
+            Glas CHF {{ wine.openprice}}
           </div>
         </div>
       </div>
@@ -112,16 +112,6 @@
     },
 
     methods: {
-      async saveRating() {
-        try {
-          //const response = await axios.put(`https://wine.azurewebsites.net/api/wine/${this.wine._id}`);
-          const response = await axios.put(`https://localhost:44322/api/wine/${this.wine._id}`);
-          this.rating++;
-          console.log(response.data);
-        } catch (error) {
-          console.error(error);
-        }
-      },
 
       removeWineInBookmark() {
         this.$emit('remove-wine-element');
@@ -149,55 +139,7 @@
       openDetailView() {
         this.$emit('open-detail-view', this.wine);
       },
-  
-/*
-      updateFavoriteList() {
-      if (this.isFavorite) {
-        this.userData.favoriten = this.userData.favoriten.filter(
-          (favorite) => favorite._id !== this.wine._id
-        );
-      } else {
-        this.userData.favoriten.push({ _id: this.wine._id });
-      }
-      this.userData.favoriten = [...this.userData.favoriten];
-      },
 
-      async deleteFavorites() {
-        const token = localStorage.getItem('jwt');
-        if (!token) {
-          Console.log("User muss sich einloggen");
-          return;
-        }
-        try {
-          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, {
-          //const response = await axios.post(`https://localhost:44322/api/user/remove-favorite/${this.wine._id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        } catch (error) {
-          console.error(error);
-        }
-      },
-
-      async addToFavorites() {
-        const token = localStorage.getItem('jwt');
-        if (!token) {
-          //Alert("User muss sich einloggen");
-          return;
-        }
-        try {
-          const response = await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${this.wine._id}`, {
-          //const response = await this.$axios.post(`https://localhost:44322/api/user/add-favorite/${this.wine._id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          } catch (error) {
-          console.error(error);
-        }
-      },
-      */
     },
   }
   </script>

@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: 0; padding: 0; box-sizing: border-box;">
+  <div class="index-page" style="margin: 0; padding: 0; box-sizing: border-box;">
     <div class="start-page-container">
       <div class="block"></div>
       <div class="block"></div>
@@ -30,14 +30,22 @@ export default {
   font-family: 'Semplicita', sans-serif;
 }
 
-body {
+html, body {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
+}
+
+.index-page {
+  height: 100%;
+  width: 100%;
+  margin: 0;
   background-image: url("/background/glaswein.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  margin-bottom: 0px;
 }
 
 .start-page-container {

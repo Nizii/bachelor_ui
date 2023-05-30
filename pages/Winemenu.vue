@@ -372,17 +372,6 @@ async created() {
 </script>
 
 
-<style scoped>
-body, html {
-  margin: 0;
-  padding: 0;
-  background-image: url("/background/weinfleck rot.png");
-  background-position: center;
-  background-repeat: repeat-y;
-  background-attachment: scroll; 
-}
-</style>
-
 <style>
 
 * {
@@ -398,6 +387,11 @@ body, html {
 
 .main-container {
   margin: 0;
+  padding: 0;
+  background-image: url("/background/weinfleck rot.png");
+  background-position: center;
+  background-repeat: repeat-y;
+  background-attachment: scroll; 
   box-sizing: border-box;
 }
 
