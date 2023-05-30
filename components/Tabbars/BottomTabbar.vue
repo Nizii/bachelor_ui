@@ -17,8 +17,8 @@
 
     <!-- Profil Button -->
     <button @click="pressProfile('Profile')" class="bottom-bar-link">
-      <img v-if="!isProfile" :src="require('static/icons/buttons/profil.svg')" class="icon" alt="Profile icon" />
-      <img v-else :src="require('static/icons/buttons/profil_an.svg')" class="icon" alt="Profile icon" />
+      <img v-if="!isProfile" :src="require('static/icons/buttons/Profil.svg')" class="icon" alt="Profile icon" />
+      <img v-else :src="require('static/icons/buttons/Profil_an.svg')" class="icon" alt="Profile icon" />
       <!--<span class="bottom-bar-label">Profil</span>-->
     </button>
   </div>
