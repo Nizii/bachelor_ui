@@ -36,7 +36,7 @@
             </div>
           </div>
           <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
-            <div v-if="wine.winetype === 'Rosé'">
+            <div v-if="wine.winetype === 'Rose'">
               <WineInfo :wine="wine" :userData="userData" 
               @open-detail-view="toggleDetailViewWine"
               @bookmark-removed="updateBookmarkedWinesCount" /> 
