@@ -29,18 +29,27 @@
 
         <div class="wine-price">
           <div class="bottle-price">
-            Flasche CHF {{ wine.bottleprice}}
-          </div>
-          <div class="open-price">
-            Glas CHF {{ wine.openprice}}
+            <div class="price-label">
+              <div>Flasche</div>
+              <div>Glas</div>
+            </div>
+            <div class="volume-value">
+              <div>0.75l</div>
+              <div>0.1l</div>
+            </div>
+            <div class="price-value">
+              <div>CHF {{ wine.openprice * 7}}</div>
+              <div>CHF {{ wine.openprice}}</div>
+            </div>
           </div>
         </div>
+        
       </div>
       <div class="wine_card_row3">
         <div class="container-above">
           <button v-if="!isBookmark" @click.stop="addToBookmarks">
-            <img v-if="!isFavorite" :src="require('static/icons/buttons/merkliste.svg')" class="icon" alt="Bookmark icon" />
-            <img v-else :src="require('static/icons/buttons/merkliste_an.svg')" class="icon" alt="Bookmark icon" />
+            <img v-if="!isFavorite" :src="require('static/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
+            <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
           </button>
           <button v-else @click.stop="removeWineInBookmark">
             <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
@@ -229,11 +238,30 @@
   }
   
   
-  .wine-price {
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+.wine-price {
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bottle-price {
+  display: flex;
+  flex-direction: row;
+  justify-content:left;
+}
+
+.price-label,
+.price-value,
+.volume-value {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-value, .volume-value{
+  padding-left: 5px;
+}
   
   .star-rating {
     width: 100%;
