@@ -145,10 +145,11 @@ export default {
     text-decoration: none; 
     color: white;
     text-align: center;
-    margin:20px;
+    margin: 20px;
     padding: 15px;
     width: 250px;
     margin-top: 30px;
+    border: none;
   }
 
   .help-button{
@@ -161,6 +162,7 @@ export default {
     margin:20px;
     padding: 10px;
     width: 70px;
+    border: none;
   }
    
   .AppHeader {
