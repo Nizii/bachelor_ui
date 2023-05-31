@@ -8,6 +8,7 @@
         <router-link to="/Tasteprofile/Sweet" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
         <router-link to="/Winemenu" class="start-page-link">Weiter zu Weinkarte</router-link>
       </div>
+      <div class="block-2"></div>
     </div>
   </div>
 </template>
@@ -65,7 +66,7 @@ html, body {
   width: 60%;
   max-width: 900px;
   margin: 0 auto;
-  height: 33vh;
+  height: 30vh;
 }
 
 .block {
@@ -73,7 +74,16 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 34vh;
+  height: 25vh;
+  overflow: auto;
+}
+
+.block-2 {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 20vh;
   overflow: auto;
 }
 

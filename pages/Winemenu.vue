@@ -319,20 +319,18 @@ export default {
  */
   // Eine Funktion, die die Übereinstimmung zwischen dem Geschmacksprofil eines Benutzers und eines Weins berechnet
   calculateMatch(userProfile, wineProfile) {
-    if(userProfile[0] == 0 &&
-      userProfile[1] == 0 &&
-      userProfile[2] == 0 &&
-      userProfile[3] == 0 &&
-      userProfile[4] == 0 &&
-      userProfile[5] == 0) return 0;
-
   // Eine Variable, um die Gesamtdifferenz zwischen den Profilen zu speichern
     var totalDifference = 0;
     // Eine Schleife, die durch jedes Element in den Profilen geht
     for (var i = 0; i < userProfile.length; i++) {
         // Finde den Unterschied zwischen den entsprechenden Elementen in den Profilen
         var difference = userProfile[i] - wineProfile[i];
-        // Quadriere den Unterschied, um negative Werte zu vermeiden
+        // Quadriere den Unterschied, um negative Werte zu vermeiden und Unterschiede stärker zu gewichten
+        // Bsp mit quadrierung  5-1 = 4 -> 4^2 = 16
+        // BSp ohne quadrierung 5-1 = 4 ->     =  4 
+
+        // Bsp mit quadrierung  3-1 = 2 -> 4^2 =  4
+        // Bsp ohne quadrierung 3-1 = 2 ->     =  2 
         var squaredDifference = difference * difference;
         // Addiere die quadratische Differenz zur Gesamtdifferenz
         totalDifference += squaredDifference;

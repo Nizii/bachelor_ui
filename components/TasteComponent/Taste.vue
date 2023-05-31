@@ -17,16 +17,14 @@
       <div class="block">
         <TitleBig :title="title" :fontSize="30" />
       </div>
-      <div class="block">
-      </div>
-      <div class="block">
+      <div class="block"></div>
+      <div class="block-content">
         <Slider ref="slider" @emit-value="setPreferenceAndNavigate" />
         <button class="navigation-button" @click="startProcess()">
           Weiter
         </button>
-        <div class="block">
-        </div>
       </div>
+      <div class="block-bottom"></div>
       <TasteInfoPopup v-if="showInfo" :infoKey="preferenceKey" :show="showInfo" @close="showInfo = false" />
     </div>
   </div>
@@ -118,8 +116,23 @@ export default {
     overflow: auto;
     text-align: center;
   }
+
+  .block-content {
+    height: 35vh;
+    margin-left: 30px;
+    margin-right: 30px;
+    overflow: auto;
+    text-align: center;
+  }
+
+  .block-bottom {
+    height: 28vh;
+    margin-left: 30px;
+    margin-right: 30px;
+    overflow: auto;
+    text-align: center;
+  }
    
-  
   .navigation-button {
     background-color: #660F0F;
     color: white;
@@ -130,7 +143,7 @@ export default {
     margin:20px;
     padding: 15px;
     width: 250px;
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   .help-button{
