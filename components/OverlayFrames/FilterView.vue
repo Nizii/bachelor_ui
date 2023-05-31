@@ -249,7 +249,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .go-icon{
   width: 40px;
   height: 40px;
@@ -267,7 +268,7 @@ export default {
 
 .filter-title{
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 .active {
@@ -291,7 +292,7 @@ export default {
   scroll-padding: 20px;
   scroll-snap-type: x mandatory;
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }
 
 .checkbox {
@@ -303,7 +304,9 @@ export default {
 }
 
 .parent-container{
-  padding: 30px
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
 }
 
 .overlay-frame {
@@ -346,6 +349,7 @@ export default {
   top: 0;
   z-index: 1001; 
   background-color: white; 
+  padding-top: 15px;
 }
 
 </style>
