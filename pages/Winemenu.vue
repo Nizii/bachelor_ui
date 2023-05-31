@@ -25,6 +25,9 @@
             <button @click="sortWinesByPrice" class="sort-button">Preis
               <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
             </button>
+            <button @click="sortWinesByMatch" class="sort-button">Match
+              <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
+            </button>
           </div>
           <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
             <div v-if="wine.winetype === 'Weisswein'">
@@ -153,7 +156,15 @@ export default {
       }
     },
 
+    sortWinesByMatch() {
+      this.sortByMatchAscending = !this.sortByMatchAscending;
 
+      if (this.sortByPriceAscending) {
+        this.filteredWines.sort((a, b) => a.rating - b.rating);
+      } else {
+        this.filteredWines.sort((a, b) => b.rating - a.rating);
+      }
+    },
 
     filterWines(wineType) {
       let filteredWines = this.wines;
@@ -196,15 +207,6 @@ export default {
           wine.winetype.toLowerCase().includes(this.searchText.toLowerCase())
         );
       }
-
-      /*
-      if (this.filters.price > 0 && this.filters.price <= 100) {
-        filteredWines = filteredWines.filter(wine => {
-          return wine.price <= this.filters.price;
-        });
-      }
-      */
-
       this.filteredWines = filteredWines;
     },
 
@@ -235,172 +237,162 @@ export default {
       this.filterWines();
     },
 
-    /*
-    filterWines(filter) {
-      if (filter === 'all') {
-        this.searchText = '';
-      } else {
-        this.searchText = filter;
-      }
-      this.filterWines();
+    hasWineType(winetype) {
+      return this.filteredWines.some(wine => wine.winetype === winetype);
     },
-*/
-  hasWineType(winetype) {
-    return this.filteredWines.some(wine => wine.winetype === winetype);
+
+    toggleShowBookmarksOverlay() {
+      this.showBookmarksOverlay = !this.showBookmarksOverlay;
+    },
+
+    setBookmarkFalse(){
+      this.showBookmarksOverlay = false;
+    },
+
+    setBookmarkTrue(){
+      this.showBookmarksOverlay = true;
+    },
+
+    setLogginAndProfileFalse(){
+      this.showProfile = false;
+      this.showLogin = false;
+    },
+
+    closeBookmarkPressed() {
+      this.$refs.bottomTabbar.toggleMenuButtons('Winemenu');
+    },
+
+    toggleShowFoodOverlay() {
+      this.showFoodOverlay = !this.showFoodOverlay;
+    },
+
+    setProfileTrue() {
+      this.showProfile = true;
+    },
+
+    setLoginTrue() {
+      this.showLogin = true;
+    },
+
+    setProfileFalse() {
+      this.showProfile = false;
+    },
+
+    setLoginFalse() {
+      this.showLogin = false;
+    },
+
+    navigateToProfileAfterLogin() {
+      this.showProfile = true;
+      this.showLogin = false;
+    },
+
+    navigateToWinemenu() {
+      this.$refs.bottomTabbar.pressWinemenu('/Winemenu', 'Winemenu');
+    },
+
+    toggleDetailViewWine(wine) {
+      this.selectedWine = wine;
+      this.showDetailWineView = !this.showDetailWineView;
+    },
+
+    pushToTasteprofile() {
+      this.$router.push('/Tasteprofile/Sweet');
+    },
+
+    /**
+   * Berechnet die Übereinstimmung zwischen einem Benutzerprofil und einem Weinprofil.
+   * Dieser Algorithmus verwendet das Konzept der euklidischen Distanz
+   *
+   * @param userProfile - Ein Array von fünf Zahlen, die das Geschmacksprofil des Benutzers darstellen.
+   * @param wineProfile - Ein Array von fünf Zahlen, die das Geschmacksprofil des Weins darstellen.
+   *
+   * @return {number} - Rückgabe als Protzentzahl
+   */
+    // Eine Funktion, die die Übereinstimmung zwischen dem Geschmacksprofil eines Benutzers und eines Weins berechnet
+    calculateMatch(userProfile, wineProfile) {
+    // Eine Variable, um die Gesamtdifferenz zwischen den Profilen zu speichern
+      var totalDifference = 0;
+      // Eine Schleife, die durch jedes Element in den Profilen geht
+      for (var i = 0; i < userProfile.length; i++) {
+          // Finde den Unterschied zwischen den entsprechenden Elementen in den Profilen
+          var difference = userProfile[i] - wineProfile[i];
+          // Quadriere den Unterschied, um negative Werte zu vermeiden und Unterschiede stärker zu gewichten
+          // Bsp mit quadrierung  5-1 = 4 -> 4^2 = 16
+          // BSp ohne quadrierung 5-1 = 4 ->     =  4 
+
+          // Bsp mit quadrierung  3-1 = 2 -> 4^2 =  4
+          // Bsp ohne quadrierung 3-1 = 2 ->     =  2 
+          var squaredDifference = difference * difference;
+          // Addiere die quadratische Differenz zur Gesamtdifferenz
+          totalDifference += squaredDifference;
+      }
+      // Die "Distanz" zwischen den Profilen ist die Quadratwurzel der Gesamtdifferenz
+      var distance = Math.sqrt(totalDifference);
+      // Die maximale mögliche Distanz ist die Quadratwurzel von 500 (weil es 5 Merkmale gibt und jedes Merkmal von 0 bis 10 reicht)
+      var maxDistance = Math.sqrt(5 * 5 * 10);
+      // Die Übereinstimmung ist 100% minus das Verhältnis der Distanz zur maximalen Distanz
+      var match = (1 - distance / maxDistance) * 100;
+      return Math.round(match);
+
+    },
+
+    assignRatingsToWines(userProfile) {
+      // Gehe durch jeden Wein in der Liste
+      for (var j = 0; j < this.wines.length; j++) {
+          // Hole das Geschmacksprofil des aktuellen Weins
+          var wineProfile = this.wines[j].radarchart;
+          
+          // Berechne die Übereinstimmung für den aktuellen Wein
+          var match = this.calculateMatch(userProfile, wineProfile);
+          
+          // Weise dem aktuellen Wein seinen Übereinstimmungsprozentsatz zu
+          this.wines[j].rating = match;
+      }
+    },
   },
 
-  toggleShowBookmarksOverlay() {
-    this.showBookmarksOverlay = !this.showBookmarksOverlay;
-  },
-
-  setBookmarkFalse(){
-    this.showBookmarksOverlay = false;
-  },
-
-  setBookmarkTrue(){
-    this.showBookmarksOverlay = true;
-  },
-
-  setLogginAndProfileFalse(){
-    this.showProfile = false;
-    this.showLogin = false;
-  },
-
-  closeBookmarkPressed() {
+  mounted() {
     this.$refs.bottomTabbar.toggleMenuButtons('Winemenu');
   },
 
-  toggleShowFoodOverlay() {
-    this.showFoodOverlay = !this.showFoodOverlay;
-  },
+  async created() {
+    try {
+      const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
+      //const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
+      this.wines = WineDataResponse.data;
+      this.loading = false; 
 
-  setProfileTrue() {
-    this.showProfile = true;
-  },
+      const token = localStorage.getItem('jwt');
+      if (token) {
+        const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+        //const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          },
+        });
+        this.userData = userDataResponse.data;
+      }
+      if (this.wines.length > 0 && this.preferences) {
+        this.assignRatingsToWines(
+          [        
+            this.preferences.suss,
+            this.preferences.sauer,
+            this.preferences.intensiv,
+            this.preferences.fruchtig,
+            this.preferences.holzig, 
+            this.preferences.trocken, 
+          ]
+        );
+      } else {
+        console.log("Matchberechnung nicht möglich");
+      }
 
-  setLoginTrue() {
-    this.showLogin = true;
-  },
-
-  setProfileFalse() {
-    this.showProfile = false;
-  },
-
-  setLoginFalse() {
-    this.showLogin = false;
-  },
-
-  navigateToProfileAfterLogin() {
-    this.showProfile = true;
-    this.showLogin = false;
-  },
-
-  navigateToWinemenu() {
-    this.$refs.bottomTabbar.pressWinemenu('/Winemenu', 'Winemenu');
-  },
-
-  toggleDetailViewWine(wine) {
-    this.selectedWine = wine;
-    this.showDetailWineView = !this.showDetailWineView;
-  },
-
-  pushToTasteprofile() {
-    this.$router.push('/Tasteprofile/Sweet');
-  },
-
-  /**
- * Berechnet die Übereinstimmung zwischen einem Benutzerprofil und einem Weinprofil.
- * Dieser Algorithmus verwendet das Konzept der euklidischen Distanz
- *
- * @param userProfile - Ein Array von fünf Zahlen, die das Geschmacksprofil des Benutzers darstellen.
- * @param wineProfile - Ein Array von fünf Zahlen, die das Geschmacksprofil des Weins darstellen.
- *
- * @return {number} - Rückgabe als Protzentzahl
- */
-  // Eine Funktion, die die Übereinstimmung zwischen dem Geschmacksprofil eines Benutzers und eines Weins berechnet
-  calculateMatch(userProfile, wineProfile) {
-  // Eine Variable, um die Gesamtdifferenz zwischen den Profilen zu speichern
-    var totalDifference = 0;
-    // Eine Schleife, die durch jedes Element in den Profilen geht
-    for (var i = 0; i < userProfile.length; i++) {
-        // Finde den Unterschied zwischen den entsprechenden Elementen in den Profilen
-        var difference = userProfile[i] - wineProfile[i];
-        // Quadriere den Unterschied, um negative Werte zu vermeiden und Unterschiede stärker zu gewichten
-        // Bsp mit quadrierung  5-1 = 4 -> 4^2 = 16
-        // BSp ohne quadrierung 5-1 = 4 ->     =  4 
-
-        // Bsp mit quadrierung  3-1 = 2 -> 4^2 =  4
-        // Bsp ohne quadrierung 3-1 = 2 ->     =  2 
-        var squaredDifference = difference * difference;
-        // Addiere die quadratische Differenz zur Gesamtdifferenz
-        totalDifference += squaredDifference;
+      this.filterWines();
+      
+    } catch (error) {
+      console.error(error);
     }
-    // Die "Distanz" zwischen den Profilen ist die Quadratwurzel der Gesamtdifferenz
-    var distance = Math.sqrt(totalDifference);
-    // Die maximale mögliche Distanz ist die Quadratwurzel von 500 (weil es 5 Merkmale gibt und jedes Merkmal von 0 bis 10 reicht)
-    var maxDistance = Math.sqrt(5 * 5 * 10);
-    // Die Übereinstimmung ist 100% minus das Verhältnis der Distanz zur maximalen Distanz
-    var match = (1 - distance / maxDistance) * 100;
-    return Math.round(match);
-
-  },
-
-  assignRatingsToWines(userProfile) {
-    // Gehe durch jeden Wein in der Liste
-    for (var j = 0; j < this.wines.length; j++) {
-        // Hole das Geschmacksprofil des aktuellen Weins
-        var wineProfile = this.wines[j].radarchart;
-        
-        // Berechne die Übereinstimmung für den aktuellen Wein
-        var match = this.calculateMatch(userProfile, wineProfile);
-        
-        // Weise dem aktuellen Wein seinen Übereinstimmungsprozentsatz zu
-        this.wines[j].rating = match;
-    }
-  },
-},
-
-mounted() {
-  this.$refs.bottomTabbar.toggleMenuButtons('Winemenu');
-},
-
-async created() {
-  try {
-    const WineDataResponse = await axios.get('https://wine.azurewebsites.net/api/wine');
-    //const WineDataResponse = await axios.get('https://localhost:44322/api/wine');
-    this.wines = WineDataResponse.data;
-    this.loading = false; 
-
-    const token = localStorage.getItem('jwt');
-    if (token) {
-      const userDataResponse = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
-      //const userDataResponse = await axios.get(`https://localhost:44322/api/user/userdata/`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        },
-      });
-      this.userData = userDataResponse.data;
-    }
-    if (this.wines.length > 0 && this.preferences) {
-      this.assignRatingsToWines(
-        [        
-          this.preferences.suss,
-          this.preferences.sauer,
-          this.preferences.intensiv,
-          this.preferences.fruchtig,
-          this.preferences.holzig, 
-          this.preferences.trocken, 
-        ]
-      );
-    } else {
-      console.log("Matchberechnung nicht möglich");
-    }
-
-    this.filterWines();
-    
-  } catch (error) {
-    console.error(error);
-  }
   }
 }
 </script>
@@ -482,6 +474,7 @@ async created() {
   color: black;
   padding: 10px;
   border-radius: 10px;
+  margin-left: 15px;
 }
 
 .sort-container{
