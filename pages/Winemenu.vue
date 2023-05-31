@@ -160,7 +160,7 @@ export default {
     sortWinesByMatch() {
       this.sortByMatchAscending = !this.sortByMatchAscending;
 
-      if (this.sortByPriceAscending) {
+      if (this.sortByMatchAscending) {
         this.filteredWines.sort((a, b) => a.rating - b.rating);
       } else {
         this.filteredWines.sort((a, b) => b.rating - a.rating);
