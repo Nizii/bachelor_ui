@@ -22,7 +22,9 @@
         </div>
         <div v-else>
           <div class="sort-container">
-            <button @click="sortWinesByPrice" class="sort-button">Preis {{ sortByPriceAscending ? 'aufsteigend' : 'absteigend' }}</button>
+            <button @click="sortWinesByPrice" class="sort-button">Preis
+              <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
+            </button>
           </div>
           <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
             <div v-if="wine.winetype === 'Weisswein'">
@@ -454,6 +456,10 @@ async created() {
   padding: 0;
 }
 
+.sort-icon{
+  width: 15px;
+  height: 15px;
+}
 
 .loading{
   color: white;

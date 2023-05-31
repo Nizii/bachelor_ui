@@ -9,7 +9,7 @@
         </button>
         <TitleOverlay title="Filter Optionen" />
         <button class="close-button" @click="closeOverlay">
-          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
+          <img :src="require('static/icons/buttons/go.png')" class="go-icon" alt="Bookmark icon" />  
         </button>
       </div>      
       
@@ -248,6 +248,10 @@ export default {
 </script>
 
 <style>
+.go-icon{
+  width: 40px;
+  height: 40px;
+}
 
 .filter-slider {
   width: 100%;
