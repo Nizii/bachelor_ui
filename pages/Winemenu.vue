@@ -128,6 +128,7 @@ export default {
         nation: [],
         grape: [],
         character: [],
+        price: 100,
       },
     }
   },
@@ -208,6 +209,12 @@ export default {
           wine.winetype.toLowerCase().includes(this.searchText.toLowerCase())
         );
       }
+
+      if (this.filters.price) {
+        const priceFilter = Number(this.filters.price);
+        filteredWines = filteredWines.filter(wine => wine.bottleprice <= priceFilter);
+      }
+
       this.filteredWines = filteredWines;
     },
 
@@ -219,6 +226,7 @@ export default {
         nation: [],
         grape: [],
         character: [],
+        price: 100,
       };
       this.filterWines();
     },
