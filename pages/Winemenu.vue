@@ -5,10 +5,10 @@
     <div v-else-if="!showLogin && !showProfile">
         <div class="top-section">
           <div class="button-group">
-            <button @click="filterWines('Rotwein')" class="button">Rotwein</button>
-            <button @click="filterWines('Weisswein')" class="button">Weisswein</button>
-            <button @click="filterWines('Rosé')" class="button">Rosé</button>
-            <button @click="pushToTasteprofile()" class="button">Your Taste</button>
+            <button @click="filterWines('Rotwein')" class="header-button">Rotwein</button>
+            <button @click="filterWines('Weisswein')" class="header-button">Weisswein</button>
+            <button @click="filterWines('Rose')" class="header-button">Rosé</button>
+            <button @click="pushToTasteprofile()" class="header-button">Your Taste</button>
           </div>
           <div class="inputrow">
             <input type="text" class="search-input" @input="onSearchInput">
@@ -21,21 +21,20 @@
           Loading...
         </div>
         <div v-else>
+          <div class="sort-container">
+            <button @click="sortWinesByPrice" class="sort-button">Preis {{ sortByPriceAscending ? 'aufsteigend' : 'absteigend' }}</button>
+          </div>
           <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
             <div v-if="wine.winetype === 'Weisswein'">
               <WineInfo :wine="wine" :userData="userData" 
               @open-detail-view="toggleDetailViewWine" 
               @bookmark-removed="updateBookmarkedWinesCount" />    
             </div>
-          </div>
-          <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
             <div v-if="wine.winetype === 'Rotwein'">
               <WineInfo :wine="wine" :userData="userData" 
               @open-detail-view="toggleDetailViewWine"
               @bookmark-removed="updateBookmarkedWinesCount" />      
             </div>
-          </div>
-          <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
             <div v-if="wine.winetype === 'Rose'">
               <WineInfo :wine="wine" :userData="userData" 
               @open-detail-view="toggleDetailViewWine"
@@ -46,9 +45,12 @@
         <div class="bottom-placeholder">
         </div>
 
-        <Fillter v-if="showFoodOverlay" 
+        <FilterView v-if="showFoodOverlay" 
           @close="toggleShowFoodOverlay" 
-          @open-detail-view="toggleDetailViewWine" :wines="wines" />
+          @open-detail-view="toggleDetailViewWine" 
+          @filters-selected="onFilterSelected" 
+          :wines="wines" />
+      
 
         <Bookmarks v-if="showBookmarksOverlay" 
           @close="setBookmarkFalse" 
@@ -75,101 +77,172 @@
   </div>
 </template>
 
-
 <script>
 import AppHeader from '~/components/Titles/AppHeader.vue';
 import WineInfo from '~/components/WineInfo.vue';
 import axios from 'axios';
-import Fillter from '~/components/OverlayFrames/Fillter.vue';
+import FilterView from '~/components/OverlayFrames/FilterView.vue';
 import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
 import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
 import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
 import Login from '~/components/Login.vue';
 import Profile from '~/components/Profile.vue';
 
-
 export default {
-name: 'WineList',
-components: {
-  AppHeader,
-  WineInfo,
-  Fillter,
-  Bookmarks,
-  DetailWineView,
-  BottomTabbar,
-  Login,
-  Profile,
-},
-data() {
-  return {
-    loading: true,
-    wines: [],
-    searchText: '',
-    showFoodOverlay: false,
-
-    showProfile: false,
-    showLogin: false,
-    showBookmarksOverlay: false,
-    
-    userData: null,
-    selectedWine: null,
-    showDetailWineView: false,
-    matchedAttributes:[],
-    preferences: JSON.parse(localStorage.getItem('preferences')),
-  }
-},
-computed: {
-  filteredWines() {
-    if (!this.searchText) {
-      return this.wines;
-    }
-
-    return this.wines.filter(wine =>
-      wine.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
-      wine.winetype.toLowerCase().includes(this.searchText.toLowerCase())
-    );
+  name: 'WineList',
+  components: {
+    AppHeader,
+    WineInfo,
+    FilterView,
+    Bookmarks,
+    DetailWineView,
+    BottomTabbar,
+    Login,
+    Profile,
   },
-
-  hasStoredPreferences() {
-    const savedPreferences = localStorage.getItem('preferences');
-    if (savedPreferences) {
-      return true;
-    } else {
-      return false;
+  data() {
+    return {
+      loading: true,
+      searchText: '',
+      showFoodOverlay: false,
+      showProfile: false,
+      showLogin: false,
+      showBookmarksOverlay: false,
+      userData: null,
+      selectedWine: null,
+      showDetailWineView: false,
+      matchedAttributes:[],
+      preferences: JSON.parse(localStorage.getItem('preferences')),
+      sortByPriceAscending: true,
+      
+      wines: [],
+      filteredWines: [],
+      filters: {
+        dish: [],
+        nation: [],
+        grape: [],
+        character: [],
+      },
     }
   },
-},
-methods: {
-  resetFilters() {
-    this.searchText = '';
+  computed: {
+    hasStoredPreferences() {
+      const savedPreferences = localStorage.getItem('preferences');
+      if (savedPreferences) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
+  methods: {
+    onFilterSelected(filters) {
+      this.filters = filters;
+      this.filterWines();
+    },
 
-  updateBookmarkedWinesCount() {
-    this.$refs.bottomTabbar.updateBookmarkedWinesCount();
-  },
+    sortWinesByPrice() {
+      this.sortByPriceAscending = !this.sortByPriceAscending;
 
-  closeBookmarkFrame() {
-    if(this.showBookmarksOverlay){
-      this.$refs.bookmark.closeOverlay();
-    }
-  },
+      if (this.sortByPriceAscending) {
+        this.filteredWines.sort((a, b) => a.openprice - b.openprice);
+      } else {
+        this.filteredWines.sort((a, b) => b.openprice - a.openprice);
+      }
+    },
 
-  onFavoriteUpdated() {
-    this.loadWines(); 
-  },
 
-  onSearchInput(event) {
-    this.searchText = event.target.value;
-  },
 
-  filterWines(filter) {
-    if (filter === 'all') {
+    filterWines(wineType) {
+      let filteredWines = this.wines;
+
+      if (wineType === 'Rotwein') {
+        filteredWines = filteredWines.filter(wine => wine.winetype === 'Rotwein');
+      } else if (wineType === 'Weisswein') {
+        filteredWines = filteredWines.filter(wine => wine.winetype === 'Weisswein');
+      } else if (wineType === 'Rose') {
+        filteredWines = filteredWines.filter(wine => wine.winetype === 'Rose');
+      }
+
+      if (this.filters.dish.length > 0) {
+        filteredWines = filteredWines.filter(wine => {
+          return this.filters.dish.some(dish => wine.foodTags.includes(dish));
+        });
+      }
+
+      if (this.filters.nation.length > 0) {
+        filteredWines = filteredWines.filter(wine => {
+          return this.filters.nation.includes(wine.nationTag);
+        });
+      }
+
+      if (this.filters.grape.length > 0) {
+        filteredWines = filteredWines.filter(wine => {
+          return this.filters.grape.some(grape => wine.grapeTags.includes(grape));
+        });
+      }
+
+      if (this.filters.character.length > 0) {
+        filteredWines = filteredWines.filter(wine => {
+          return this.filters.character.includes(wine.profile);
+        });
+      }
+
+      if (this.searchText) {
+        filteredWines = filteredWines.filter(wine =>
+          wine.name.toLowerCase().includes(this.searchText.toLowerCase()) ||
+          wine.winetype.toLowerCase().includes(this.searchText.toLowerCase())
+        );
+      }
+
+      /*
+      if (this.filters.price > 0 && this.filters.price <= 100) {
+        filteredWines = filteredWines.filter(wine => {
+          return wine.price <= this.filters.price;
+        });
+      }
+      */
+
+      this.filteredWines = filteredWines;
+    },
+
+
+    resetFilters() {
       this.searchText = '';
-    } else {
-      this.searchText = filter;
-    }
-  },
+      this.filters = {
+        dish: [],
+        nation: [],
+        grape: [],
+        character: [],
+      };
+      this.filterWines();
+    },
 
+    updateBookmarkedWinesCount() {
+      this.$refs.bottomTabbar.updateBookmarkedWinesCount();
+    },
+
+    closeBookmarkFrame() {
+      if (this.showBookmarksOverlay) {
+        this.$refs.bookmark.closeOverlay();
+      }
+    },
+
+    onSearchInput(event) {
+      this.searchText = event.target.value;
+      this.filterWines();
+    },
+
+    /*
+    filterWines(filter) {
+      if (filter === 'all') {
+        this.searchText = '';
+      } else {
+        this.searchText = filter;
+      }
+      this.filterWines();
+    },
+*/
   hasWineType(winetype) {
     return this.filteredWines.some(wine => wine.winetype === winetype);
   },
@@ -363,6 +436,8 @@ async created() {
     } else {
       console.log("Matchberechnung nicht möglich");
     }
+
+    this.filterWines();
     
   } catch (error) {
     console.error(error);
@@ -379,6 +454,7 @@ async created() {
   padding: 0;
 }
 
+
 .loading{
   color: white;
   font-size: 15px;
@@ -388,16 +464,19 @@ async created() {
 .main-container {
   margin: 0;
   padding: 0;
+  /*-moz-animation-duration: ;
   background-image: url("/background/weinfleck rot.png");
   background-position: center;
   background-repeat: repeat-y;
+  */
   background-attachment: scroll; 
   box-sizing: border-box;
 }
 
 .top-section {
   background-color: #791545;
-  padding: 20px;  /* Adjust as needed */
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .inputrow {
@@ -435,38 +514,53 @@ async created() {
   margin-top:3px;
 }
 
-.button-group {
-display: flex;
-justify-content: space-around;
-align-items: center;
-background-color: #791545;
-height: 50px;
-margin: 20px;
+.sort-button{
+  background-color: rgb(211, 211, 211);
+  color: black;
+  padding: 10px;
+  border-radius: 10px;
 }
 
-.button {
-display: flex;
-justify-content: center;
-align-items: center;
-color: white;
-background-color: #791545;
-text-decoration: none;
-height: 100%;
-width: 25%;
-box-sizing: border-box;
-transition: color 0.3s;
-font-size: 12px;
-border: none;
+.sort-container{
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #791545;
+  height: 50px;
+  margin: 20px;
+}
+
+.header-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: #791545;
+  text-decoration: none;
+  height: 100%;
+  width: 25%;
+  box-sizing: border-box;
+  transition: color 0.3s;
+  font-size: 12px;
+  border: none;
 }
 
 .button:hover,
 .button:focus {
-color: white;
-font-weight: bold;
-text-decoration: underline;
-text-decoration-color: white;
-text-decoration-thickness: 2px;
-text-decoration-offset: 5px;
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: white;
+  text-decoration-thickness: 2px;
+  text-decoration-offset: 5px;
 }
 
 .bottom-placeholder{

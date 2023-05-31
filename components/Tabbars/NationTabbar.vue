@@ -9,8 +9,11 @@
     <button @click="showWinesForNation('Frankreich')" class="button button-3">Frankreich
       <img :src="require('static/icons/nations/Frankreich.png')" class="icon" alt="Profile icon" />
     </button>
-    <button @click="showWinesForNation('Spanien')" class="button button-3">Spanien
+    <button @click="showWinesForNation('Spanien')" class="button button-4">Spanien
       <img :src="require('static/icons/nations/Spanien.png')" class="icon" alt="Profile icon" />
+    </button>
+    <button @click="showWinesForNation('Österreich')" class="button button-5">Österreich
+      <img :src="require('static/icons/nations/Österreich.png')" class="icon" alt="Profile icon" />
     </button>
   </div>
 </template>
