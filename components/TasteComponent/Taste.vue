@@ -18,9 +18,9 @@
         <TitleBig :title="title" :fontSize="30" />
       </div>
       <div class="block">
-        <Slider ref="slider" @emit-value="setPreferenceAndNavigate" />
       </div>
       <div class="block">
+        <Slider ref="slider" @emit-value="setPreferenceAndNavigate" />
         <button class="navigation-button" @click="startProcess()">
           Weiter
         </button>
@@ -110,7 +110,7 @@ export default {
 
 <style>  
   .block {
-    height: 31vh;
+    height: 28vh;
     margin-left: 30px;
     margin-right: 30px;
     overflow: auto;
@@ -128,6 +128,7 @@ export default {
     margin:20px;
     padding: 15px;
     width: 250px;
+    margin-top: 40px;
   }
 
   .help-button{
