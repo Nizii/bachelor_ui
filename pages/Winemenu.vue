@@ -328,29 +328,21 @@ export default {
 
   // Eine Variable, um die Gesamtdifferenz zwischen den Profilen zu speichern
     var totalDifference = 0;
-
     // Eine Schleife, die durch jedes Element in den Profilen geht
     for (var i = 0; i < userProfile.length; i++) {
-
         // Finde den Unterschied zwischen den entsprechenden Elementen in den Profilen
         var difference = userProfile[i] - wineProfile[i];
-
         // Quadriere den Unterschied, um negative Werte zu vermeiden
         var squaredDifference = difference * difference;
-
         // Addiere die quadratische Differenz zur Gesamtdifferenz
         totalDifference += squaredDifference;
     }
-
     // Die "Distanz" zwischen den Profilen ist die Quadratwurzel der Gesamtdifferenz
     var distance = Math.sqrt(totalDifference);
-
     // Die maximale mögliche Distanz ist die Quadratwurzel von 500 (weil es 5 Merkmale gibt und jedes Merkmal von 0 bis 10 reicht)
     var maxDistance = Math.sqrt(5 * 10 * 10);
-
     // Die Übereinstimmung ist 100% minus das Verhältnis der Distanz zur maximalen Distanz
     var match = (1 - distance / maxDistance) * 100;
-
     return Math.round(match);
 
   },
@@ -367,39 +359,6 @@ export default {
         // Weise dem aktuellen Wein seinen Übereinstimmungsprozentsatz zu
         this.wines[j].rating = match;
     }
-  },
-
-  calc() {
-
-    /*
-    this.wines.forEach(wine => wine.matchedAttributes = []);
-    var match = 0;
-    for (var j = 0; j < this.wines.length; j++) {
-      console.log("Match "+match);
-      for (var x = 0; x < this.wines[j].profile.length; x++) {
-        if (this.preferences) {
-          for (const [key, value] of Object.entries(this.preferences)) {
-            if (Boolean(value) && key === this.wines[j].profile[x]) {
-              match++;
-              this.wines[j].matchedAttributes.push(key);
-            }
-          }
-        }
-      }
-      if (match > 0) {
-        this.wines[j].rating = 100 + ((match - this.wines[j].profile.length) * 10);
-        //Berechnung anhand von Prozentsatz
-        //this.wines[j].rating = (match / this.wines[j].profile.length) * 100;
-      }
-
-      if (this.wines[j].rating < 5) {
-        this.wines[j].rating = 0;
-        console.log("Müsste null  " + this.wines[j].rating);
-      }
-
-      match = 0;
-    }
-    */
   },
 },
 

@@ -396,11 +396,13 @@
   .detail-view-header {
     position: sticky;
     top: 0;
-    z-index: 1001; 
-    background-color: white; 
+    z-index: 1001;
+    width: 100%; 
+    background-color: white;
     border-bottom: 1px solid rgb(214, 214, 214);
     margin-bottom: 3em;
-  }
+}
+
   
   .detail-view-main-container {
     display: flex;

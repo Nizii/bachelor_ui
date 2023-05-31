@@ -1,142 +1,144 @@
 <template>
   <div>
     <div class="background-overlay" v-if="frameOpen" />
-    <div class="overlay-frame" :class="{ open: frameOpen }">
+      <div class="overlay-frame" :class="{ open: frameOpen }">
+        <div class="parent-container">
 
-      <div class="filter-header">
-        <button class="close-button" @click="resetFilters">
-          Reset  
-        </button>
-        <TitleOverlay title="Filter Optionen" />
-        <button class="close-button" @click="closeOverlay">
-          <img :src="require('static/icons/buttons/go.png')" class="go-icon" alt="Bookmark icon" />  
-        </button>
-      </div>      
-      
-      <div class="main-container">
-        <div class="filter-title">
-          ESSEN
-        </div>
-        <div class="checkbox-container">
-          <div @click="toggleDishCheckbox('Apéro')" :class="{ active: selectedDish.includes('Apéro') }" class="checkbox checkbox-1">
-            <div class="food-content">
-              Apéro
-            </div>
-            <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
+        <div class="filter-header">
+          <button class="close-button" @click="resetFilters">
+            Reset  
+          </button>
+          <TitleOverlay title="Filter Optionen" />
+          <button class="close-button" @click="closeOverlay">
+            <img :src="require('static/icons/buttons/go.png')" class="go-icon" alt="Bookmark icon" />  
+          </button>
+        </div>      
+        
+        <div class="main-container">
+          <div class="filter-title">
+            ESSEN
           </div>
-          <div @click="toggleDishCheckbox('Antipasti')" :class="{ active: selectedDish.includes('Antipasti') }" class="checkbox checkbox-1">
-            <div class="food-content">
-              Antipasti
+          <div class="checkbox-container">
+            <div @click="toggleDishCheckbox('Apéro')" :class="{ active: selectedDish.includes('Apéro') }" class="checkbox checkbox-1">
+              <div class="food-content">
+                Apéro
+              </div>
+              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Salat')" :class="{ active: selectedDish.includes('Salat') }" class="checkbox checkbox-2">
-            <div class="food-content">
-              Salat
+            <div @click="toggleDishCheckbox('Antipasti')" :class="{ active: selectedDish.includes('Antipasti') }" class="checkbox checkbox-1">
+              <div class="food-content">
+                Antipasti
+              </div>
+              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Helles Fleisch')" :class="{ active: selectedDish.includes('Helles Fleisch') }" class="checkbox checkbox-1">
-            <div class="food-content">
-              Helles Fleisch
+            <div @click="toggleDishCheckbox('Salat')" :class="{ active: selectedDish.includes('Salat') }" class="checkbox checkbox-2">
+              <div class="food-content">
+                Salat
+              </div>
+              <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Rotes Fleisch')" :class="{ active: selectedDish.includes('Rotes Fleisch') }" class="checkbox checkbox-2">
-            <div class="food-content">
-              Rotes Fleisch
+            <div @click="toggleDishCheckbox('Helles Fleisch')" :class="{ active: selectedDish.includes('Helles Fleisch') }" class="checkbox checkbox-1">
+              <div class="food-content">
+                Helles Fleisch
+              </div>
+              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Fisch')" :class="{ active: selectedDish.includes('Fisch') }" class="checkbox checkbox-1">
-            <div class="food-content">
-              Fisch
+            <div @click="toggleDishCheckbox('Rotes Fleisch')" :class="{ active: selectedDish.includes('Rotes Fleisch') }" class="checkbox checkbox-2">
+              <div class="food-content">
+                Rotes Fleisch
+              </div>
+              <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Fisch.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Käse')" :class="{ active: selectedDish.includes('Käse') }" class="checkbox checkbox-2">
-            <div class="food-content">
-              Käse
+            <div @click="toggleDishCheckbox('Fisch')" :class="{ active: selectedDish.includes('Fisch') }" class="checkbox checkbox-1">
+              <div class="food-content">
+                Fisch
+              </div>
+              <img :src="require('static/icons/food/Fisch.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Tofu')" :class="{ active: selectedDish.includes('Tofu') }" class="checkbox checkbox-1">
-            <div class="food-content">
-              Tofu
+            <div @click="toggleDishCheckbox('Käse')" :class="{ active: selectedDish.includes('Käse') }" class="checkbox checkbox-2">
+              <div class="food-content">
+                Käse
+              </div>
+              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Tapas')" :class="{ active: selectedDish.includes('Tapas') }" class="checkbox checkbox-2">
-            <div class="food-content">
-              Tapas
+            <div @click="toggleDishCheckbox('Tofu')" :class="{ active: selectedDish.includes('Tofu') }" class="checkbox checkbox-1">
+              <div class="food-content">
+                Tofu
+              </div>
+              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Pizza')" :class="{ active: selectedDish.includes('Pizza') }" class="checkbox checkbox-1">
-            <div class="food-content">
-              Pizza
+            <div @click="toggleDishCheckbox('Tapas')" :class="{ active: selectedDish.includes('Tapas') }" class="checkbox checkbox-2">
+              <div class="food-content">
+                Tapas
+              </div>
+              <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Pizza.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleDishCheckbox('Pasta')" :class="{ active: selectedDish.includes('Pasta') }" class="checkbox checkbox-2">
-            <div class="food-content">
-              Pasta
+            <div @click="toggleDishCheckbox('Pizza')" :class="{ active: selectedDish.includes('Pizza') }" class="checkbox checkbox-1">
+              <div class="food-content">
+                Pizza
+              </div>
+              <img :src="require('static/icons/food/Pizza.png')" class="icon" alt="Profile icon" />
             </div>
-            <img :src="require('static/icons/food/Pasta.png')" class="icon" alt="Profile icon" />
+            <div @click="toggleDishCheckbox('Pasta')" :class="{ active: selectedDish.includes('Pasta') }" class="checkbox checkbox-2">
+              <div class="food-content">
+                Pasta
+              </div>
+              <img :src="require('static/icons/food/Pasta.png')" class="icon" alt="Profile icon" />
+            </div>
           </div>
-        </div>
 
-        <div class="filter-title">
-          PREIS
-        </div>
-        <div class="checkbox-container">
-          <div class="filter-slider">
-            <input type="range" min="1" max="100" v-model="selectedPrice" />
-            <div>CHF {{ selectedPrice }}</div>
+          <div class="filter-title">
+            PREIS
           </div>
-        </div>
+          <div class="checkbox-container">
+            <div class="filter-slider">
+              <input type="range" min="1" max="100" v-model="selectedPrice" />
+              <div>CHF {{ selectedPrice }}</div>
+            </div>
+          </div>
 
-        <div class="filter-title">
-          LÄNDER
-        </div>
-        <div class="checkbox-container">
-          <div @click="toggleNationCheckbox('Schweiz')" :class="{ active: selectedNation.includes('Schweiz') }" class="checkbox checkbox-1">
-            <img :src="require('static/icons/nations/Schweiz.png')" class="icon" alt="Profile icon" />
+          <div class="filter-title">
+            LÄNDER
           </div>
-          <div @click="toggleNationCheckbox('Italien')" :class="{ active: selectedNation.includes('Italien') }" class="checkbox checkbox-2">
-            <img :src="require('static/icons/nations/Italien.png')" class="icon" alt="Profile icon" />
+          <div class="checkbox-container">
+            <div @click="toggleNationCheckbox('Schweiz')" :class="{ active: selectedNation.includes('Schweiz') }" class="checkbox checkbox-1">
+              <img :src="require('static/icons/nations/Schweiz.png')" class="icon" alt="Profile icon" />
+            </div>
+            <div @click="toggleNationCheckbox('Italien')" :class="{ active: selectedNation.includes('Italien') }" class="checkbox checkbox-2">
+              <img :src="require('static/icons/nations/Italien.png')" class="icon" alt="Profile icon" />
+            </div>
+            <div @click="toggleNationCheckbox('Spanien')" :class="{ active: selectedNation.includes('Spanien') }" class="checkbox checkbox-1">
+              <img :src="require('static/icons/nations/Spanien.png')" class="icon" alt="Profile icon" />
+            </div>
+            <div @click="toggleNationCheckbox('Frankreich')" :class="{ active: selectedNation.includes('Frankreich') }" class="checkbox checkbox-2">
+              <img :src="require('static/icons/nations/Frankreich.png')" class="icon" alt="Profile icon" />
+            </div>
+            <div @click="toggleNationCheckbox('Österreich')" :class="{ active: selectedNation.includes('Österreich') }" class="checkbox checkbox-2">
+              <img :src="require('static/icons/nations/Österreich.png')" class="icon" alt="Profile icon" />
+            </div>
           </div>
-          <div @click="toggleNationCheckbox('Spanien')" :class="{ active: selectedNation.includes('Spanien') }" class="checkbox checkbox-1">
-            <img :src="require('static/icons/nations/Spanien.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleNationCheckbox('Frankreich')" :class="{ active: selectedNation.includes('Frankreich') }" class="checkbox checkbox-2">
-            <img :src="require('static/icons/nations/Frankreich.png')" class="icon" alt="Profile icon" />
-          </div>
-          <div @click="toggleNationCheckbox('Österreich')" :class="{ active: selectedNation.includes('Österreich') }" class="checkbox checkbox-2">
-            <img :src="require('static/icons/nations/Österreich.png')" class="icon" alt="Profile icon" />
-          </div>
-        </div>
 
-        <div class="filter-title">
-          TRAUBEN
-        </div>
-        <div class="checkbox-container">
-          <div @click="toggleGrapeCheckbox('Sylvaner')" :class="{ active: selectedGrape.includes('Sylvaner') }" class="checkbox checkbox-1">Sylvaner</div>
-          <div @click="toggleGrapeCheckbox('Chasselas')" :class="{ active: selectedGrape.includes('Chasselas') }" class="checkbox checkbox-2">Chasselas</div>
-          <div @click="toggleGrapeCheckbox('Fendant')" :class="{ active: selectedGrape.includes('Fendant') }" class="checkbox checkbox-1">Fendant</div>
-          <div @click="toggleGrapeCheckbox('Heida Paien')" :class="{ active: selectedGrape.includes('Heida Paien') }" class="checkbox checkbox-2">Heida Païen</div>
-          <div @click="toggleGrapeCheckbox('Pinot Noir')" :class="{ active: selectedGrape.includes('Pinot Noir') }" class="checkbox checkbox-1">Pinot Noir</div>
-          <div @click="toggleGrapeCheckbox('Gamaret Garanoir')" :class="{ active: selectedGrape.includes('Gamaret Garanoir') }" class="checkbox checkbox-2">Gamaret Garanoir</div>
-          <div @click="toggleGrapeCheckbox('Negroamaro')" :class="{ active: selectedGrape.includes('Negroamaro') }" class="checkbox checkbox-1">Negroamaro</div>
-          <div @click="toggleGrapeCheckbox('Cabernet Sauvignon')" :class="{ active: selectedGrape.includes('Cabernet Sauvignon') }" class="checkbox checkbox-2">Cabernet Sauvignon</div>
-          <div @click="toggleGrapeCheckbox('Primitivo')" :class="{ active: selectedGrape.includes('Primitivo') }" class="checkbox checkbox-1">Primitivo</div>
-          <div @click="toggleGrapeCheckbox('Blaufränkisch')" :class="{ active: selectedGrape.includes('Blaufränkisch') }" class="checkbox checkbox-2">Blaufränkisch</div>
-          <div @click="toggleGrapeCheckbox('Corvina')" :class="{ active: selectedGrape.includes('Corvina') }" class="checkbox checkbox-1">Corvina</div>
-          <div @click="toggleGrapeCheckbox('Arneis')" :class="{ active: selectedGrape.includes('Arneis') }" class="checkbox checkbox-2">Arneis</div>
-          <div @click="toggleGrapeCheckbox('Trebbiano')" :class="{ active: selectedGrape.includes('Trebbiano') }" class="checkbox checkbox-1">Trebbiano</div>
-          <div @click="toggleGrapeCheckbox('Gewürztraminer')" :class="{ active: selectedGrape.includes('Gewürztraminer') }" class="checkbox checkbox-2">Gewürztraminer</div>
-        </div>
+          <div class="filter-title">
+            TRAUBEN
+          </div>
+          <div class="checkbox-container">
+            <div @click="toggleGrapeCheckbox('Sylvaner')" :class="{ active: selectedGrape.includes('Sylvaner') }" class="checkbox checkbox-1">Sylvaner</div>
+            <div @click="toggleGrapeCheckbox('Chasselas')" :class="{ active: selectedGrape.includes('Chasselas') }" class="checkbox checkbox-2">Chasselas</div>
+            <div @click="toggleGrapeCheckbox('Fendant')" :class="{ active: selectedGrape.includes('Fendant') }" class="checkbox checkbox-1">Fendant</div>
+            <div @click="toggleGrapeCheckbox('Heida Paien')" :class="{ active: selectedGrape.includes('Heida Paien') }" class="checkbox checkbox-2">Heida Païen</div>
+            <div @click="toggleGrapeCheckbox('Pinot Noir')" :class="{ active: selectedGrape.includes('Pinot Noir') }" class="checkbox checkbox-1">Pinot Noir</div>
+            <div @click="toggleGrapeCheckbox('Gamaret Garanoir')" :class="{ active: selectedGrape.includes('Gamaret Garanoir') }" class="checkbox checkbox-2">Gamaret Garanoir</div>
+            <div @click="toggleGrapeCheckbox('Negroamaro')" :class="{ active: selectedGrape.includes('Negroamaro') }" class="checkbox checkbox-1">Negroamaro</div>
+            <div @click="toggleGrapeCheckbox('Cabernet Sauvignon')" :class="{ active: selectedGrape.includes('Cabernet Sauvignon') }" class="checkbox checkbox-2">Cabernet Sauvignon</div>
+            <div @click="toggleGrapeCheckbox('Primitivo')" :class="{ active: selectedGrape.includes('Primitivo') }" class="checkbox checkbox-1">Primitivo</div>
+            <div @click="toggleGrapeCheckbox('Blaufränkisch')" :class="{ active: selectedGrape.includes('Blaufränkisch') }" class="checkbox checkbox-2">Blaufränkisch</div>
+            <div @click="toggleGrapeCheckbox('Corvina')" :class="{ active: selectedGrape.includes('Corvina') }" class="checkbox checkbox-1">Corvina</div>
+            <div @click="toggleGrapeCheckbox('Arneis')" :class="{ active: selectedGrape.includes('Arneis') }" class="checkbox checkbox-2">Arneis</div>
+            <div @click="toggleGrapeCheckbox('Trebbiano')" :class="{ active: selectedGrape.includes('Trebbiano') }" class="checkbox checkbox-1">Trebbiano</div>
+            <div @click="toggleGrapeCheckbox('Gewürztraminer')" :class="{ active: selectedGrape.includes('Gewürztraminer') }" class="checkbox checkbox-2">Gewürztraminer</div>
+          </div>
 
+        </div>
       </div>
     </div>
   </div>
@@ -300,6 +302,10 @@ export default {
   padding: 10px;
 }
 
+.parent-container{
+  padding: 30px
+}
+
 .overlay-frame {
   z-index: 999;
   /* Hier wird die Overlay Animation gemacht*/
@@ -313,7 +319,6 @@ export default {
   background-attachment: scroll;
   background-color: white;
   background-image: none;
-  padding: 30px;
 }
 
 .background-overlay {
