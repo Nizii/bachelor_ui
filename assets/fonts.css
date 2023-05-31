@@ -51,3 +51,24 @@
     src: url('/fonts/SemplicitaOmbra.otf') format('opentype');
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Soleil';
+    src: url('/fonts/SoleilBold.otf') format('opentype');
+    font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Soleil';
+    src: url('/fonts/SoleilBook.otf') format('opentype');
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Soleil';
+    src: url('/fonts/SoleilRegular.otf') format('opentype');
+    font-weight: 500;
+    font-display: swap;
+}

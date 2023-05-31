@@ -109,6 +109,11 @@ export default {
 </script>
 
 <style>  
+
+  *{
+    font-family: 'Soleil', sans-serif;
+  }
+
   .block {
     height: 20vh;
     margin-left: 30px;
@@ -136,7 +141,7 @@ export default {
   .navigation-button {
     background-color: #660F0F;
     color: white;
-    border-radius: 10px;
+    border-radius: 8px;
     text-decoration: none; 
     color: white;
     text-align: center;
@@ -149,7 +154,7 @@ export default {
   .help-button{
     background-color: #660F0F;
     color: white;
-    border-radius: 10px;
+    border-radius: 8px;
     text-decoration: none; 
     color: white;
     text-align: center;

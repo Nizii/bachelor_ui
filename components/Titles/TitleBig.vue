@@ -21,10 +21,14 @@ export default {
 </script>
 
 <style scoped>
+*{
+  font-family: 'Soleil', sans-serif;
+}
 .big-bold-white-title {
   /*color: #FF69B4;*/
   color: white;
   font-weight: bold;
+  font-size: 50px;
 }
 
 </style>

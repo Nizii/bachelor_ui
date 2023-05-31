@@ -162,6 +162,7 @@ export default {
 .slider-titel {
   color: white;
   margin-bottom: 20px;
+  font-size: 35px;
 }
 
 label,
