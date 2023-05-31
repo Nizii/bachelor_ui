@@ -6,7 +6,7 @@
       <div class="block"></div>
       <div class="content-container">
         <TitleBig title="Finde DEINEN Wein!" />
-        <router-link to="/Tasteprofile/Sour" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
+        <router-link to="/Tasteprofile/Sweet" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
         <router-link to="/Winemenu" class="start-page-link">Weiter zu Weinkarte</router-link>
       </div>
     </div>

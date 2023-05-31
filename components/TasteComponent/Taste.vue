@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import AppHeader from '~/components/Titles/AppHeader.vue';
 import TitleBig from '~/components/Titles/TitleBig.vue';
 import TasteInfoPopup from '~/components/TasteComponent/TasteInfoPopup.vue';
 import Slider from '~/components/TasteComponent/Slider.vue';
@@ -99,7 +98,13 @@ export default {
     } else {
       localStorage.setItem('preferences', JSON.stringify(this.preferences));
     }
-  }
+    
+  },
+
+  mounted(){
+    this.$refs.slider.setTasteToSlider(this.preferenceKey);
+  },
+
 }
 </script>
 
@@ -114,26 +119,26 @@ export default {
    
   
   .navigation-button {
-    background-color: #781449;
+    background-color: #660F0F;
     color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     text-decoration: none; 
     color: white;
     text-align: center;
     margin:20px;
     padding: 15px;
-    width: 200px;
+    width: 250px;
   }
 
   .help-button{
-    background-color: #781449;
+    background-color: #660F0F;
     color: white;
-    border-radius: 15px;
+    border-radius: 10px;
     text-decoration: none; 
     color: white;
     text-align: center;
     margin:20px;
-    padding: 20px;
+    padding: 10px;
     width: 70px;
   }
    

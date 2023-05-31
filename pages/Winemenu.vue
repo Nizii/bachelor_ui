@@ -305,7 +305,7 @@ export default {
   },
 
   pushToTasteprofile() {
-    this.$router.push('Tasteprofile/Sour');
+    this.$router.push('Tasteprofile/Sweet');
   },
 
   /**

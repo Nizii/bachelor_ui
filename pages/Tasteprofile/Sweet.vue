@@ -1,9 +1,9 @@
 <template>
   <Taste 
-    title="Magst du deinen Wein süss?" 
-    nextRoute="/Tasteprofile/Intensive"
+    title="Wie süss magst du es?" 
+    nextRoute="/Tasteprofile/Sour"
     preferenceKey="suss"
-    bgImage="/background/dessert.jpg"
+    bgImage="/background/suss.jpg"
   />
 </template>
 

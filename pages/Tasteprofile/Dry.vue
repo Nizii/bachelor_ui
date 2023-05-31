@@ -3,7 +3,7 @@
     title="Magst du deinen Wein Trocken?" 
     nextRoute="/Winemenu"
     preferenceKey="trocken"
-    bgImage="/background/pfeffer.jpg"
+    bgImage="/background/intensiv.jpg"
   />
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <Taste 
-    title="Magst du frischen Holzgeschmack?" 
+    title="Magst du den Geruch von frisch gehacktem Holz?" 
     nextRoute="/Tasteprofile/Dry"
     preferenceKey="holzig"
     bgImage="/background/holz.jpg"
