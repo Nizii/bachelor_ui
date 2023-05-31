@@ -1,6 +1,6 @@
 <template>
   <Taste 
-    title="Magst du deinen Wein schwer?" 
+    title="Magst du deinen Wein intensiv?" 
     nextRoute="/Tasteprofile/Fruity"
     preferenceKey="intensiv"
     bgImage="/background/gewicht.jpg"
