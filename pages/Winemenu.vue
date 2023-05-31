@@ -119,6 +119,7 @@ export default {
       matchedAttributes:[],
       preferences: JSON.parse(localStorage.getItem('preferences')),
       sortByPriceAscending: true,
+      sortByMatchAscending: true,
       
       wines: [],
       filteredWines: [],
