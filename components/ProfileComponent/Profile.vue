@@ -48,7 +48,7 @@
   
   <script>
   import axios from 'axios';
-  import CellarItem from '~/components/CellarItem.vue';
+  import CellarItem from '~/components/ProfileComponent/CellarItem.vue';
   import WineInfo from '~/components/WineInfo.vue';
   import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
   import DoughnutChart from '~/components/Charts/DoughnutChart.vue';

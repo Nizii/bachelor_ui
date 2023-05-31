@@ -91,7 +91,7 @@ import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
 import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
 import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
 import Login from '~/components/Login.vue';
-import Profile from '~/components/Profile.vue';
+import Profile from '~/components/ProfileComponent/Profile.vue';
 
 export default {
   name: 'WineList',

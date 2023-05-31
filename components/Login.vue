@@ -52,7 +52,6 @@
 import AppHeader from '~/components/Titles/AppHeader.vue';
 import WineInfo from '~/components/WineInfo.vue';
 import axios from 'axios';
-import Fillter from '~/components/OverlayFrames/Fillter.vue';
 import Bookmarks from '~/components/OverlayFrames/Bookmarks.vue';
 import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
 import BottomTabbar from '~/components/Tabbars/BottomTabbar.vue';
@@ -61,7 +60,6 @@ export default {
     components: {
       AppHeader,
       WineInfo,
-      Fillter,
       Bookmarks,
       DetailWineView,
       BottomTabbar,
