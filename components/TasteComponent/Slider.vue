@@ -173,7 +173,7 @@ span {
 }
 
 input[type="range"] {
-  width: 80%;
+  width: 250px;
   appearance: none;
   background: white;
   height: 2px;
