@@ -3,10 +3,9 @@
     <div class="start-page-container">
       <div class="block"></div>
       <div class="block"></div>
-      <div class="block"></div>
       <div class="content-container">
         <TitleBig title="Finde DEINEN Wein!" />
-        <router-link to="/Tasteprofile/Sweet" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
+        <router-link to="/Tasteprofile/Sour" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
         <router-link to="/Winemenu" class="start-page-link">Weiter zu Weinkarte</router-link>
       </div>
     </div>
@@ -66,7 +65,7 @@ html, body {
   width: 60%;
   max-width: 900px;
   margin: 0 auto;
-  height: 40vh;
+  height: 33vh;
 }
 
 .block {
@@ -74,7 +73,7 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  height: 20vh;
+  height: 34vh;
   overflow: auto;
 }
 

@@ -24,6 +24,8 @@
         <button class="navigation-button" @click="startProcess()">
           Weiter
         </button>
+        <div class="block">
+        </div>
       </div>
       <TasteInfoPopup v-if="showInfo" :infoKey="preferenceKey" :show="showInfo" @close="showInfo = false" />
     </div>
@@ -110,7 +112,7 @@ export default {
 
 <style>  
   .block {
-    height: 28vh;
+    height: 20vh;
     margin-left: 30px;
     margin-right: 30px;
     overflow: auto;
