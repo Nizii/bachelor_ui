@@ -340,7 +340,7 @@ export default {
     // Die "Distanz" zwischen den Profilen ist die Quadratwurzel der Gesamtdifferenz
     var distance = Math.sqrt(totalDifference);
     // Die maximale mögliche Distanz ist die Quadratwurzel von 500 (weil es 5 Merkmale gibt und jedes Merkmal von 0 bis 10 reicht)
-    var maxDistance = Math.sqrt(5 * 10 * 10);
+    var maxDistance = Math.sqrt(5 * 5 * 10);
     // Die Übereinstimmung ist 100% minus das Verhältnis der Distanz zur maximalen Distanz
     var match = (1 - distance / maxDistance) * 100;
     return Math.round(match);
