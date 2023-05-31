@@ -199,7 +199,7 @@
 
     methods: {
       calcTasteProfile() {
-        this.$router.push('Tasteprofile/Sweet');
+        this.$router.push('/Tasteprofile/Sweet');
       },
 
       closeOverlay() {
