@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="form-container">
       <div v-if="!showRegister" class="form">
-      <WineHeader class="overrideMargin" title="Melde dich an!"/>
+      <h1 class="overrideMargin" title="Melde dich an!"/>
         <form @submit.prevent="login">
           <div class="input-container">
             <input type="text" id="username" placeholder="Username" v-model="username" required>
@@ -15,7 +15,7 @@
         <p>Noch keinen Account? <a href="#" @click="showRegister = true">Registrieren</a></p>
       </div>
       <div v-if="showRegister" class="form">
-        <WineHeader class="overrideMargin" title="Erstelle ein Profil!"/>
+        <h1 class="overrideMargin" title="Erstelle ein Profil!"/>
         <form @submit.prevent="register">
 
           <div class="input-container">
@@ -112,6 +112,8 @@ export default {
             email: this.email,
             password: this.password
           });
+          localStorage.removeItem('jwt');
+          localStorage.removeItem('user');
 
           localStorage.setItem('jwt', response.data.token);
           localStorage.setItem('user', this.username);

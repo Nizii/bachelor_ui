@@ -120,7 +120,7 @@ export default {
       preferences: JSON.parse(localStorage.getItem('preferences')),
       sortByPriceAscending: true,
       sortByMatchAscending: true,
-      
+
       wines: [],
       filteredWines: [],
       filters: {
@@ -380,25 +380,75 @@ export default {
           Authorization: `Bearer ${token}`,
           },
         });
-        this.userData = userDataResponse.data;
-      }
-      if (this.wines.length > 0 && this.preferences) {
-        this.assignRatingsToWines(
-          [        
-            this.preferences.suss,
-            this.preferences.sauer,
-            this.preferences.intensiv,
-            this.preferences.fruchtig,
-            this.preferences.holzig, 
-            this.preferences.trocken, 
-          ]
-        );
+        console.log(userDataResponse.data);
+        this.userData = userDataResponse.data;      
+        if (!this.userData || !this.userData.radarchart) {
+          console.log("Kein User");
+          let savedPreferences = {
+            suss: 0,
+            sauer: 0,
+            intensiv: 0,
+            fruchtig: 0,
+            holzig: 0,
+            trocken: 0,
+          };
+          localStorage.setItem('savedPreferences', JSON.stringify(savedPreferences));
+
+        } else {
+          console.log("User vorhanden");
+          let savedPreferences = {
+            suss: this.userData.radarchart[0],
+            sauer: this.userData.radarchart[1],
+            intensiv: this.userData.radarchart[2],
+            fruchtig: this.userData.radarchart[3],
+            holzig: this.userData.radarchart[4],
+            trocken: this.userData.radarchart[5],
+          };
+          localStorage.setItem('savedPreferences', JSON.stringify(savedPreferences));
+          
+          this.preferences = JSON.parse(localStorage.getItem('preferences'));
+
+          if (this.wines.length > 0 && this.preferences && this.userData.radarchart[0] === 0) {
+            console.log("Taste aus Frontend");
+            this.assignRatingsToWines([
+              this.preferences.suss,
+              this.preferences.sauer,
+              this.preferences.intensiv,
+              this.preferences.fruchtig,
+              this.preferences.holzig,
+              this.preferences.trocken,
+            ]);
+          } else if (this.userData.radarchart[0] !== 0) {
+            console.log("Taste aus DB");
+            this.assignRatingsToWines([
+              this.userData.radarchart[0],
+              this.userData.radarchart[1],
+              this.userData.radarchart[2],
+              this.userData.radarchart[3],
+              this.userData.radarchart[4],
+              this.userData.radarchart[5],
+            ]);
+          } else {
+            console.log("Taste Berechnung nicht möglich");
+          }
+        }
+
       } else {
-        console.log("Matchberechnung nicht möglich");
+        if(this.wines.length > 0 && this.preferences) {
+            console.log("Taste aus Frontend");
+            this.assignRatingsToWines([
+              this.preferences.suss,
+              this.preferences.sauer,
+              this.preferences.intensiv,
+              this.preferences.fruchtig,
+              this.preferences.holzig,
+              this.preferences.trocken,
+            ]);
+          }
       }
 
+
       this.filterWines();
-      
     } catch (error) {
       console.error(error);
     }

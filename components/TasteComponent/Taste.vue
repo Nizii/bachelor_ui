@@ -34,6 +34,7 @@
 import TitleBig from '~/components/Titles/TitleBig.vue';
 import TasteInfoPopup from '~/components/TasteComponent/TasteInfoPopup.vue';
 import Slider from '~/components/TasteComponent/Slider.vue';
+import axios from 'axios'; 
 
 export default {
   name: 'Taste',
@@ -81,8 +82,29 @@ export default {
     },
 
     setPreferenceAndNavigate(value) {
+      
       this.preferences[this.preferenceKey] = parseInt(value);
       localStorage.setItem('preferences', JSON.stringify(this.preferences));
+      
+      if(this.preferenceKey === 'trocken') {
+        let token = localStorage.getItem('jwt'); 
+        if(token){
+          let user = localStorage.getItem('user');
+          console.log("User "+ user);
+          let Tasteprofile = {
+            Username: user, 
+            Radarchart: Object.values(this.preferences)
+          };
+          axios.post('https://wine.azurewebsites.net/api/user/update-taste-profile', Tasteprofile, { headers: { Authorization: `Bearer ${token}` }})
+          //axios.post('https://localhost:44322/api/user/update-taste-profile', Tasteprofile)
+          .then(response => {
+            console.log(response);
+          }).catch(error => {
+            console.error(error);
+          });
+        }
+      }
+      
       this.$router.push(this.nextRoute);
     },
 

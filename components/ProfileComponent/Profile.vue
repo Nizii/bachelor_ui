@@ -2,7 +2,7 @@
     <div class="profile-content">
       <div class="profile-header">
         <div class="profile-title">
-          Weinkeller
+          <p>Weinkeller</p>
         </div>
         <div class="logout-container">
           <button @click="logout()" class="logout-button">Logout</button>
@@ -29,6 +29,20 @@
         </div>
       </div>
 
+      <div class="profile-line-1"></div>    
+
+      <div class="profile-taste-container">
+        <div class="profile-chart-title"> 
+          <p>Mein Geschmacksprofil</p>
+        </div>
+        <div class="profile-radar-chart">
+          <radar-chart :data="radarChartData" :options="radarChartOptions" />
+        </div>
+        <button class="detail-view-button" @click="calcTasteProfile">
+          Geschmacksprofil neu berechnen
+        </button>
+      </div>
+
       <div class="profile-line-1"></div>
 
       <div class="chart-container">
@@ -38,6 +52,15 @@
         <div class="doughnut-chart">
           <DoughnutChart :chartData="chartData" :options="chartOptions" />
         </div>
+      </div>
+
+      <div class="profile-line-1"></div>
+
+      <div class="chart-container">
+        <p>Benutzer</p>
+        <button class="detail-view-button" @click="removeUserProfile">
+          Benutzerprofil löschen
+        </button>
       </div>
 
       <div class="bottom-placeholder">
@@ -52,6 +75,7 @@
   import WineInfo from '~/components/WineInfo.vue';
   import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
   import DoughnutChart from '~/components/Charts/DoughnutChart.vue';
+  import RadarChart from '~/components/Charts/RadarChart.vue';
 
   
   export default {
@@ -60,9 +84,22 @@
       WineInfo,
       DetailWineView,
       DoughnutChart,
+      RadarChart,
+    },
+
+    beforeCreate() {
+      const storedPreferences = localStorage.getItem('savedPreferences');
+      if (storedPreferences) {
+        this.preferences = JSON.parse(storedPreferences);
+        console.log("Präferenzen verfügbar" +this.preferences);
+      } else {
+        console.log("Keine Präferenzen verfügbar");
+        this.preferences = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
+      }
     },
   
     data() {
+      const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       return {
         userData: null,
         showFoodOverlay: false,
@@ -85,7 +122,44 @@
             fontSize: 16, 
             */
           },
-        }
+        },
+
+        radarChartData: {
+          labels: ['Säure', 'Zucker', 'Intensität', 'Fruchtig', 'Holzig', 'Trocken'],
+          datasets: [
+            {
+              label: 'Mein Geschmacksprofil', 
+              backgroundColor: 'rgba(54, 162, 235, 0.2)',
+              borderColor: 'rgba(54, 162, 235, 0.8)',
+              pointBackgroundColor: 'blue',
+              pointBorderColor: 'blue',
+              pointHoverBackgroundColor: 'blue',
+              pointHoverBorderColor: 'blue',
+              data: [
+                preferences.sauer,
+                preferences.suss,
+                preferences.intensiv,
+                preferences.fruchtig,
+                preferences.holzig,
+                preferences.trocken
+              ],
+            }
+          ]
+        },
+        radarChartOptions: {
+          title: {
+            display: false,
+          },
+          scale: {
+            ticks: {
+              beginAtZero: true,
+              min: 0,
+              max: 5,
+              stepSize: 1
+            }
+          }
+        },
+    
 
       };
     },
@@ -95,6 +169,33 @@
     },
   
     methods: {
+      async removeUserProfile() {
+        const token = localStorage.getItem('jwt');
+        if(!token) {
+          console.error('No token found');
+          return;
+        }
+        let user = localStorage.getItem('user');
+        try {
+          const response = await this.$axios.delete(`https://wine.azurewebsites.net/api/user/delete/${user}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          if (response.status === 200) {
+            this.userData = null;
+            localStorage.removeItem('jwt');
+            this.$emit('logout');
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      },
+
+      calcTasteProfile() {
+        this.$router.push('/Tasteprofile/Sweet');
+      },
+
       toggleShowBookmarksOverlay() {
         this.showBookmarksOverlay = !this.showBookmarksOverlay;
       },
@@ -111,20 +212,25 @@
       async getUserData() {
         const token = localStorage.getItem('jwt');
         try {
-            const response = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
-            //const response = await this.$axios.get(`https://localhost:44322/api/user/userdata/`, {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-            this.userData = response.data;
-            } catch (error) {
-          }
-          if(!token) {
-            localStorage.removeItem('jwt');
-            this.$emit('logout');
-          }
+          const response = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          this.userData = response.data;
+
+        } catch (error) {
+          // Hier sollten Sie einen besseren Fehlerbehandlungsprozess einrichten
+          console.error(error);
+        }
+
+        // Wenn kein Token vorhanden ist, führen Sie den Abmeldeprozess aus
+        if(!token) {
+          localStorage.removeItem('jwt');
+          this.$emit('logout');
+        }
       },
+
 
       logout() {
         localStorage.removeItem('jwt');
@@ -160,22 +266,18 @@
   </script>
 
   <style>
-  h1 {
-    font-size: 48px;
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 30px;
-  }
 
   .profile-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin-bottom: 3em;
+    font-weight: bold;
     position: sticky;
     top: 0;
     z-index: 1001; 
     background-color: white; 
-    border-bottom: 1px solid rgb(214, 214, 214);
   }
 
   .profile-chart-title{
@@ -189,7 +291,6 @@
     color: black;
     font-size: 30px;
     font-weight: bold;
-    font-family: sans-serif;
     padding-top: 20px;
     padding-bottom: 20px;
   }
@@ -254,10 +355,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    /*
     background-image: url("/background/weinkeller.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
+    */
   }
   
   .regal {
