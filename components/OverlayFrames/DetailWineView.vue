@@ -19,6 +19,10 @@
               <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" /></p>
             <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
               <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" /></p>
+              <button @click.stop="addToBookmarks">
+                <img v-if="!isBookmarked" :src="require('static/icons/buttons/merkliste.png')" class="detail-bookmark-icon" alt="Bookmark icon" />
+                <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="detail-bookmark-icon" alt="Bookmark icon" />
+              </button>              
           </div>
           <br>
           <p id="detail-view-grape">{{wine.grape}}</p>
@@ -50,14 +54,14 @@
           </p>
           <br>
           <p class="detail-view-description">{{wine.winzer}}</p>
-          <div class="add-to-favorite-container">
-            <button v-if="isLoggedIn" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
+          <div v-if="isLoggedIn" class="add-to-favorite-container">
+            <button v-if="!wineInCellar" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
               Zum Weinkeller hinzufügen
             </button>
-            <button   v-else class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToBookmarks">
-              Zur Merkliste
+            <button v-else class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="removeFromWineCellar">
+              Entfernen
             </button>
-          </div>
+          </div>          
         </div>
         <div class="detail-view-right">
           <img class="detail-view-image" :src="wine.link"/>
@@ -138,7 +142,10 @@
     data() {
       const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       return {
+        userData: null,
         frameOpen: false,
+        wineInCellar:null,
+        isBookmarked: false,
         newComment: '',
         isLoggedIn: false,
         chartData: {
@@ -198,6 +205,17 @@
 
 
     methods: {
+
+      checkWineInCellar() {
+        const wineCellar = JSON.parse(localStorage.getItem('favoriten')) || [];
+        const alreadyInCellar = wineCellar.some(wine => wine._id === this.wine._id);
+        if (alreadyInCellar) {
+          this.wineInCellar = true;
+        } else {
+          this.wineInCellar = false;
+        }
+      },
+      
       calcTasteProfile() {
         this.$router.push('/Tasteprofile/Sweet');
       },
@@ -258,6 +276,29 @@
 
       },
 
+      async getUserData() {
+        const token = localStorage.getItem('jwt');
+        if(token) {
+          try {
+          const response = await this.$axios.get(`https://wine.azurewebsites.net/api/user/userdata/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          this.userData = response.data;
+          if (this.userData) {
+          localStorage.setItem('favoriten', JSON.stringify(this.userData.favoriten));
+        }    
+          } catch (error) {
+            console.error(error);
+          }
+        }
+
+
+      },
+
+
+
       addToBookmarks() {
         // Erhalte die aktuelle Liste der gemerkten Weine (oder eine leere Liste, wenn noch keine Weine gemerkt wurden)
         const bookmarkedWines = JSON.parse(localStorage.getItem('bookmarkedWines')) || [];
@@ -267,28 +308,75 @@
         if (!alreadyBookmarked) {
           bookmarkedWines.push(this.wine);
           localStorage.setItem('bookmarkedWines', JSON.stringify(bookmarkedWines));
+          this.isBookmarked = true;  // Der Wein ist als Lesezeichen gesetzt
+        } else {
+          // Wenn der Wein bereits gemerkt ist, wird der Wein entfernt
+          const updatedBookmarkedWines = bookmarkedWines.filter(wine => wine._id !== this.wine._id);
+          localStorage.setItem('bookmarkedWines', JSON.stringify(updatedBookmarkedWines));
+          this.isBookmarked = false;  // Der Wein ist nicht mehr als Lesezeichen gesetzt
         }
         this.$emit('bookmark-removed');
-        this.closeOverlay();
       },
+
+
 
       addToWineCellar() {
         // Erhalte die aktuelle Liste der Weine im Weinkeller (oder eine leere Liste, wenn noch keine Weine hinzugefügt wurden)
         const wineCellar = JSON.parse(localStorage.getItem('wineCellar')) || [];
         // Überprüfe, ob der aktuelle Wein bereits im Weinkeller ist
         const alreadyAdded = wineCellar.some(wine => wine._id === this.wine._id);
-        // Wenn der Wein noch nicht im Weinkeller ist, wird er hinzugefügt
+        
         if (!alreadyAdded) {
           wineCellar.push(this.wine);
+          this.userData.favoriten = wineCellar;
           localStorage.setItem('wineCellar', JSON.stringify(wineCellar));
-          this.isFavorite = true;
+          this.wineInCellar = true;
+
+          // Neuen Wein zum Server hinzufügen
+          const token = localStorage.getItem('jwt');
+          if (token) {
+            const wineId = this.wine._id;
+            this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${wineId}`, {}, { headers: { Authorization: `Bearer ${token}` }})
+            .then(response => {
+              console.log(response);
+            })
+            .catch(error => {
+              console.error(error);
+            });
+          }
         } else {
           // Wenn der Wein bereits im Weinkeller ist, wird er entfernt
           const updatedWineCellar = wineCellar.filter(wine => wine._id !== this.wine._id);
+          this.userData.favoriten = updatedWineCellar;
           localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
-          this.isFavorite = false;
+          this.wineInCellar = false;
         }
+        this.$emit('update-profile');
       },
+
+      async removeFromWineCellar() {
+        const wineCellar = JSON.parse(localStorage.getItem('wineCellar')) || [];
+        const updatedWineCellar = wineCellar.filter(wine => wine._id !== this.wine._id);
+        this.userData.favoriten = updatedWineCellar; 
+        localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
+        this.wineInCellar = false;
+        
+        // Wein vom Server entfernen
+        const token = localStorage.getItem('jwt');
+        if(token) {
+          try {
+            await this.$axios.post(`https://wine.azurewebsites.net/api/user/remove-favorite/${this.wine._id}`, null, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+          } catch (error) {
+            console.error(error);
+          }
+        }
+        this.$emit('update-profile');
+      },
+
 
       async addComment() {
         const comment = this.newComment;
@@ -321,7 +409,10 @@
       if(localStorage.getItem('jwt')){
         this.isLoggedIn = true;
       } 
+      this.getUserData();
+      this.checkWineInCellar();
     },
+
   };
   </script>
   
@@ -344,6 +435,10 @@
     background: none;
     font-size: 1.5em;
     cursor: pointer;
+  }
+
+  .detail-bookmark-icon{
+    margin-left: 20px;
   }
 
   .overlay-frame {

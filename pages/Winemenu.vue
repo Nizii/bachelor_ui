@@ -1,7 +1,14 @@
 <template>
   <div class="main-container" style="margin: 0; padding: 0; box-sizing: border-box;">
-    <Profile v-if="showProfile && !showLogin" @logout="navigateToWinemenu" />
-    <Login v-else-if="showLogin" @login-succeed="navigateToProfileAfterLogin()" />
+    
+    <Profile v-if="showProfile && !showLogin" 
+      @logout="navigateToWinemenu" 
+      @open-detail-view="toggleDetailViewWine"
+      @update-bookmar-count="updateBookmarkedWinesCount" />
+
+    <Login v-else-if="showLogin" 
+      @login-succeed="navigateToProfileAfterLogin()" />
+
     <div v-else-if="!showLogin && !showProfile">
         <div class="top-section">
           <div class="button-group">
@@ -65,10 +72,12 @@
 
         <DetailWineView v-if="showDetailWineView" :wine="selectedWine" 
           @close="toggleDetailViewWine" 
-          @bookmark-removed="updateBookmarkedWinesCount" />
+          @bookmark-removed="updateBookmarkedWinesCount" 
+          ref="detailview" />
 
       </div>
       <BottomTabbar 
+        @close-detailview="closeDetailview"
         @login-and-profile-false="setLogginAndProfileFalse"
         @bookmark-true="setBookmarkTrue" 
         @bookmark-false="setBookmarkFalse" 
@@ -246,6 +255,10 @@ export default {
       this.filterWines();
     },
 
+    closeDetailview(){
+      if(this.showDetailWineView)this.$refs.detailview.closeOverlay();
+    },
+
     hasWineType(winetype) {
       return this.filteredWines.some(wine => wine.winetype === winetype);
     },
@@ -301,6 +314,7 @@ export default {
     },
 
     toggleDetailViewWine(wine) {
+      console.log("Hit");
       this.selectedWine = wine;
       this.showDetailWineView = !this.showDetailWineView;
     },
@@ -381,7 +395,10 @@ export default {
           },
         });
         console.log(userDataResponse.data);
-        this.userData = userDataResponse.data;      
+        this.userData = userDataResponse.data;  
+        if (this.userData) {
+          localStorage.setItem('favoriten', JSON.stringify(this.userData.favoriten));
+        }    
         if (!this.userData || !this.userData.radarchart) {
           console.log("Kein User");
           let savedPreferences = {

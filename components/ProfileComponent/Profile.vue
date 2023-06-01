@@ -10,21 +10,21 @@
       </div>
 
       <div class="profile-button-group">
-        <button @click="filterWines('Weintyp')" class="button">Weintyp</button>
-        <button @click="filterWines('Herkunft')" class="button">Herkunft</button>
-        <button @click="filterWines('Trauben')" class="button">Trauben</button>
-        <button @click="filterWines('Jahr')" class="button">Jahr</button>
-        <button @click="filterWines('Preis')" class="button">Preis</button>
+        <button @click="filterWines('Weintyp')" class="profile-button">Weintyp</button>
+        <button @click="filterWines('Herkunft')" class="profile-button">Herkunft</button>
+        <button @click="filterWines('Trauben')" class="profile-button">Trauben</button>
+        <button @click="filterWines('Jahr')" class="profile-button">Jahr</button>
+        <button @click="filterWines('Preis')" class="profile-button">Preis</button>
       </div>
       <div v-if="userData" class="wine-cellar">
         <div class="regal">
           <div v-for="(wine, index) in userData.favoriten" :key="wine._id.$oid" class="wine-item" v-if="index < 4">
-            <CellarItem :wine="wine"/>
+            <CellarItem @click="toggleDetailViewWine(wine)" :wine="wine"/>
           </div>
         </div>
         <div class="regal">
           <div v-for="(wine, index) in userData.favoriten" :key="wine._id.$oid" class="wine-item" v-if="index >= 4">
-            <CellarItem :wine="wine"/>
+            <CellarItem @click="toggleDetailViewWine(wine)" :wine="wine"/>
           </div>
         </div>
       </div>
@@ -66,6 +66,11 @@
       <div class="bottom-placeholder">
 
       </div>
+      <DetailWineView v-if="showDetailWineView" :wine="selectedWine" 
+        @close="toggleDetailViewWine" 
+        @bookmark-removed="updateBookmarkedWinesCount" 
+        @update-profile="updateProfile"
+        ref="detailview" />
     </div>
   </template>
   
@@ -76,7 +81,6 @@
   import DetailWineView from '~/components/OverlayFrames/DetailWineView.vue';
   import DoughnutChart from '~/components/Charts/DoughnutChart.vue';
   import RadarChart from '~/components/Charts/RadarChart.vue';
-
   
   export default {
     components: {
@@ -85,6 +89,7 @@
       DetailWineView,
       DoughnutChart,
       RadarChart,
+      DetailWineView,
     },
 
     beforeCreate() {
@@ -166,9 +171,23 @@
   
     mounted() {
       this.getUserData();
+      this.$on('update-profile', this.updateProfile);
+    },
+
+    beforeDestroy() {
+      this.$off('update-profile', this.updateProfile);
     },
   
     methods: {
+      openDetailView(wine) {
+        
+      },
+
+      updateProfile() {
+        console.log("GET USER wird aud");
+        this.getUserData();
+      },
+
       async removeUserProfile() {
         const token = localStorage.getItem('jwt');
         if(!token) {
@@ -185,11 +204,16 @@
           if (response.status === 200) {
             this.userData = null;
             localStorage.removeItem('jwt');
+            localStorage.removeItem('user');
             this.$emit('logout');
           }
         } catch (error) {
           console.error(error);
         }
+      },
+
+      updateBookmarkedWinesCount(){
+        this.$emit('update-bookmar-count');
       },
 
       calcTasteProfile() {
@@ -205,6 +229,7 @@
       },
   
       toggleDetailViewWine(wine) {
+        console.log("Open DetailView");
         this.selectedWine = wine;
         this.showDetailWineView = !this.showDetailWineView;
       },
@@ -220,21 +245,21 @@
           this.userData = response.data;
 
         } catch (error) {
-          // Hier sollten Sie einen besseren Fehlerbehandlungsprozess einrichten
           console.error(error);
         }
-
-        // Wenn kein Token vorhanden ist, führen Sie den Abmeldeprozess aus
         if(!token) {
-          localStorage.removeItem('jwt');
-          this.$emit('logout');
+          this.logout();
         }
       },
 
 
       logout() {
         localStorage.removeItem('jwt');
-        //this.$router.push('/Winemenu');
+        localStorage.removeItem('user');
+        localStorage.removeItem('favoriten');
+        localStorage.removeItem('preferences');
+        localStorage.removeItem('savedPreferences');
+        localStorage.removeItem('wineCellar');
         this.$emit('logout');
       },
   
@@ -266,6 +291,10 @@
   </script>
 
   <style>
+
+  *{
+    font-family: 'Semplicita', sans-serif;
+  }
 
   .profile-header {
     display: flex;
@@ -329,25 +358,23 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: white;
     height: 50px;
     width: 100%;
   }
 
 
-  .button {
+  .profile-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: black;
     text-decoration: none;
     padding: 0 1rem;
     height: 100%;
     width: 25%;
     box-sizing: border-box;
-    transition: color 0.3s;
     font-size: 12px;
-    font-family: sans-serif;
     border: none;
   }
   
@@ -366,7 +393,7 @@
   .regal {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: flex-end; 
     width: 100%;
     height: auto;
     
@@ -375,12 +402,11 @@
     overflow-y: auto;
     padding-top: 10px;
     padding-left: 10px;
-  }
+}
   
   
   .wine-item {
     margin-right: 10px;
-    padding: 5px;
     border-radius: 5px;
     background-color: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);

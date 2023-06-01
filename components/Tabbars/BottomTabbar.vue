@@ -116,7 +116,7 @@ export default {
         this.$emit('bookmark-false');
       }
       this.toggleMenuButtons(input);
-
+      this.$emit('close-detailview');
       if(this.isLoggedIn()) {
         this.$emit('profile-true');
       } else {

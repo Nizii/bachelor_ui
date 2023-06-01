@@ -28,11 +28,11 @@
           </div>
 
           <div class="input-container">
-            <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="8" required>
+            <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="2" required>
           </div>
 
           <div class="input-container">
-            <input type="password" id="password" placeholder="Passwort bestätigen" v-model="confirmPassword" minlength="4" required>
+            <input type="password" id="password" placeholder="Passwort bestätigen" v-model="confirmPassword" minlength="2" required>
           </div>
 
           <div v-if="errorMessage" class="error-message">
@@ -115,8 +115,9 @@ export default {
           localStorage.removeItem('jwt');
           localStorage.removeItem('user');
 
+          console.log(response.data.token);
           localStorage.setItem('jwt', response.data.token);
-          localStorage.setItem('user', this.username);
+          localStorage.setItem('user', JSON.stringify(response.data.user));
 
           this.$emit('login-succeed');
         } catch (error) {
