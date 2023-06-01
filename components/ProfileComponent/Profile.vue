@@ -9,67 +9,69 @@
         </div>
       </div>
 
-      <div class="profile-button-group">
-        <button @click="filterWines('Weintyp')" class="profile-button">Weintyp</button>
-        <button @click="filterWines('Herkunft')" class="profile-button">Herkunft</button>
-        <button @click="filterWines('Trauben')" class="profile-button">Trauben</button>
-        <button @click="filterWines('Jahr')" class="profile-button">Jahr</button>
-        <button @click="filterWines('Preis')" class="profile-button">Preis</button>
-      </div>
+      <div class="inner-content">
+        <div class="profile-button-group">
+          <button @click="filterWines('Weintyp')" class="profile-button">Weintyp</button>
+          <button @click="filterWines('Herkunft')" class="profile-button">Herkunft</button>
+          <button @click="filterWines('Trauben')" class="profile-button">Trauben</button>
+          <button @click="filterWines('Jahr')" class="profile-button">Jahr</button>
+          <button @click="filterWines('Preis')" class="profile-button">Preis</button>
+        </div>
 
-      <div class="profile-line-2"></div>   
+        <div class="profile-line-2"></div>   
 
-      <div v-if="userData" class="wine-cellar">
-        <div class="regal" v-for="(wineGroup, groupIndex) in wineGroups" :key="groupIndex">
-          <div v-for="(wine, wineIndex) in wineGroup" :key="wineIndex" class="wine-item">
-            <CellarItem @click="toggleDetailViewWine(wine)" :wine="wine" />
+        <div v-if="userData" class="wine-cellar">
+          <div class="regal" v-for="(wineGroup, groupIndex) in wineGroups" :key="groupIndex">
+            <div v-for="(wine, wineIndex) in wineGroup" :key="wineIndex" class="wine-item">
+              <CellarItem @click="toggleDetailViewWine(wine)" :wine="wine" />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="profile-line-3"></div>    
+        <div class="profile-line-3"></div>    
 
-      <div class="profile-taste-container">
-        <div class="profile-chart-title"> 
-          <p>Mein Geschmacksprofil</p>
+        <div class="profile-taste-container">
+          <div class="profile-chart-title"> 
+            <p>Mein Geschmacksprofil</p>
+          </div>
+          <div class="profile-radar-chart">
+            <radar-chart :data="radarChartData" :options="radarChartOptions" />
+          </div>
+          <button class="detail-view-button" @click="calcTasteProfile">
+            Geschmacksprofil neu berechnen
+          </button>
         </div>
-        <div class="profile-radar-chart">
-          <radar-chart :data="radarChartData" :options="radarChartOptions" />
+
+        <div class="profile-line-3"></div>
+
+        <div class="chart-container">
+          <div class="profile-chart-title"> 
+            <p>Weinkeller Statistik</p>
+          </div>
+          <div class="doughnut-chart">
+            <DoughnutChart :chartData="chartData" :options="chartOptions" />
+          </div>
         </div>
-        <button class="detail-view-button" @click="calcTasteProfile">
-          Geschmacksprofil neu berechnen
-        </button>
-      </div>
 
-      <div class="profile-line-3"></div>
+        <div class="profile-line-1"></div>
 
-      <div class="chart-container">
-        <div class="profile-chart-title"> 
-          <p>Weinkeller Statistik</p>
+        <div class="chart-container">
+          <p>Benutzer</p>
+          <button class="detail-view-button" @click="removeUserProfile">
+            Benutzerprofil löschen
+          </button>
         </div>
-        <div class="doughnut-chart">
-          <DoughnutChart :chartData="chartData" :options="chartOptions" />
+
+        <div class="bottom-placeholder">
+
         </div>
+        <DetailWineView v-if="showDetailWineView" :wine="selectedWine" 
+          @close="toggleDetailViewWine" 
+          @bookmark-removed="updateBookmarkedWinesCount" 
+          @update-profile="updateProfile"
+          @load-profile="updateProfile"
+          ref="detailview" />
       </div>
-
-      <div class="profile-line-1"></div>
-
-      <div class="chart-container">
-        <p>Benutzer</p>
-        <button class="detail-view-button" @click="removeUserProfile">
-          Benutzerprofil löschen
-        </button>
-      </div>
-
-      <div class="bottom-placeholder">
-
-      </div>
-      <DetailWineView v-if="showDetailWineView" :wine="selectedWine" 
-        @close="toggleDetailViewWine" 
-        @bookmark-removed="updateBookmarkedWinesCount" 
-        @update-profile="updateProfile"
-        @load-profile="updateProfile"
-        ref="detailview" />
     </div>
   </template>
   
@@ -326,8 +328,10 @@
     font-weight: bold;
     position: sticky;
     top: 0;
-    z-index: 1001; 
-    background-color: white; 
+    z-index: 1001;
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   .profile-chart-title{
@@ -349,9 +353,18 @@
 
   }
 
-  .profile-content{
-    padding-left: 20px;
-    padding-right: 20px;
+  .logout-content{
+
+  }
+
+  .profile-content {
+    height: 100vh; 
+    overflow-y: auto; 
+  }
+
+  .inner-content{
+    margin-left: 20px;
+    margin-right:20px;
   }
 
   .profile-line-1{

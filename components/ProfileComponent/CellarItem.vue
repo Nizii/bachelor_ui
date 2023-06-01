@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 250px; 
+  height: 260px; 
 }
 
 .item-title {
