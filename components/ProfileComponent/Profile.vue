@@ -2,7 +2,7 @@
     <div class="profile-content">
       <div class="profile-header">
         <div class="profile-title">
-          <p>Weinkeller</p>
+          <p>Mein Weinkeller</p>
         </div>
         <div class="logout-container">
           <button @click="logout()" class="logout-button">Logout</button>
@@ -16,20 +16,18 @@
         <button @click="filterWines('Jahr')" class="profile-button">Jahr</button>
         <button @click="filterWines('Preis')" class="profile-button">Preis</button>
       </div>
+
+      <div class="profile-line-2"></div>   
+
       <div v-if="userData" class="wine-cellar">
-        <div class="regal">
-          <div v-for="(wine, index) in userData.favoriten" :key="wine._id.$oid" class="wine-item" v-if="index < 4">
-            <CellarItem @click="toggleDetailViewWine(wine)" :wine="wine"/>
-          </div>
-        </div>
-        <div class="regal">
-          <div v-for="(wine, index) in userData.favoriten" :key="wine._id.$oid" class="wine-item" v-if="index >= 4">
-            <CellarItem @click="toggleDetailViewWine(wine)" :wine="wine"/>
+        <div class="regal" v-for="(wineGroup, groupIndex) in wineGroups" :key="groupIndex">
+          <div v-for="(wine, wineIndex) in wineGroup" :key="wineIndex" class="wine-item">
+            <CellarItem @click="toggleDetailViewWine(wine)" :wine="wine" />
           </div>
         </div>
       </div>
 
-      <div class="profile-line-1"></div>    
+      <div class="profile-line-3"></div>    
 
       <div class="profile-taste-container">
         <div class="profile-chart-title"> 
@@ -43,11 +41,11 @@
         </button>
       </div>
 
-      <div class="profile-line-1"></div>
+      <div class="profile-line-3"></div>
 
       <div class="chart-container">
         <div class="profile-chart-title"> 
-          <p>Meine getrunkenen Weine</p>
+          <p>Weinkeller Statistik</p>
         </div>
         <div class="doughnut-chart">
           <DoughnutChart :chartData="chartData" :options="chartOptions" />
@@ -104,18 +102,33 @@
       }
     },
   
+    computed: {
+      wineGroups() {
+        if (!this.userData || !this.userData.favoriten) {
+          return [];
+        }
+        const wines = this.userData.favoriten;
+        const wineGroups = [];
+        for (let i = 0; i < wines.length; i += this.winesPerRow) {
+          wineGroups.push(wines.slice(i, i + this.winesPerRow));
+        }
+        return wineGroups;
+      },
+    },
+
     data() {
       const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       return {
         userData: null,
+        winesPerRow: 3,
         showFoodOverlay: false,
         showBookmarksOverlay: false,
         showDetailWineView: false,
         chartData: {
-          labels: ['Red', 'Blue', 'Yellow'],
+          labels: ['Rotwein', 'Weisswein', 'Rosé'],
           datasets: [{
-            data: [300, 50, 100],
-            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
+            data: [2, 2, 2],
+            backgroundColor: ['#A15B80', '#E8D954', '#F28A87'],
             hoverOffset: 4
           }]
         },
@@ -180,12 +193,18 @@
     },
   
     methods: {
-      openDetailView(wine) {
-        
+
+      calcDoughnutValues(data) {
+        if (data && data.favoriten) {
+          console.log("Favoriten "+ this.userData.favoriten);
+          const redWines = this.userData.favoriten.filter(wine => wine.winetype === 'Rotwein');
+          const whiteWines = this.userData.favoriten.filter(wine => wine.winetype === 'Weisswein');
+          const roseWines = this.userData.favoriten.filter(wine => wine.winetype === 'Rose');
+          this.chartData.datasets[0].data = [redWines.length, whiteWines.length, roseWines.length];
+        }
       },
 
       updateProfile() {
-        console.log("GET USER wird aud");
         this.getUserData();
       },
 
@@ -244,6 +263,7 @@
             },
           });
           this.userData = response.data;
+          this.calcDoughnutValues(response.data);
 
         } catch (error) {
           console.error(error);
@@ -302,7 +322,7 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid rgb(214, 214, 214);
-    margin-bottom: 3em;
+    margin-bottom: 1em;
     font-weight: bold;
     position: sticky;
     top: 0;
@@ -338,6 +358,20 @@
     border-bottom: 1px solid rgb(214, 214, 214);
     margin-top: 3em;
     margin-bottom: 1em;
+    width: 100%;
+  }
+
+  .profile-line-2{
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 100%;
+  }
+
+  .profile-line-3{
+    border-bottom: 1px solid rgb(214, 214, 214);
+    margin-top: 3em;
+    margin-bottom: 3em;
     width: 100%;
   }
   
@@ -394,6 +428,7 @@
   .regal {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     align-items: flex-end; 
     width: 100%;
     height: auto;
@@ -401,8 +436,9 @@
     border-bottom: 3px solid brown;
     box-sizing: border-box;
     overflow-y: auto;
-    padding-top: 10px;
-    padding-left: 10px;
+    padding-top: 30px;
+    margin-bottom: 20px;
+    gap: 10px;
 }
   
   
