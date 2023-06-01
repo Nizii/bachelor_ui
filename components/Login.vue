@@ -112,20 +112,11 @@ export default {
   */
 
         async login() {
-        const token = localStorage.getItem('jwt');
-        if (!token) {
-          console.error('No token found');
-          return;
-        }
 
         try {
           const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
             username: this.username,
             password: this.password
-          }, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            }
           });
 
           if (response.data.user) {
