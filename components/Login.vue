@@ -80,7 +80,7 @@ export default {
   },
   
   methods: {
-
+/*
       
     async removeUserProfile() {
       const token = localStorage.getItem('jwt');
@@ -109,7 +109,42 @@ export default {
         console.error(error);
       }
     },
-  
+  */
+
+        async login() {
+        const token = localStorage.getItem('jwt');
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+
+        try {
+          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+            username: this.username,
+            password: this.password
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+
+          if (response.data.user) {
+            console.log("User "+response.data.user.username);
+            localStorage.setItem('user', JSON.stringify(response.data.user.username));
+
+            this.$emit('login-succeed');
+          }
+        } catch (error) {
+          if (error.response && error.response.status === 400) {
+            this.errorMessage = error.response.data;
+          } else {
+            this.errorMessage = "Login fehlgeschlagen";
+          }
+        }
+      },
+
+
+
     async register() {
         if (this.password !== this.confirmPassword) {
           alert('Passwörter stimmen nicht überein!');
