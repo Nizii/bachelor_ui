@@ -111,28 +111,28 @@ export default {
     },
   */
 
-        async login() {
+  async login() {
+  try {
+    const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+      username: this.username,
+      password: this.password
+    });
 
-        try {
-          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
-            username: this.username,
-            password: this.password
-          });
+    if (response.data.token) {
+      console.log("Trigger in if");
+      localStorage.setItem('jwt', response.data.token);
+      localStorage.setItem('user', this.username);
+      this.$emit('login-succeed');
+    }
+  } catch (error) {
+    if (error.response && error.response.status === 401) {
+      this.errorMessage = "Nutzername oder Passwort ist falsch";
+    } else {
+      this.errorMessage = "Login fehlgeschlagen";
+    }
+  }
+},
 
-          if (response.data.user) {
-            console.log("User "+response.data.user.username);
-            localStorage.setItem('user', JSON.stringify(response.data.user.username));
-
-            this.$emit('login-succeed');
-          }
-        } catch (error) {
-          if (error.response && error.response.status === 400) {
-            this.errorMessage = error.response.data;
-          } else {
-            this.errorMessage = "Login fehlgeschlagen";
-          }
-        }
-      },
 
 
 

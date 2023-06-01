@@ -305,6 +305,7 @@ export default {
     },
 
     navigateToProfileAfterLogin() {
+      console.log("yesyes");
       this.showProfile = true;
       this.showLogin = false;
     },
