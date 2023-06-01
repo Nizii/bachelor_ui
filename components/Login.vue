@@ -82,22 +82,32 @@ export default {
   methods: {
 
       
-    async login() {
-      try {
-          const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
-          //const response = await axios.post('https://localhost:44322/api/User/login', {
-            username: this.username,
-            email: this.email,
-            password: this.password
-          });
+    async removeUserProfile() {
+      const token = localStorage.getItem('jwt');
+      if (!token) {
+        console.error('No token found');
+        return;
+      }
+      
+      const user = localStorage.getItem('user');
+      console.log("User " + user);
 
-          localStorage.setItem('user', this.username);
-          localStorage.setItem('jwt', response.data.token);
-          
-          this.$emit('login-succeed');
-        } catch (error) {
-          console.error(error);
+      try {
+        const response = await this.$axios.delete(`https://wine.azurewebsites.net/api/user/delete/${user}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.status === 200) {
+          this.userData = null;
+          localStorage.removeItem('jwt');
+          localStorage.removeItem('user');
+          this.$emit('logout');
         }
+      } catch (error) {
+        console.error(error);
+      }
     },
   
     async register() {
@@ -115,9 +125,12 @@ export default {
           localStorage.removeItem('jwt');
           localStorage.removeItem('user');
 
-          console.log(response.data.token);
+          console.log("Token "+response.data.token);
+          console.log("User "+response.data.user.username);
+          console.log("Response "+response.data);
+
           localStorage.setItem('jwt', response.data.token);
-          localStorage.setItem('user', JSON.stringify(response.data.user));
+          localStorage.setItem('user', JSON.stringify(response.data.user.username));
 
           this.$emit('login-succeed');
         } catch (error) {

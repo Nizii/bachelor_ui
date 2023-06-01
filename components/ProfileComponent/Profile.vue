@@ -70,6 +70,7 @@
         @close="toggleDetailViewWine" 
         @bookmark-removed="updateBookmarkedWinesCount" 
         @update-profile="updateProfile"
+        @load-profile="updateProfile"
         ref="detailview" />
     </div>
   </template>

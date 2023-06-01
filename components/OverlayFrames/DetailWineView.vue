@@ -55,12 +55,13 @@
           <br>
           <p class="detail-view-description">{{wine.winzer}}</p>
           <div v-if="isLoggedIn" class="add-to-favorite-container">
-            <button v-if="!wineInCellar" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
+            <button v-if="!isWineInCellar" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
               Zum Weinkeller hinzufügen
             </button>
             <button v-else class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="removeFromWineCellar">
-              Entfernen
+                Entfernen
             </button>
+          
           </div>          
         </div>
         <div class="detail-view-right">
@@ -113,6 +114,7 @@
   <script>
   import TasteInfo from '~/components/TasteComponent/TasteInfo.vue';
   import RadarChart from '~/components/Charts/RadarChart.vue';
+  import { mapState } from 'vuex';
 
   export default {
     name: 'DetailWineView',
@@ -138,13 +140,21 @@
       }
     },
 
+    computed: {
+      ...mapState({
+        wineInCellar: state => state.wineInCellar[this.wine._id] || false
+      }),
+
+      isWineInCellar() {
+        return this.$store.state.wineInCellar[this.wine._id] || false;
+      }
+    },
 
     data() {
       const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       return {
         userData: null,
         frameOpen: false,
-        wineInCellar:null,
         isBookmarked: false,
         newComment: '',
         isLoggedIn: false,
@@ -224,6 +234,7 @@
         this.frameOpen = false;
         document.body.style.overflow = 'auto'; // Erlaubt das Scrollen auf dem Body wieder
         setTimeout(() => {
+          this.$emit('load-profile');
           this.$emit('close');
         }, 300);
       },
@@ -320,7 +331,7 @@
 
 
 
-      addToWineCellar() {
+      async addToWineCellar() {
         // Erhalte die aktuelle Liste der Weine im Weinkeller (oder eine leere Liste, wenn noch keine Weine hinzugefügt wurden)
         const wineCellar = JSON.parse(localStorage.getItem('wineCellar')) || [];
         // Überprüfe, ob der aktuelle Wein bereits im Weinkeller ist
@@ -328,15 +339,14 @@
         
         if (!alreadyAdded) {
           wineCellar.push(this.wine);
-          this.userData.favoriten = wineCellar;
           localStorage.setItem('wineCellar', JSON.stringify(wineCellar));
-          this.wineInCellar = true;
+          this.$store.commit('setWineInCellar', { wineId: this.wine._id, inCellar: true });
 
           // Neuen Wein zum Server hinzufügen
           const token = localStorage.getItem('jwt');
           if (token) {
             const wineId = this.wine._id;
-            this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${wineId}`, {}, { headers: { Authorization: `Bearer ${token}` }})
+            await this.$axios.post(`https://wine.azurewebsites.net/api/user/add-favorite/${wineId}`, {}, { headers: { Authorization: `Bearer ${token}` }})
             .then(response => {
               console.log(response);
             })
@@ -347,19 +357,19 @@
         } else {
           // Wenn der Wein bereits im Weinkeller ist, wird er entfernt
           const updatedWineCellar = wineCellar.filter(wine => wine._id !== this.wine._id);
-          this.userData.favoriten = updatedWineCellar;
           localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
-          this.wineInCellar = false;
+          this.$store.commit('setWineInCellar', { wineId: this.wine._id, inCellar: false });
         }
         this.$emit('update-profile');
       },
 
       async removeFromWineCellar() {
+        // Erhalte aktuelle Liste der Weine im Weinkeller
         const wineCellar = JSON.parse(localStorage.getItem('wineCellar')) || [];
+        // Entferne Wein aus dem Weinkeller
         const updatedWineCellar = wineCellar.filter(wine => wine._id !== this.wine._id);
-        this.userData.favoriten = updatedWineCellar; 
         localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
-        this.wineInCellar = false;
+        this.$store.commit('setWineInCellar', { wineId: this.wine._id, inCellar: false });
         
         // Wein vom Server entfernen
         const token = localStorage.getItem('jwt');
@@ -374,7 +384,6 @@
             console.error(error);
           }
         }
-        this.$emit('update-profile');
       },
 
 
