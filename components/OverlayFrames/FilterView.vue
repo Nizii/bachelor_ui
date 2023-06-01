@@ -249,7 +249,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 
 .go-icon{
   width: 40px;
