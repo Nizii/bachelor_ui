@@ -212,7 +212,7 @@
 
     mounted() {
       this.getUserData().then(() => {
-        this.calcDoughnutValues(this.userData);
+        this.refreshDoughnutData(this.userData);
       });
       this.$on('update-profile', this.updateProfile);
     },
@@ -223,12 +223,38 @@
   
     methods: {
       refreshProfile() {
-        
+        this.refreshDoughnutData();
+      },
+
+      refreshDoughnutData() {
+        var redWinesCount;
+        var whiteWinesCount;
+        var roseWinesCount; 
+
+        if(JSON.parse(localStorage.getItem('favoriten'))) {
+          var favoriten = JSON.parse(localStorage.getItem('favoriten'));
+          redWinesCount = favoriten.filter(wine => wine.winetype === 'Rotwein').length;
+          whiteWinesCount = favoriten.filter(wine => wine.winetype === 'Weisswein').length;
+          roseWinesCount = favoriten.filter(wine => wine.winetype === 'Rose').length;
+        } else {
+          redWinesCount = 0;
+          whiteWinesCount = 0;
+          roseWinesCount = 0;
+        }
+
+        this.chartData = {
+          labels: ['Rotwein', 'Weisswein', 'Rosé'],
+          datasets: [{
+            data: [redWinesCount,whiteWinesCount,roseWinesCount],
+            backgroundColor: ['#A15B80', '#E8D954', '#F28A87'],
+            hoverOffset: 4
+          }]
+        }
       },
 
       updateProfile() {
         this.getUserData().then(() => {
-          this.calcDoughnutValues(this.userData);
+          this.refreshProfile(this.userData);
           });
         this.$on('update-profile', this.updateProfile);
       },

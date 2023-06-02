@@ -141,12 +141,8 @@
     },
 
     computed: {
-      ...mapState({
-        wineInCellar: state => state.wineInCellar[this.wine._id] || false
-      }),
-
       isWineInCellar() {
-        return this.$store.state.wineInCellar[this.wine._id] || false;
+        return this.$store.getters.isWineInCellar(this.wine._id);
       }
     },
 
