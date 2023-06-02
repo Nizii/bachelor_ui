@@ -129,7 +129,7 @@
         chartData: {
           labels: ['Rotwein', 'Weisswein', 'Rosé'],
           datasets: [{
-            data: [2, 2, 2],
+            data: [1,1,1],
             backgroundColor: ['#A15B80', '#E8D954', '#F28A87'],
             hoverOffset: 4
           }]
@@ -184,9 +184,11 @@
 
       };
     },
-  
+
     mounted() {
-      this.getUserData();
+      this.getUserData().then(() => {
+        this.calcDoughnutValues(this.userData);
+      });
       this.$on('update-profile', this.updateProfile);
     },
 
@@ -197,17 +199,27 @@
     methods: {
 
       calcDoughnutValues(data) {
-        if (data && data.favoriten) {
-          console.log("Favoriten "+ this.userData.favoriten);
-          const redWines = this.userData.favoriten.filter(wine => wine.winetype === 'Rotwein');
-          const whiteWines = this.userData.favoriten.filter(wine => wine.winetype === 'Weisswein');
-          const roseWines = this.userData.favoriten.filter(wine => wine.winetype === 'Rose');
-          this.chartData.datasets[0].data = [redWines.length, whiteWines.length, roseWines.length];
-        }
+        console.log("Favoriten "+ this.userData.favoriten[0].name);
+        const redWines = this.userData.favoriten.filter(wine => wine.winetype === 'Rotwein');
+        const whiteWines = this.userData.favoriten.filter(wine => wine.winetype === 'Weisswein');
+        const roseWines = this.userData.favoriten.filter(wine => wine.winetype === 'Rose');  
+          
+        this.chartData = {
+          labels: ['Rotwein', 'Weisswein', 'Rosé'],
+          datasets: [{
+            data: [redWines.length, whiteWines.length, roseWines.length],
+            backgroundColor: ['#A15B80', '#E8D954', '#F28A87'],
+            hoverOffset: 4
+          }]
+        };
+
       },
 
       updateProfile() {
-        this.getUserData();
+        this.getUserData().then(() => {
+          this.calcDoughnutValues(this.userData);
+          });
+        this.$on('update-profile', this.updateProfile);
       },
 
       async removeUserProfile() {
@@ -265,7 +277,6 @@
             },
           });
           this.userData = response.data;
-          this.calcDoughnutValues(response.data);
 
         } catch (error) {
           console.error(error);
@@ -459,7 +470,6 @@
     margin-right: 10px;
     border-radius: 5px;
     background-color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   .bottom-placeholder{

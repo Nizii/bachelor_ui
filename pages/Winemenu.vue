@@ -335,6 +335,8 @@ export default {
    */
     // Eine Funktion, die die Übereinstimmung zwischen dem Geschmacksprofil eines Benutzers und eines Weins berechnet
     calculateMatch(userProfile, wineProfile) {
+      var temp = JSON.parse(localStorage.getItem('preferences'));
+      if(temp.suss === 0) return;
     // Eine Variable, um die Gesamtdifferenz zwischen den Profilen zu speichern
       var totalDifference = 0;
       // Eine Schleife, die durch jedes Element in den Profilen geht
