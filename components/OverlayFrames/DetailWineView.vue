@@ -384,6 +384,7 @@
             console.error(error);
           }
         }
+        this.$emit('refresh-profile-for-doughnut');
       },
 
 

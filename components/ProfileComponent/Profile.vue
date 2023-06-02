@@ -70,6 +70,7 @@
           @bookmark-removed="updateBookmarkedWinesCount" 
           @update-profile="updateProfile"
           @load-profile="updateProfile"
+          @refresh-profile-for-doughnut="refreshProfile"
           ref="detailview" />
       </div>
     </div>
@@ -119,7 +120,31 @@
     },
 
     data() {
-      const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
+      var redWinesCount;
+      var whiteWinesCount;
+      var roseWinesCount; 
+      var preferences;
+
+      if(JSON.parse(localStorage.getItem('favoriten'))) {
+        var favoriten = JSON.parse(localStorage.getItem('favoriten'));
+        redWinesCount = favoriten.filter(wine => wine.winetype === 'Rotwein').length;
+        whiteWinesCount = favoriten.filter(wine => wine.winetype === 'Weisswein').length;
+        roseWinesCount = favoriten.filter(wine => wine.winetype === 'Rose').length;
+      } else {
+        redWinesCount = 0;
+        whiteWinesCount = 0;
+        roseWinesCount = 0;
+      }
+
+
+      if(JSON.parse(localStorage.getItem('savedPreferences'))){
+        preferences = JSON.parse(localStorage.getItem('savedPreferences'));
+      } else if (JSON.parse(localStorage.getItem('preferences'))) {
+        preferences = JSON.parse(localStorage.getItem('preferences'));
+      } else {
+        preferences = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
+      }
+
       return {
         userData: null,
         winesPerRow: 3,
@@ -129,7 +154,7 @@
         chartData: {
           labels: ['Rotwein', 'Weisswein', 'Rosé'],
           datasets: [{
-            data: [1,1,1],
+            data: [redWinesCount,whiteWinesCount,roseWinesCount],
             backgroundColor: ['#A15B80', '#E8D954', '#F28A87'],
             hoverOffset: 4
           }]
@@ -197,22 +222,8 @@
     },
   
     methods: {
-
-      calcDoughnutValues(data) {
-        console.log("Favoriten "+ this.userData.favoriten[0].name);
-        const redWines = this.userData.favoriten.filter(wine => wine.winetype === 'Rotwein');
-        const whiteWines = this.userData.favoriten.filter(wine => wine.winetype === 'Weisswein');
-        const roseWines = this.userData.favoriten.filter(wine => wine.winetype === 'Rose');  
-          
-        this.chartData = {
-          labels: ['Rotwein', 'Weisswein', 'Rosé'],
-          datasets: [{
-            data: [redWines.length, whiteWines.length, roseWines.length],
-            backgroundColor: ['#A15B80', '#E8D954', '#F28A87'],
-            hoverOffset: 4
-          }]
-        };
-
+      refreshProfile() {
+        
       },
 
       updateProfile() {

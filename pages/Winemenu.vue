@@ -397,7 +397,6 @@ export default {
           Authorization: `Bearer ${token}`,
           },
         });
-        console.log(userDataResponse.data);
         this.userData = userDataResponse.data;  
         if (this.userData) {
           localStorage.setItem('favoriten', JSON.stringify(this.userData.favoriten));
