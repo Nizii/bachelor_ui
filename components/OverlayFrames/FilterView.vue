@@ -65,7 +65,7 @@
               <div class="food-content">
                 Tofu
               </div>
-              <img :src="require('static/icons/food/Tofu.svg')" class="filter-icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/tofu.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Tapas')" :class="{ active: selectedDish.includes('Tapas') }" class="checkbox checkbox-2">
               <div class="food-content">
