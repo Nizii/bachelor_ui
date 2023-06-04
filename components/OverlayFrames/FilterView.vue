@@ -23,67 +23,67 @@
               <div class="food-content">
                 Apéro
               </div>
-              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/apero.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Antipasti')" :class="{ active: selectedDish.includes('Antipasti') }" class="checkbox checkbox-1">
               <div class="food-content">
                 Antipasti
               </div>
-              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/antipasti.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Salat')" :class="{ active: selectedDish.includes('Salat') }" class="checkbox checkbox-2">
               <div class="food-content">
                 Salat
               </div>
-              <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/Salat.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Helles Fleisch')" :class="{ active: selectedDish.includes('Helles Fleisch') }" class="checkbox checkbox-1">
               <div class="food-content">
                 Helles Fleisch
               </div>
-              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/hellesFleisch.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Rotes Fleisch')" :class="{ active: selectedDish.includes('Rotes Fleisch') }" class="checkbox checkbox-2">
               <div class="food-content">
                 Rotes Fleisch
               </div>
-              <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/rotesFleisch.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Fisch')" :class="{ active: selectedDish.includes('Fisch') }" class="checkbox checkbox-1">
               <div class="food-content">
                 Fisch
               </div>
-              <img :src="require('static/icons/food/Fisch.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/Fisch.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Käse')" :class="{ active: selectedDish.includes('Käse') }" class="checkbox checkbox-2">
               <div class="food-content">
                 Käse
               </div>
-              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/Kase.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Tofu')" :class="{ active: selectedDish.includes('Tofu') }" class="checkbox checkbox-1">
               <div class="food-content">
                 Tofu
               </div>
-              <img :src="require('static/icons/food/Kase.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/Tofu.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Tapas')" :class="{ active: selectedDish.includes('Tapas') }" class="checkbox checkbox-2">
               <div class="food-content">
                 Tapas
               </div>
-              <img :src="require('static/icons/food/Salat.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/tapas.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Pizza')" :class="{ active: selectedDish.includes('Pizza') }" class="checkbox checkbox-1">
               <div class="food-content">
                 Pizza
               </div>
-              <img :src="require('static/icons/food/Pizza.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/Pizza.svg')" class="filter-icon" alt="Profile icon" />
             </div>
             <div @click="toggleDishCheckbox('Pasta')" :class="{ active: selectedDish.includes('Pasta') }" class="checkbox checkbox-2">
               <div class="food-content">
                 Pasta
               </div>
-              <img :src="require('static/icons/food/Pasta.png')" class="icon" alt="Profile icon" />
+              <img :src="require('static/icons/food/Pasta.svg')" class="filter-icon" alt="Profile icon" />
             </div>
           </div>
 
@@ -250,6 +250,11 @@ export default {
 </script>
 
 <style>
+
+.filter-icon{
+  width: 40px;
+  height: 40px;
+}
 
 .go-icon{
   width: 40px;
