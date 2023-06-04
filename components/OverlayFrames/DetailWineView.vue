@@ -136,16 +136,6 @@
       },
     },
 
-    beforeCreate() {
-      const storedPreferences = localStorage.getItem('preferences');
-      if (storedPreferences) {
-        this.preferences = JSON.parse(storedPreferences);
-      } else {
-        console.log("Keine Präferenzen verfügbar");
-        this.preferences = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
-      }
-    },
-
     computed: {
       isWineInCellar() {
         return this.$store.getters.isWineInCellar(this.wine._id);
@@ -153,7 +143,14 @@
     },
 
     data() {
-      const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
+      var temp;
+      if(JSON.parse(localStorage.getItem('savedPreferences'))){
+        temp = JSON.parse(localStorage.getItem('savedPreferences'));
+      } else if (JSON.parse(localStorage.getItem('preferences'))){
+        temp = JSON.parse(localStorage.getItem('preferences'))
+      } else {
+        temp = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
+      }
       return {
         userData: null,
         frameOpen: false,
@@ -189,12 +186,12 @@
               pointHoverBackgroundColor: 'blue',
               pointHoverBorderColor: 'blue',
               data: [
-                preferences.sauer,
-                preferences.suss,
-                preferences.intensiv,
-                preferences.fruchtig,
-                preferences.holzig,
-                preferences.trocken
+                temp.sauer,
+                temp.suss,
+                temp.intensiv,
+                temp.fruchtig,
+                temp.holzig,
+                temp.trocken
               ],
             }
           ]
