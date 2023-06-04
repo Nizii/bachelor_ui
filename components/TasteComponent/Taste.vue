@@ -19,7 +19,9 @@
       </div>
       <div class="block"></div>
       <div class="block-content">
-        <Slider ref="slider" @emit-value="setPreferenceAndNavigate" />
+        <div class="slider-overlay">
+          <Slider class="slider-class" ref="slider" @emit-value="setPreferenceAndNavigate" />
+        </div>
         <button class="navigation-button" @click="startProcess()">
           Weiter
         </button>
@@ -190,5 +192,7 @@ export default {
   .AppHeader {
     text-align: center;
   }
+
+  
   </style>
   
