@@ -3,30 +3,34 @@
     <div class="wine-card-row1">
       <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
       <div class="wine-card-row2">
-        <h3 class="wine-title">{{ wine.name }}</h3>
+        <h3 class="wine-title">
+          {{ wine.name }}
+          <!--<img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="wine-info-flag" alt="Profile icon" />-->
+        </h3>
         <div class="wine-attribute">
 
           <div class="wine-type_container">
-            <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" />
+            <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
+              <img :src="require('static/icons/food/traube_weisswein.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
-            <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" />
+            <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">
+              <img :src="require('static/icons/food/traube_rotwein.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
-            <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" />
+            <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
+              <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
-            <p>
-              {{ wine.grape }}
+            <p v-for="(grape, index) in wine.grapeTags" :key="index">
+              {{ grape }}&nbsp;
             </p>
           </div>
 
         </div>
 
+  
         <div class="wine-flag">
           <img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="wine-info-flag" alt="Profile icon" />
         </div>
-
+ 
         <div class="wine-price">
           <div class="bottle-price">
             <div class="price-label">
@@ -296,8 +300,8 @@
   }
 
   .icon-small {
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
   }
 
   

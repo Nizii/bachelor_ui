@@ -13,20 +13,26 @@
     <div class="inner-overlay">
         <div id="row2">
           <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
-            <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">Weiss
-              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" /></p>
-            <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">Rot
-              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" /></p>
-            <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">Rosé
-              <img :src="require('static/icons/others/traube.svg')" class="icon-small" alt="Bookmark icon" /></p>
               <button @click.stop="addToBookmarks">
                 <img v-if="!isBookmarked" :src="require('static/icons/buttons/merkliste.png')" class="detail-bookmark-icon" alt="Bookmark icon" />
                 <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="detail-bookmark-icon" alt="Bookmark icon" />
               </button>              
           </div>
           <br>
-          <p id="detail-view-grape">{{wine.grape}}</p>
+          <p v-for="(grape, index) in wine.grapeTags" :key="index">
+            {{ grape }}
+            <span v-if="index !== wine.grapeTags.length - 1">,&nbsp;</span>
+          </p>
         </div>
+        <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
+          <img :src="require('static/icons/food/traube_weisswein.svg')" class="detail-view-icon" alt="Bookmark icon" />
+        </p>
+        <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">
+          <img :src="require('static/icons/food/traube_rotwein.svg')" class="detail-view-icon" alt="Bookmark icon" />
+        </p>
+        <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
+          <img :src="require('static/icons/food/traube_rose.svg')" class="detail-view-icon" alt="Bookmark icon" />
+        </p>
       <div class="detail-view-main-container">
         <div class="detail-view-left">
           <br>
@@ -444,7 +450,7 @@
   }
 
   .detail-bookmark-icon{
-    margin-left: 20px;
+ 
   }
 
   .overlay-frame {
@@ -514,10 +520,16 @@
   .detail-view-right {
     flex: 1; 
   }
+
+  .detail-view-icon{
+    width: 30px;
+    height: 30px;
+  }
   
   .detail-view-label {
     margin-bottom: 0.03em;
     font-size: 14px;
+    margin-top: 15px;
   }
 
   .detail-view-content{
