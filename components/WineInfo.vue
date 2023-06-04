@@ -19,8 +19,13 @@
             <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
               <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
+            <!--
             <p v-for="(grape, index) in wine.grapeTags" :key="index">
               {{ grape }}&nbsp;
+            </p>
+            -->
+            <p>
+              {{ whine.grape }};
             </p>
           </div>
 
