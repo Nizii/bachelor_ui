@@ -25,7 +25,7 @@
             </p>
             -->
             <p>
-              {{ whine.grape }};
+              {{ wine.grape }};
             </p>
           </div>
 

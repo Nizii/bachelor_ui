@@ -135,7 +135,17 @@
         required: true,
       },
     },
-
+/*
+    beforeCreate() {
+      const storedPreferences = localStorage.getItem('preferences');
+      if (storedPreferences) {
+        this.preferences = JSON.parse(storedPreferences);
+      } else {
+        console.log("Keine Präferenzen verfügbar");
+        this.preferences = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
+      }
+    },
+*/
     computed: {
       isWineInCellar() {
         return this.$store.getters.isWineInCellar(this.wine._id);
@@ -143,6 +153,7 @@
     },
 
     data() {
+      //const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       var temp;
       if(JSON.parse(localStorage.getItem('savedPreferences'))){
         temp = JSON.parse(localStorage.getItem('savedPreferences'));
