@@ -13,10 +13,12 @@
     <div class="inner-overlay">
         <div id="row2">
           <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
+            <!--
               <button @click.stop="addToBookmarks">
                 <img v-if="!isBookmarked" :src="require('static/icons/buttons/merkliste.png')" class="detail-bookmark-icon" alt="Bookmark icon" />
                 <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="detail-bookmark-icon" alt="Bookmark icon" />
-              </button>              
+              </button>  
+              -->            
           </div>
           <br>
           <p v-for="(grape, index) in wine.grapeTags" :key="index">
@@ -61,7 +63,7 @@
           <br>
           <p class="detail-view-description">{{wine.winzer}}</p>
           <div v-if="isLoggedIn" class="add-to-favorite-container">
-            <button v-if="!isWineInCellar" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
+            <button v-if="!isWineInCellar  && !inProfile" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
               Zum Weinkeller hinzufügen
             </button>
             <button v-else class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="removeFromWineCellar">
@@ -134,6 +136,16 @@
         type: Object,
         required: true,
       },
+
+      inProfile: {
+        type: Boolean,
+        default: false,
+      },
+
+      closeOverlayHandlerOn: {
+        type: Boolean,
+        default: false,
+      }
     },
 /*
     beforeCreate() {
@@ -394,6 +406,7 @@
             console.error(error);
           }
         }
+        if(this.closeOverlayHandlerOn) {this.closeOverlay()}
         this.$emit('refresh-profile-for-doughnut');
       },
 

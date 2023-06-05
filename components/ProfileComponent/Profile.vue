@@ -65,7 +65,10 @@
         <div class="bottom-placeholder">
 
         </div>
-        <DetailWineView v-if="showDetailWineView" :wine="selectedWine" 
+        <DetailWineView v-if="showDetailWineView" 
+          :closeOverlayHandlerOn="true"
+          :inProfile="true"
+          :wine="selectedWine" 
           @close="toggleDetailViewWine" 
           @bookmark-removed="updateBookmarkedWinesCount" 
           @update-profile="updateProfile"

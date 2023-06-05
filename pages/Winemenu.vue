@@ -70,7 +70,8 @@
           @bookmark-removed="updateBookmarkedWinesCount"
           ref="bookmark" />
 
-        <DetailWineView v-if="showDetailWineView" :wine="selectedWine" 
+        <DetailWineView v-if="showDetailWineView" 
+          :wine="selectedWine" 
           @close="toggleDetailViewWine" 
           @bookmark-removed="updateBookmarkedWinesCount" 
           ref="detailview" />
