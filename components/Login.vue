@@ -80,61 +80,27 @@ export default {
   },
   
   methods: {
-/*
-      
-    async removeUserProfile() {
-      const token = localStorage.getItem('jwt');
-      if (!token) {
-        console.error('No token found');
-        return;
-      }
-      
-      const user = localStorage.getItem('user');
-      console.log("User " + user);
-
+    async login() {
       try {
-        const response = await this.$axios.delete(`https://wine.azurewebsites.net/api/user/delete/${user}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+        const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
+          username: this.username,
+          password: this.password
         });
 
-        if (response.status === 200) {
-          this.userData = null;
-          localStorage.removeItem('jwt');
-          localStorage.removeItem('user');
-          this.$emit('logout');
+        if (response.data.token) {
+          console.log("Trigger in if");
+          localStorage.setItem('jwt', response.data.token);
+          localStorage.setItem('user', this.username);
+          this.$emit('login-succeed');
         }
       } catch (error) {
-        console.error(error);
+        if (error.response && error.response.status === 401) {
+          this.errorMessage = "Nutzername oder Passwort ist falsch";
+        } else {
+          this.errorMessage = "Login fehlgeschlagen";
+        }
       }
     },
-  */
-
-  async login() {
-  try {
-    const response = await axios.post('https://wine.azurewebsites.net/api/User/login', {
-      username: this.username,
-      password: this.password
-    });
-
-    if (response.data.token) {
-      console.log("Trigger in if");
-      localStorage.setItem('jwt', response.data.token);
-      localStorage.setItem('user', this.username);
-      this.$emit('login-succeed');
-    }
-  } catch (error) {
-    if (error.response && error.response.status === 401) {
-      this.errorMessage = "Nutzername oder Passwort ist falsch";
-    } else {
-      this.errorMessage = "Login fehlgeschlagen";
-    }
-  }
-},
-
-
-
 
     async register() {
         if (this.password !== this.confirmPassword) {

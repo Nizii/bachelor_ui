@@ -14,13 +14,11 @@
 </template>
 
 <script>
-import AppHeader from '~/components/Titles/AppHeader.vue';
 import TitleBig from '~/components/Titles/TitleBig.vue';
 
 export default {
   name: 'index',
   components: {
-    AppHeader,
     TitleBig,
   }
 }

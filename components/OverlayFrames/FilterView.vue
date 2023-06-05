@@ -207,7 +207,6 @@ export default {
     },
 
     closeOverlay() {
-      this.currentTab = null;
       this.frameOpen = false;
       document.body.style.overflow = 'auto'; // Erlaubt das Scrollen auf dem Body wieder
       setTimeout(() => {
@@ -231,7 +230,6 @@ export default {
   data() {
     return {
       frameOpen: false,
-      currentTab: null,
       selectedDish: [],
       selectedNation: [],
       selectedGrape: [],

@@ -93,7 +93,6 @@
 </template>
 
 <script>
-import AppHeader from '~/components/Titles/AppHeader.vue';
 import WineInfo from '~/components/WineInfo.vue';
 import axios from 'axios';
 import FilterView from '~/components/OverlayFrames/FilterView.vue';
@@ -106,7 +105,6 @@ import Profile from '~/components/ProfileComponent/Profile.vue';
 export default {
   name: 'WineList',
   components: {
-    AppHeader,
     WineInfo,
     FilterView,
     Bookmarks,
@@ -368,7 +366,7 @@ export default {
 
     },
 
-    assignRatingsToWines(userProfile) {
+    setRatingsToWines(userProfile) {
       // Gehe durch jeden Wein in der Liste
       for (var j = 0; j < this.wines.length; j++) {
           // Hole das Geschmacksprofil des aktuellen Weins
@@ -434,7 +432,7 @@ export default {
 
           if (this.wines.length > 0 && this.preferences && this.userData.radarchart[0] === 0) {
             console.log("Taste aus Frontend");
-            this.assignRatingsToWines([
+            this.setRatingsToWines([
               this.preferences.suss,
               this.preferences.sauer,
               this.preferences.intensiv,
@@ -444,7 +442,7 @@ export default {
             ]);
           } else if (this.userData.radarchart[0] !== 0) {
             console.log("Taste aus DB");
-            this.assignRatingsToWines([
+            this.setRatingsToWines([
               this.userData.radarchart[0],
               this.userData.radarchart[1],
               this.userData.radarchart[2],
@@ -460,7 +458,7 @@ export default {
       } else {
         if(this.wines.length > 0 && this.preferences) {
             console.log("Taste aus Frontend");
-            this.assignRatingsToWines([
+            this.setRatingsToWines([
               this.preferences.suss,
               this.preferences.sauer,
               this.preferences.intensiv,
