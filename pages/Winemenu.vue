@@ -405,7 +405,7 @@ export default {
         if (this.userData) {
           localStorage.setItem('favoriten', JSON.stringify(this.userData.favoriten));
         }    
-        if (!this.userData || !this.userData.radarchart) {
+        if (!this.userData || !this.userData.radarchart[0]) {
           console.log("Kein User");
           let savedPreferences = {
             suss: 0,
