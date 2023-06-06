@@ -7,7 +7,7 @@
       <div class="popup-text" v-if="infoKey === 'suss'">
         <span class="popup-tag">Süss:</span>
         <br>
-        <p class="infotxt">Schmeckt der Wein angenehm süß und zeigt deutliche Aromen von Zucker, Honig oder kandierten Früchten, die den Gaumen betören?</p>
+        <p class="infotxt">Schmeckt der Wein angenehm süss und zeigt deutliche Aromen von Zucker, Honig oder kandierten Früchten, die den Gaumen betören?</p>
       </div>
       <div class="popup-text" v-if="infoKey === 'sauer'">
         <span class="popup-tag">Sauer:</span>
@@ -19,24 +19,25 @@
         <br>
         <p class="infotxt">Hat der Wein ein intensives Geruchsbouquet oder muss ich das Glas mehrmals schwenken, bis ich etwas wahrnehme?</p>
       </div>
-      <div class="popup-text" v-if="infoKey === 'mild'">
-        <span class="popup-tag">Mild:</span>
+      <div class="popup-text" v-if="infoKey === 'holzig'">
+        <span class="popup-tag">Holzig:</span>
         <br>
-        <p class="infotxt">Ist der Wein sanft und zurückhaltend im Geruch, sodass er einen leichten und unaufdringlichen Eindruck hinterlässt?</p>
+        <p class="infotxt">Weist der Wein starke Holznoten auf, wie z.B. Eiche, Zedernholz oder Vanille, die das Geschmacksprofil dominieren?</p>
       </div>
       <div class="popup-text" v-if="infoKey === 'fruchtig'">
         <span class="popup-tag">Fruchtig:</span>
         <br>
         <p class="infotxt">Besitzt der Wein ausgeprägte fruchtige Aromen, wie z.B. Beeren, Zitrusfrüchte oder tropische Früchte, die sofort ins Auge fallen?</p>
       </div>
-      <div class="popup-text" v-if="infoKey === 'erdig'">
-        <span class="popup-tag">Erdig:</span>
+      <div class="popup-text" v-if="infoKey === 'trocken'">
+        <span class="popup-tag">Trocken:</span>
         <br>
-        <p class="infotxt">Nimmt man beim Riechen und Schmecken des Weins erdige Nuancen wahr, wie etwa mineralische, pilzartige oder waldbodenähnliche Noten?</p>
+        <p class="infotxt">Hat der Wein einen trockenen Charakter, was bedeutet, dass er kaum oder keine Restsüsse aufweist und eher herbe Geschmacksnoten zeigt?</p>
       </div>
     </div>
   </div>
 </template>
+
 
 <script>
 export default {

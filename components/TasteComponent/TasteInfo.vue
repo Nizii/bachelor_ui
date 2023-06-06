@@ -31,6 +31,16 @@
         <p class="infotxt">
             Nimmt man beim Riechen und Schmecken des Weins erdige Nuancen wahr, wie etwa mineralische, pilzartige oder waldbodenähnliche Noten?
         </p>
+        <span class="popup-tag">Holzig</span>
+        <br>
+        <p class="infotxt">
+            Weist der Wein starke Holznoten auf, wie z.B. Eiche, Zedernholz oder Vanille, die das Geschmacksprofil dominieren?
+        </p>
+        <span class="popup-tag">Trocken</span>
+        <br>
+        <p class="infotxt">
+            Hat der Wein einen trockenen Charakter, was bedeutet, dass er kaum oder keine Restsüsse aufweist und eher herbe Geschmacksnoten zeigt?
+        </p>
     </div>
 </template>
 

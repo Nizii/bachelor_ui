@@ -19,14 +19,15 @@
             <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
               <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
-            <!--
-            <p v-for="(grape, index) in wine.grapeTags" :key="index">
-              {{ grape }}&nbsp;
+           
+            <p class="grape-text" v-for="(grape, index) in wine.grapeTags" :key="index">
+              {{ grape }}<span v-if="index < wine.grapeTags.length - 1">,</span>&nbsp;
             </p>
-            -->
+             <!--
             <p>
               {{ wine.grape }}
             </p>
+          -->
           </div>
 
         </div>
@@ -169,6 +170,10 @@
   
   * {
     font-family: 'Semplicita', sans-serif;
+  }
+
+  .grape-text{
+    font-size: 9px;
   }
 
   .wine-type_container {
