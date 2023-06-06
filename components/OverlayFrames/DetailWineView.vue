@@ -709,7 +709,7 @@
   .comment-input-container input {
     padding: 1em;
     border-radius: 15px;
-    border: 1px solid #1110107c;
+    border: 2px solid rgb(214, 214, 214);
     width:90%;
   }
 
