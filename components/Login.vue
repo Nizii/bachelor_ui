@@ -10,9 +10,12 @@
           <div class="input-container">
             <input type="password" id="password" placeholder="Passwort" v-model="password" required>
           </div>
+          <div v-if="errorMessage" class="error-message">
+            {{ errorMessage }}
+          </div>
           <button type="submit">Anmelden</button>
         </form>
-        <p>Noch keinen Account? <a href="#" class="switch-link"  @click="showRegister = true">Registrieren</a></p>
+        <p>Noch keinen Account? <a href="#" class="switch-link"  @click="showRegister = true, errorMessage = false">Registrieren</a></p>
       </div>
       <div v-if="showRegister" class="form">
         <h1 class="overrideMargin" title="Erstelle ein Profil!"/>
