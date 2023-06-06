@@ -48,9 +48,12 @@
           <div class="profile-chart-title"> 
             <p>Weinkeller Statistik</p>
           </div>
+          
           <div class="doughnut-chart">
-            <DoughnutChart :chartData="chartData" :options="chartOptions" />
-          </div>
+            <canvas ref="chartContainer"></canvas>
+            <!--<DoughnutChart ref="doughnutChart" :chartData="chartData" :options="chartOptions"/>
+            -->
+            </div>
         </div>
 
         <div class="profile-line-1"></div>
@@ -73,7 +76,7 @@
           @bookmark-removed="updateBookmarkedWinesCount" 
           @update-profile="updateProfile"
           @load-profile="updateProfile"
-          @refresh-profile-for-doughnut="refreshProfile"
+          @refresh-profile-for-doughnut="updateProfile"
           ref="detailview" />
       </div>
     </div>
@@ -149,6 +152,7 @@
       }
 
       return {
+        chart: null,
         userData: null,
         winesPerRow: 3,
         showFoodOverlay: false,
@@ -164,12 +168,6 @@
         },
         chartOptions: {
           title: {
-            /*
-            display: true, 
-            text: 'Mein Doughnut-Chart', 
-            fontColor: 'black',
-            fontSize: 16, 
-            */
           },
         },
 
@@ -215,7 +213,11 @@
 
     mounted() {
       this.getUserData().then(() => {
-        this.refreshDoughnutData(this.userData);
+        //this.refreshDoughnutData(this.userData);
+        this.chart = new Chart(this.$refs.chartContainer, {
+          type: 'doughnut',
+          data: this.chartData,
+        });
       });
       this.$on('update-profile', this.updateProfile);
     },
@@ -225,8 +227,26 @@
     },
   
     methods: {
-      refreshProfile() {
-        this.refreshDoughnutData();
+
+      addData() {
+        let redWinesCount, whiteWinesCount, roseWinesCount;
+        const favoriten = JSON.parse(localStorage.getItem('favoriten'));
+        if (favoriten) {
+          redWinesCount = favoriten.filter(wine => wine.winetype === 'Rotwein').length;
+          whiteWinesCount = favoriten.filter(wine => wine.winetype === 'Weisswein').length;
+          roseWinesCount = favoriten.filter(wine => wine.winetype === 'Rose').length;
+        } else {
+          redWinesCount = 0;
+          whiteWinesCount = 0;
+          roseWinesCount = 0;
+        }
+        this.chartData.datasets[0].data = [redWinesCount, whiteWinesCount, roseWinesCount];
+        console.log("R"+redWinesCount);
+        console.log("W"+whiteWinesCount);
+        console.log("R"+roseWinesCount);
+        if (this.chart) {
+          this.chart.update();
+        }   
       },
 
       refreshDoughnutData() {
@@ -245,7 +265,7 @@
           roseWinesCount = 0;
         }
 
-        this.chartData = {
+        chartData = {
           labels: ['Rotwein', 'Weisswein', 'Rosé'],
           datasets: [{
             data: [redWinesCount,whiteWinesCount,roseWinesCount],
@@ -253,11 +273,12 @@
             hoverOffset: 4
           }]
         }
+        return chartData;
       },
 
       updateProfile() {
         this.getUserData().then(() => {
-          this.refreshProfile(this.userData);
+          this.addData();
           });
         this.$on('update-profile', this.updateProfile);
       },
@@ -306,6 +327,7 @@
         console.log("Open DetailView");
         this.selectedWine = wine;
         this.showDetailWineView = !this.showDetailWineView;
+        this.addData();
       },
   
       async getUserData() {

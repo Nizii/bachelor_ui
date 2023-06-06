@@ -409,6 +409,11 @@
           localStorage.setItem('wineCellar', JSON.stringify(wineCellar));
           this.$store.commit('setWineInCellar', { wineId: this.wine._id, inCellar: true });
 
+          // Update "favoriten" in localStorage
+          const favoriten = JSON.parse(localStorage.getItem('favoriten')) || [];
+          favoriten.push(this.wine);
+          localStorage.setItem('favoriten', JSON.stringify(favoriten));
+
           // Neuen Wein zum Server hinzufügen
           const token = localStorage.getItem('jwt');
           if (token) {
@@ -438,6 +443,11 @@
         localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
         this.$store.commit('setWineInCellar', { wineId: this.wine._id, inCellar: false });
         
+        // Update "favoriten" in localStorage
+        const favoriten = JSON.parse(localStorage.getItem('favoriten')) || [];
+        const updatedFavoriten = favoriten.filter(wine => wine._id !== this.wine._id);
+        localStorage.setItem('favoriten', JSON.stringify(updatedFavoriten));
+        
         // Wein vom Server entfernen
         const token = localStorage.getItem('jwt');
         if(token) {
@@ -452,9 +462,8 @@
           }
         }
         if(this.closeOverlayHandlerOn) {this.closeOverlay()}
-        this.$emit('refresh-profile-for-doughnut');
+        this.$emit('update-profile');
       },
-
 
       async addComment() {
         const comment = this.newComment;
