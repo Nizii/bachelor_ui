@@ -9,11 +9,18 @@
       margin: '0',
       padding: '0'
     }">
+    <div class="button-container">
+      <div class="back-button">
+        <button class="button-style" @click="goBack(previousRoute)">
+          Back
+        </button>
+      </div>
       <div class="info-container">
-        <button class="help-button" @click="openPopup(preferenceKey)">
+        <button class="button-style" @click="openPopup(preferenceKey)">
           Hilfe
         </button>
       </div>
+    </div>
       <div class="block">
         <TitleBig :title="title" :fontSize="30" />
       </div>
@@ -54,6 +61,10 @@ export default {
       type: String,
       required: true
     },
+    previousRoute: {
+      type: String,
+      required: true
+    },
     preferenceKey: {
       type: String,
       required: true
@@ -81,6 +92,10 @@ export default {
   methods: {
     startProcess() {
       this.$refs.slider.emitValue();
+    },
+
+    goBack(){
+      this.$router.push(this.previousRoute);
     },
 
     setPreferenceAndNavigate(value) {
@@ -175,22 +190,24 @@ export default {
     margin-top: 30px;
     border: none;
   }
-
-  .help-button{
-    background-color: #660F0F;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none; 
-    color: white;
-    text-align: center;
-    margin:20px;
-    padding: 10px;
-    width: 70px;
-    border: none;
-  }
    
   .AppHeader {
     text-align: center;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+  .button-style {
+    background-color: #660F0F;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    width: 70px;
+    border: none;
   }
 
   

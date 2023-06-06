@@ -3,6 +3,7 @@
     title="Ich liebe fruchtigen Geschmack!" 
     nextRoute="/Tasteprofile/Wood"
     preferenceKey="fruchtig"
+    previousRoute="/Tasteprofile/Intensive"
     bgImage="/background/fruchtig.jpg"
   />
 </template>

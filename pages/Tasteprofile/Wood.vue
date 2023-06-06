@@ -3,6 +3,7 @@
     title="Magst du den Geruch von frisch gehacktem Holz?" 
     nextRoute="/Tasteprofile/Dry"
     preferenceKey="holzig"
+    previousRoute="/Tasteprofile/Fruity"
     bgImage="/background/holz.jpg"
   />
 </template>

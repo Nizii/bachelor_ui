@@ -3,6 +3,7 @@
     title="Magst du es sauer?" 
     nextRoute="/Tasteprofile/Intensive"
     preferenceKey="sauer"
+    previousRoute="/Tasteprofile/Sweet"
     bgImage="/background/sauer.jpg"
   />
 </template>

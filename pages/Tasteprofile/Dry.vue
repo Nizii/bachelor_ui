@@ -3,6 +3,7 @@
     title="Magst du deinen Wein Trocken?" 
     nextRoute="/Winemenu"
     preferenceKey="trocken"
+    previousRoute="/Tasteprofile/Wood"
     bgImage="/background/intensiv.jpg"
   />
 </template>
