@@ -1,5 +1,5 @@
 <template>
-    <div class="detail-view-info-container">
+    <div class="detail-view-info-container" :style="{ backgroundColor: backgroundColor }">
         <p id="detail-view-titel">Was bedeutet...</p>
         <div class="placeholder"></div>
         <span class="popup-tag">Süss</span>
@@ -50,23 +50,13 @@
     props: {
         'background-color': {
             type: String,
-            default: '#ffffff'
+            default: 'rgba(0, 0, 0, 0.1)'
         },
-    },
-    methods: {
-        getBackgroundColor() {
-            this.$emit('get-background-color');
-        },
-        getColor() {
-            this.$emit('get-color');
-        }
     },
 }
 </script>
 
 <style>
-    /* @import url('https://fonts.googleapis.com/css2?family=Semplicita:wght@400;700&display=swap'); */
-
 .placeholder{
     height: 20px;
 }

@@ -63,10 +63,10 @@
           <br>
           <p class="detail-view-description">{{wine.winzer}}</p>
           <div v-if="isLoggedIn" class="add-to-favorite-container">
-            <button v-if="!isWineInCellar  && !inProfile" class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addToWineCellar">
+            <button v-if="!isWineInCellar  && !inProfile" class="detail-view-button" @click="addToWineCellar">
               Zum Weinkeller hinzufügen
             </button>
-            <button v-else class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="removeFromWineCellar">
+            <button v-else class="detail-view-button" @click="removeFromWineCellar">
                 Entfernen
             </button>
           
@@ -84,13 +84,13 @@
 
       <p id="detail-view-titel">Geschmacksprofil</p>
       <radar-chart :data="chartData" :options="chartOptions" />
-      <button class="detail-view-button" @click="calcTasteProfile" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }">
+      <button class="detail-view-button" @click="calcTasteProfile">
         Geschmacksprofil berechnen
       </button>
 
       <div class="line-1"></div>
 
-      <TasteInfo :background-color="getBackgroundColor()" @get-background-color="getBackgroundColor"/>
+      <TasteInfo @get-background-color="getBackgroundColor"/>
 
       <div class="line-2"></div>
 
@@ -103,15 +103,15 @@
         </div>
       
         <div class="comment-input-container" v-if="isLoggedIn">
-          <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
-          <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">
+          <input class="comment-input" type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
+          <button class="detail-view-button" @click="addComment">
             Senden
           </button>
         </div>
-        <div v-else>
-          <input type="text" v-model="gastUser" placeholder="Dein Name..." />
-          <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
-          <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">
+        <div class="comment-input-container" v-else>
+          <input class="comment-input" type="text" v-model="gastUser" placeholder="Dein Name..." />
+          <input class="comment-input" type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
+          <button class="detail-view-button" @click="addComment">
             Senden
           </button>
         </div>
@@ -463,7 +463,8 @@
         if(localStorage.getItem('user')){
           username = localStorage.getItem('user');
         } else {
-          username = gastUser;
+          username = this.gastUser;
+          this.gastUser = '';
         }
 
         console.log("Username "+ username);
@@ -561,6 +562,17 @@
   }
   
   .detail-view-button{
+    border-radius: 15px;
+    padding: 10px 20px;
+    text-decoration: none; 
+    margin-bottom: 20px;
+    margin-top: 2em;
+    width: 300px;
+    background-color: #660F0F;
+    color: white;
+  }
+
+  .comment-input{
     border-radius: 15px;
     padding: 10px 20px;
     text-decoration: none; 
@@ -669,6 +681,7 @@
     margin-top: 2em; 
     margin-bottom: 3em;
     border: 2px solid rgb(214, 214, 214);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 
   .comment {
@@ -684,7 +697,6 @@
     color: black;
   }
 
-  /* Eingabefeld */
   .comment-input-container {
     align-items: center;
     border-top: 1px solid #0202027e;
