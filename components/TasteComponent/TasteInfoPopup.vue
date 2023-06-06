@@ -62,23 +62,25 @@ export default {
 
 .popup {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 
 .popup-content {
   background-color: #fff;
   border-radius: 5px;
   padding: 20px;
   position: relative;
-  width: 80%;
+  width: 100%;
   max-width: 500px;
+  margin-top: -50%;
 }
 
 .popup-text {

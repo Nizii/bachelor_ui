@@ -109,7 +109,7 @@ export default {
             this.sliderLabelTxt = 'Mag ich!';
             break;
           case 5:
-            this.sliderLabelTxt = 'Ich liebe fruchtiger Geschmack!';
+            this.sliderLabelTxt = 'Ich liebe fruchtigen Geschmack!';
             break;
           default:
             this.sliderLabelTxt = '';
@@ -187,7 +187,7 @@ input[type="range"]::-webkit-slider-thumb {
   content: "<>";
   color: white;
   appearance: none;
-  background: #6C361B;
+  background: #660F0F;
   height: 40px;
   width: 40px;
   border-radius: 50%;

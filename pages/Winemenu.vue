@@ -510,7 +510,7 @@ export default {
 }
 
 .top-section {
-  background-color: #791545;
+  background-color: #660F0F;
   padding-top: 10px;
   padding-bottom: 10px;
 }
@@ -570,7 +570,7 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: #791545;
+  background-color: #660F0F;
   height: 50px;
   margin: 20px;
 }
@@ -580,7 +580,7 @@ export default {
   justify-content: center;
   align-items: center;
   color: white;
-  background-color: #791545;
+  background-color: #660F0F;
   text-decoration: none;
   height: 100%;
   width: 25%;

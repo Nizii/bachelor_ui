@@ -4,7 +4,7 @@
         <span class="popup-tag">Süss</span>
         <br>
         <p class="infotxt">
-            Schmeckt der Wein angenehm süß und zeigt deutliche Aromen von Zucker, Honig oder kandierten Früchten, die den Gaumen betören?
+            Schmeckt der Wein angenehm süss und zeigt deutliche Aromen von Zucker, Honig oder kandierten Früchten, die den Gaumen betören?
         </p>
         <span class="popup-tag">Sauer</span>
         <br>

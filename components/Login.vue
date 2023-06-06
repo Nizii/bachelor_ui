@@ -12,7 +12,7 @@
           </div>
           <button type="submit">Anmelden</button>
         </form>
-        <p>Noch keinen Account? <a href="#" @click="showRegister = true">Registrieren</a></p>
+        <p>Noch keinen Account? <a href="#" class="switch-link"  @click="showRegister = true">Registrieren</a></p>
       </div>
       <div v-if="showRegister" class="form">
         <h1 class="overrideMargin" title="Erstelle ein Profil!"/>
@@ -41,7 +41,7 @@
 
           <button type="submit">Registrieren</button>
         </form>
-        <p>Bereits einen Account? <a href="#" @click="showRegister = false">Anmelden</a></p>
+        <p>Bereits einen Account? <a href="#" class="switch-link" @click="showRegister = false">Anmelden</a></p>
       </div>
     </div>
   </div>
@@ -147,6 +147,10 @@ export default {
     color: red;
     font-weight: bold;
     margin-top: 10px;
+  }
+
+  .switch-link{
+    text-decoration: none;
   }
   
   *{

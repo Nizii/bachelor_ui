@@ -185,12 +185,12 @@
           datasets: [
             {
               label: this.wine.name,
-              backgroundColor: 'rgba(255, 99, 132, 0.2)',
-              borderColor: 'rgba(255, 99, 132, 0.8)',
-              pointBackgroundColor: 'red',
-              pointBorderColor: 'red',
-              pointHoverBackgroundColor: 'red',
-              pointHoverBorderColor: 'red',
+              backgroundColor: 'rgba(102, 15, 15, 0.2)',
+              borderColor: 'rgba(102, 15, 15, 0.2)',
+              pointBackgroundColor: '#660F0F',
+              pointBorderColor: '#660F0F',
+              pointHoverBackgroundColor: '#660F0F',
+              pointHoverBorderColor: '#660F0F',
               data: [
                 this.wine.radarchart[0],
                 this.wine.radarchart[1],

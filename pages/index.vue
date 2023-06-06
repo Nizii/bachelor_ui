@@ -92,7 +92,7 @@ html, body {
 }
 
 .red-button {
-  background-color: #781449;
+  background-color: #660F0F;
   color: white;
   border-radius: 15px;
   padding: 10px 20px;

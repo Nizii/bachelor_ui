@@ -47,8 +47,8 @@
               <div>0.1l</div>
             </div>
             <div class="price-value">
-              <div>CHF {{ wine.openprice * 7}}</div>
-              <div>CHF {{ wine.openprice}}</div>
+              <div><b>CHF {{ wine.openprice * 7}}</b></div>
+              <div><b>CHF {{ wine.openprice}}</b></div>
             </div>
           </div>
         </div>
