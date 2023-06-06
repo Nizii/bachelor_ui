@@ -270,7 +270,7 @@ export default {
 }
 
 .active {
-  background-color: #a1a1a1;
+  background-color: #fce3e1;
   padding: 10px;
   border-radius: 10px;
 }

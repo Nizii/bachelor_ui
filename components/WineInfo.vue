@@ -71,15 +71,17 @@
           </button>
         </div>
         <div v-if="wine.rating > 10" class="container-below">
+          <!--<p class="wine-rating-title" :style="isHighestRated ? 'color: #70CC74; font-weight: bold;' : ''">-->
           <p class="wine-rating-title">
             Your Taste
           </p>
+          
           <div class="container-below-child">
             <div class="wine-rating-left">
-              <img :src="require('static/icons/others/Wein.png')" class="icon" alt="Bookmark icon" />  
+              <img :src="require(isHighestRated ? 'static/icons/others/Wein.png' : 'static/icons/others/Wein.png')" class="icon" alt="Bookmark icon" />  
             </div>
             <div class="wine-rating-right">
-              <div class="wine-rating">
+              <div class="wine-rating" :style="isHighestRated ? 'color: #70CC74; font-weight: bold; font-size: 25px;' : ''">
                 {{wine.rating}}%
               </div>
             </div>
@@ -100,6 +102,7 @@
 
     data() {
       return {
+        
         rating: 0,
         selectedWine: null,
         isFavorite: false,
@@ -119,6 +122,10 @@
         default: null,
       },
       isBookmark: {
+        type: Boolean,
+        default: false,
+      },
+      isHighestRated: {
         type: Boolean,
         default: false,
       },
@@ -305,7 +312,6 @@
   }
 
   .wine-rating-title{
-    font-size: 12px;
   }
 
   .wine-rating-right {
