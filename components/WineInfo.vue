@@ -25,7 +25,7 @@
             </p>
             -->
             <p>
-              {{ wine.grape }};
+              {{ wine.grape }}
             </p>
           </div>
 

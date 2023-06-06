@@ -1,6 +1,6 @@
 <template>
     <div class="detail-view-info-container" :style="{ backgroundColor: backgroundColor, color: getColor}">
-        <p id="detail-view-titel">Was bedeutet?</p>
+        <p id="detail-view-titel">Was bedeutet...</p>
         <span class="popup-tag">Süss</span>
         <br>
         <p class="infotxt">
@@ -55,6 +55,10 @@
 
 <style>
     /* @import url('https://fonts.googleapis.com/css2?family=Semplicita:wght@400;700&display=swap'); */
+
+.detail-view-titel{
+
+}
 
 .detail-view-info-container{
     padding: 20px;

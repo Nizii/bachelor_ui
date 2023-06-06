@@ -88,12 +88,12 @@
           </div>
 
           <div class="filter-title">
-            PREIS
+            FLASCHEN PREIS
           </div>
-          <div class="checkbox-container">
+          <div class="checkbox-container-slider">
             <div class="filter-slider">
-              <input type="range" min="1" max="100" v-model="selectedPrice" />
-              <div>CHF {{ selectedPrice }}</div>
+              <input type="range" min="42" max="100" v-model="selectedPrice" />
+              <div class="slider-price">Bis <b>CHF {{ selectedPrice }} </b></div>
             </div>
           </div>
 
@@ -263,11 +263,6 @@ export default {
   width: 100%;
 }
 
-.filter-slider input[type="range"] {
-  width: 100%;
-  background-color: #791545; 
-}
-
 
 .filter-title{
   font-weight: bold;
@@ -296,6 +291,21 @@ export default {
   scroll-snap-type: x mandatory;
   width: 100%;
   margin-bottom: 35px;
+}
+
+.checkbox-container-slider {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-padding: 20px;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+  margin-bottom: 35px;
+  padding-top: 10px;
+}
+
+.slider-price{
+  margin-top: 15px;
 }
 
 .checkbox {
@@ -353,6 +363,37 @@ export default {
   z-index: 1001; 
   background-color: white; 
   padding-top: 15px;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width:100%;
+  height: 5px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  background: #660F0F; 
+  height: 5px;
+  cursor: pointer;
+  border-radius: 1.3px;
+  box-shadow: 0px 0px 0px #000000;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  background: #660F0F;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slider {
+  position: relative;
 }
 
 </style>

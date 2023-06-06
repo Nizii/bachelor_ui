@@ -220,7 +220,7 @@ export default {
 
       if (this.filters.price) {
         const priceFilter = Number(this.filters.price);
-        filteredWines = filteredWines.filter(wine => wine.bottleprice <= priceFilter);
+        filteredWines = filteredWines.filter(wine => wine.openprice * 7 <= priceFilter);
       }
 
       this.filteredWines = filteredWines;

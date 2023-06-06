@@ -161,7 +161,7 @@ export default {
     right: auto;
     bottom: 28px;
     left: 50%;
-    background-color: red;
+    background-color: #660F0F;
     color: white;
     border-radius: 50%;
     padding: 2px 5px;

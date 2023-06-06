@@ -95,7 +95,7 @@
       <div class="line-2"></div>
 
       <div class="detail-view-comment-container" :style="{ backgroundColor: getBackgroundColor() }">
-        <p id="detail-view-titel">Kommentare</p>
+        <p id="detail-view-titel">Meinung der anderen Gäste</p>
         <div class="comment" v-for="(comment, index) in wine.comments" :key="index">
           <p class="comment-user">{{ comment[0] }}</p>
           <p class="comment-content">{{ comment[1] }}</p>
@@ -104,11 +104,11 @@
         <div class="comment-input-container" v-if="isLoggedIn">
           <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
           <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">
-            Kommentiere
+            Senden
           </button>
         </div>
         <div v-else>
-          <p>Registriere dich und kommentiere!. 
+          <p>Registriere dich und kommentiere!
             <br>
             <b>Unten rechts</b>
           </p>
