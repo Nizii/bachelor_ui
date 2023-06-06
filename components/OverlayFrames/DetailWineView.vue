@@ -94,8 +94,9 @@
 
       <div class="line-2"></div>
 
-      <div class="detail-view-comment-container" :style="{ backgroundColor: getBackgroundColor() }">
+      <div class="detail-view-comment-container">
         <p id="detail-view-titel">Meinung der anderen Gäste</p>
+        <div class="placeholder"></div>
         <div class="comment" v-for="(comment, index) in wine.comments" :key="index">
           <p class="comment-user">{{ comment[0] }}</p>
           <p class="comment-content">{{ comment[1] }}</p>
@@ -108,10 +109,11 @@
           </button>
         </div>
         <div v-else>
-          <p>Registriere dich und kommentiere!
-            <br>
-            <b>Unten rechts</b>
-          </p>
+          <input type="text" v-model="gastUser" placeholder="Dein Name..." />
+          <input type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
+          <button class="detail-view-button" :style="{ color: getButtonTextColor(), backgroundColor: getButtonColor() }" @click="addComment">
+            Senden
+          </button>
         </div>
       </div>
     </div>
@@ -179,6 +181,7 @@
       var radarDotsColor = this.getRadarColorDots();
       var radarLineColor = this.getRadarColorLine();
       return {
+        gastUser:"",
         userData: null,
         frameOpen: false,
         isBookmarked: false,
@@ -456,7 +459,12 @@
       async addComment() {
         const comment = this.newComment;
         const wineId = this.wine._id;
-        const username = localStorage.getItem('user');
+        var username;
+        if(localStorage.getItem('user')){
+          username = localStorage.getItem('user');
+        } else {
+          username = gastUser;
+        }
 
         console.log("Username "+ username);
 
@@ -495,6 +503,13 @@
 
   @import "@/CSS/shared-wine-type-styles.css";
 
+  .comment-user{
+    color: #660F0F;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 10px;
+  }
+
   #row1 {
     display: flex;
     justify-content: space-between;
@@ -514,6 +529,10 @@
 
   .detail-bookmark-icon{
  
+  }
+
+  .placeholder{
+    height: 20px;
   }
 
   .overlay-frame {
@@ -547,6 +566,7 @@
     text-decoration: none; 
     margin-bottom: 20px;
     margin-top: 2em;
+    width: 300px;
   }
 
   .detail-view-flag{
@@ -643,20 +663,21 @@
     flex-direction: column;
   }
 
-    /* Kommentarbereich */
   .detail-view-comment-container {
     padding: 1em;
     border-radius: 15px;
     margin-top: 2em; 
     margin-bottom: 3em;
+    border: 2px solid rgb(214, 214, 214);
   }
 
-  /* Kommentare */
   .comment {
     background-color: white;
     border-radius: 15px;
     padding: 1em;
     margin-bottom: 1em;
+    border: 2px solid rgb(214, 214, 214);
+
   }
 
   .comment-content {
@@ -681,14 +702,14 @@
   }
 
   .line-1{
-    border-bottom: 1px solid rgb(214, 214, 214);
+    border-bottom: 2px solid rgb(214, 214, 214);
     margin-top: 1em;
     margin-bottom: 3em;
     width: 100%;
   }
 
   .line-2{
-    border-bottom: 1px solid rgb(214, 214, 214);
+    border-bottom: 2px solid rgb(214, 214, 214);
     margin-top: 3em;
     margin-bottom: 3em;
     width: 100%;

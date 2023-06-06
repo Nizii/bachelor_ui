@@ -1,6 +1,7 @@
 <template>
-    <div class="detail-view-info-container" :style="{ backgroundColor: backgroundColor, color: getColor}">
+    <div class="detail-view-info-container">
         <p id="detail-view-titel">Was bedeutet...</p>
+        <div class="placeholder"></div>
         <span class="popup-tag">Süss</span>
         <br>
         <p class="infotxt">
@@ -66,8 +67,8 @@
 <style>
     /* @import url('https://fonts.googleapis.com/css2?family=Semplicita:wght@400;700&display=swap'); */
 
-.detail-view-titel{
-
+.placeholder{
+    height: 20px;
 }
 
 .detail-view-info-container{
@@ -76,6 +77,7 @@
     border-radius: 15px;
     margin-top: 2em; 
     font-family: 'Semplicita', sans-serif;
+    border: 2px solid rgb(214, 214, 214);
 }
 
 .detail-view-title{
@@ -94,7 +96,7 @@
 }
 
 .popup-tag{
-    font-weight: 700;
     font-size: 15px;
+    color: #660F0F;
 }
 </style>

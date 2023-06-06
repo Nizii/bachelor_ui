@@ -22,7 +22,7 @@
            
 
             <p class="grape-text">
-              {{ wine.grapeTags[0] }}<span v-if="wine.grapeTags.length > 1"> und mehr...</span>
+              {{ wine.grapeTags[0] }}<span class="und-mehr" v-if="wine.grapeTags.length > 1"> und mehr...</span>
             </p>
             <!--
             <p class="grape-text" v-for="(grape, index) in wine.grapeTags" :key="index">
@@ -177,8 +177,12 @@
     font-family: 'Semplicita', sans-serif;
   }
 
+  .und-mehr{
+    font-size: 8px;
+  }
+
   .grape-text{
-    font-size: 9px;
+    font-size: 12px;
   }
 
   .wine-type_container {
