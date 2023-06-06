@@ -174,6 +174,10 @@
       } else {
         temp = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       }
+
+      var radarWineColor = this.getRadarColor();
+      var radarDotsColor = this.getRadarColorDots();
+      var radarLineColor = this.getRadarColorLine();
       return {
         userData: null,
         frameOpen: false,
@@ -185,12 +189,12 @@
           datasets: [
             {
               label: this.wine.name,
-              backgroundColor: 'rgba(102, 15, 15, 0.2)',
-              borderColor: 'rgba(102, 15, 15, 0.2)',
-              pointBackgroundColor: '#660F0F',
-              pointBorderColor: '#660F0F',
-              pointHoverBackgroundColor: '#660F0F',
-              pointHoverBorderColor: '#660F0F',
+              backgroundColor: radarWineColor,
+              borderColor: radarLineColor,
+              pointBackgroundColor: radarDotsColor,
+              pointBorderColor: radarDotsColor,
+              pointHoverBackgroundColor: radarDotsColor,
+              pointHoverBorderColor: radarDotsColor,
               data: [
                 this.wine.radarchart[0],
                 this.wine.radarchart[1],
@@ -272,6 +276,44 @@
           return '#781449';
         }
       },
+
+      getRadarColor() {
+        if (this.wine.winetype === 'Weisswein') {
+          return 'rgba(232, 217, 84, 0.3)';
+        } else if (this.wine.winetype === 'Rotwein') {
+          return 'rgba(102, 15, 15, 0.3)';
+        } else if (this.wine.winetype === 'Rose') {
+          return 'rgba(222, 96, 88, 0.3)';
+        } else {
+          return '#781449';
+        }
+      },
+
+      getRadarColorDots() {
+        if (this.wine.winetype === 'Weisswein') {
+          return '#E8AC01';
+        } else if (this.wine.winetype === 'Rotwein') {
+          return 'rgba(102, 15, 15, 1)';
+        } else if (this.wine.winetype === 'Rose') {
+          return 'rgba(222, 96, 88, 1)';
+        } else {
+          return '#781449';
+        }
+      },
+
+      getRadarColorLine() {
+        if (this.wine.winetype === 'Weisswein') {
+          return 'rgba(232, 217, 84, 0.7)';
+        } else if (this.wine.winetype === 'Rotwein') {
+          return 'rgba(102, 15, 15, 0.7)';
+        } else if (this.wine.winetype === 'Rose') {
+          return 'rgba(222, 96, 88, 0.7)';
+        } else {
+          return '#781449';
+        }
+      },
+
+
 
       getBackgroundColor() {
         if (this.wine.winetype === 'Weisswein') {

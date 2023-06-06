@@ -5,15 +5,15 @@
       <h1 class="overrideMargin" title="Melde dich an!"/>
         <form @submit.prevent="login">
           <div class="input-container">
-            <input type="text" id="username" placeholder="Username" v-model="username" required>
+            <input class="input-tag" type="text" id="username" placeholder="Username" v-model="username" required>
           </div>
           <div class="input-container">
-            <input type="password" id="password" placeholder="Passwort" v-model="password" required>
+            <input class="input-tag" type="password" id="password" placeholder="Passwort" v-model="password" required>
           </div>
           <div v-if="errorMessage" class="error-message">
             {{ errorMessage }}
           </div>
-          <button type="submit">Anmelden</button>
+          <button class="input-tag" type="submit">Anmelden</button>
         </form>
         <p>Noch keinen Account? <a href="#" class="switch-link"  @click="showRegister = true, errorMessage = false">Registrieren</a></p>
       </div>
@@ -23,26 +23,26 @@
 
           <div class="input-container">
             <!--Für Werkschau Resgistartion möglich nur mit Username-->
-            <input type="text" id="username" placeholder="Username" v-model="username" required>
+            <input class="input-tag" type="text" id="username" placeholder="Username" v-model="username" required>
           </div>
 
           <div class="input-container">
-            <input type="email" id="username" placeholder="Email" v-model="email" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            <input class="input-tag" type="email" id="username" placeholder="Email" v-model="email" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
           </div>
 
           <div class="input-container">
-            <input type="password" id="password" placeholder="Passwort" v-model="password" minlength="2" required>
+            <input class="input-tag" type="password" id="password" placeholder="Passwort" v-model="password" minlength="2" required>
           </div>
 
           <div class="input-container">
-            <input type="password" id="password" placeholder="Passwort bestätigen" v-model="confirmPassword" minlength="2" required>
+            <input class="input-tag" type="password" id="password" placeholder="Passwort bestätigen" v-model="confirmPassword" minlength="2" required>
           </div>
 
           <div v-if="errorMessage" class="error-message">
             {{ errorMessage }}
           </div>
 
-          <button type="submit">Registrieren</button>
+          <button class="input-tag" type="submit">Registrieren</button>
         </form>
         <p>Bereits einen Account? <a href="#" class="switch-link" @click="showRegister = false">Anmelden</a></p>
       </div>
@@ -152,6 +152,10 @@ export default {
     margin-top: 10px;
   }
 
+  .input-tag{
+    border-radius: 8px;
+  }
+
   .switch-link{
     text-decoration: none;
   }
@@ -197,6 +201,7 @@ export default {
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 20px;
+    border-radius: 8px;
     font-size: 18px;
     width: 100%;
   }

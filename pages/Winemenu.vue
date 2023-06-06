@@ -341,25 +341,25 @@ export default {
         temp = JSON.parse(localStorage.getItem('preferences'))
       } else {return}
     // Eine Variable, um die Gesamtdifferenz zwischen den Profilen zu speichern
-      var totalDifference = 0;
+      var differeceFull = 0;
       // Eine Schleife, die durch jedes Element in den Profilen geht
       for (var i = 0; i < userProfile.length; i++) {
           // Finde den Unterschied zwischen den entsprechenden Elementen in den Profilen
-          var difference = userProfile[i] - wineProfile[i];
+          var differenceBetweenTwoElements = userProfile[i] - wineProfile[i];
           // Quadriere den Unterschied, um negative Werte zu vermeiden und Unterschiede stärker zu gewichten
           // Bsp mit quadrierung  5-1 = 4 -> 4^2 = 16
           // BSp ohne quadrierung 5-1 = 4 ->     =  4 
 
           // Bsp mit quadrierung  3-1 = 2 -> 4^2 =  4
           // Bsp ohne quadrierung 3-1 = 2 ->     =  2 
-          var squaredDifference = difference * difference;
+          var differcePowTwo = differenceBetweenTwoElements * differenceBetweenTwoElements;
           // Addiere die quadratische Differenz zur Gesamtdifferenz
-          totalDifference += squaredDifference;
+          differeceFull += differcePowTwo;
       }
       // Die "Distanz" zwischen den Profilen ist die Quadratwurzel der Gesamtdifferenz
-      var distance = Math.sqrt(totalDifference);
-      // Die maximale mögliche Distanz ist die Quadratwurzel von 500 (weil es 5 Merkmale gibt und jedes Merkmal von 0 bis 10 reicht)
-      var maxDistance = Math.sqrt(5 * 5 * 10);
+      var distance = Math.sqrt(differeceFull);
+      // Die maximale mögliche Distanz ist die Quadratwurzel von 500 (weil es 5 Merkmale pro Profil gibt und jedes Merkmal von 0 bis 5 reicht also 5*5*5 = 125)
+      var maxDistance = Math.sqrt(5 * 5 * 5);
       // Die Übereinstimmung ist 100% minus das Verhältnis der Distanz zur maximalen Distanz
       var match = (1 - distance / maxDistance) * 100;
       return Math.round(match);
