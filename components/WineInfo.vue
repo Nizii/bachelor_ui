@@ -20,10 +20,15 @@
               <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
             </p>
            
+
+            <p class="grape-text">
+              {{ wine.grapeTags[0] }}<span v-if="wine.grapeTags.length > 1"> und mehr...</span>
+            </p>
+            <!--
             <p class="grape-text" v-for="(grape, index) in wine.grapeTags" :key="index">
               {{ grape }}<span v-if="index < wine.grapeTags.length - 1">,</span>&nbsp;
             </p>
-             <!--
+             
             <p>
               {{ wine.grape }}
             </p>

@@ -38,17 +38,20 @@
           </div>
           <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
             <div v-if="wine.winetype === 'Weisswein'">
-              <WineInfo :wine="wine" :userData="userData" 
+              <WineInfo :wine="wine" :userData="userData"
+              :style="wine.rating === highestRating ? {'border': '3px solid green'} : {}" 
               @open-detail-view="toggleDetailViewWine" 
               @bookmark-removed="updateBookmarkedWinesCount" />    
             </div>
             <div v-if="wine.winetype === 'Rotwein'">
-              <WineInfo :wine="wine" :userData="userData" 
+              <WineInfo :wine="wine" :userData="userData"
+              :style="wine.rating === highestRating ? {'border': '3px solid green'} : {}" 
               @open-detail-view="toggleDetailViewWine"
               @bookmark-removed="updateBookmarkedWinesCount" />      
             </div>
             <div v-if="wine.winetype === 'Rose'">
-              <WineInfo :wine="wine" :userData="userData" 
+              <WineInfo :wine="wine" :userData="userData"
+              :style="wine.rating === highestRating ? {'border': '3px solid green'} : {}" 
               @open-detail-view="toggleDetailViewWine"
               @bookmark-removed="updateBookmarkedWinesCount" /> 
             </div>
@@ -115,6 +118,7 @@ export default {
   },
   data() {
     return {
+      highestRating: null,
       loading: true,
       searchText: '',
       showFoodOverlay: false,
@@ -154,6 +158,16 @@ export default {
     onFilterSelected(filters) {
       this.filters = filters;
       this.filterWines();
+    },
+
+    findHighestRating() {
+      let maxRating = 0;
+      for (let wine of this.wines) {
+        if (wine.rating > maxRating) {
+          maxRating = wine.rating;
+        }
+      }
+      this.highestRating = maxRating;
     },
 
     sortWinesByPrice() {
@@ -471,6 +485,7 @@ export default {
 
 
       this.filterWines();
+      this.findHighestRating();
     } catch (error) {
       console.error(error);
     }
