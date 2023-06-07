@@ -622,7 +622,8 @@
   
   .detail-view-left,
   .detail-view-right {
-    flex: 1; 
+    flex: 1;
+    width: 30%;
   }
 
   .detail-view-icon{
