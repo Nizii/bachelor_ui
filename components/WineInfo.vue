@@ -3,39 +3,42 @@
     <div class="wine-card-row1">
       <div class="wine-img-container">
         <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
-        <img :src="require(`/static/background/kachel_verlauf_rot.png`)" class="verlauf-image" alt="Profile icon" />      </div>
+        <img v-if="wine.winetype === 'Weisswein'" :src="require(`/static/background/kachelverlauf_gelb.png`)" class="verlauf-image" alt="Profile icon" />
+        <img v-if="wine.winetype === 'Rotwein'" :src="require(`/static/background/kachel_verlauf_rot.png`)" class="verlauf-image" alt="Profile icon" />
+        <img v-if="wine.winetype === 'Rose'" :src="require(`/static/background/kachelverlauf_rose.png`)" class="verlauf-image" alt="Profile icon" />
+      </div>
       <div class="wine-card-row2">
-        <h3 class="wine-title">
-          {{ wine.name }}
-          <!--<img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="wine-info-flag" alt="Profile icon" />-->
-        </h3>
-        <div class="wine-attribute">
+      <h3 class="wine-title">
+        {{ wine.name }}
+        <!--<img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="wine-info-flag" alt="Profile icon" />-->
+      </h3>
+      <div class="wine-attribute">
 
-          <div class="wine-type_container">
-            <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
-              <img :src="require('static/icons/food/traube_weisswein.svg')" class="icon-small" alt="Bookmark icon" />
-            </p>
-            <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">
-              <img :src="require('static/icons/food/traube_rotwein.svg')" class="icon-small" alt="Bookmark icon" />
-            </p>
-            <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
-              <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
-            </p>
-           
+        <div class="wine-type_container">
+          <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
+            <img :src="require('static/icons/food/traube_weisswein.svg')" class="icon-small" alt="Bookmark icon" />
+          </p>
+          <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">
+            <img :src="require('static/icons/food/traube_rotwein.svg')" class="icon-small" alt="Bookmark icon" />
+          </p>
+          <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
+            <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
+          </p>
+          
 
-            <p class="grape-text">
-              {{ wine.grapeTags[0] }}<span class="und-mehr" v-if="wine.grapeTags.length > 1"> und mehr...</span>
-            </p>
-            <!--
-            <p class="grape-text" v-for="(grape, index) in wine.grapeTags" :key="index">
-              {{ grape }}<span v-if="index < wine.grapeTags.length - 1">,</span>&nbsp;
-            </p>
-             
-            <p>
-              {{ wine.grape }}
-            </p>
-          -->
-          </div>
+          <p class="grape-text">
+            {{ wine.grapeTags[0] }}<span class="und-mehr" v-if="wine.grapeTags.length > 1"> und mehr...</span>
+          </p>
+          <!--
+          <p class="grape-text" v-for="(grape, index) in wine.grapeTags" :key="index">
+            {{ grape }}<span v-if="index < wine.grapeTags.length - 1">,</span>&nbsp;
+          </p>
+            
+          <p>
+            {{ wine.grape }}
+          </p>
+        -->
+        </div>
 
         </div>
 
