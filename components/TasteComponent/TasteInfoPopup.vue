@@ -60,6 +60,7 @@ export default {
   width: 25px;
   height: 25px;
   background-color: white;
+  border-radius: 8px;
 }
 .close-popup {
   background-color: white;
@@ -67,6 +68,7 @@ export default {
   position: absolute;
   top: 0px;
   right: 0px;
+  border-radius: 8px;
 }
 
 .popup {
@@ -84,7 +86,7 @@ export default {
 
 .popup-content {
   background-color: #fff;
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 20px;
   position: relative;
   width: 100%;
