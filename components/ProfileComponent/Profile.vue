@@ -399,9 +399,7 @@
     border-bottom: 1px solid rgb(214, 214, 214);
     margin-bottom: 1em;
     font-weight: bold;
-    position: sticky;
     top: 0;
-    z-index: 1001;
     background-color: white;
     padding-left: 20px;
     padding-right: 20px;
@@ -473,6 +471,8 @@
     width: 40px;
     height: 40px;
     font-weight: bold;
+    border: none;
+    background-color: white;
   }
   
   .profile-button-group {
