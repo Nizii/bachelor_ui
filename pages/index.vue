@@ -10,16 +10,19 @@
       </div>
       <div class="block-2"></div>
     </div>
+    <TutorialOverlay />
   </div>
 </template>
 
 <script>
 import TitleBig from '~/components/Titles/TitleBig.vue';
+import TutorialOverlay from '~/components/Tutorial/TutorialOverlay.vue';
 
 export default {
   name: 'index',
   components: {
     TitleBig,
+    TutorialOverlay,
   }
 }
 </script>
