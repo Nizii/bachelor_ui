@@ -6,7 +6,9 @@
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
         <button id="detail-view-close-btn" @click="closeOverlay">
-          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />
+          <img v-if="wine.winetype === 'Weisswein'" :src="require('static/icons/buttons/closegelb.jpg')" class="icon" alt="Bookmark icon" />
+          <img v-if="wine.winetype === 'Rotwein'" :src="require('static/icons/buttons/closerot.jpg')" class="icon" alt="Bookmark icon" />
+          <img v-if="wine.winetype === 'Rose'" :src="require('static/icons/buttons/closerose.jpg')" class="icon" alt="Bookmark icon" />
         </button>
       </div>
     </div>
@@ -21,25 +23,52 @@
               -->            
           </div>
           <br>
-          <p v-for="(grape, index) in wine.grapeTags" :key="index">
-            {{ grape }}
-            <span v-if="index !== wine.grapeTags.length - 1">,&nbsp;</span>
-          </p>
+          
         </div>
-        <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
-          <img :src="require('static/icons/food/traube_weisswein.svg')" class="detail-view-icon" alt="Bookmark icon" />
-        </p>
-        <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">
-          <img :src="require('static/icons/food/traube_rotwein.svg')" class="detail-view-icon" alt="Bookmark icon" />
-        </p>
-        <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
-          <img :src="require('static/icons/food/traube_rose.svg')" class="detail-view-icon" alt="Bookmark icon" />
-        </p>
+
       <div class="detail-view-main-container">
+
         <div class="detail-view-left">
+          
+          <div class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
+            <div class="grape-case-left">
+              <img :src="require('static/icons/food/traube_weisswein.svg')" class="detail-view-icon" alt="Bookmark icon" />
+            </div>
+            <div class="grape-case-right">
+              <span v-for="(grape, index) in wine.grapeTags" :key="index">
+              {{ grape }}
+              <br>
+            </span>
+            </div>
+          </div>
+
+          <div class="wine-type-case_1" v-if="wine.winetype === 'Rotwein'">
+            <div class="grape-case-left">
+              <img :src="require('static/icons/food/traube_rotwein.svg')" class="detail-view-icon" alt="Bookmark icon" />
+            </div>
+            <div class="grape-case-right">
+              <span v-for="(grape, index) in wine.grapeTags" :key="index">
+              {{ grape }}
+              <br>
+            </span>
+            </div>
+          </div>
+
+          <div class="wine-type-case_1" v-if="wine.winetype === 'Rose'">
+            <div class="grape-case-left">
+              <img :src="require('static/icons/food/traube_rose.svg')" class="detail-view-icon" alt="Bookmark icon" />
+            </div>
+            <div class="grape-case-right">
+              <span v-for="(grape, index) in wine.grapeTags" :key="index">
+              {{ grape }}
+              <br>
+            </span>
+            </div>
+          </div>
+
           <br>
           <p class="detail-view-label">Preis</p>
-          <p class="detail-view-content"><b>CHF {{wine.bottleprice}}.-</b></p>
+          <p class="detail-view-content"><b>CHF {{wine.openprice * 7}}.-</b></p>
           <br>
           <p class="detail-view-label">Land</p>
           <b>
@@ -48,9 +77,6 @@
             <img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="detail-view-flag" alt="Profile icon" />
           </p>
           </b> 
-          <br>
-          <p class="detail-view-description">{{wine.charakter}}</p>
-          <br>
           <p class="detail-view-description">
             Der Wein passt zu 
             <span v-for="(meal, index) in wine.foodTags" :key="`meal-${index}`">
@@ -59,8 +85,8 @@
               ,
               </span>
             </span>
-          </p>
-          <br>
+          </p>  
+          <p class="detail-view-description">{{wine.charakter}}</p>
           <p class="detail-view-description">{{wine.winzer}}</p>
           <div v-if="isLoggedIn" class="add-to-favorite-container">
             <button v-if="!isWineInCellar  && !inProfile" class="detail-view-button" @click="addToWineCellar">
@@ -104,14 +130,14 @@
       
         <div class="comment-input-container" v-if="isLoggedIn">
           <input class="comment-input" type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
-          <button class="detail-view-button" @click="addComment">
+          <button class="detail-view-button-comment" @click="addComment">
             Senden
           </button>
         </div>
         <div class="comment-input-container" v-else>
           <input class="comment-input" type="text" v-model="gastUser" placeholder="Dein Name..." />
-          <input class="comment-input" type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." />
-          <button class="detail-view-button" @click="addComment">
+          <input class="comment-input" type="text" v-model="newComment" placeholder="Füge einen Kommentar hinzu..." >
+          <button class="detail-view-button-comment" @click="addComment">
             Senden
           </button>
         </div>
@@ -349,7 +375,20 @@
           return '/weinflecke_weiss.png'; 
         }
       },
-      
+
+      /*
+      getBackgroundImage() {
+        if (this.wine.winetype === 'Weisswein') {
+          return '/fleckweisswein2.png';
+        } else if (this.wine.winetype === 'Rotwein') {
+          return '/rotweinfleck3.png';
+        } else if (this.wine.winetype === 'Rose') {
+          return '/fleckrose2.png';
+        } else {
+          return '/weinflecke_weiss.png'; 
+        }
+      },
+      */
       openPopup() {
 
       },
@@ -513,6 +552,18 @@
 
   @import "@/CSS/shared-wine-type-styles.css";
 
+  .wine-type-case_1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .grape-case-left,
+  .grape-case-right {
+    flex: 1;
+  }
+  
+
   .comment-user{
     color: #660F0F;
     font-size: 12px;
@@ -525,7 +576,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 0;
-    padding: 10px;
+    padding: 20px;
     position: sticky;
 
   }
@@ -576,9 +627,21 @@
     text-decoration: none; 
     margin-bottom: 20px;
     margin-top: 2em;
-    width: 300px;
+    width: auto;
     background-color: #660F0F;
     color: white;
+  }
+
+  .detail-view-button-comment{
+    border-radius: 15px;
+    padding: 10px 20px;
+    text-decoration: none; 
+    margin-bottom: 20px;
+    margin-top: 2em;
+    width: auto;
+    background-color: #660F0F;
+    color: white;
+    width: 100%;
   }
 
   .comment-input{
@@ -610,8 +673,7 @@
     z-index: 1001;
     width: 100%; 
     background-color: white;
-    border-bottom: 1px solid rgb(214, 214, 214);
-    margin-bottom: 3em;
+   /* border-bottom: 1px solid rgb(214, 214, 214);*/
 }
 
   
@@ -645,6 +707,8 @@
   .detail-view-description {
     margin-top: 1em;
     font-size: 13px;
+    margin-bottom: 10px;
+
   }
   
   .detail-view-right {
@@ -659,7 +723,7 @@
     height: 450px;
     margin-bottom: 0;
     padding-bottom: 0;
-    margin-top: -6em; /* Negative Margin nach obe.*/
+    margin-top: -2em; /* Negative Margin nach obe.*/
 
   }
 
@@ -691,7 +755,7 @@
     margin-top: 2em; 
     margin-bottom: 3em;
     border: 2px solid rgb(214, 214, 214);
-    background-color: rgba(0, 0, 0, 0.1);
+    /*background-color: rgba(0, 0, 0, 0.1);*/
   }
 
   .comment {

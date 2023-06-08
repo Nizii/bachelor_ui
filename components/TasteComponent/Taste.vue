@@ -12,12 +12,12 @@
     <div class="button-container">
       <div class="back-button">
         <button class="button-style" @click="goBack(previousRoute)">
-          Back
+          <img :src="require('static/icons/buttons/zurückbutton.svg')" class="icon" alt="Filter icon" />
         </button>
       </div>
       <div class="info-container">
         <button class="button-style" @click="openPopup(preferenceKey)">
-          Hilfe
+          ?
         </button>
       </div>
     </div>
@@ -206,7 +206,8 @@ export default {
     color: white;
     border-radius: 8px;
     padding: 10px;
-    width: 70px;
+    width: 40px;
+    height: 40px;
     border: none;
   }
 

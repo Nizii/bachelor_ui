@@ -44,13 +44,15 @@
  
         <div class="wine-price">
           <div class="bottle-price">
+            <!--
             <div class="price-label">
               <div>Flasche</div>
               <div>Glas</div>
             </div>
+            -->
             <div class="volume-value">
-              <div>0.75l</div>
-              <div>0.1l</div>
+              <div>75cl</div>
+              <div>10cl</div>
             </div>
             <div class="price-value">
               <div><b>CHF {{ wine.openprice * 7}}</b></div>
@@ -63,16 +65,16 @@
       <div class="wine_card_row3">
         <div class="container-above">
           <button v-if="!isBookmark" @click.stop="addToBookmarks">
-            <img v-if="!isFavorite" :src="require('static/icons/buttons/merkliste.png')" class="icon" alt="Bookmark icon" />
-            <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="icon" alt="Bookmark icon" />
+            <img v-if="!isFavorite" :src="require('static/icons/buttons/merklisteoff.jpg')" class="icon" alt="Bookmark icon" />
+            <img v-else :src="require('static/icons/buttons/merkon.jpg')" class="icon" alt="Bookmark icon" />
           </button>
           <button v-else @click.stop="removeWineInBookmark">
             <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
           </button>
         </div>
         <div v-if="wine.rating > 10" class="container-below">
-          <!--<p class="wine-rating-title" :style="isHighestRated ? 'color: #70CC74; font-weight: bold;' : ''">-->
-          <p class="wine-rating-title">
+          <p class="wine-rating-title" :style="isHighestRated ? 'color: #70CC74; font-weight: bold;' : ''">
+          <!--<p class="wine-rating-title">-->
             Your Taste
           </p>
           
@@ -81,7 +83,7 @@
               <img :src="require(isHighestRated ? 'static/icons/others/Wein.png' : 'static/icons/others/Wein.png')" class="icon" alt="Bookmark icon" />  
             </div>
             <div class="wine-rating-right">
-              <div class="wine-rating" :style="isHighestRated ? 'color: #70CC74; font-weight: bold; font-size: 25px;' : ''">
+              <div class="wine-rating" :style="isHighestRated ? 'color: #70CC74; font-weight: bold; font-size: 20px;' : ''">
                 {{wine.rating}}%
               </div>
             </div>
@@ -205,7 +207,7 @@
     width: 100%;
     height: auto;
     margin-bottom: 20px;
-    box-shadow: 2.5px 2.5px 2.5px 1.5px rgba(136, 136, 136, 0.5);
+    box-shadow: 0px 0px 2.5px 2.5px rgba(136, 136, 136, 0.1);
     border-radius: 10px;
   }  
 

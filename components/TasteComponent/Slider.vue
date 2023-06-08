@@ -80,7 +80,7 @@ export default {
             this.sliderLabelTxt = 'Nein!';
             break;
           case 2:
-            this.sliderLabelTxt = 'Ich bevorzuge hart!';
+            this.sliderLabelTxt = 'Lieber nicht!';
             break;
           case 3:
             this.sliderLabelTxt = 'Teilweise!';
@@ -109,7 +109,7 @@ export default {
             this.sliderLabelTxt = 'Mag ich!';
             break;
           case 5:
-            this.sliderLabelTxt = 'Ich liebe fruchtigen Geschmack!';
+            this.sliderLabelTxt = 'Ich liebe es!';
             break;
           default:
             this.sliderLabelTxt = '';

@@ -38,22 +38,22 @@
           </div>
           <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
             <div v-if="wine.winetype === 'Weisswein'">
-              <WineInfo :wine="wine" :userData="userData"
-              :style="wine.rating === highestRating ? {'border': '4px solid #70CC74'} : {}" 
+              <WineInfo :wine="wine" :userData="userData"             
+              :style="wine.rating === highestRating ? {'border': '2px solid #70CC74'} : {}" 
               :isHighestRated="wine.rating === highestRating"
               @open-detail-view="toggleDetailViewWine" 
               @bookmark-removed="updateBookmarkedWinesCount" />    
             </div>
             <div v-if="wine.winetype === 'Rotwein'">
               <WineInfo :wine="wine" :userData="userData"
-              :style="wine.rating === highestRating ? {'border': '4px solid #70CC74'} : {}" 
+              :style="wine.rating === highestRating ? {'border': '2px solid #70CC74'} : {}" 
               :isHighestRated="wine.rating === highestRating"
               @open-detail-view="toggleDetailViewWine"
               @bookmark-removed="updateBookmarkedWinesCount" />      
             </div>
             <div v-if="wine.winetype === 'Rose'">
               <WineInfo :wine="wine" :userData="userData"
-              :style="wine.rating === highestRating ? {'border': '4px solid #70CC74'} : {}" 
+              :style="wine.rating === highestRating ? {'border': '2px solid #70CC74'} : {}" 
               :isHighestRated="wine.rating === highestRating"
               @open-detail-view="toggleDetailViewWine"
               @bookmark-removed="updateBookmarkedWinesCount" /> 
