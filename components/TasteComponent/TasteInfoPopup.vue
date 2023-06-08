@@ -59,8 +59,10 @@ export default {
 .taste-info-close{
   width: 25px;
   height: 25px;
+  background-color: white;
 }
 .close-popup {
+  background-color: white;
   border: none;
   position: absolute;
   top: 0px;
