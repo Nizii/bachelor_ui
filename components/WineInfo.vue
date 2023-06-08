@@ -267,6 +267,7 @@
 
   .wine-img-container {
     position: relative;
+    width: 50px;
   }
 
   .wine-image, .verlauf-image {
@@ -279,6 +280,7 @@
 
   .verlauf-image {
     z-index: 1;
+    height: 100%;
   }
 
 
@@ -286,6 +288,8 @@
     height: 100%;
     object-fit: contain;
     z-index: 2;
+    margin-left: 20px;
+    margin-top: 10px;
   }
 
   .wine-info-flag{
