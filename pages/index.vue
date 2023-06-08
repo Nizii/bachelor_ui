@@ -1,11 +1,14 @@
 <template>
   <div>
     <div class="tutorial-frame-header">
-      <div></div>
-      <h1>Tutorial</h1>
-      <button @click="pushToSweet" class="skip-button">
-        Skip Tutorial
-      </button>
+      <div class="tutorial-header-box"></div>
+      <h1 class="tutorial-header-box">Tutorial</h1>
+      <div class="tutorial-header-box">
+        <button @click="pushToSweet" class="skip-button">
+          Skip Tutorial
+        </button>
+      </div>
+
     </div>
     <div v-for="(tutorial, index) in tutorials" :key="index" v-show="index === currentTutorialIndex">
       <TutorialDetailView 
@@ -89,6 +92,9 @@
   </script>
   
   <style>
+  .tutorial-header-box{
+    width: 33%;
+  }
 
   .skip-button{
     border-radius: 8px;
