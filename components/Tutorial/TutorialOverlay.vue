@@ -1,7 +1,7 @@
 <template>
   <div style="margin: 0; padding: 0; box-sizing: border-box;">
     <div class="background-overlay" v-if="frameOpen" />
-    <div class="overlay-frame" :class="{ open: frameOpen }">
+    <div class="tutorial-overlay-frame" :class="{ open: frameOpen }">
       <div class="tutorial-frame-header">
         <div></div>
         <TitleOverlay title="Tutorial" />
@@ -70,9 +70,11 @@
     
     methods: {
       closeOverlay() {
-        setTimeout(() => { this.$emit('close-tutorial'); }, 300);
+        setTimeout(() => { 
+          this.$emit('close-tutorial');
+          this.frameOpen = false;
+       }, 300);
         document.body.style.overflow = 'auto'; 
-        this.frameOpen = false;
       },
 
       goToNextTutorial() {
@@ -88,20 +90,27 @@
     mounted() {
       document.body.style.overflow = 'hidden'; 
       setTimeout(() => {
-        
+        this.frameOpen = true;
       }, 300); 
-      this.frameOpen = true;
     },
   };
   </script>
   
   <style>
 
-  @import "@/CSS/shared-overlay-styles.css";
+ /* @import "@/CSS/shared-overlay-styles.css";*/
 
 
-  .overlay-frame{
+  .tutorial-overlay-frame{
     z-index: 1000;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 85%;
+    background-color: white;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
   }
 
 
