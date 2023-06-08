@@ -35,6 +35,7 @@
     data() {
       return {
         frameOpen: true,
+        isEnd: false,
         currentTutorialIndex: 0,
         tutorials: [
             {
@@ -59,6 +60,7 @@
                 title: "Weinkeller",
                 text_1: "Erstelle ein Profil und speichere deine Lieblingsweine in deinem persönlichen Weinkeller ab!",
                 text_2:" ",
+                isEnd: true,
                 img: "/tutorial/myCellar.jpg"
             },
             ],

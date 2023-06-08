@@ -6,12 +6,12 @@
             <div class="tutorial-text-1">{{text_1}}</div>
             <div class="tutorial-text-2">{{text_2}}</div> 
         </div>
-
         <button v-if="!isEnd" class="tutorial-next-button" @click="nextTutorial">
-          Weiter
+            Weiter
         </button>
-        <router-link v-else to="/Tasteprofile/Sweet" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
-
+        <router-link v-else to="/Tasteprofile/Sweet" class="router-link-button">
+            Geschmacksprofil erstellen
+        </router-link>
     </div>
 </template>
 
@@ -99,6 +99,19 @@
     border-radius: 8px;
     margin-top: 20px;
     
+}
+
+
+.router-link-button{
+    margin-top: auto; 
+    width: auto;
+    background-color: #66100F;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-decoration: none;
 }
 
 .tutorial-text-content{
