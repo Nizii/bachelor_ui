@@ -110,6 +110,8 @@
     color: white;
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-radius: 8px;
     margin-top: 20px;
     text-decoration: none;
