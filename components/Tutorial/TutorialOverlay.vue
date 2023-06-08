@@ -60,7 +60,6 @@
             },
             {
                 title: "Weinkeller",
-                isEnd: true,
                 text_1: "Erstelle ein Profil und speichere deine Lieblingsweine in deinem persönlichen Weinkeller ab!",
                 text_2:" ",
                 img: "/tutorial/myCellar.jpg"
@@ -80,7 +79,7 @@
         if (this.currentTutorialIndex < this.tutorials.length - 1) {
           this.currentTutorialIndex++;
         } else {
-          // Hier können Sie Logik hinzufügen, um etwas zu tun, wenn das letzte Tutorial erreicht wurde
+          this.frameOpen = false;
         }
       }
 

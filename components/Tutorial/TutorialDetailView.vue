@@ -23,27 +23,23 @@
     },
 
     props: {
-    title: {
-      type: String,
-      required: true
+        title: {
+        type: String,
+        required: true
+        },
+        text_1: {
+        type: String,
+        required: true
+        },
+        text_2: {
+        type: String,
+        required: true
+        },
+        img: {
+        type: String,
+        required: true
+        }
     },
-    isEnd: {
-      type: Boolean,
-      default: false
-    },
-    text_1: {
-      type: String,
-      required: true
-    },
-    text_2: {
-      type: String,
-      required: true
-    },
-    img: {
-      type: String,
-      required: true
-    }
-  },
 
     data() {
       return {
@@ -53,12 +49,7 @@
     
     methods: {
         nextTutorial(){
-            console.log("End "+this.isEnd);
-            if(this.isEnd){
-                this.$emit('close-tutorial');
-            } else {
-               this.$emit('next-tutorial'); 
-            }  
+            this.$emit('next-tutorial'); 
         }
     },
   };
