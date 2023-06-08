@@ -71,7 +71,7 @@
     methods: {
       closeOverlay() {
         this.frameOpen = false;
-        setTimeout(() => { this.$emit('close-tutorial'); }, 300);
+        setTimeout(() => { this.$emit('close-tutorial'); }, 100);
         document.body.style.overflow = 'auto'; 
       },
 
@@ -79,7 +79,10 @@
         if (this.currentTutorialIndex < this.tutorials.length - 1) {
           this.currentTutorialIndex++;
         } else {
+          console.log("close Tutorrial");
           this.frameOpen = false;
+          setTimeout(() => { this.$emit('close-tutorial'); }, 100);
+          document.body.style.overflow = 'auto'; 
         }
       }
 
@@ -98,25 +101,6 @@
 
   @import "@/CSS/shared-overlay-styles.css";
 
-  .tutorial-next-button{
-
-  }
-
-  .tutorial-img{
-
-  }
-
-  .tutorial-title{
-
-  }
-
-  .tutorial-text{
-
-  }
-
-  .tutorial-next-button{
-    
-  }
 
   .overlay-frame{
     z-index: 1000;
