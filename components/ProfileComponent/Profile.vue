@@ -420,7 +420,7 @@
   }
 
   .doughnut-chart{
-
+    width: 100%;
   }
 
   .logout-content{
