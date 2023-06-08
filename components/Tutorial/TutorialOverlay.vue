@@ -70,9 +70,9 @@
     
     methods: {
       closeOverlay() {
-        this.frameOpen = false;
-        setTimeout(() => { this.$emit('close-tutorial'); }, 100);
+        setTimeout(() => { this.$emit('close-tutorial'); }, 300);
         document.body.style.overflow = 'auto'; 
+        this.frameOpen = false;
       },
 
       goToNextTutorial() {
@@ -88,8 +88,9 @@
     mounted() {
       document.body.style.overflow = 'hidden'; 
       setTimeout(() => {
-        this.frameOpen = true;
-      }, 200); 
+        
+      }, 300); 
+      this.frameOpen = true;
     },
   };
   </script>
