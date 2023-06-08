@@ -6,11 +6,63 @@
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
         <button id="detail-view-close-btn" @click="closeOverlay">
-          <!--<nuxt-icon v-if="wine.winetype === 'Weisswein'" name="static/icons/buttons/closebutton_gelb.svg"></nuxt-icon>
-          -->
-          <img v-if="wine.winetype === 'Weisswein'" :src="require('static/icons/buttons/closegelb.jpg')" class="icon" alt="Bookmark icon" />
-          <img v-if="wine.winetype === 'Rotwein'" :src="require('static/icons/buttons/closerot.jpg')" class="icon" alt="Bookmark icon" />
-          <img v-if="wine.winetype === 'Rose'" :src="require('static/icons/buttons/closerose.jpg')" class="icon" alt="Bookmark icon" />
+          <div v-if="wine.winetype === 'Weisswein'">
+            <!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+            <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve">
+            <style type="text/css">
+              .st0{opacity:0.5;fill:#E9D953;}
+              .st1{fill:none;stroke:#000000;stroke-width:0.75;stroke-miterlimit:10;}
+            </style>
+            <circle class="st0" cx="14.1" cy="14.2" r="14.1"/>
+            <g>
+              <line class="st1" x1="9.4" y1="7.9" x2="19.2" y2="19"/>
+              <line class="st1" x1="19.2" y1="7.9" x2="9.4" y2="19"/>
+              <ellipse cx="19.2" cy="7.9" rx="0.4" ry="0.4"/>
+              <ellipse cx="9.5" cy="7.9" rx="0.4" ry="0.4"/>
+              <ellipse cx="9.4" cy="19" rx="0.4" ry="0.4"/>
+              <ellipse cx="19.2" cy="19" rx="0.4" ry="0.4"/>
+            </g>
+            </svg>
+          </div> 
+          <div v-if="wine.winetype === 'Rotwein'">
+            <!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+            <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve">
+            <style type="text/css">
+              .st0{opacity:0.7;fill:#661412;}
+              .st1{fill:none;stroke:#000000;stroke-width:0.75;stroke-miterlimit:10;}
+            </style>
+            <circle class="st0" cx="14.1" cy="14.2" r="14.1"/>
+            <g>
+              <line class="st1" x1="9.6" y1="8" x2="19.4" y2="19.1"/>
+              <line class="st1" x1="19.4" y1="8" x2="9.6" y2="19.1"/>
+              <ellipse cx="19.4" cy="8" rx="0.4" ry="0.4"/>
+              <ellipse cx="9.6" cy="8" rx="0.4" ry="0.4"/>
+              <ellipse cx="9.6" cy="19.1" rx="0.4" ry="0.4"/>
+              <ellipse cx="19.4" cy="19.1" rx="0.4" ry="0.4"/>
+            </g>
+            </svg>
+            
+          </div>
+          <div v-if="wine.winetype === 'Rose'">
+            <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve" class="icon">
+              <style type="text/css">
+                .st0{opacity:0.5;fill:#E9D953;}
+                .st1{fill:none;stroke:#000000;stroke-width:0.75;stroke-miterlimit:10;}
+              </style>
+              <circle class="st0" cx="14.1" cy="14.2" r="14.1"/>
+              <g>
+                <line class="st1" x1="9.4" y1="7.9" x2="19.2" y2="19"/>
+                <line class="st1" x1="19.2" y1="7.9" x2="9.4" y2="19"/>
+                <ellipse cx="19.2" cy="7.9" rx="0.4" ry="0.4"/>
+                <ellipse cx="9.5" cy="7.9" rx="0.4" ry="0.4"/>
+                <ellipse cx="9.4" cy="19" rx="0.4" ry="0.4"/>
+                <ellipse cx="19.2" cy="19" rx="0.4" ry="0.4"/>
+              </g>
+            </svg>
+          </div>
         </button>
       </div>
     </div>
@@ -584,6 +636,8 @@
   }
   
   #detail-view-close-btn {
+    width: 50px;
+    height: 50px;
     border: none;
     background: none;
     font-size: 1.5em;
@@ -632,6 +686,8 @@
     width: auto;
     background-color: #660F0F;
     color: white;
+    border:none;
+
   }
 
   .detail-view-button-comment{
@@ -644,6 +700,7 @@
     background-color: #660F0F;
     color: white;
     width: 100%;
+    border:none;
   }
 
   .comment-input{

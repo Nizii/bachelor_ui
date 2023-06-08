@@ -39,6 +39,25 @@
 
   
         <div class="wine-flag">
+          <div v-if="wine.nationTag === 'Schweiz'">
+            
+          </div>
+
+          <div v-if="wine.nationTag === 'Frankreich'">
+           
+          </div>
+
+          <div v-if="wine.nationTag === 'Italien'">
+
+          </div>
+
+          <div v-if="wine.nationTag === 'Spanien'">
+
+          </div>
+
+          <div v-if="wine.nationTag === 'Östereich'">
+            
+          </div>
           <img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="wine-info-flag" alt="Profile icon" />
         </div>
  
@@ -80,7 +99,47 @@
           
           <div class="container-below-child">
             <div class="wine-rating-left">
-              <img :src="require(isHighestRated ? 'static/icons/others/Wein.png' : 'static/icons/others/Wein.png')" class="icon" alt="Bookmark icon" />  
+              <div class="weinglas-grün" v-if="isHighestRated">
+                <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 28.4 28.4" style="enable-background:new 0 0 28.4 28.4;" xml:space="preserve">
+                <style type="text/css">
+                  .st0{display:none;}
+                  .st1{fill:none;stroke:#70CC74;stroke-miterlimit:10;}
+                </style>
+                <g id="Vorlage" class="st0">
+                  
+
+                </g>
+                <g>
+                  <path class="st1" d="M10.2,3.4h7.9c0,0,7,13.7-3.8,13.7S10.2,3.4,10.2,3.4z"/>
+                  <line class="st1" x1="14.3" y1="17.1" x2="14.3" y2="24.5"/>
+                  <ellipse class="st1" cx="14.3" cy="25.5" rx="4.3" ry="0.6"/>
+                  <line class="st1" x1="8.2" y1="10.3" x2="20.2" y2="10.3"/>
+                </g>
+                </svg>
+              </div>
+              
+              <!--
+              <div class="weinglas" v-else>
+                <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                    viewBox="0 0 28.4 28.4" style="enable-background:new 0 0 28.4 28.4;" xml:space="preserve">
+                <style type="text/css">
+                  .st0{display:none;}
+                  .st1{fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                  .st2{fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                </style>
+                <g id="Vorlage" class="st0">
+                </g>
+                <g id="Pikto">
+                  <path class="st1" d="M9.2,0.7h9.4c0,0,8.3,16.2-4.5,16.2S9.2,0.7,9.2,0.7z"/>
+                  <line class="st1" x1="14.1" y1="17" x2="14.1" y2="26.2"/>
+                  <ellipse class="st1" cx="14.1" cy="27" rx="5.1" ry="0.7"/>
+                  <line class="st2" x1="6.8" y1="8.9" x2="21.1" y2="8.9"/>
+                </g>
+                </svg>
+              </div>
+                -->
+              
             </div>
             <div class="wine-rating-right">
               <div class="wine-rating" :style="isHighestRated ? 'color: #70CC74; font-weight: bold; font-size: 20px;' : ''">
@@ -298,6 +357,16 @@
   .star-rating {
     width: 100%;
     transform: scale(0.5);
+  }
+
+  .weinglas-grün{
+    width: 40px;
+    height: 40px;
+  }
+
+  .weinglas{
+    width: 40px;
+    height: 40px;
   }
 
   .container-below {
