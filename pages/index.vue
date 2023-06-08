@@ -1,10 +1,10 @@
 <template>
-  <div style="margin: 0; padding: 0; box-sizing: border-box;">
+  <div>
     <div class="tutorial-frame-header">
       <div></div>
-      <TitleOverlay title="Tutorial" />
-      <button class="tutorial-close-button" @click="closeOverlay">
-        skip <img :src="require('static/icons/buttons/close.png')" alt="Bookmark icon" />         
+      <h1>Tutorial</h1>
+      <button @click="pushToSweet" class="skip-button">
+        Skip Tutorial
       </button>
     </div>
     <div v-for="(tutorial, index) in tutorials" :key="index" v-show="index === currentTutorialIndex">
@@ -22,20 +22,17 @@
 </template>
   
 <script>
-  import TitleOverlay from '~/components/Titles/TitleOverlay.vue';
   import TutorialDetailView from '~/components/Tutorial/TutorialDetailView.vue';
   
   export default {
     name: "TutorialOverlay",
     components: {
-      TitleOverlay,
       TutorialDetailView,
     },
 
     data() {
       return {
         frameOpen: true,
-        isEnd: false,
         currentTutorialIndex: 0,
         tutorials: [
             {
@@ -68,20 +65,17 @@
     },
     
     methods: {
-      closeOverlay() {
-        setTimeout(() => { 
-          this.$emit('close-tutorial');
-          this.frameOpen = false;
-       }, 300);
-        document.body.style.overflow = 'auto'; 
-      },
 
       goToNextTutorial() {
         if (this.currentTutorialIndex < this.tutorials.length - 1) {
           this.currentTutorialIndex++;
         } else {
-          this.closeOverlay();
+          this.$router.push('/Tasteprofile/Sweet/index/Sweet');
         }
+      },
+
+      pushToSweet(){
+        this.$router.push('/Tasteprofile/Sweet');
       }
     },
 
@@ -96,12 +90,33 @@
   
   <style>
 
- /* @import "@/CSS/shared-overlay-styles.css";*/
+  .skip-button{
+    border-radius: 8px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
 
+    text-decoration: none; 
+    width: auto;
+    background-color: #660F0F;
+    color: white;
+    width:auto;
+    border:none;
+  }
+  
+  .skip-icon{
+    width: 30px;
+    height: 30px;
+  }
 
-
-  .open {
-    transform: translateY(0);
+  .tutorial-frame-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: white; 
+    border-bottom: 1px solid rgb(214, 214, 214);
   }
 
 </style>

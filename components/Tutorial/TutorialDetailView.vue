@@ -112,6 +112,7 @@
     border-radius: 8px;
     margin-top: 20px;
     text-decoration: none;
+    border: none;
 }
 
 .tutorial-text-content{
