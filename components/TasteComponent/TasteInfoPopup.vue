@@ -2,7 +2,7 @@
   <div v-if="show" class="popup">
     <div class="popup-content">
       <button class="close-popup" @click="$emit('close')">
-        <img :src="require('static/icons/buttons/closebutton_merkliste.svg')" class="icon" alt="Bookmark icon" />  
+        <img :src="require('static/icons/buttons/closebutton_merkliste.svg')" class="taste-info-close" alt="Bookmark icon" />  
       </button>
       <div class="popup-text" v-if="infoKey === 'suss'">
         <span class="popup-tag">Süss:</span>
@@ -55,6 +55,11 @@ export default {
 </script>
 
 <style scoped>
+
+.taste-info-close{
+  width: 25px;
+  height: 25px;
+}
 .close-popup {
   border: none;
   position: absolute;
