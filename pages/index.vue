@@ -111,12 +111,12 @@
   }
 
   .tutorial-frame-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-    background-color: white; 
-    border-bottom: 1px solid rgb(214, 214, 214);
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  background-color: white; 
+  border-bottom: 1px solid rgb(214, 214, 214);
+}
 
 </style>

@@ -67,6 +67,7 @@
 .tutorial-title{
     font-weight: bold;
     margin-bottom: 15px;
+    margin-top: 15px;
     height: 10%;
 }
 
@@ -98,7 +99,7 @@
     padding-bottom: 10px;
     border-radius: 8px;
     margin-top: 20px;
-    
+    border: none;
 }
 
 
