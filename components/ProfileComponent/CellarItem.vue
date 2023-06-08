@@ -4,7 +4,7 @@
       <div class="item-title">
         {{ wine.name.split(' ')[0] }}
       </div>
-      <img class="wine-image-profile" :src=wine.link alt="Weinbild" width="30px" height="260px" />
+      <img class="wine-image-profile" :src=wine.link alt="Weinbild"/>
     </div>
   </div>
 </template>
@@ -34,6 +34,7 @@
 }
 
 .wine-image-profile {
+  width: 50px;
   object-fit: cover;
 }
 </style>
