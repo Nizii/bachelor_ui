@@ -69,9 +69,7 @@
             <img v-else :src="require('static/icons/buttons/merkon.jpg')" class="icon" alt="Bookmark icon" />
           </button>
           <button v-else @click.stop="removeWineInBookmark">
-            <div v-if="wine.winetype === 'Weisswein'">
-              - <!--<img :src="require('static/icons/buttons/closebutton_gelb.svg')" alt="Filter icon" />-->
-            </div>
+            <img :src="require('static/icons/buttons/loschen.svg')" class="del-icon" alt="Filter icon" />
           </button>
         </div>
         <div v-if="wine.rating > 10 && !isBookmark" class="container-below">
@@ -228,6 +226,11 @@
   
   * {
     font-family: 'Semplicita', sans-serif;
+  }
+
+  .del-icon{
+    width:25px;
+    height: 25px;
   }
 
   .und-mehr{

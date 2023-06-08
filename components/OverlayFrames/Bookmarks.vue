@@ -6,7 +6,7 @@
         <div></div>
         <TitleOverlay title="Merkliste" />
         <button class="close-button" @click="closeOverlay">
-          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         
+          <img :src="require('static/icons/buttons/closebutton_merkliste.svg')" class="closebutton-icon" alt="Bookmark icon" />         
         </button>
       </div>
       <div class="wine-container" v-for="(wine, index) in bookmarkedWines" :key="index">
@@ -74,6 +74,11 @@
 
   .bold {
     font-weight: bold;
+  }
+
+  .closebutton-icon{
+    width: 50px;
+    height: 50;
   }
 
   .overlay-frame-bookmark {

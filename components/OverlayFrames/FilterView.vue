@@ -9,8 +9,8 @@
             Reset  
           </button>
           <TitleOverlay title="Filter Optionen" />
-          <button class="close-button" @click="closeOverlay">
-            <img :src="require('static/icons/buttons/go.png')" class="go-icon" alt="Bookmark icon" />  
+          <button class="close-button" @click="closeOverlay(false)">
+            <img :src="require('static/icons/buttons/closebutton_merkliste.svg')" class="go-icon" alt="Bookmark icon" />  
           </button>
         </div>      
         
@@ -139,6 +139,9 @@
           </div>
 
         </div>
+        <button class="filter-button" @click="closeOverlay(true)">
+          Ausführen 
+        </button>
       </div>
     </div>
   </div>
@@ -206,11 +209,11 @@ export default {
       }
     },
 
-    closeOverlay() {
+    closeOverlay(isFilter) {
       this.frameOpen = false;
       document.body.style.overflow = 'auto'; // Erlaubt das Scrollen auf dem Body wieder
       setTimeout(() => {
-        this.updateFilters();
+        if(isFilter)this.updateFilters();
         this.$emit('close');
       }, 300);
     },
@@ -254,6 +257,19 @@ export default {
   height: 40px;
 }
 
+.filter-button{
+  border-radius: 15px;
+  padding: 10px 20px;
+  text-decoration: none; 
+  margin-bottom: 20px;
+  margin-top: 2em;
+  width: auto;
+  background-color: #660F0F;
+  color: white;
+  width: 100%;
+  border:none;
+}
+
 .go-icon{
   width: 40px;
   height: 40px;
@@ -280,7 +296,6 @@ export default {
   flex-direction: column;
   width: 100%;
   overflow-x: auto;
-
 }
 
 .checkbox-container {

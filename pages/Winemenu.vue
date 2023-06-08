@@ -20,7 +20,7 @@
           <div class="inputrow">
             <input type="text" class="search-input" @input="onSearchInput">
             <button class="toggle-btn" @click="toggleShowFoodOverlay">
-              <img :src="require('static/icons/buttons/filter.svg')" class="icon" alt="Filter icon" />
+              <img :src="require('static/icons/buttons/filter.svg')" class="filter-icon" alt="Filter icon" />
             </button>
           </div>
         </div>
@@ -504,6 +504,11 @@ export default {
 * {
   margin: 0;
   padding: 0;
+}
+
+.filter-icon{
+  width: 25px;
+  height: 25px;
 }
 
 .sort-icon{

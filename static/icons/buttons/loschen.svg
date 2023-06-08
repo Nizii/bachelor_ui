@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve">
+<style type="text/css">
+	.st01{display:none;}
+	.st11{display:inline;}
+	.st21{fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-miterlimit:10;}
+	.st31{fill:none;stroke:#000000;stroke-width:0.75;stroke-miterlimit:10;}
+</style>
+<g id="Ebene_1" class="st01">
+	<g id="QsXGPZ.tif" class="st11">
+		
+			<image style="overflow:visible;" width="342" height="420" id="Layer_0_00000045612363059522381750000007110820489597916290_" xlink:href="70374F8CF8C3AEDB.png"  transform="matrix(6.622500e-02 0 0 6.622500e-02 2.9868 0.3466)">
+		</image>
+	</g>
+</g>
+<g id="Ebene_2">
+	<g>
+		<line class="st21" x1="10" y1="12.8" x2="10" y2="22.3"/>
+		<line class="st21" x1="13.9" y1="12.8" x2="13.9" y2="22.3"/>
+		<line class="st21" x1="17.9" y1="12.8" x2="17.9" y2="22.3"/>
+		<path class="st31" d="M24.4,7.7H3.5c-0.2,0-0.3-0.1-0.3-0.3v-3c0-0.2,0.1-0.3,0.3-0.3h20.9c0.2,0,0.3,0.1,0.3,0.3v3
+			C24.7,7.6,24.5,7.7,24.4,7.7z"/>
+		<path class="st31" d="M16.4,4.1h-5c-0.2,0-0.4-0.2-0.4-0.4V1.4c0-0.2,0.2-0.4,0.4-0.4h5c0.2,0,0.4,0.2,0.4,0.4v2.4
+			C16.8,4,16.6,4.1,16.4,4.1z"/>
+		<path class="st31" d="M22.5,27.4H5.4c-0.2,0-0.4-0.2-0.4-0.4V8.2c0-0.2,0.2-0.4,0.4-0.4h17.1c0.2,0,0.4,0.2,0.4,0.4v18.7
+			C22.9,27.2,22.7,27.4,22.5,27.4z"/>
+	</g>
+</g>
+</svg>

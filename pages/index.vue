@@ -1,120 +1,105 @@
 <template>
-  <div class="index-page" style="margin: 0; padding: 0; box-sizing: border-box;">
-    <div class="start-page-container">
-      <div class="block"></div>
-      <div class="block"></div>
-      <div class="content-container">
-        <TitleBig title="Finde DEINEN Wein!" />
-        <router-link to="/Tasteprofile/Sweet" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
-        <router-link to="/Winemenu" class="start-page-link">Weiter zu Weinkarte</router-link>
-      </div>
-      <div class="block-2"></div>
+  <div style="margin: 0; padding: 0; box-sizing: border-box;">
+    <div class="tutorial-frame-header">
+      <div></div>
+      <TitleOverlay title="Tutorial" />
+      <button class="tutorial-close-button" @click="closeOverlay">
+        skip <img :src="require('static/icons/buttons/close.png')" alt="Bookmark icon" />         
+      </button>
     </div>
-    <TutorialOverlay v-if="showTutorialOverlay" @close-tutorial="toggleShowTutorial"/>
+    <div v-for="(tutorial, index) in tutorials" :key="index" v-show="index === currentTutorialIndex">
+      <TutorialDetailView 
+        :title="tutorial.title" 
+        :isEnd="tutorial.isEnd"
+        :text_1="tutorial.text_1"
+        :text_2="tutorial.text_2"
+        :img="tutorial.img"
+        @next-tutorial="goToNextTutorial"
+        @close-tutorial="closeOverlay"
+      />
+    </div>
   </div>
 </template>
-
+  
 <script>
-import TitleBig from '~/components/Titles/TitleBig.vue';
-import TutorialOverlay from '~/components/Tutorial/TutorialOverlay.vue';
+  import TitleOverlay from '~/components/Titles/TitleOverlay.vue';
+  import TutorialDetailView from '~/components/Tutorial/TutorialDetailView.vue';
+  
+  export default {
+    name: "TutorialOverlay",
+    components: {
+      TitleOverlay,
+      TutorialDetailView,
+    },
 
-export default {
-  name: 'index',
-  components: {
-    TitleBig,
-    TutorialOverlay,
-  },
-  methods:{
-    toggleShowTutorial() {
-      this.showTutorialOverlay = false;
-    }
-  },
-  data() {
-    return {
-      showTutorialOverlay: true,
-    }
+    data() {
+      return {
+        frameOpen: true,
+        currentTutorialIndex: 0,
+        tutorials: [
+            {
+                title: "Herzlich Willkommen",
+                text_1: "Wenn du nur wenig Wissen zum Thema Wein hast, dann bist du hier genau richtig!",
+                text_2: "Finde YOUR TASTE, erstelle deinen eigenen Weinkeller, gibt deine Bestellung beim Servicepersonal auf und geniesse anschliessend den gewählten Wein!",
+                img: "/tutorial/default.jpg"
+            },
+            {
+                title: "Your Taste",
+                text_1: "Nur sechs Fragen beantworten und YOUR TASTE ist definiert. Anschliessend werden zu dir passende Weine vorgeschlagen !",
+                text_2: "Du kannst natürlich auch direkt zur Weinkarte und später deinen Taste herausfinden!",
+                img: "/tutorial/myTaste.jpg"
+            },
+            {
+                title: "Bestellung aufgeben",
+                text_1: "Speichere deine gewünschten Weine in der Merkliste und gib anschliessend dem Servicepersonal die Bestellung auf!",
+                text_2: " ",
+                img: "/tutorial/myOrder.jpg"
+            },
+            {
+                title: "Weinkeller",
+                text_1: "Erstelle ein Profil und speichere deine Lieblingsweine in deinem persönlichen Weinkeller ab!",
+                text_2:" ",
+                img: "/tutorial/myCellar.jpg"
+            },
+            ],
+      }
+    },
+    
+    methods: {
+      closeOverlay() {
+        setTimeout(() => { 
+          this.$emit('close-tutorial');
+          this.frameOpen = false;
+       }, 300);
+        document.body.style.overflow = 'auto'; 
+      },
+
+      goToNextTutorial() {
+        if (this.currentTutorialIndex < this.tutorials.length - 1) {
+          this.currentTutorialIndex++;
+        } else {
+          this.closeOverlay();
+        }
+      }
+    },
+
+    mounted() {
+      document.body.style.overflow = 'hidden'; 
+      setTimeout(() => {
+        this.frameOpen = true;
+      }, 300); 
+    },
+  };
+  </script>
+  
+  <style>
+
+ /* @import "@/CSS/shared-overlay-styles.css";*/
+
+
+
+  .open {
+    transform: translateY(0);
   }
-}
-</script>
 
-<style scoped>
-
-* {
-  font-family: 'Semplicita', sans-serif;
-}
-
-html, body {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.index-page {
-  height: 100%;
-  width: 100%;
-  margin: 0;
-  background-image: url("/background/glaswein.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin-bottom: 0px;
-}
-
-.start-page-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: left;
-  height: 100%;
-}
-
-.content-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-  width: 60%;
-  max-width: 900px;
-  margin: 0 auto;
-  height: 30vh;
-}
-
-.block {
-  display: flex; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  height: 25vh;
-  overflow: auto;
-}
-
-.block-2 {
-  display: flex; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  height: 20vh;
-  overflow: auto;
-}
-
-
-.start-page-link {
-  margin-top: 15px;
-  color: white;
-}
-
-.red-button {
-  background-color: #660F0F;
-  color: white;
-  border-radius: 15px;
-  padding: 10px 20px;
-  text-decoration: none; 
-}
-
-
-.AppHeader {
-  text-align: center;
-}
 </style>

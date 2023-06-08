@@ -7,9 +7,11 @@
             <div class="tutorial-text-2">{{text_2}}</div> 
         </div>
 
-        <button class="tutorial-next-button" @click="nextTutorial">
+        <button v-if="!isEnd" class="tutorial-next-button" @click="nextTutorial">
           Weiter
         </button>
+        <router-link v-else to="/Tasteprofile/Sweet" class="start-page-link red-button">Geschmacksprofil erstellen</router-link>
+
     </div>
 </template>
 
@@ -23,6 +25,10 @@
         title: {
         type: String,
         required: true
+        },
+        isEnd: {
+        type: Boolean,
+        default: false
         },
         text_1: {
         type: String,
