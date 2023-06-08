@@ -51,9 +51,7 @@
           
           <div class="doughnut-chart">
             <canvas ref="chartContainer"></canvas>
-            <!--<DoughnutChart ref="doughnutChart" :chartData="chartData" :options="chartOptions"/>
-            -->
-            </div>
+          </div>
         </div>
 
         <div class="profile-line-1"></div>
