@@ -808,6 +808,10 @@
     flex-direction: column;
   }
 
+  .glas-grün-svg{
+
+  }
+
   .detail-view-comment-container {
     padding: 1em;
     border-radius: 15px;

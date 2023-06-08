@@ -58,7 +58,7 @@
           <div v-if="wine.nationTag === 'Östereich'">
             
           </div>
-          <img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="wine-info-flag" alt="Profile icon" />
+          <img :src="require(`/static/icons/nations/${wine.nationTag}.svg`)" class="wine-info-flag" alt="Profile icon" />
         </div>
  
         <div class="wine-price">
@@ -103,42 +103,44 @@
                 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 28.4 28.4" style="enable-background:new 0 0 28.4 28.4;" xml:space="preserve">
                 <style type="text/css">
-                  .st0{display:none;}
-                  .st1{fill:none;stroke:#70CC74;stroke-miterlimit:10;}
+                  .stg0{display:none;}
+                  .stg1{fill:none;stroke:#70CC74;stroke-miterlimit:10;}
                 </style>
-                <g id="Vorlage" class="st0">
+                <g id="Vorlage" class="stg0">
                   
 
                 </g>
                 <g>
-                  <path class="st1" d="M10.2,3.4h7.9c0,0,7,13.7-3.8,13.7S10.2,3.4,10.2,3.4z"/>
-                  <line class="st1" x1="14.3" y1="17.1" x2="14.3" y2="24.5"/>
-                  <ellipse class="st1" cx="14.3" cy="25.5" rx="4.3" ry="0.6"/>
-                  <line class="st1" x1="8.2" y1="10.3" x2="20.2" y2="10.3"/>
+                  <path class="stg1" d="M10.2,3.4h7.9c0,0,7,13.7-3.8,13.7S10.2,3.4,10.2,3.4z"/>
+                  <line class="stg1" x1="14.3" y1="17.1" x2="14.3" y2="24.5"/>
+                  <ellipse class="stg1" cx="14.3" cy="25.5" rx="4.3" ry="0.6"/>
+                  <line class="stg1" x1="8.2" y1="10.3" x2="20.2" y2="10.3"/>
                 </g>
                 </svg>
               </div>
               
-              <!--
-              <div class="weinglas" v-else>
+
+                <div class="weinglas" v-else>
                 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 28.4 28.4" style="enable-background:new 0 0 28.4 28.4;" xml:space="preserve">
                 <style type="text/css">
-                  .st0{display:none;}
-                  .st1{fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
-                  .st2{fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                  .st0s{display:none;}
+                  .st1s{fill:none;stroke:#000000;stroke-width:0.75;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                  .st2s{fill:none;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
                 </style>
-                <g id="Vorlage" class="st0">
+                <g id="Vorlage" class="st0s">
                 </g>
                 <g id="Pikto">
-                  <path class="st1" d="M9.2,0.7h9.4c0,0,8.3,16.2-4.5,16.2S9.2,0.7,9.2,0.7z"/>
-                  <line class="st1" x1="14.1" y1="17" x2="14.1" y2="26.2"/>
-                  <ellipse class="st1" cx="14.1" cy="27" rx="5.1" ry="0.7"/>
-                  <line class="st2" x1="6.8" y1="8.9" x2="21.1" y2="8.9"/>
+                  <path class="st1s" d="M9.2,0.7h9.4c0,0,8.3,16.2-4.5,16.2S9.2,0.7,9.2,0.7z"/>
+                  <line class="st1s" x1="14.1" y1="17" x2="14.1" y2="26.2"/>
+                  <ellipse class="st1s" cx="14.1" cy="27" rx="5.1" ry="0.7"/>
+                  <line class="st2s" x1="6.8" y1="8.9" x2="21.1" y2="8.9"/>
                 </g>
                 </svg>
               </div>
-                -->
+
+   
+               
               
             </div>
             <div class="wine-rating-right">
@@ -360,8 +362,8 @@
   }
 
   .weinglas-grün{
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
 
   .weinglas{
@@ -390,6 +392,7 @@
     font-weight: bold;
     font-size: 15px;
     padding-left: 10px;
+
   }
   .wine-rating-left {
 

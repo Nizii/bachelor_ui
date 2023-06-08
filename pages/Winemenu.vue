@@ -187,12 +187,13 @@ export default {
     },
 
     sortWinesByMatch() {
-      this.sortByMatchAscending = !this.sortByMatchAscending;
-
-      if (this.sortByMatchAscending) {
-        this.filteredWines.sort((a, b) => a.rating - b.rating);
-      } else {
-        this.filteredWines.sort((a, b) => b.rating - a.rating);
+      if(this.wines[0].rating > 10) {
+          this.sortByMatchAscending = !this.sortByMatchAscending;
+        if (this.sortByMatchAscending) {
+          this.filteredWines.sort((a, b) => a.rating - b.rating);
+        } else {
+          this.filteredWines.sort((a, b) => b.rating - a.rating);
+        }
       }
     },
 
