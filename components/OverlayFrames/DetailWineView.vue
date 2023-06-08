@@ -837,7 +837,7 @@
   .comment-input-container {
     align-items: center;
     border-top: 1px solid #0202027e;
-    padding-top: 1em;
+    padding-top: 0.3em;
     width: 100%;
     display: flex;
     flex-direction: column;
