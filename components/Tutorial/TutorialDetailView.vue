@@ -92,6 +92,7 @@
     padding-left: 20px;
     padding-right: 20px;
     text-align: center;
+    z-index: 1000;
 }
 
 .tutorial-next-button{

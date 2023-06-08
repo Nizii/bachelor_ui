@@ -119,6 +119,10 @@
     
   }
 
+  .overlay-frame{
+    z-index: 1000;
+  }
+
 
   .background-overlay {
     position: fixed;
