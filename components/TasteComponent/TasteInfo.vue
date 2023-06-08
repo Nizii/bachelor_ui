@@ -17,20 +17,10 @@
         <p class="infotxt">
             Hat der Wein ein intensives Geruchsbouquet oder muss ich das Glas mehrmals schwenken, bis ich etwas wahrnehme?
         </p>
-        <span class="popup-tag">Mild</span>
-        <br>
-        <p class="infotxt">
-            Ist der Wein sanft und zurückhaltend im Geruch, sodass er einen leichten und unaufdringlichen Eindruck hinterlässt?
-        </p>
         <span class="popup-tag">Fruchtig</span>
         <br>
         <p class="infotxt">
             Besitzt der Wein ausgeprägte fruchtige Aromen, wie z.B. Beeren, Zitrusfrüchte oder tropische Früchte, die sofort ins Auge fallen?
-        </p>
-        <span class="popup-tag">Erdig</span>
-        <br>
-        <p class="infotxt">
-            Nimmt man beim Riechen und Schmecken des Weins erdige Nuancen wahr, wie etwa mineralische, pilzartige oder waldbodenähnliche Noten?
         </p>
         <span class="popup-tag">Holzig</span>
         <br>

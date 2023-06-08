@@ -18,9 +18,6 @@
   
   export default {
     name: "TutorialDetailView",
-    components: {
-
-    },
 
     props: {
         title: {
