@@ -5,11 +5,11 @@
         <div class="parent-container">
 
         <div class="filter-header">
-          <button class="close-button" @click="resetFilters">
+          <button class="filter-close-button" @click="resetFilters">
             Reset  
           </button>
           <TitleOverlay title="Filter Optionen" />
-          <button class="close-button" @click="closeOverlay(false)">
+          <button class="filter-close-button" @click="closeOverlay(false)">
             <img :src="require('static/icons/buttons/closebutton_merkliste.svg')" class="go-icon" alt="Bookmark icon" />  
           </button>
         </div>      
@@ -253,6 +253,11 @@ export default {
 <style>
 
 @import "@/CSS/shared-overlay-styles.css";
+
+.filter-close-button{
+  border: none;
+  background-color: white;
+}
 
 .filter-icon{
   width: 40px;
