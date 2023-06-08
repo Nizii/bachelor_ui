@@ -37,7 +37,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 * {
   font-family: 'Semplicita', sans-serif;
 }

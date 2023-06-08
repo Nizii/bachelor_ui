@@ -82,10 +82,10 @@
 
       <div class="line-1"></div>
 
-      <p id="detail-view-titel">Geschmacksprofil</p>
+      <p id="detail-view-titel">Your Taste</p>
       <radar-chart :data="chartData" :options="chartOptions" />
       <button class="detail-view-button" @click="calcTasteProfile">
-        Geschmacksprofil berechnen
+        Your Taste
       </button>
 
       <div class="line-1"></div>
