@@ -121,7 +121,7 @@ export default {
   },
   data() {
     return {
-      highestRating: null,
+      highestRating: 0,
       loading: true,
       searchText: '',
       showFoodOverlay: false,
@@ -164,13 +164,16 @@ export default {
     },
 
     findHighestRating() {
-      let maxRating = 0;
-      for (let wine of this.wines) {
-        if (wine.rating > maxRating) {
-          maxRating = wine.rating;
+      console.log("Rating "+ this.wines[0].rating);
+      if(this.wines[0].rating > 10) {
+        let maxRating = 0;
+        for (let wine of this.wines) {
+          if (wine.rating > maxRating) {
+            maxRating = wine.rating;
+          }
         }
+        this.highestRating = maxRating;
       }
-      this.highestRating = maxRating;
     },
 
     sortWinesByPrice() {
@@ -321,7 +324,6 @@ export default {
     },
 
     navigateToProfileAfterLogin() {
-      console.log("yesyes");
       this.showProfile = true;
       this.showLogin = false;
     },
@@ -331,7 +333,6 @@ export default {
     },
 
     toggleDetailViewWine(wine) {
-      console.log("Hit");
       this.selectedWine = wine;
       this.showDetailWineView = !this.showDetailWineView;
     },

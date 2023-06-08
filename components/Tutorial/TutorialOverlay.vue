@@ -6,7 +6,7 @@
         <div></div>
         <TitleOverlay title="Tutorial" />
         <button class="tutorial-close-button" @click="closeOverlay">
-          <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         
+          <img :src="require('static/icons/buttons/close.png')" alt="Bookmark icon" />         
         </button>
       </div>
       <div v-for="(tutorial, index) in tutorials" :key="index" v-show="index === currentTutorialIndex">
