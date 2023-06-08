@@ -71,7 +71,7 @@
     methods: {
       closeOverlay() {
         this.frameOpen = false;
-        setTimeout(() => { this.$emit('close'); }, 300);
+        setTimeout(() => { this.$emit('close-tutorial'); }, 300);
         document.body.style.overflow = 'auto'; 
       },
 

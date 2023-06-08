@@ -10,7 +10,7 @@
       </div>
       <div class="block-2"></div>
     </div>
-    <TutorialOverlay />
+    <TutorialOverlay v-if="showTutorialOverlay" @close-tutorial="toggleShowTutorial"/>
   </div>
 </template>
 
@@ -23,6 +23,16 @@ export default {
   components: {
     TitleBig,
     TutorialOverlay,
+  },
+  methods:{
+    toggleShowTutorial() {
+      this.showTutorialOverlay = false;
+    }
+  },
+  data() {
+    return {
+      showTutorialOverlay: true,
+    }
   }
 }
 </script>
