@@ -6,6 +6,8 @@
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
         <button id="detail-view-close-btn" @click="closeOverlay">
+          <!--<nuxt-icon v-if="wine.winetype === 'Weisswein'" name="static/icons/buttons/closebutton_gelb.svg"></nuxt-icon>
+          -->
           <img v-if="wine.winetype === 'Weisswein'" :src="require('static/icons/buttons/closegelb.jpg')" class="icon" alt="Bookmark icon" />
           <img v-if="wine.winetype === 'Rotwein'" :src="require('static/icons/buttons/closerot.jpg')" class="icon" alt="Bookmark icon" />
           <img v-if="wine.winetype === 'Rose'" :src="require('static/icons/buttons/closerose.jpg')" class="icon" alt="Bookmark icon" />
