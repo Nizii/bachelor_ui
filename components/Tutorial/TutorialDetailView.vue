@@ -94,7 +94,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     border-radius: 8px;
-    margin-top: 50px;
+    margin-top: 20px;
     
 }
 
