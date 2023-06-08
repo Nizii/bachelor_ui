@@ -278,12 +278,11 @@
     top: 0;
     left: 0;
     width: 30px;
-    height: 100px;
+    height: 100%;
   }
 
   .verlauf-image {
     z-index: 1;
-    height: 100%;
   }
 
 
@@ -292,7 +291,7 @@
     object-fit: contain;
     z-index: 2;
     margin-left: 20px;
-    margin-top: 10px;
+
   }
 
   .wine-info-flag{
