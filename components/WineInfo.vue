@@ -39,25 +39,6 @@
 
   
         <div class="wine-flag">
-          <div v-if="wine.nationTag === 'Schweiz'">
-            
-          </div>
-
-          <div v-if="wine.nationTag === 'Frankreich'">
-           
-          </div>
-
-          <div v-if="wine.nationTag === 'Italien'">
-
-          </div>
-
-          <div v-if="wine.nationTag === 'Spanien'">
-
-          </div>
-
-          <div v-if="wine.nationTag === 'Östereich'">
-            
-          </div>
           <img :src="require(`/static/icons/nations/${wine.nationTag}.svg`)" class="wine-info-flag" alt="Profile icon" />
         </div>
  
@@ -88,10 +69,12 @@
             <img v-else :src="require('static/icons/buttons/merkon.jpg')" class="icon" alt="Bookmark icon" />
           </button>
           <button v-else @click.stop="removeWineInBookmark">
-            <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />  
+            <div v-if="wine.winetype === 'Weisswein'">
+              - <!--<img :src="require('static/icons/buttons/closebutton_gelb.svg')" alt="Filter icon" />-->
+            </div>
           </button>
         </div>
-        <div v-if="wine.rating > 10" class="container-below">
+        <div v-if="wine.rating > 10 && !isBookmark" class="container-below">
           <p class="wine-rating-title" :style="isHighestRated ? 'color: #70CC74; font-weight: bold;' : ''">
           <!--<p class="wine-rating-title">-->
             Your Taste
