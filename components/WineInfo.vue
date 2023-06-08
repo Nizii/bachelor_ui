@@ -285,6 +285,9 @@
     z-index: 1;
   }
 
+  .container-above{
+    padding-top: 10px;
+  }
 
   .wine-image {
     height: 100%;
