@@ -63,6 +63,7 @@
           <button class="detail-view-button" @click="removeUserProfile">
             Benutzerprofil löschen
           </button>
+          <div class="profile-placeholder"></div>
         </div>
 
         <div class="bottom-placeholder">
@@ -426,6 +427,10 @@
 
   .logout-content{
 
+  }
+
+  .profile-placeholder{
+    height: 50px;
   }
 
   .profile-content {
