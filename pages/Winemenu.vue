@@ -581,6 +581,7 @@ export default {
   padding: 10px;
   border-radius: 10px;
   margin-left: 15px;
+  border: none;
 }
 
 .sort-container{
