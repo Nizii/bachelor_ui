@@ -5,7 +5,7 @@
       <div class="tutorial-frame-header">
         <div></div>
         <TitleOverlay title="Tutorial" />
-        <button class="tutorial-close-button" @click="closeOverlay">
+        <button class="tutorial-close-button" @click="pushToSweet">
           <img :src="require('static/icons/buttons/close.png')" alt="Bookmark icon" />         
         </button>
       </div>
@@ -77,6 +77,10 @@
         } else {
           this.$router.push('/Sweet');
         }
+      },
+
+      pushToSweet(){
+        this.$router.push('/Sweet');
       }
     },
 
