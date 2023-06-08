@@ -252,6 +252,8 @@ export default {
 
 <style>
 
+@import "@/CSS/shared-overlay-styles.css";
+
 .filter-icon{
   width: 40px;
   height: 40px;
