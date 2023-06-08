@@ -1,7 +1,9 @@
 <template>
   <div class="wine-card" @click="openDetailView">
     <div class="wine-card-row1">
-      <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
+      <div class="wine-img-container">
+        <img class="wine-image" :src="wine.link" alt="Weinbild" width="30px" height="100px"/>
+        <img :src="require(`/static/background/kachel_verlauf_rot.png`)" class="verlauf-image" alt="Profile icon" />      </div>
       <div class="wine-card-row2">
         <h3 class="wine-title">
           {{ wine.name }}
@@ -263,9 +265,27 @@
     border-radius: 10px;
   }  
 
+  .wine-img-container {
+    position: relative;
+  }
+
+  .wine-image, .verlauf-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 100px;
+  }
+
+  .verlauf-image {
+    z-index: 1;
+  }
+
+
   .wine-image {
     height: 100%;
     object-fit: contain;
+    z-index: 2;
   }
 
   .wine-info-flag{
@@ -277,9 +297,10 @@
   .wine-card-row1 {
     display: flex;
     background-color: white;
-    padding-left: 30px;
     border-radius: 25px;
-    padding-top:15px
+    /*padding-left: 30px;
+    
+    padding-top:15px*/
   }
   
   .wine-card-row2 {
