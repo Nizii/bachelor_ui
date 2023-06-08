@@ -63,7 +63,7 @@
                 isEnd: true,
                 text_1: "Erstelle ein Profil und speichere deine Lieblingsweine in deinem persönlichen Weinkeller ab!",
                 text_2:" ",
-                img: "/tutorial/myTaste.jpg"
+                img: "/tutorial/myCellar.jpg"
             },
             ],
       }

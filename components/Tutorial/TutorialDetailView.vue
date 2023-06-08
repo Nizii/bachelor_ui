@@ -111,10 +111,11 @@
 }
 
 .tutorial-img{
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
     height: 250px;
-    max-width: 100%;
+    max-width: 90%;
+    padding-top: 10px;
 }
 
 </style>
