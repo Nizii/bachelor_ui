@@ -94,6 +94,7 @@
   <style>
   .tutorial-header-box{
     width: 33%;
+    text-align: right;
   }
 
   .skip-button{
