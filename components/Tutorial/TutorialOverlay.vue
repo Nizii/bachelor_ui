@@ -2,7 +2,7 @@
   <div style="margin: 0; padding: 0; box-sizing: border-box;">
     <div class="background-overlay" v-if="frameOpen" />
     <div class="overlay-frame" :class="{ open: frameOpen }">
-      <div class="frame-header">
+      <div class="tutorial-frame-header">
         <div></div>
         <TitleOverlay title="Tutorial" />
         <button class="close-button" @click="closeOverlay">
@@ -89,7 +89,7 @@
       document.body.style.overflow = 'hidden'; 
       setTimeout(() => {
         this.frameOpen = true;
-      }, 100); 
+      }, 200); 
     },
   };
   </script>
@@ -137,7 +137,7 @@
     transform: translateY(0);
   }
 
-  .frame-header {
+  .tutorial-frame-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
