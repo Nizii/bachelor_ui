@@ -5,7 +5,7 @@
       <div class="tutorial-frame-header">
         <div></div>
         <TitleOverlay title="Tutorial" />
-        <button class="close-button" @click="closeOverlay">
+        <button class="tutorial-close-button" @click="closeOverlay">
           <img :src="require('static/icons/buttons/close.png')" class="icon" alt="Bookmark icon" />         
         </button>
       </div>
@@ -37,7 +37,7 @@
 
     data() {
       return {
-        frameOpen: false,
+        frameOpen: true,
         currentTutorialIndex: 0,
         tutorials: [
             {
@@ -79,10 +79,7 @@
         if (this.currentTutorialIndex < this.tutorials.length - 1) {
           this.currentTutorialIndex++;
         } else {
-          console.log("close Tutorrial");
-          this.frameOpen = false;
-          setTimeout(() => { this.$emit('close-tutorial'); }, 100);
-          document.body.style.overflow = 'auto'; 
+          this.closeOverlay();
         }
       }
 
