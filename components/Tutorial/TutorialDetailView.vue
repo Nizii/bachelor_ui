@@ -65,10 +65,13 @@
   </script>
 
 
+<style scoped>
+  *{
+    font-family: 'Semplicita', sans-serif;
+  }
+</style>
+
 <style>
-*{
-    font-family: 'Soleil', sans-serif;
-}
 
 .router-link-winemenu{
     margin-bottom: 20px;
@@ -76,6 +79,7 @@
 }
 
 .tutorial-title{
+    font-size: 25px;
     font-weight: bold;
     margin-bottom: 15px;
     margin-top: 15px;

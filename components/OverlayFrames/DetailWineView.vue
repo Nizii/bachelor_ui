@@ -789,6 +789,7 @@
     font-size: 30px;
     font-weight: bold;
     font-family: sans-serif;
+    font-family: 'Semplicita', sans-serif;
   }
 
   #detail-view-grape{

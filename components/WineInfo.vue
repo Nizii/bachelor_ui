@@ -230,7 +230,7 @@
   @import "@/CSS/shared-wine-type-styles.css";
   
   * {
-    font-family: 'Semplicita', sans-serif;
+    font-family: 'Soleil', sans-serif;
   }
 
   .bookmark-button-info{
@@ -345,6 +345,7 @@
     font-size: 14px;
     margin-top: 5px;
     color: black;
+    font-family: 'Semplicita', sans-serif;
   }
   
   .wine-attribute {

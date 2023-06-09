@@ -147,11 +147,13 @@ export default {
 }
 </script>
 
-<style>  
-
+<style scoped>
   *{
-    font-family: 'Soleil', sans-serif;
+    font-family: 'Semplicita', sans-serif;
   }
+</style>
+
+<style>  
 
   .block {
     height: 20vh;

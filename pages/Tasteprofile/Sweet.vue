@@ -17,3 +17,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+*{
+  font-family: 'Semplicita', sans-serif;
+}
+</style>

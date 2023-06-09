@@ -2,7 +2,6 @@
   <div>
     <div class="tutorial-frame-header">
       <div class="tutorial-header-box"></div>
-      <h1 class="tutorial-header-box">Tutorial</h1>
       <div class="tutorial-header-box">
         <button @click="pushToSweet" class="skip-button">
           Skip Tutorial
@@ -122,7 +121,8 @@
   align-items: center;
   padding: 0 20px;
   background-color: white; 
-  border-bottom: 1px solid rgb(214, 214, 214);
+  height: 40px;
+  padding-top: 10px;
 }
 
 </style>

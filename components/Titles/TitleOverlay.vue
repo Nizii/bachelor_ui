@@ -21,6 +21,7 @@
     font-size: 25px;
     font-weight: bold;
     font-family: sans-serif;
+    font-family: 'Semplicita', sans-serif;
   }
   
   </style>
