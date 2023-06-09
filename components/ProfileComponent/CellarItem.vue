@@ -5,7 +5,7 @@
         <!--Zeigt nur das erste Wort im Namen an-->
         {{ wine.name.split(' ')[0] }}
       </div>
-      <img class="wine-image-profile" :src=wine.link alt="Weinbild"/>
+      <img class="wine-image-profile" :src=wine.link2 alt="Weinbild"/>
     </div>
   </div>
 </template>

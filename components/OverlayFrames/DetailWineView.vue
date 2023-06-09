@@ -146,7 +146,7 @@
         </div>
         <!--Weinbild-->
         <div class="detail-view-right">
-          <img class="detail-view-image" :src="wine.link"/>
+          <img class="detail-view-image" :src="wine.link2"/>
         </div>
       </div>
     </div>
