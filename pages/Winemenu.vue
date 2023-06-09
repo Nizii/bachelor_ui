@@ -585,7 +585,7 @@ export default {
 }
 
 .sort-container{
-  margin-right: 20px;
+  margin-right: 25px;
   margin-top: 5px;
   margin-bottom: 5px;
   display: flex;

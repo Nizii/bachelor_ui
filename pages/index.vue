@@ -8,7 +8,6 @@
           Skip Tutorial
         </button>
       </div>
-
     </div>
     <div v-for="(tutorial, index) in tutorials" :key="index" v-show="index === currentTutorialIndex">
       <TutorialDetailView 
@@ -67,7 +66,6 @@
     },
     
     methods: {
-
       goToNextTutorial() {
         if (this.currentTutorialIndex < this.tutorials.length - 1) {
           this.currentTutorialIndex++;
@@ -88,42 +86,29 @@
       }, 300); 
     },
   };
-  </script>
-  
-  <style>
-  .tutorial-header-box{
-    width: 33%;
-    text-align: right;
-  }
+</script>
+<style>
+.tutorial-header-box {
+  width: 33%;
+  text-align: right;
+}
 
-  .skip-button{
-    border-radius: 8px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-right: 10px;
+.skip-button {
+  border-radius: 8px;
+  padding: 10px;
+  text-decoration: none;
+  background-color: #660F0F;
+  color: white;
+  border: none;
+}
 
-    text-decoration: none; 
-    width: auto;
-    background-color: #660F0F;
-    color: white;
-    width:auto;
-    border:none;
-  }
-  
-  .skip-icon{
-    width: 30px;
-    height: 30px;
-  }
-
-  .tutorial-frame-header {
+.tutorial-frame-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background-color: white; 
+  background-color: white;
   height: 40px;
   padding-top: 10px;
 }
-
 </style>
