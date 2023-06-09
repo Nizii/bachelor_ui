@@ -17,8 +17,6 @@
           </button>
         </div>
 
-        <div class="profile-line-2"></div>   
-
         <div v-if="userData" class="wine-cellar">
           <div class="regal" v-for="(wineGroup, groupIndex) in wineGroups" :key="groupIndex">
             <div v-for="(wine, wineIndex) in wineGroup" :key="wineIndex" class="wine-item">
@@ -416,7 +414,7 @@
   
   .profile-title {
     color: black;
-    font-size: 30px;
+    font-size: 25px;
     font-weight: bold;
     padding-top: 20px;
     padding-bottom: 20px;
