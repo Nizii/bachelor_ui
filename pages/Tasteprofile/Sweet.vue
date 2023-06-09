@@ -3,7 +3,7 @@
     title="Wie süss magst du es?" 
     nextRoute="/Tasteprofile/Sour"
     preferenceKey="suss"
-    previousRoute="/"
+    previousRoute="/Winemenu"
     bgImage="/background/suss.jpg"
   />
 </template>
