@@ -23,11 +23,6 @@
               <img :src="require('static/icons/buttons/filter.svg')" class="filter-icon" alt="Filter icon" />
             </button>
           </div>
-        </div>
-        <div v-if="loading" class="loading" style="text-align: center; margin: 20px;">
-          Loading...
-        </div>
-        <div v-else>
           <div class="sort-container">
             <button @click="sortWinesByPrice" class="sort-button">Preis
               <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
@@ -36,6 +31,12 @@
               <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
             </button>
           </div>
+        </div>
+        <div v-if="loading" class="loading" style="text-align: center; margin: 20px;">
+          Loading...
+        </div>
+        <div v-else>
+
           <div v-for="wine in filteredWines" :key="wine.id" style="margin: 20px;">
             <div v-if="wine.winetype === 'Weisswein'">
               <WineInfo :wine="wine" :userData="userData"             
@@ -574,8 +575,11 @@ export default {
 .sort-button{
   background-color: rgb(211, 211, 211);
   color: black;
-  padding: 10px;
-  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom:5px;
+  border-radius: 8px;
   margin-left: 15px;
   border: none;
 }

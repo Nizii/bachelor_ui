@@ -11,11 +11,10 @@
 
       <div class="inner-content">
         <div class="profile-button-group">
-          <button @click="filterWines('Weintyp')" class="profile-button">Weintyp</button>
-          <button @click="filterWines('Herkunft')" class="profile-button">Herkunft</button>
-          <button @click="filterWines('Trauben')" class="profile-button">Trauben</button>
-          <button @click="filterWines('Jahr')" class="profile-button">Jahr</button>
-          <button @click="filterWines('Preis')" class="profile-button">Preis</button>
+          <button @click="filterWines('Weintyp')" class="profile-sort-button">
+            <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
+            Weintyp
+          </button>
         </div>
 
         <div class="profile-line-2"></div>   
@@ -382,6 +381,18 @@
 
   *{
     font-family: 'Semplicita', sans-serif;
+  }
+
+  .profile-sort-button {
+    background-color: rgb(211, 211, 211);
+    color: black;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom:5px;
+    border-radius: 8px;
+    margin-left: 15px;
+    border: none;
   }
 
   .profile-header {

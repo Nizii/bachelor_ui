@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="background-overlay" v-if="frameOpen" />
-  <div class="overlay-frame" :class="{ open: frameOpen }" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }">
+  <div class="overlay-frame" :class="{ open: frameOpen }">
     <!--Header-->
     <div class="detail-view-header">
       <div id="row1">
@@ -66,12 +66,12 @@
       </div>
     </div>
     <!--Content-->
-    <div class="inner-overlay">
-        <div id="row2">
-          <div class="wine-type_container" :style="{ color: getButtonTextColor() }">           
-          </div>
-          <br>  
+    <div class="inner-overlay" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }">
+      <div id="row2">
+        <div class="wrapper">
+          <div class="inner-overlay" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }"></div>
         </div>
+      </div>
 
       <!--Weinbeschreibung-->
       <div class="detail-view-main-container">
@@ -401,6 +401,7 @@
         }
       },
 
+      /*
       getBackgroundImage() {
         if (this.wine.winetype === 'Weisswein') {
           return '/weinflecke_weiss.png';
@@ -412,20 +413,20 @@
           return '/weinflecke_weiss.png'; 
         }
       },
-
-      /*
+*/
+      
       getBackgroundImage() {
         if (this.wine.winetype === 'Weisswein') {
-          return '/fleckweisswein2.png';
+          return '/fleckweisswein4.png';
         } else if (this.wine.winetype === 'Rotwein') {
-          return '/rotweinfleck3.png';
+          return '/rotweinfleck4.png';
         } else if (this.wine.winetype === 'Rose') {
-          return '/fleckrose2.png';
+          return '/fleckweisswein4.png';
         } else {
-          return '/weinflecke_weiss.png'; 
+          return '/rotweinfleck4.png'; 
         }
       },
-      */
+      
 
       async getUserData() {
         const token = localStorage.getItem('jwt');
@@ -595,10 +596,18 @@
     flex-direction: column;
   }
 
-  .inner-overlay{
+  .wrapper {
+    padding-bottom: 50px;
+  }
+  
+  .inner-overlay {
     padding-left: 15px;
     padding-right: 5px;
+    background-position: center bottom 100px;    
+    background-size: 100% auto;
+    background-repeat: no-repeat;
   }
+
   .inner-overlay-2{
     padding: 15px;
   }
@@ -709,7 +718,7 @@
     height: 450px;
     margin-bottom: 0;
     padding-bottom: 0;
-    margin-top: -2em; 
+    margin-top: 0; 
   }
 
   #detail-view-titel{
