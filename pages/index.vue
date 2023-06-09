@@ -47,20 +47,20 @@
                 title: "Your Taste",
                 text_1: "Nur sechs Fragen beantworten und YOUR TASTE ist definiert. Anschliessend werden zu dir passende Weine vorgeschlagen !",
                 text_2: "Du kannst natürlich auch direkt zur Weinkarte und später deinen Taste herausfinden!",
-                img: "/tutorial/myTaste.jpg"
+                img: "/tutorial/t1.jpg"
             },
             {
                 title: "Bestellung aufgeben",
                 text_1: "Speichere deine gewünschten Weine in der Merkliste und gib anschliessend dem Servicepersonal die Bestellung auf!",
                 text_2: " ",
-                img: "/tutorial/myOrder.jpg"
+                img: "/tutorial/t2.jpg"
             },
             {
                 title: "Weinkeller",
                 text_1: "Erstelle ein Profil und speichere deine Lieblingsweine in deinem persönlichen Weinkeller ab!",
                 text_2:" ",
                 isEnd: true,
-                img: "/tutorial/myCellar.jpg"
+                img: "/tutorial/t3.jpg"
             },
             ],
       }
@@ -89,10 +89,6 @@
   };
 </script>
 <style>
-.slider-tutorial{
-  width: 20%;
-  text-align: center;
-}
 
 .tutorial-header-box {
   width: 33%;

@@ -56,12 +56,6 @@
             required: true
         }
     },
-
-    data() {
-      return {
-
-        }
-    },
     
     methods: {
         nextTutorial(){
@@ -81,17 +75,20 @@
 <style>
 .img-container-tutorial {
     position: relative;
-}
-
-.tutorial-img {
+  }
+  
+  .tutorial-img {
     position: relative;
-    z-index: 1;
-}
+    margin-left: 25px;
+    margin-right: 25px;
 
-.slider-tutorial {
+  }
+  
+  .slider-tutorial {
     position: relative;
-    z-index: 2;
-}
+    width: 30%;
+
+  }
 
 .skip-to-menu-button{
     margin-top: 20px;

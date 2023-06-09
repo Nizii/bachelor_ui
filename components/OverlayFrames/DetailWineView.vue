@@ -400,7 +400,7 @@
         }
       },
 
-      /*
+      
       getBackgroundImage() {
         if (this.wine.winetype === 'Weisswein') {
           return '/weinflecke_weiss.png';
@@ -412,8 +412,8 @@
           return '/weinflecke_weiss.png'; 
         }
       },
-      */
       
+      /*
       getBackgroundImage() {
         if (this.wine.winetype === 'Weisswein') {
           return '/fleckweisswein4.png';
@@ -426,7 +426,7 @@
         }
       },
       
-
+*/
       async getUserData() {
         const token = localStorage.getItem('jwt');
         if(token) {
@@ -602,10 +602,8 @@
   
   .inner-overlay {
     padding-left: 15px;
-    padding-right: 5px;
-    background-position: center bottom;    
+    padding-right: 5px;  
     background-size: 100% auto;
-    background-repeat: no-repeat;
   }
 
   .inner-overlay-2{
