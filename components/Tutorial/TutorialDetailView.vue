@@ -1,10 +1,16 @@
 <template>
-    <div class="tutorial-content-container" >
+    <div class="tutorial-content-container">
+      <div class="img-container-tutorial">
         <img :src="img" class="tutorial-img">
+        <img v-if="i == 0" class="slider-tutorial" :src="require('static/background/slidertutorial1.png')" alt="Bookmark icon" />
+        <img v-if="i == 1" class="slider-tutorial" :src="require('static/background/slidertutorial2.png')" alt="Bookmark icon" />
+        <img v-if="i == 2" class="slider-tutorial" :src="require('static/background/slidertutorial3.png')" alt="Bookmark icon" />
+        <img v-if="i == 3" class="slider-tutorial" :src="require('static/background/slidertutorial4.png')" alt="Bookmark icon" />
+    </div>
         <div class="tutorial-text-content">
             <div class="tutorial-title"><b>{{title}}</b></div>
             <div class="tutorial-text-1">{{text_1}}</div>
-            <div class="tutorial-text-2">{{text_2}}</div> 
+            <div class="tutorial-text-2">{{text_2}}</div>
         </div>
         <button v-if="!isEnd" class="tutorial-next-button" @click="nextTutorial">
             Weiter
@@ -14,37 +20,40 @@
         </router-link>
         <div class="skip-to-menu-button">
             <router-link v-if="isEnd" to="/Winemenu" class="router-link-winemenu">
-                Direkt zur Weinkarte
+            Direkt zur Weinkarte
             </router-link>
         </div>
-        <img :src="img" class="slider-tutorial">
     </div>
-</template>
+  </template>
 
 <script>
   export default {
     name: "TutorialDetailView",
 
     props: {
+        i: {
+            type: Number,
+            required: true
+        },
         title: {
-        type: String,
-        required: true
+            type: String,
+            required: true
         },
         isEnd: {
-        type: Boolean,
-        default: false
+            type: Boolean,
+            default: false
         },
         text_1: {
-        type: String,
-        required: true
+            type: String,
+            required: true
         },
         text_2: {
-        type: String,
-        required: true
+            type: String,
+            required: true
         },
         img: {
-        type: String,
-        required: true
+            type: String,
+            required: true
         }
     },
 
@@ -70,9 +79,18 @@
 </style>
 
 <style>
+.img-container-tutorial {
+    position: relative;
+}
 
-.slider-tutorial{
-    width: 100%;
+.tutorial-img {
+    position: relative;
+    z-index: 1;
+}
+
+.slider-tutorial {
+    position: relative;
+    z-index: 2;
 }
 
 .skip-to-menu-button{

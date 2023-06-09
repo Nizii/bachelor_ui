@@ -11,6 +11,7 @@
     </div>
     <div v-for="(tutorial, index) in tutorials" :key="index" v-show="index === currentTutorialIndex">
       <TutorialDetailView 
+        :i=index
         :title="tutorial.title" 
         :isEnd="tutorial.isEnd"
         :text_1="tutorial.text_1"
@@ -88,6 +89,11 @@
   };
 </script>
 <style>
+.slider-tutorial{
+  width: 20%;
+  text-align: center;
+}
+
 .tutorial-header-box {
   width: 33%;
   text-align: right;
