@@ -69,7 +69,6 @@
     <div class="inner-overlay" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }">
       <div id="row2">
         <div class="wrapper">
-          <div class="inner-overlay" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }"></div>
         </div>
       </div>
 
@@ -603,7 +602,7 @@
   .inner-overlay {
     padding-left: 15px;
     padding-right: 5px;
-    background-position: center bottom 100px;    
+    background-position: center bottom;    
     background-size: 100% auto;
     background-repeat: no-repeat;
   }
