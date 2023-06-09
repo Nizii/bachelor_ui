@@ -722,7 +722,7 @@
 
   #detail-view-titel{
     color: black;
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
     font-family: sans-serif;
     font-family: 'Semplicita', sans-serif;
