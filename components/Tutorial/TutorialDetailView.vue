@@ -142,7 +142,6 @@
 }
 
 .router-link-button{
-    margin-top: auto; 
     width: auto;
     background-color: #66100F;
     color: white;
