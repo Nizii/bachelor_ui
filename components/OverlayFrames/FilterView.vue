@@ -118,6 +118,7 @@
             </div>
           </div>
 
+          <!--
           <div class="filter-title">
             TRAUBEN
           </div>
@@ -137,7 +138,7 @@
             <div @click="toggleGrapeCheckbox('Trebbiano')" :class="{ active: selectedGrape.includes('Trebbiano') }" class="checkbox checkbox-1">Trebbiano</div>
             <div @click="toggleGrapeCheckbox('Gewürztraminer')" :class="{ active: selectedGrape.includes('Gewürztraminer') }" class="checkbox checkbox-2">Gewürztraminer</div>
           </div>
-
+          -->
         </div>
         <button class="filter-button" @click="closeOverlay(true)">
           Ausführen 

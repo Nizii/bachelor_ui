@@ -18,7 +18,6 @@
         :text_2="tutorial.text_2"
         :img="tutorial.img"
         @next-tutorial="goToNextTutorial"
-        @close-tutorial="closeOverlay"
       />
     </div>
   </div>

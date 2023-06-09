@@ -402,6 +402,7 @@ export default {
 
   mounted() {
     this.$refs.bottomTabbar.toggleMenuButtons('Winemenu');
+    document.body.style.overflow = 'auto'; 
   },
 
   async created() {

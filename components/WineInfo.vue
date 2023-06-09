@@ -78,7 +78,7 @@
           </button>
         </div>
         <div v-if="wine.rating > 10 && !isBookmark" class="container-below">
-          <p class="wine-rating-title" :style="isHighestRated ? 'color: #70CC74; font-weight: bold;' : ''">
+          <p class="wine-rating-title" :style="isHighestRated ? 'color: #1F7771F; font-weight: bold;' : ''">
           <!--<p class="wine-rating-title">-->
             Your Taste
           </p>
@@ -90,7 +90,7 @@
                     viewBox="0 0 28.4 28.4" style="enable-background:new 0 0 28.4 28.4;" xml:space="preserve">
                 <style type="text/css">
                   .stg0{display:none;}
-                  .stg1{fill:none;stroke:#70CC74;stroke-miterlimit:10;}
+                  .stg1{fill:none;stroke:#1F771F;stroke-miterlimit:10;}
                 </style>
                 <g id="Vorlage" class="stg0">
                   
@@ -130,7 +130,7 @@
               
             </div>
             <div class="wine-rating-right">
-              <div class="wine-rating" :style="isHighestRated ? 'color: #70CC74; font-weight: bold; font-size: 20px;' : ''">
+              <div class="wine-rating" :style="isHighestRated ? 'color: #1F771F; font-weight: bold; font-size: 20px;' : ''">
                 {{wine.rating}}%
               </div>
             </div>
@@ -326,7 +326,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-end;
-    padding-right: 15px;
+    padding-right: 5px;
   }
 
   .wine-flag {
@@ -342,8 +342,8 @@
   }
   
   .wine-title {
-    font-size: 16px;
-    margin-top: 0;
+    font-size: 14px;
+    margin-top: 5px;
     color: black;
   }
   
@@ -385,11 +385,13 @@
   .weinglas-grün{
     width: 50px;
     height: 50px;
+    margin-bottom: 5px;
   }
 
   .weinglas{
     width: 40px;
     height: 40px;
+    margin-bottom: 5px;
   }
 
   .container-below {
@@ -406,12 +408,13 @@
   }
 
   .wine-rating-title{
+    font-size: 12px;
   }
 
   .wine-rating-right {
     padding-top: 7px;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
     padding-left: 10px;
 
   }

@@ -49,7 +49,7 @@
             <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve" class="icon">
               <style type="text/css">
-                .st0{opacity:0.5;fill:#E9D953;}
+                .st0{opacity:0.5;fill:#ED6861;}
                 .st1{fill:none;stroke:#000000;stroke-width:0.75;stroke-miterlimit:10;}
               </style>
               <circle class="st0" cx="14.1" cy="14.2" r="14.1"/>
@@ -289,12 +289,12 @@
             },
             {
               label: 'Mein Geschmacksprofil', 
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgba(54, 162, 235, 0.8)',
-              pointBackgroundColor: 'blue',
-              pointBorderColor: 'blue',
-              pointHoverBackgroundColor: 'blue',
-              pointHoverBorderColor: 'blue',
+              backgroundColor: 'rgba(32, 120, 51, 0.2)',
+              borderColor: 'rgba(32, 120, 51, 0.8)',
+              pointBackgroundColor: '#1F771F',
+              pointBorderColor: '#1F771F',
+              pointHoverBackgroundColor: '#1F771F',
+              pointHoverBorderColor: '#1F771F',
               data: [
                 temp.sauer,
                 temp.suss,
@@ -612,11 +612,9 @@
     align-items: center;
   }
   
-  .grape-case-left,
   .grape-case-right {
     flex: 1;
   }
-  
 
   .comment-user{
     color: #660F0F;

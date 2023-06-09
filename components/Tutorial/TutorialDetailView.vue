@@ -12,6 +12,12 @@
         <router-link v-else to="/Tasteprofile/Sweet" class="router-link-button">
             Geschmacksprofil erstellen
         </router-link>
+        <div>
+            <router-link v-if="isEnd" to="/Winemenu" class="router-link-winemenu">
+                Geschmacksprofil erstellen
+            </router-link>
+        </div>
+
     </div>
 </template>
 
@@ -62,6 +68,11 @@
 <style>
 *{
     font-family: 'Soleil', sans-serif;
+}
+
+.router-link-winemenu{
+    margin-bottom: 20px;
+    text-decoration: none;
 }
 
 .tutorial-title{
