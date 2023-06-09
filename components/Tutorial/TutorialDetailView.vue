@@ -2,11 +2,11 @@
     <div class="tutorial-content-container">
       <div class="img-container-tutorial">
         <img :src="img" class="tutorial-img">
-        <img v-if="i == 0" class="slider-tutorial" :src="require('static/background/slidertutorial1.png')" alt="Bookmark icon" />
-        <img v-if="i == 1" class="slider-tutorial" :src="require('static/background/slidertutorial2.png')" alt="Bookmark icon" />
-        <img v-if="i == 2" class="slider-tutorial" :src="require('static/background/slidertutorial3.png')" alt="Bookmark icon" />
-        <img v-if="i == 3" class="slider-tutorial" :src="require('static/background/slidertutorial4.png')" alt="Bookmark icon" />
     </div>
+    <img v-if="i == 0" class="slider-tutorial" :src="require('static/background/slidertutorial1.png')" alt="Bookmark icon" />
+    <img v-if="i == 1" class="slider-tutorial" :src="require('static/background/slidertutorial2.png')" alt="Bookmark icon" />
+    <img v-if="i == 2" class="slider-tutorial" :src="require('static/background/slidertutorial3.png')" alt="Bookmark icon" />
+    <img v-if="i == 3" class="slider-tutorial" :src="require('static/background/slidertutorial4.png')" alt="Bookmark icon" />
         <div class="tutorial-text-content">
             <div class="tutorial-title"><b>{{title}}</b></div>
             <div class="tutorial-text-1">{{text_1}}</div>
@@ -79,8 +79,6 @@
   
   .tutorial-img {
     position: relative;
-    margin-left: 25px;
-    margin-right: 25px;
 
   }
   

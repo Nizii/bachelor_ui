@@ -4,9 +4,6 @@
     <div class="tutorial-frame-header">
       <div class="tutorial-header-box"></div>
       <div class="tutorial-header-box">
-        <button @click="pushToSweet" class="skip-button">
-          Skip Tutorial
-        </button>
       </div>
     </div>
     <div v-for="(tutorial, index) in tutorials" :key="index" v-show="index === currentTutorialIndex">
@@ -62,7 +59,7 @@
                 isEnd: true,
                 img: "/tutorial/t3.jpg"
             },
-            ],
+          ],
       }
     },
     
@@ -74,10 +71,6 @@
           this.$router.push('/Tasteprofile/Sweet/index/Sweet');
         }
       },
-
-      pushToSweet(){
-        this.$router.push('/Tasteprofile/Sweet');
-      }
     },
 
     mounted() {

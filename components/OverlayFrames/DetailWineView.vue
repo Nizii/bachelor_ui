@@ -413,7 +413,7 @@
         }
       },
       
-      /*
+      /* Diese Funktion wird noch gebraucht
       getBackgroundImage() {
         if (this.wine.winetype === 'Weisswein') {
           return '/fleckweisswein4.png';
@@ -426,7 +426,7 @@
         }
       },
       
-*/
+      */
       async getUserData() {
         const token = localStorage.getItem('jwt');
         if(token) {
