@@ -18,11 +18,10 @@
         <router-link v-else to="/Tasteprofile/Sweet" class="router-link-button">
             Geschmacksprofil erstellen
         </router-link>
-        <div class="skip-to-menu-button">
-            <router-link v-if="isEnd" to="/Winemenu" class="router-link-winemenu">
+        <div class="skip-to-menu-button"></div>
+        <router-link v-if="isEnd" to="/Winemenu" class="router-link-winemenu">
             Direkt zur Weinkarte
-            </router-link>
-        </div>
+        </router-link>
     </div>
   </template>
 
@@ -89,12 +88,19 @@
   }
 
 .skip-to-menu-button{
-    margin-top: 20px;
+    height: 50px;
 }
 
-.router-link-winemenu{
-    margin-bottom: 20px;
+.router-link-winemenu {
     text-decoration: none;
+    color: #66100F;
+    background-color: white;
+    border: 2px solid #66100F;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .tutorial-title{
