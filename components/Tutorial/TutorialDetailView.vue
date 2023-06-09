@@ -17,6 +17,7 @@
                 Direkt zur Weinkarte
             </router-link>
         </div>
+        <img :src="img" class="slider-tutorial">
     </div>
 </template>
 
@@ -69,6 +70,10 @@
 </style>
 
 <style>
+
+.slider-tutorial{
+    width: 100%;
+}
 
 .skip-to-menu-button{
     margin-top: 20px;

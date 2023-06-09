@@ -148,12 +148,14 @@
       }
 
       return {
+        
         chart: null,
         userData: null,
         winesPerRow: 3,
         showFoodOverlay: false,
         showBookmarksOverlay: false,
         showDetailWineView: false,
+        reverseSort: false,
         chartData: {
           labels: ['Rotwein', 'Weisswein', 'Rosé'],
           datasets: [{
@@ -352,26 +354,27 @@
       filterWines(filterType) {
         if (!this.userData) return;
         let filteredWines = this.userData.favoriten.slice();
-  
+
         switch (filterType) {
           case 'Weintyp':
-            filteredWines.sort((a, b) => a.winetype.localeCompare(b.winetype));
+            filteredWines.sort((a, b) => this.reverseSort ? b.winetype.localeCompare(a.winetype) : a.winetype.localeCompare(b.winetype));
             break;
           case 'Herkunft':
-            filteredWines.sort((a, b) => a.origin.localeCompare(b.origin));
+            filteredWines.sort((a, b) => this.reverseSort ? b.origin.localeCompare(a.origin) : a.origin.localeCompare(b.origin));
             break;
           case 'Trauben':
-            filteredWines.sort((a, b) => a.grape.localeCompare(b.grape));
+            filteredWines.sort((a, b) => this.reverseSort ? b.grape.localeCompare(a.grape) : a.grape.localeCompare(b.grape));
             break;
           case 'Jahr':
-            filteredWines.sort((a, b) => a.year - b.year);
+            filteredWines.sort((a, b) => this.reverseSort ? b.year - a.year : a.year - b.year);
             break;
           case 'Preis':
-            filteredWines.sort((a, b) => a.bottleprice - b.bottleprice);
+            filteredWines.sort((a, b) => this.reverseSort ? b.bottleprice - a.bottleprice : a.bottleprice - b.bottleprice);
             break;
-          }
+        }
         this.userData.favoriten = filteredWines;
-      },
+        this.reverseSort = !this.reverseSort;
+      }
     },
   };
   </script>
