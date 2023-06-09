@@ -74,33 +74,19 @@
 <style>
 .img-container-tutorial {
     position: relative;
-  }
-  
-  .tutorial-img {
-    position: relative;
+}
 
-  }
-  
-  .slider-tutorial {
+.tutorial-img {
+    position: relative;
+}
+
+.slider-tutorial {
     position: relative;
     width: 30%;
-
-  }
+}
 
 .skip-to-menu-button{
     height: 50px;
-}
-
-.router-link-winemenu {
-    text-decoration: none;
-    color: #66100F;
-    background-color: white;
-    border: 2px solid #66100F;
-    border-radius: 8px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 .tutorial-title{
@@ -130,6 +116,19 @@
     z-index: 1000;
 }
 
+.router-link-winemenu {
+    text-decoration: none;
+    color: #66100F;
+    background-color: white;
+    border: 2px solid #66100F;
+    border-radius: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 70%;
+}
+
 .tutorial-next-button{
     margin-top: auto; 
     width: 70%;
@@ -141,7 +140,6 @@
     margin-top: 20px;
     border: none;
 }
-
 
 .router-link-button{
     margin-top: auto; 
