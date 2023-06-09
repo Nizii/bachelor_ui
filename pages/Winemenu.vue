@@ -598,7 +598,6 @@ export default {
   align-items: center;
   background-color: #660F0F;
   height: 50px;
-  margin: 20px;
 }
 
 .header-button {

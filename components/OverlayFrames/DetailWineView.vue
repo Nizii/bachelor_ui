@@ -7,7 +7,7 @@
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
         <button id="detail-view-close-btn" @click="closeOverlay">
-          <div v-if="wine.winetype === 'Weisswein'">
+          <div v-if="wine.winetype === 'Weisswein'" class="close-icon-size">
             <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve">
             <style type="text/css">
@@ -25,7 +25,7 @@
             </g>
             </svg>
           </div> 
-          <div v-if="wine.winetype === 'Rotwein'">
+          <div v-if="wine.winetype === 'Rotwein'" class="close-icon-size">
             <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve">
             <style type="text/css">
@@ -44,7 +44,7 @@
             </svg>
             
           </div>
-          <div v-if="wine.winetype === 'Rose'">
+          <div v-if="wine.winetype === 'Rose'" class="close-icon-size">
             <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                  viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve" class="icon">
               <style type="text/css">
@@ -555,6 +555,7 @@
   }
   
   .grape-case-right {
+    padding-left: 10px;
     flex: 1;
   }
 
@@ -595,8 +596,8 @@
     flex-direction: column;
   }
 
-  .wrapper {
-    padding-bottom: 50px;
+  .wrapper{
+    padding-bottom: 20px;
   }
   
   .inner-overlay {
@@ -749,6 +750,11 @@
     margin-top: 2em; 
     margin-bottom: 3em;
     border: 2px solid rgb(214, 214, 214);
+  }
+
+  .close-icon-size{
+    height: 30px;
+    width: 30px;
   }
 
   .comment {

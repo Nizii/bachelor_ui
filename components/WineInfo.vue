@@ -214,6 +214,8 @@
 
   .grape-text{
     font-size: 12px;
+    font-weight: 600;
+    padding-top:5px;
   }
 
   .wine-type_container {
@@ -345,24 +347,20 @@
     padding-left: 5px;
   }
 
-  .volume-value{
-
-  }
-  
   .star-rating {
     width: 100%;
     transform: scale(0.5);
   }
 
   .weinglas-grün{
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
     margin-bottom: 5px;
   }
 
   .weinglas{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     margin-bottom: 5px;
   }
 
@@ -380,14 +378,15 @@
   }
 
   .wine-rating-title{
-    font-size: 12px;
+    font-size: 13px;
+    padding-left: 7px;
+    padding-bottom: 5px;
   }
 
   .wine-rating-right {
     padding-top: 7px;
     font-weight: bold;
-    font-size: 12px;
-    padding-left: 10px;
+    padding-left: 5px;
 
   }
 

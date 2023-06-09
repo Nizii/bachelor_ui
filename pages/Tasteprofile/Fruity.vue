@@ -1,6 +1,6 @@
 <template>
   <Taste 
-    title="Ich liebe fruchtigen Geschmack!" 
+    title="Magst du Früchte?" 
     nextRoute="/Tasteprofile/Wood"
     preferenceKey="fruchtig"
     previousRoute="/Tasteprofile/Intensive"

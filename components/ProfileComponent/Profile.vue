@@ -172,12 +172,12 @@
           datasets: [
             {
               label: 'Mein Geschmacksprofil', 
-              backgroundColor: 'rgba(54, 162, 235, 0.2)',
-              borderColor: 'rgba(54, 162, 235, 0.8)',
-              pointBackgroundColor: 'blue',
-              pointBorderColor: 'blue',
-              pointHoverBackgroundColor: 'blue',
-              pointHoverBorderColor: 'blue',
+              backgroundColor: 'rgba(32, 120, 51, 0.2)',
+              borderColor: 'rgba(32, 120, 51, 0.8)',
+              pointBackgroundColor: '#1F771F',
+              pointBorderColor: '#1F771F',
+              pointHoverBackgroundColor: '#1F771F',
+              pointHoverBorderColor: '#1F771F',
               data: [
                 preferences.sauer,
                 preferences.suss,
@@ -385,8 +385,8 @@
   .profile-sort-button {
     display: flex;
     align-items: center;
-    background-color: rgb(211, 211, 211);
-    color: black;
+    background-color: white;
+    color: #660F0F;
     padding: 5px 10px;
     border-radius: 8px;
     margin-left: auto;
@@ -470,7 +470,6 @@
   }
 
   .logout-container {
-    margin-right: 20px;
   }
 
   .sort-icon{
@@ -480,11 +479,16 @@
   }
 
   .logout-button{
-    width: 40px;
-    height: 40px;
-    font-weight: bold;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
     border: none;
-    background-color: white;
+    color: white;
+    border-radius: 8px;
+    font-size: 10px;
+    background-color: #660F0F;
+    font-family: 'Soleil', sans-serif;
   }
   
   .profile-button-group {
