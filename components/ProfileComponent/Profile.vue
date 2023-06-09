@@ -48,6 +48,7 @@
           <div class="doughnut-chart">
             <canvas ref="chartContainer"></canvas>
           </div>
+          <p class="doughnut-chart-text">Diese Grafik veranschaulicht die Anzahl der verschiedenen Weinsorten, die sich aktuell in deinem Weinkeller befinden.</p>
         </div>
 
         <div class="profile-line-1"></div>
@@ -410,6 +411,7 @@
     font-size: 30px;
     font-weight: bold;
     font-family: sans-serif;
+    margin-bottom: 20px;
   }
   
   .profile-title {
@@ -457,6 +459,10 @@
     margin-top: 3em;
     margin-bottom: 3em;
     width: 100%;
+  }
+
+  .doughnut-chart-text{
+    margin-top: 20px;
   }
   
   .toggle-btn {
