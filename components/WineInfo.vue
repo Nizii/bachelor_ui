@@ -153,7 +153,7 @@
     computed: {
       isLoggedIn() {
         return this.userData !== null;
-      },
+      }, 
     },
 
     created() {
@@ -246,7 +246,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 30px;
+    
     
   }
   
@@ -263,7 +263,8 @@
   .wine-image {
     object-fit: contain;
     z-index: 2;
-    margin-left: 20px;
+    margin-left: 10px;
+    width: 50px;
   }
 
   .wine-info-flag{

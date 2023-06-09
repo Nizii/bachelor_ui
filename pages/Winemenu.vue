@@ -392,10 +392,8 @@ export default {
       for (var j = 0; j < this.wines.length; j++) {
           // Hole das Geschmacksprofil des aktuellen Weins
           var wineProfile = this.wines[j].radarchart;
-          
           // Berechne die Übereinstimmung für den aktuellen Wein
           var match = this.calculateMatch(userProfile, wineProfile);
-          
           // Weise dem aktuellen Wein seinen Übereinstimmungsprozentsatz zu
           this.wines[j].rating = match;
       }
