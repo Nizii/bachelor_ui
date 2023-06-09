@@ -38,7 +38,7 @@
                 title: "Herzlich Willkommen",
                 text_1: "Wenn du nur wenig Wissen zum Thema Wein hast, dann bist du hier genau richtig!",
                 text_2: "Finde YOUR TASTE, erstelle deinen eigenen Weinkeller, gibt deine Bestellung beim Servicepersonal auf und geniesse anschliessend den gewählten Wein!",
-                img: "/tutorial/default.jpg"
+                img: "/tutorial/logo.svg"
             },
             {
                 title: "Your Taste",
