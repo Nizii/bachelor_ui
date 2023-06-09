@@ -413,7 +413,7 @@
           return '/weinflecke_weiss.png'; 
         }
       },
-*/
+      */
       
       getBackgroundImage() {
         if (this.wine.winetype === 'Weisswein') {
@@ -421,7 +421,7 @@
         } else if (this.wine.winetype === 'Rotwein') {
           return '/rotweinfleck4.png';
         } else if (this.wine.winetype === 'Rose') {
-          return '/fleckweisswein4.png';
+          return '/fleckrose4.png';
         } else {
           return '/rotweinfleck4.png'; 
         }

@@ -8,25 +8,24 @@
         <img v-if="wine.winetype === 'Rose'" :src="require(`/static/background/kachelverlauf_rose.png`)" class="verlauf-image" alt="Profile icon" />
       </div>
       <div class="wine-card-row2">
-      <h3 class="wine-title">
-        {{ wine.name }}
-      </h3>
-      <div class="wine-attribute">
-
-        <div class="wine-type_container">
-          <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
-            <img :src="require('static/icons/food/traube_weisswein.svg')" class="icon-small" alt="Bookmark icon" />
-          </p>
-          <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">
-            <img :src="require('static/icons/food/traube_rotwein.svg')" class="icon-small" alt="Bookmark icon" />
-          </p>
-          <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
-            <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
-          </p>
-          <p class="grape-text">
-            {{ wine.grapeTags[0] }}<span class="und-mehr" v-if="wine.grapeTags.length > 1"> und mehr...</span>
-          </p>
-        </div>
+        <h3 class="wine-title">
+          {{ wine.name }}
+        </h3>
+        <div class="wine-attribute">
+          <div class="wine-type_container">
+            <p class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
+              <img :src="require('static/icons/food/traube_weisswein.svg')" class="icon-small" alt="Bookmark icon" />
+            </p>
+            <p class="wine-type-case_2" v-if="wine.winetype === 'Rotwein'">
+              <img :src="require('static/icons/food/traube_rotwein.svg')" class="icon-small" alt="Bookmark icon" />
+            </p>
+            <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
+              <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
+            </p>
+            <p class="grape-text">
+              {{ wine.grapeTags[0] }}<span class="und-mehr" v-if="wine.grapeTags.length > 1"> und mehr...</span>
+            </p>
+          </div>
         </div>
   
         <div class="wine-flag">
@@ -50,8 +49,8 @@
       <div class="wine_card_row3">
         <div class="container-above">
           <button v-if="!isBookmark" @click.stop="addToBookmarks" class="bookmark-button-info">
-            <img v-if="!isFavorite" :src="require('static/icons/buttons/merklisteoff.jpg')" class="icon" alt="Bookmark icon" />
-            <img v-else :src="require('static/icons/buttons/merkon.jpg')" class="icon" alt="Bookmark icon" />
+            <img v-if="!isFavorite" :src="require('static/icons/buttons/merkliste.svg')" class="icon-booky" alt="Bookmark icon" />
+            <img v-else :src="require('static/icons/buttons/merkliste_an.svg')" class="icon-booky" alt="Bookmark icon" />
           </button>
           <button v-else @click.stop="removeWineInBookmark" class="bookmark-button-info">
             <img :src="require('static/icons/buttons/loschen.svg')" class="del-icon" alt="Filter icon" />
@@ -237,30 +236,32 @@
   .wine-img-container {
     position: relative;
     width: 50px;
+    display: flex;
+    align-items: flex-end;
   }
-
+  
   .wine-image, .verlauf-image {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 30px;
-    height: 100%;
+    
   }
-
+  
   .verlauf-image {
     z-index: 1;
+    width: 60px;
+    height: 100%;
   }
-
-  .container-above{
+  
+  .container-above {
     padding-top: 10px;
   }
-
+  
   .wine-image {
-    height: 100%;
     object-fit: contain;
     z-index: 2;
     margin-left: 20px;
-
   }
 
   .wine-info-flag{
@@ -272,6 +273,7 @@
     display: flex;
     background-color: white;
     border-radius: 25px;
+    
   }
   
   .wine-card-row2 {
@@ -327,6 +329,11 @@
     justify-content:left;
   }
 
+  .icon-booky{
+    width: 28px;
+    height: 35px;
+  }
+
   .price-label,
   .price-value,
   .volume-value {
@@ -334,8 +341,12 @@
     flex-direction: column;
   }
 
-  .price-value, .volume-value{
+  .price-value {
     padding-left: 5px;
+  }
+
+  .volume-value{
+
   }
   
   .star-rating {

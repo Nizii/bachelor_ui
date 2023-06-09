@@ -25,10 +25,10 @@
           </div>
           <div class="sort-container">
             <button @click="sortWinesByPrice" class="sort-button">Preis
-              <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
+              <img :src="require('static/icons/buttons/sort.svg')" class="sort-icon" alt="Bookmark icon" />  
             </button>
             <button @click="sortWinesByMatch" class="sort-button">Match
-              <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
+              <img :src="require('static/icons/buttons/sort.svg')" class="sort-icon" alt="Bookmark icon" />  
             </button>
           </div>
         </div>
@@ -514,8 +514,9 @@ export default {
 }
 
 .sort-icon{
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
 }
 
 .loading{
@@ -573,12 +574,11 @@ export default {
 }
 
 .sort-button{
-  background-color: rgb(211, 211, 211);
+  display: flex;
+  align-items: center;
+  background-color: white;
   color: black;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom:5px;
+  padding: 5px 10px;
   border-radius: 8px;
   margin-left: 15px;
   border: none;

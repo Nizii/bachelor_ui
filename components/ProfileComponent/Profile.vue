@@ -12,8 +12,8 @@
       <div class="inner-content">
         <div class="profile-button-group">
           <button @click="filterWines('Weintyp')" class="profile-sort-button">
-            <img :src="require('static/icons/buttons/sort.png')" class="sort-icon" alt="Bookmark icon" />  
             Weintyp
+            <img :src="require('static/icons/buttons/sort.svg')" class="sort-icon" alt="Bookmark icon" />  
           </button>
         </div>
 
@@ -384,14 +384,13 @@
   }
 
   .profile-sort-button {
+    display: flex;
+    align-items: center;
     background-color: rgb(211, 211, 211);
     color: black;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 5px;
-    padding-bottom:5px;
+    padding: 5px 10px;
     border-radius: 8px;
-    margin-left: 15px;
+    margin-left: auto;
     border: none;
   }
 
@@ -468,6 +467,12 @@
 
   .logout-container {
     margin-right: 20px;
+  }
+
+  .sort-icon{
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
   }
 
   .logout-button{
