@@ -10,7 +10,6 @@
       <div class="wine-card-row2">
       <h3 class="wine-title">
         {{ wine.name }}
-        <!--<img :src="require(`/static/icons/nations/${wine.nationTag}.png`)" class="wine-info-flag" alt="Profile icon" />-->
       </h3>
       <div class="wine-attribute">
 
@@ -24,24 +23,11 @@
           <p class="wine-type-case_3" v-if="wine.winetype === 'Rose'">
             <img :src="require('static/icons/food/traube_rose.svg')" class="icon-small" alt="Bookmark icon" />
           </p>
-          
-
           <p class="grape-text">
             {{ wine.grapeTags[0] }}<span class="und-mehr" v-if="wine.grapeTags.length > 1"> und mehr...</span>
           </p>
-          <!--
-          <p class="grape-text" v-for="(grape, index) in wine.grapeTags" :key="index">
-            {{ grape }}<span v-if="index < wine.grapeTags.length - 1">,</span>&nbsp;
-          </p>
-            
-          <p>
-            {{ wine.grape }}
-          </p>
-        -->
         </div>
-
         </div>
-
   
         <div class="wine-flag">
           <img :src="require(`/static/icons/nations/${wine.nationTag}.svg`)" class="wine-info-flag" alt="Profile icon" />
@@ -49,12 +35,6 @@
  
         <div class="wine-price">
           <div class="bottle-price">
-            <!--
-            <div class="price-label">
-              <div>Flasche</div>
-              <div>Glas</div>
-            </div>
-            -->
             <div class="volume-value">
               <div>75cl</div>
               <div>10cl</div>
@@ -79,7 +59,6 @@
         </div>
         <div v-if="wine.rating > 10 && !isBookmark" class="container-below">
           <p class="wine-rating-title" :style="isHighestRated ? 'color: #1F7771F; font-weight: bold;' : ''">
-          <!--<p class="wine-rating-title">-->
             Your Taste
           </p>
           
@@ -92,9 +71,7 @@
                   .stg0{display:none;}
                   .stg1{fill:none;stroke:#1F771F;stroke-miterlimit:10;}
                 </style>
-                <g id="Vorlage" class="stg0">
-                  
-
+                <g id="Vorlage" class="stg0"> 
                 </g>
                 <g>
                   <path class="stg1" d="M10.2,3.4h7.9c0,0,7,13.7-3.8,13.7S10.2,3.4,10.2,3.4z"/>
@@ -104,7 +81,6 @@
                 </g>
                 </svg>
               </div>
-              
 
                 <div class="weinglas" v-else>
                 <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
@@ -124,10 +100,7 @@
                 </g>
                 </svg>
               </div>
-
-   
-               
-              
+ 
             </div>
             <div class="wine-rating-right">
               <div class="wine-rating" :style="isHighestRated ? 'color: #1F771F; font-weight: bold; font-size: 20px;' : ''">
@@ -151,7 +124,6 @@
 
     data() {
       return {
-        
         rating: 0,
         selectedWine: null,
         isFavorite: false,
@@ -160,7 +132,6 @@
     },
 
     name: 'WineInfo',
-
     props: {
       wine: {
         type: Object,
@@ -192,23 +163,18 @@
     },
 
     methods: {
-
       removeWineInBookmark() {
         this.$emit('remove-wine-element');
       },
 
       addToBookmarks() {
-        // Erhalte die aktuelle Liste der gemerkten Weine (oder eine leere Liste, wenn noch keine Weine gemerkt wurden)
         const bookmarkedWines = JSON.parse(localStorage.getItem('bookmarkedWines')) || [];
-        // Überprüfe, ob der aktuelle Wein bereits gemerkt wurde
         const alreadyBookmarked = bookmarkedWines.some(bookmarkedWine => bookmarkedWine._id === this.wine._id);
-        // Wenn der Wein noch nicht gemerkt wurde, wird der Wein hinzugefügt
         if (!alreadyBookmarked) {
           bookmarkedWines.push(this.wine);
           localStorage.setItem('bookmarkedWines', JSON.stringify(bookmarkedWines));
           this.isFavorite = true;
         } else {
-          // Wenn der Wein bereits gemerkt wurde, wird er aus der Liste entfernt
           const updatedBookmarkedWines = bookmarkedWines.filter(bookmarkedWine => bookmarkedWine._id !== this.wine._id);
           localStorage.setItem('bookmarkedWines', JSON.stringify(updatedBookmarkedWines));
           this.isFavorite = false;
@@ -302,14 +268,10 @@
     height: 13px;
   }
 
-
   .wine-card-row1 {
     display: flex;
     background-color: white;
     border-radius: 25px;
-    /*padding-left: 30px;
-    
-    padding-top:15px*/
   }
   
   .wine-card-row2 {
@@ -333,7 +295,6 @@
     width: 100%;
     height: auto;
     display: block;
-    /*background-image: url("/flag.png");*/
     background-size: contain;
     background-repeat: no-repeat;
     margin-bottom: 0;
@@ -351,32 +312,31 @@
   .wine-attribute {
     font-size: 12px;
   }
-  
-  
-.wine-price {
-  font-size: 12px;
 
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-}
+  .wine-price {
+    font-size: 12px;
 
-.bottle-price {
-  display: flex;
-  flex-direction: row;
-  justify-content:left;
-}
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
 
-.price-label,
-.price-value,
-.volume-value {
-  display: flex;
-  flex-direction: column;
-}
+  .bottle-price {
+    display: flex;
+    flex-direction: row;
+    justify-content:left;
+  }
 
-.price-value, .volume-value{
-  padding-left: 5px;
-}
+  .price-label,
+  .price-value,
+  .volume-value {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-value, .volume-value{
+    padding-left: 5px;
+  }
   
   .star-rating {
     width: 100%;
@@ -419,14 +379,10 @@
     padding-left: 10px;
 
   }
-  .wine-rating-left {
-
-  }
 
   .icon-small {
     width: 18px;
     height: 18px;
   }
 
-  
   </style>

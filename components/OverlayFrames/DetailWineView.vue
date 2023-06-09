@@ -2,12 +2,12 @@
 <div>
   <div class="background-overlay" v-if="frameOpen" />
   <div class="overlay-frame" :class="{ open: frameOpen }" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }">
+    <!--Header-->
     <div class="detail-view-header">
       <div id="row1">
         <p id="detail-view-titel">{{wine.name}}</p>
         <button id="detail-view-close-btn" @click="closeOverlay">
           <div v-if="wine.winetype === 'Weisswein'">
-            <!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
             <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve">
             <style type="text/css">
@@ -26,7 +26,6 @@
             </svg>
           </div> 
           <div v-if="wine.winetype === 'Rotwein'">
-            <!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
             <svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                viewBox="0 0 28.3 28.3" style="enable-background:new 0 0 28.3 28.3;" xml:space="preserve">
             <style type="text/css">
@@ -66,22 +65,16 @@
         </button>
       </div>
     </div>
+    <!--Content-->
     <div class="inner-overlay">
         <div id="row2">
-          <div class="wine-type_container" :style="{ color: getButtonTextColor() }">
-            <!--
-              <button @click.stop="addToBookmarks">
-                <img v-if="!isBookmarked" :src="require('static/icons/buttons/merkliste.png')" class="detail-bookmark-icon" alt="Bookmark icon" />
-                <img v-else :src="require('static/icons/buttons/merkliste_an.png')" class="detail-bookmark-icon" alt="Bookmark icon" />
-              </button>  
-              -->            
+          <div class="wine-type_container" :style="{ color: getButtonTextColor() }">           
           </div>
-          <br>
-          
+          <br>  
         </div>
 
+      <!--Weinbeschreibung-->
       <div class="detail-view-main-container">
-
         <div class="detail-view-left">
           
           <div class="wine-type-case_1" v-if="wine.winetype === 'Weisswein'">
@@ -152,6 +145,7 @@
           
           </div>          
         </div>
+        <!--Weinbild-->
         <div class="detail-view-right">
           <img class="detail-view-image" :src="wine.link"/>
         </div>
@@ -162,6 +156,7 @@
 
       <div class="line-1"></div>
 
+      <!--Radarchart des Geschmacksprofil-->
       <p id="detail-view-titel">Your Taste</p>
       <radar-chart :data="chartData" :options="chartOptions" />
       <button class="detail-view-button" @click="calcTasteProfile">
@@ -170,10 +165,12 @@
 
       <div class="line-1"></div>
 
+      <!--Textarea für dieBeschreibung von Wein-->
       <TasteInfo @get-background-color="getBackgroundColor"/>
 
       <div class="line-2"></div>
 
+      <!--Kommentararea-->
       <div class="detail-view-comment-container">
         <p id="detail-view-titel">Meinung der anderen Gäste</p>
         <div class="placeholder"></div>
@@ -229,17 +226,7 @@
         default: false,
       }
     },
-/*
-    beforeCreate() {
-      const storedPreferences = localStorage.getItem('preferences');
-      if (storedPreferences) {
-        this.preferences = JSON.parse(storedPreferences);
-      } else {
-        console.log("Keine Präferenzen verfügbar");
-        this.preferences = { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
-      }
-    },
-*/
+
     computed: {
       isWineInCellar() {
         return this.$store.getters.isWineInCellar(this.wine._id);
@@ -247,7 +234,6 @@
     },
 
     data() {
-      //const preferences = this.preferences || { sauer: 0, suss: 0, intensiv: 0, fruchtig: 0, holzig: 0, trocken: 0 };
       var temp;
       if(JSON.parse(localStorage.getItem('savedPreferences'))){
         temp = JSON.parse(localStorage.getItem('savedPreferences'));
@@ -322,7 +308,6 @@
       }
     },
 
-
     methods: {
 
       checkWineInCellar() {
@@ -396,8 +381,6 @@
         }
       },
 
-
-
       getBackgroundColor() {
         if (this.wine.winetype === 'Weisswein') {
           return '#F5F5DC';
@@ -443,9 +426,6 @@
         }
       },
       */
-      openPopup() {
-
-      },
 
       async getUserData() {
         const token = localStorage.getItem('jwt');
@@ -464,50 +444,21 @@
             console.error(error);
           }
         }
-
-
       },
 
-
-
-      addToBookmarks() {
-        // Erhalte die aktuelle Liste der gemerkten Weine (oder eine leere Liste, wenn noch keine Weine gemerkt wurden)
-        const bookmarkedWines = JSON.parse(localStorage.getItem('bookmarkedWines')) || [];
-        // Überprüfe, ob der aktuelle Wein bereits gemerkt wurde
-        const alreadyBookmarked = bookmarkedWines.some(bookmarkedWine => bookmarkedWine._id === this.wine._id);
-        // Wenn der Wein noch nicht gemerkt wurde, wird der Wein hinzugefügt
-        if (!alreadyBookmarked) {
-          bookmarkedWines.push(this.wine);
-          localStorage.setItem('bookmarkedWines', JSON.stringify(bookmarkedWines));
-          this.isBookmarked = true;  // Der Wein ist als Lesezeichen gesetzt
-        } else {
-          // Wenn der Wein bereits gemerkt ist, wird der Wein entfernt
-          const updatedBookmarkedWines = bookmarkedWines.filter(wine => wine._id !== this.wine._id);
-          localStorage.setItem('bookmarkedWines', JSON.stringify(updatedBookmarkedWines));
-          this.isBookmarked = false;  // Der Wein ist nicht mehr als Lesezeichen gesetzt
-        }
-        this.$emit('bookmark-removed');
-      },
-
-
-
+      // Fürgt ein Wein dem Weinkeller hinzu im localStorage und in der Datenbank
+      // Es existieren während der Laufzeit zwei Instanzen dieser Komponente
+      // Deshalb wir die var "inCellar" im vuex Store gespeichert um inkonsistenzen zu vermeiden
       async addToWineCellar() {
-        // Erhalte die aktuelle Liste der Weine im Weinkeller (oder eine leere Liste, wenn noch keine Weine hinzugefügt wurden)
         const wineCellar = JSON.parse(localStorage.getItem('wineCellar')) || [];
-        // Überprüfe, ob der aktuelle Wein bereits im Weinkeller ist
         const alreadyAdded = wineCellar.some(wine => wine._id === this.wine._id);
-        
         if (!alreadyAdded) {
           wineCellar.push(this.wine);
           localStorage.setItem('wineCellar', JSON.stringify(wineCellar));
           this.$store.commit('setWineInCellar', { wineId: this.wine._id, inCellar: true });
-
-          // Update "favoriten" in localStorage
           const favoriten = JSON.parse(localStorage.getItem('favoriten')) || [];
           favoriten.push(this.wine);
-          localStorage.setItem('favoriten', JSON.stringify(favoriten));
-
-          // Neuen Wein zum Server hinzufügen
+          localStorage.setItem('favoriten', JSON.stringify(favoriten))
           const token = localStorage.getItem('jwt');
           if (token) {
             const wineId = this.wine._id;
@@ -520,7 +471,6 @@
             });
           }
         } else {
-          // Wenn der Wein bereits im Weinkeller ist, wird er entfernt
           const updatedWineCellar = wineCellar.filter(wine => wine._id !== this.wine._id);
           localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
           this.$store.commit('setWineInCellar', { wineId: this.wine._id, inCellar: false });
@@ -528,20 +478,17 @@
         this.$emit('update-profile');
       },
 
+      // Fürgt ein Wein dem Weinkeller hinzu im localStorage und in der Datenbank
+      // Es existieren während der Laufzeit zwei Instanzen dieser Komponente
+      // Deshalb wir die var "inCellar" im vuex Store gespeichert um inkonsistenzen zu vermeiden
       async removeFromWineCellar() {
-        // Erhalte aktuelle Liste der Weine im Weinkeller
         const wineCellar = JSON.parse(localStorage.getItem('wineCellar')) || [];
-        // Entferne Wein aus dem Weinkeller
         const updatedWineCellar = wineCellar.filter(wine => wine._id !== this.wine._id);
         localStorage.setItem('wineCellar', JSON.stringify(updatedWineCellar));
         this.$store.commit('setWineInCellar', { wineId: this.wine._id, inCellar: false });
-        
-        // Update "favoriten" in localStorage
         const favoriten = JSON.parse(localStorage.getItem('favoriten')) || [];
         const updatedFavoriten = favoriten.filter(wine => wine._id !== this.wine._id);
         localStorage.setItem('favoriten', JSON.stringify(updatedFavoriten));
-        
-        // Wein vom Server entfernen
         const token = localStorage.getItem('jwt');
         if(token) {
           try {
@@ -568,9 +515,6 @@
           username = this.gastUser;
           this.gastUser = '';
         }
-
-        console.log("Username "+ username);
-
         try {
           const response = await this.$axios.post(
             `https://wine.azurewebsites.net/api/wine/${wineId}/comments`,
@@ -582,16 +526,14 @@
             console.error(error);
         }
       },
-
     },
 
     mounted(){
       setTimeout(() => {
         this.frameOpen = true;
       }, 100); 
-
+      // Verbietet das Scrollen auf dem Background
       document.body.style.overflow = 'hidden';
-       // Verbietet das Scrollen auf dem Background
       if(localStorage.getItem('jwt')){
         this.isLoggedIn = true;
       } 
@@ -642,10 +584,6 @@
     cursor: pointer;
   }
 
-  .detail-bookmark-icon{
- 
-  }
-
   .placeholder{
     height: 20px;
   }
@@ -685,7 +623,6 @@
     background-color: #660F0F;
     color: white;
     border:none;
-
   }
 
   .detail-view-button-comment{
@@ -719,10 +656,6 @@
   .overlay-frame.open {
     transform: translateY(0);
   }
-
-  .detail-view-fixed-title{
-
-  }
   
   .detail-view-header {
     position: sticky;
@@ -730,13 +663,10 @@
     z-index: 1001;
     width: 100%; 
     background-color: white;
-   /* border-bottom: 1px solid rgb(214, 214, 214);*/
-}
+  }
 
-  
   .detail-view-main-container {
     display: flex;
-
   }
   
   .detail-view-left,
@@ -765,7 +695,6 @@
     margin-top: 1em;
     font-size: 13px;
     margin-bottom: 10px;
-
   }
   
   .detail-view-right {
@@ -780,8 +709,7 @@
     height: 450px;
     margin-bottom: 0;
     padding-bottom: 0;
-    margin-top: -2em; /* Negative Margin nach obe.*/
-
+    margin-top: -2em; 
   }
 
   #detail-view-titel{
@@ -807,17 +735,12 @@
     flex-direction: column;
   }
 
-  .glas-grün-svg{
-
-  }
-
   .detail-view-comment-container {
     padding: 1em;
     border-radius: 15px;
     margin-top: 2em; 
     margin-bottom: 3em;
     border: 2px solid rgb(214, 214, 214);
-    /*background-color: rgba(0, 0, 0, 0.1);*/
   }
 
   .comment {
@@ -826,7 +749,6 @@
     padding: 1em;
     margin-bottom: 1em;
     border: 2px solid rgb(214, 214, 214);
-
   }
 
   .comment-content {
@@ -862,9 +784,6 @@
     margin-bottom: 3em;
     width: 100%;
   }
-  
-
-
   </style>
   
   

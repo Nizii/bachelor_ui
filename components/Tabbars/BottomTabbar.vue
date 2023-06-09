@@ -4,14 +4,12 @@
     <button @click="pressWinemenu('/Winemenu', 'Winemenu')" class="bottom-bar-link">
       <img v-if="!isWinemenu" :src="require('static/icons/buttons/karte.svg')" class="icon" alt="Menu icon" />
       <img v-else :src="require('static/icons/buttons/karte_an.svg')" class="icon" alt="Menu icon" />
-      <!--<span class="bottom-bar-label">Menü</span>-->
     </button>
 
     <!-- Merkliste Button -->
     <button @click="pressBookmark('Bookmark')" class="bottom-bar-link">
       <img v-if="!isBookmark" :src="require('static/icons/buttons/merkliste.svg')" class="icon" alt="Bookmark icon" />
       <img v-else :src="require('static/icons/buttons/merkliste_an.svg')" class="icon" alt="Bookmark icon" />
-      <!--<span class="bottom-bar-label">Merkliste</span>-->
       <span v-if="bookmarkedWinesCount > 0" class="bookmark-badge">{{ bookmarkedWinesCount }}</span>
     </button>
 
@@ -19,12 +17,9 @@
     <button @click="pressProfile('Profile')" class="bottom-bar-link">
       <img v-if="!isProfile" :src="require('static/icons/buttons/Profil.svg')" class="icon" alt="Profile icon" />
       <img v-else :src="require('static/icons/buttons/Profil_an.svg')" class="icon" alt="Profile icon" />
-      <!--<span class="bottom-bar-label">Profil</span>-->
     </button>
   </div>
 </template>
-
-
 
 <script>
 export default {
@@ -43,7 +38,7 @@ export default {
     this.bookmarkedWinesCount = (JSON.parse(localStorage.getItem('bookmarkedWines')) || []).length;
   },
 
-  // Observiert bookmarkedWinesCount und loggedIn ob sich der Wert ändert
+  // Observiert bookmarkedWinesCount und loggedIn, ob sich der Wert ändert
   watch: {
     bookmarkedWinesCount: {
       handler() {
@@ -61,7 +56,6 @@ export default {
   },
 
   methods: {
-
     toggleMenuButtons(input) {
       switch(input) {
         case 'Winemenu':
@@ -82,7 +76,6 @@ export default {
       }
     },
 
-    // Aktualisiert die Anzahl gemerkter Weine
     updateBookmarkedWinesCount() {
       this.bookmarkedWinesCount = JSON.parse(localStorage.getItem('bookmarkedWines')).length;
     },
@@ -137,9 +130,8 @@ export default {
 
 };
 </script>
-
   
-  <style scoped>
+<style scoped>
 
   button{
     border:none;
@@ -170,7 +162,7 @@ export default {
 
  .fixed-bottom-bar {
   display: flex;
-  justify-content: flex-start; /* Ändert die Ausrichtung auf linksbündig */
+  justify-content: flex-start; 
   align-items: center;
   background-color: #F5F5F5;
   position: fixed;
@@ -182,7 +174,7 @@ export default {
 }
 
 .bottom-bar-link {
-  flex: 1; /* Setzt die Breite auf 100% */
+  flex: 1; 
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -192,7 +184,7 @@ export default {
   height: 100%;
 }
   .bottom-bar-link.active {
-    color: #ffffff; /* Farbe für aktive Registerkarte */
+    color: #ffffff; 
   }
   
   .bottom-bar-link i {

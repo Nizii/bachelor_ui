@@ -22,14 +22,15 @@
         <form @submit.prevent="register">
 
           <div class="input-container">
-            <!--Für Werkschau Resgistartion möglich nur mit Username-->
+            
             <input class="input-tag" type="text" id="username" placeholder="Username" v-model="username" required>
           </div>
-
+          <!--Für Werkschau Resgistartion möglich nur mit Username-->
+          <!--
           <div class="input-container">
             <input class="input-tag" type="email" id="username" placeholder="Email" v-model="email" required pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
           </div>
-
+          -->
           <div class="input-container">
             <input class="input-tag" type="password" id="password" placeholder="Passwort" v-model="password" minlength="2" required>
           </div>
@@ -114,16 +115,13 @@ export default {
           const response = await axios.post('https://wine.azurewebsites.net/api/User/reg', {
           //const response = await axios.post('https://localhost:44322/api/User/reg', {
             username: this.username,
-            email: this.email,
+            //email: this.email,
+            //Für die Werkschau wird eine dummy mail angegeben
+            email: "dummy@email.ch",
             password: this.password
           });
           localStorage.removeItem('jwt');
           localStorage.removeItem('user');
-
-          console.log("Token "+response.data.token);
-          console.log("User "+response.data.user.username);
-          console.log("Response "+response.data);
-
           localStorage.setItem('jwt', response.data.token);
           localStorage.setItem('user', JSON.stringify(response.data.user.username));
 

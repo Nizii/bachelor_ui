@@ -48,7 +48,6 @@
           <div class="profile-chart-title"> 
             <p>Weinkeller Statistik</p>
           </div>
-          
           <div class="doughnut-chart">
             <canvas ref="chartContainer"></canvas>
           </div>
@@ -205,14 +204,11 @@
             }
           }
         },
-    
-
       };
     },
 
     mounted() {
       this.getUserData().then(() => {
-        //this.refreshDoughnutData(this.userData);
         this.chart = new Chart(this.$refs.chartContainer, {
           type: 'doughnut',
           data: this.chartData,
@@ -240,9 +236,6 @@
           roseWinesCount = 0;
         }
         this.chartData.datasets[0].data = [redWinesCount, whiteWinesCount, roseWinesCount];
-        console.log("R"+redWinesCount);
-        console.log("W"+whiteWinesCount);
-        console.log("R"+roseWinesCount);
         if (this.chart) {
           this.chart.update();
         }   
@@ -423,10 +416,6 @@
     width: 100%;
   }
 
-  .logout-content{
-
-  }
-
   .profile-placeholder{
     height: 50px;
   }
@@ -487,7 +476,6 @@
     width: 100%;
   }
 
-
   .profile-button {
     display: flex;
     justify-content: center;
@@ -506,12 +494,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*
-    background-image: url("/background/weinkeller.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    */
   }
   
   .regal {
@@ -528,8 +510,7 @@
     padding-top: 30px;
     margin-bottom: 20px;
     gap: 10px;
-}
-  
+  }
   
   .wine-item {
     margin-right: 10px;
@@ -540,6 +521,5 @@
   .bottom-placeholder{
     height: 80px;
   }
-
 
   </style>

@@ -25,7 +25,7 @@
     components: {
       TitleOverlay,
       WineInfo,
-},
+    },
 
     data() {
       return {
@@ -83,7 +83,6 @@
 
   .overlay-frame-bookmark {
     z-index: 1000;
-    /* Hier wird die Overlay Animation gemacht*/
     transition:transform 0.5s;
     transform: translateY(100%);
     padding-left: 2em;
@@ -97,7 +96,7 @@
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
-    z-index: 999; /* Muss unbedingt kleiner als der z-index von overlay-frame sein */
+    z-index: 999;
   }
 
   .open {

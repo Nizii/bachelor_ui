@@ -118,7 +118,7 @@
             </div>
           </div>
 
-          <!--
+          <!-- Dieser Teil wurde für die Werkschau auskommentiert
           <div class="filter-title">
             TRAUBEN
           </div>
@@ -212,13 +212,14 @@ export default {
 
     closeOverlay(isFilter) {
       this.frameOpen = false;
-      document.body.style.overflow = 'auto'; // Erlaubt das Scrollen auf dem Body wieder
+      document.body.style.overflow = 'auto';
       setTimeout(() => {
         if(isFilter)this.updateFilters();
         this.$emit('close');
       }, 300);
     },
 
+    // Diese Funktion erstellt das Filterobjekt und emitiert es in die Oberkomponente
     updateFilters() {
       const filters = {
         dish: this.selectedDish,
@@ -246,7 +247,8 @@ export default {
     setTimeout(() => {
       this.frameOpen = true;
     }, 100); 
-    document.body.style.overflow = 'hidden'; // Verhindert das Scrollen auf dem Body
+    // Verhindert das Scrollen auf dem Body
+    document.body.style.overflow = 'hidden'; 
   },
 };
 </script>
@@ -347,12 +349,10 @@ export default {
 
 .overlay-frame {
   z-index: 999;
-  /* Hier wird die Overlay Animation gemacht*/
   transition: transform 0.5s;
   transform: translateY(100%);
   overflow-y: auto;
   padding-bottom: 3em;
-  /*background-image: url("/background/weinflecke_rose.png");*/
   background-position: center 300px;
   background-repeat: repeat-y;
   background-attachment: scroll;

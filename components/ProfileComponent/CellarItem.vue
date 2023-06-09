@@ -2,6 +2,7 @@
   <div @click="$emit('click', wine)">
     <div class="wine-item">
       <div class="item-title">
+        <!--Zeigt nur das erste Wort im Namen an-->
         {{ wine.name.split(' ')[0] }}
       </div>
       <img class="wine-image-profile" :src=wine.link alt="Weinbild"/>
@@ -28,10 +29,6 @@
   justify-content: space-between;
   align-items: center;
   height: 260px; 
-}
-
-.item-title {
-  
 }
 
 .wine-image-profile {

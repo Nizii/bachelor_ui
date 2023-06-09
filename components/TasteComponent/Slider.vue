@@ -6,7 +6,6 @@
     <div class="slider">
       <input type="range" min="1" max="5" v-model="value" />
       <img :src="require('static/background/balken.png')" alt="Bookmark icon" />
-
     </div>
   </div>
 </template>
@@ -182,7 +181,6 @@ input[type="range"] {
   height: 2px;
 }
 
-
 input[type="range"]::-webkit-slider-thumb {
   content: "<>";
   color: white;
@@ -198,7 +196,6 @@ input[type="range"]::-webkit-slider-thumb {
   transform: translateY(-50%);
 }
 
-
 input[type="range"]::-webkit-slider-runnable-track {
   width: 100%;
   height: 5px;
@@ -207,7 +204,6 @@ input[type="range"]::-webkit-slider-runnable-track {
   background: white;
   box-shadow: 0px 0px 0px #000000;
 }
-
 
 .slider {
   position: relative;
@@ -223,7 +219,6 @@ input[type="range"] {
   margin: auto;
   width: 250px; 
 }
-
 .slider img {
   position: absolute;
   z-index: 1; 

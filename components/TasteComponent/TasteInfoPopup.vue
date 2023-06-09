@@ -55,7 +55,6 @@ export default {
 </script>
 
 <style scoped>
-
 .taste-info-close{
   width: 25px;
   height: 25px;
@@ -82,7 +81,6 @@ export default {
   justify-content: center;
   align-items: center;
 }
-
 
 .popup-content {
   background-color: #fff;

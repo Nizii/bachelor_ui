@@ -68,7 +68,6 @@
           @open-detail-view="toggleDetailViewWine" 
           @filters-selected="onFilterSelected" 
           :wines="wines" />
-      
 
         <Bookmarks v-if="showBookmarksOverlay" 
           @close="setBookmarkFalse" 
@@ -178,7 +177,6 @@ export default {
 
     sortWinesByPrice() {
       this.sortByPriceAscending = !this.sortByPriceAscending;
-
       if (this.sortByPriceAscending) {
         this.filteredWines.sort((a, b) => a.openprice - b.openprice);
       } else {
@@ -197,6 +195,10 @@ export default {
       }
     },
 
+    /*
+    * Filtert nach Benutzereingaben aus Winemenu oder FilterView und setzt die Weine in ein neues Array filteredWines
+    * @param String Rot- Weiss- oder Rosewein
+    */
     filterWines(wineType) {
       let filteredWines = this.wines;
 
@@ -346,10 +348,10 @@ export default {
    * Berechnet die Übereinstimmung zwischen einem Benutzerprofil und einem Weinprofil.
    * Dieser Algorithmus verwendet das Konzept der euklidischen Distanz
    *
-   * @param userProfile - Ein Array von fünf Zahlen, die das Geschmacksprofil des Benutzers darstellen.
-   * @param wineProfile - Ein Array von fünf Zahlen, die das Geschmacksprofil des Weins darstellen.
+   * @ Param Ein Array von fünf Zahlen, die das Geschmacksprofil des Benutzers darstellen.
+   * @ Param Ein Array von fünf Zahlen, die das Geschmacksprofil des Weins darstellen.
    *
-   * @return {number} - Rückgabe als Protzentzahl
+   * @returns - REsultat als Protzentzahl
    */
     // Eine Funktion, die die Übereinstimmung zwischen dem Geschmacksprofil eines Benutzers und eines Weins berechnet
     calculateMatch(userProfile, wineProfile) {
@@ -377,12 +379,11 @@ export default {
       }
       // Die "Distanz" zwischen den Profilen ist die Quadratwurzel der Gesamtdifferenz
       var distance = Math.sqrt(differeceFull);
-      // Die maximale mögliche Distanz ist die Quadratwurzel von 216(weil es 6 Merkmale pro Profil gibt und jedes Merkmal von 0 bis 5 reicht also 6*6*6 = 216)
-      var maxDistance = Math.sqrt(6 * 6 * 6);
+      // Die maximale mögliche Distanz ist die Quadratwurzel von 180(weil es 6 Merkmale pro Profil gibt und jedes Merkmal von 1 bis 5 reicht also 6*6*5 = 180)
+      var maxDistance = Math.sqrt(6 * 6 * 5);
       // Die Übereinstimmung ist 100% minus das Verhältnis der Distanz zur maximalen Distanz
       var match = (1 - distance / maxDistance) * 100;
       return Math.round(match);
-
     },
 
     setRatingsToWines(userProfile) {
@@ -489,7 +490,6 @@ export default {
           }
       }
 
-
       this.filterWines();
       this.findHighestRating();
     } catch (error) {
@@ -526,11 +526,6 @@ export default {
 .main-container {
   margin: 0;
   padding: 0;
-  /*-moz-animation-duration: ;
-  background-image: url("/background/weinfleck rot.png");
-  background-position: center;
-  background-repeat: repeat-y;
-  */
   background-attachment: scroll; 
   box-sizing: border-box;
 }
@@ -630,6 +625,5 @@ export default {
 .bottom-placeholder{
   height: 80px;
 }
-
 
 </style>

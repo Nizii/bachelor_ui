@@ -98,11 +98,12 @@ export default {
       this.$router.push(this.previousRoute);
     },
 
+    // Setzt die Bewertung des Geschmacks durch den User in das Object preferences
+    // Wenn es der Prozess bei der letzten Frage angekommen ist, dann wird das User Geschmacksprofil gleich in der Datenbank gespeichert
+    // falls der User eingeloggt ist
     setPreferenceAndNavigate(value) {
-      
       this.preferences[this.preferenceKey] = parseInt(value);
       localStorage.setItem('preferences', JSON.stringify(this.preferences));
-      
       if(this.preferenceKey === 'trocken') {
         let token = localStorage.getItem('jwt'); 
         if(token){
@@ -120,8 +121,7 @@ export default {
             console.error(error);
           });
         }
-      }
-      
+      } 
       this.$router.push(this.nextRoute);
     },
 
@@ -137,7 +137,6 @@ export default {
     } else {
       localStorage.setItem('preferences', JSON.stringify(this.preferences));
     }
-    
   },
 
   mounted(){
@@ -212,7 +211,6 @@ export default {
     height: 40px;
     border: none;
   }
-
   
   </style>
   

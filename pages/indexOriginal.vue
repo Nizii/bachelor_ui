@@ -1,4 +1,5 @@
 <template>
+  <!--Orginale startseite aktuell deaktiviert-->
   <div class="index-page" style="margin: 0; padding: 0; box-sizing: border-box;">
     <div class="start-page-container">
       <div class="block"></div>
@@ -39,14 +40,12 @@ export default {
 * {
   font-family: 'Semplicita', sans-serif;
 }
-
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
 }
-
 .index-page {
   height: 100%;
   width: 100%;
@@ -57,7 +56,6 @@ html, body {
   background-size: cover;
   margin-bottom: 0px;
 }
-
 .start-page-container {
   display: flex;
   flex-direction: column;
@@ -66,7 +64,6 @@ html, body {
   text-align: left;
   height: 100%;
 }
-
 .content-container {
   display: flex;
   flex-direction: column;
@@ -77,7 +74,6 @@ html, body {
   margin: 0 auto;
   height: 30vh;
 }
-
 .block {
   display: flex; 
   flex-direction: column;
@@ -86,7 +82,6 @@ html, body {
   height: 25vh;
   overflow: auto;
 }
-
 .block-2 {
   display: flex; 
   flex-direction: column;
@@ -95,13 +90,10 @@ html, body {
   height: 20vh;
   overflow: auto;
 }
-
-
 .start-page-link {
   margin-top: 15px;
   color: white;
 }
-
 .red-button {
   background-color: #660F0F;
   color: white;
@@ -109,8 +101,6 @@ html, body {
   padding: 10px 20px;
   text-decoration: none; 
 }
-
-
 .AppHeader {
   text-align: center;
 }
