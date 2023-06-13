@@ -82,7 +82,7 @@
 
 .slider-tutorial {
     position: relative;
-    width: 30%;
+    width: 15%;
 }
 
 .skip-to-menu-button{
