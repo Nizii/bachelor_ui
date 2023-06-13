@@ -518,7 +518,7 @@ export default {
 }
 
 .loading{
-  color: white;
+  color: #66100F;
   font-size: 15px;
   font-weight: bold;
 }
