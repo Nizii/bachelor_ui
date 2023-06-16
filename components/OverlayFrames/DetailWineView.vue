@@ -66,7 +66,7 @@
       </div>
     </div>
     <!--Content-->
-    <div class="inner-overlay" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' }">
+    <div class="inner-overlay" :style="{ backgroundImage: 'url(background' + getBackgroundImage() + ')' , backgroundPosition: '100px 0' }">
       <div id="row2">
         <div class="wrapper">
         </div>

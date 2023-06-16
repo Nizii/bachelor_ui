@@ -33,7 +33,7 @@
           </div>
         </div>
         <div v-if="loading" class="loading" style="text-align: center; margin: 20px;">
-          Loading...
+          Weine werden geladen...
         </div>
         <div v-else>
 
@@ -556,7 +556,7 @@ export default {
   background-repeat: no-repeat;
   background-position: 5px 4px;
   background-size: 40px 40px;
-  padding-left: 30px; 
+  padding-left: 50px;
 }
 
 .toggle-btn {
