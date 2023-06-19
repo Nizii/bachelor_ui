@@ -1,11 +1,6 @@
 <template>
   <!--Tutorialseite für Werkschau-->
   <div>
-    <div class="tutorial-frame-header">
-      <div class="tutorial-header-box"></div>
-      <div class="tutorial-header-box">
-      </div>
-    </div>
     <div v-for="(tutorial, index) in tutorials" :key="index" v-show="index === currentTutorialIndex">
       <TutorialDetailView 
         :i=index
