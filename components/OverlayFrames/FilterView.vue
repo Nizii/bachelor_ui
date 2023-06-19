@@ -107,9 +107,11 @@
             <div @click="toggleNationCheckbox('Italien')" :class="{ active: selectedNation.includes('Italien') }" class="checkbox checkbox-2">
               <img :src="require('static/icons/nations/Italien.png')" class="icon" alt="Profile icon" />
             </div>
+            <!--
             <div @click="toggleNationCheckbox('Spanien')" :class="{ active: selectedNation.includes('Spanien') }" class="checkbox checkbox-1">
               <img :src="require('static/icons/nations/Spanien.png')" class="icon" alt="Profile icon" />
             </div>
+            -->
             <div @click="toggleNationCheckbox('Frankreich')" :class="{ active: selectedNation.includes('Frankreich') }" class="checkbox checkbox-2">
               <img :src="require('static/icons/nations/Frankreich.png')" class="icon" alt="Profile icon" />
             </div>
