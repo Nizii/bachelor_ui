@@ -512,8 +512,13 @@
         if(localStorage.getItem('user')){
           username = localStorage.getItem('user');
         } else {
-          username = this.gastUser;
-          this.gastUser = '';
+          if(this.gastUser.length < 1){
+            let randomNum = Math.floor(Math.random() * (99999 - 10000) + 10000);
+            username = 'Gast' + randomNum.toString();
+          } else {
+            username = this.gastUser;
+            this.gastUser = '';
+          }
         }
         try {
           const response = await this.$axios.post(
