@@ -371,7 +371,6 @@ export default {
           // Quadriere den Unterschied, um negative Werte zu vermeiden und Unterschiede stärker zu gewichten
           // Bsp mit quadrierung  5-1 = 4 -> 4^2 = 16
           // BSp ohne quadrierung 5-1 = 4 ->     =  4 
-
           // Bsp mit quadrierung  3-1 = 2 -> 4^2 =  4
           // Bsp ohne quadrierung 3-1 = 2 ->     =  2 
           var differcePowTwo = differenceBetweenTwoElements * differenceBetweenTwoElements;
@@ -381,7 +380,7 @@ export default {
       // Die "Distanz" zwischen den Profilen ist die Quadratwurzel der Gesamtdifferenz
       var distance = Math.sqrt(differeceFull);
       // Die maximale mögliche Distanz ist die Quadratwurzel von 180(weil es 6 Merkmale pro Profil gibt und jedes Merkmal von 1 bis 5 reicht also 6*6*5 = 180)
-      var maxDistance = Math.sqrt(6 * 6 * 5);
+      var maxDistance = Math.sqrt(6 * 4 * 4);
       // Die Übereinstimmung ist 100% minus das Verhältnis der Distanz zur maximalen Distanz
       var match = (1 - distance / maxDistance) * 100;
       return Math.round(match);
