@@ -78,6 +78,10 @@
 </script>
 <style>
 
+*{
+  font-family: 'Semplicita', sans-serif;
+}
+
 .tutorial-header-box {
   width: 33%;
   text-align: right;
