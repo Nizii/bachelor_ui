@@ -72,12 +72,15 @@
 </style>
 
 <style>
+
+
 .img-container-tutorial {
     position: relative;
 }
 
 .tutorial-img {
     position: relative;
+    font-family: 'Semplicita', sans-serif;
 }
 
 .slider-tutorial {
