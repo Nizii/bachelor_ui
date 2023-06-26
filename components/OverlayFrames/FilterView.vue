@@ -5,9 +5,11 @@
         <div class="parent-container">
 
         <div class="filter-header">
+          <!--Reset Button
           <button class="filter-close-button" @click="resetFilters">
             Reset  
           </button>
+          -->
           <TitleOverlay title="Filter Optionen" />
           <button class="filter-close-button" @click="closeOverlay(false)">
             <img :src="require('static/icons/buttons/closebutton_merkliste.svg')" class="go-icon" alt="Bookmark icon" />  

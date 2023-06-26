@@ -39,13 +39,13 @@
                 title: "Your Taste",
                 text_1: "Nur sechs Fragen beantworten und YOUR TASTE ist definiert. Anschliessend werden zu dir passende Weine vorgeschlagen !",
                 text_2: "Du kannst natürlich auch direkt zur Weinkarte und später deinen Taste herausfinden!",
-                img: "/tutorial/t1.jpg"
+                img: "/tutorial/geschmacksprofil.png"
             },
             {
                 title: "Bestellung aufgeben",
                 text_1: "Speichere deine gewünschten Weine in der Merkliste und gib anschliessend dem Servicepersonal die Bestellung auf!",
                 text_2: " ",
-                img: "/tutorial/t2.jpg"
+                img: "/tutorial/bestellung.png"
             },
             {
                 title: "Weinkeller",
