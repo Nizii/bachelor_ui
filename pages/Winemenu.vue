@@ -34,6 +34,8 @@
         </div>
         <div v-if="loading" class="loading" style="text-align: center; margin: 20px;">
           Weine werden geladen...
+          <br>
+          Erste Ladezeit bis zu 10 Sek. da Demoversion.
         </div>
         <div v-else>
 
